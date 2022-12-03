@@ -27,7 +27,7 @@ var (
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
 					Content: func() string {
-						return iqamav1.GetMarkdown()
+						return iqamav1.GetDiscordPrettified()
 					}(),
 				},
 			})
