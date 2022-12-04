@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func Get() []byte {
+func Get() Resp {
 
 	resp, err := http.Get("https://iqama.ccil-kbw.com/iqamatimes.php")
 	if err != nil {
@@ -18,14 +18,10 @@ func Get() []byte {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	return body
-}
 
-func GetMarkdown() string {
-	resp := Get()
-
-	// Some prettifying
-	md := string(resp)
-
-	return md
+	iqamaResp, err := UnmarshalResp(body)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	return iqamaResp
 }

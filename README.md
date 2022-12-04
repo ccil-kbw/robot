@@ -1,4 +1,11 @@
-# Development
+# CLI Tool
+
+To test the CLI tool simply run:
+``` shell
+go run ./cmd/cli/main.go
+```
+
+# Discord
 First you need to create a discord bot and generate a token for it.
 
 Join a test server of your own and get your server's id
@@ -8,3 +15,10 @@ In the context of this code these are called Token and Guild. When you got those
 ``` shell
 go run ./cmd/discord_bot/main.go -guild 1234567890 -token 1234567890
 ```
+
+# Install
+
+``` shell
+go install github.com/ccil-kbw/robot
+```
+
