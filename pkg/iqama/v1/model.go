@@ -19,16 +19,14 @@ func (r *Resp) Marshal() ([]byte, error) {
 }
 
 type Resp struct {
-	Dates                  Dates         `json:"dates"`
-	Fajr                   Prayer        `json:"fajr"`
-	Sunrise                string        `json:"sunrise"`
-	Dhuhr                  Prayer        `json:"dhuhr"`
-	Asr                    Prayer        `json:"asr"`
-	Maghrib                Prayer        `json:"maghrib"`
-	Isha                   Prayer        `json:"isha"`
-	Jumua                  Jumua         `json:"jumua"`
-	SalatsToChangeTomorrow []interface{} `json:"salatsToChangeTomorrow"`
-	SalatsThatChangeToday  interface{}   `json:"salatsThatChangeToday"`
+	Dates   Dates  `json:"dates"`
+	Fajr    Prayer `json:"fajr"`
+	Sunrise string `json:"sunrise"`
+	Dhuhr   Prayer `json:"dhuhr"`
+	Asr     Prayer `json:"asr"`
+	Maghrib Prayer `json:"maghrib"`
+	Isha    Prayer `json:"isha"`
+	Jumua   Jumua  `json:"jumua"`
 }
 
 type Prayer struct {
