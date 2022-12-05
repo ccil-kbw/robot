@@ -1,0 +1,9 @@
+[Unit]
+Description=iqamabot
+
+[Service]
+EnvironmentFile=/etc/iqama.d/conf.env
+ExecStart=/usr/sbin/iqamabot -guild $GUILD_ID -token $BOT_TOKEN
+
+[Install]
+WantedBy=multi-user.target
