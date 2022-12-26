@@ -1,10 +1,10 @@
-/* Package discord
- *
- * This package needs some love, basically Discord's robot
- */
+// Package discord
+//
+// This package needs some love, basically Discord's robot
 package discord
 
 import (
+	"github.com/ccil-kbw/robot/pkg/mappers"
 	"log"
 	"os"
 	"os/signal"
@@ -25,11 +25,7 @@ var (
 		"iqama": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
-				Data: &discordgo.InteractionResponseData{
-					Content: func() string {
-						return iqamav1.GetDiscordPrettified()
-					}(),
-				},
+				Data: mappers.IqamaTimesToDiscordInteractionResponseData(iqamav1.Get()),
 			})
 		},
 	}
