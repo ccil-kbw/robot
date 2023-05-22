@@ -1,0 +1,26 @@
+
+name: Publish
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+jobs:
+  release:
+    name: Publish new release
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with: # https://stackoverflow.com/a/65081720
+          ref: ${{ github.event.workflow_run.head_branch }}
+          fetch-depth: "0"
+
+      - name: Set Git Robot user
+        run: |
+          git config --global user.email "robot@ccil-kbw.com"
+          git config --global user.name "Khalid Ben Walid Pipeline Robot"
+
+      - name: Publish
+        run: GH_TOKEN="${{ secrets.GITHUB_TOKEN }}" auto shipit
