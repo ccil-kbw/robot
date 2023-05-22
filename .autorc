@@ -1,0 +1,20 @@
+{
+  "plugins": [
+    "git-tag",
+    "pr-body-labels"
+  ],
+  "owner": "ccil-kbw",
+  "repo": "robot",
+  "name": "CCIL-KBW Toolset,
+  "email": "robot@ccil-kbw.com",
+  "noDefaultLabels": true,
+  "labels": [
+    {
+      "name": "bugfix",
+      "changelogTitle": "🚢 Bug Fix",
+      "description": "Everything's a BugFix for now until stable for some time.",
+      "releaseType": "patch",
+      "color": "#000"
+    }
+  ]
+}
