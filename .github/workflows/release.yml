@@ -29,4 +29,4 @@ jobs:
           curl -vkL -o - https://github.com/intuit/auto/releases/download/v10.28.0/auto-linux.gz | gunzip > ${{ runner.temp }}/auto
           chmod a+x ${{ runner.temp }}/auto
       - name: Publish
-        run: GH_TOKEN="${{ secrets.GITHUB_TOKEN }}" ./auto shipit
+        run: GH_TOKEN="${{ secrets.GITHUB_TOKEN }}" ${{ runner.temp }}/auto shipit
