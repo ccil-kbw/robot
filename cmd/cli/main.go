@@ -1,7 +1,7 @@
 package main
 
 import (
-	iqamav1 "github.com/ccil-kbw/robot/pkg/iqama/v1"
+	iqamav1 "github.com/ccil-kbw/robot/iqama/v1"
 )
 
 func main() {
