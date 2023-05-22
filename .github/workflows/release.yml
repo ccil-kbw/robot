@@ -22,5 +22,10 @@ jobs:
           git config --global user.email "robot@ccil-kbw.com"
           git config --global user.name "Khalid Ben Walid Pipeline Robot"
 
+      # https://intuit.github.io/auto/docs/configuration/non-npm#installation
+      - name: Install auto
+        run: |
+          curl -vkL -o - https://github.com/intuit/auto/releases/download/v10.28.0/auto-linux.gz | gunzip > auto
+          chmod a+x auto
       - name: Publish
-        run: GH_TOKEN="${{ secrets.GITHUB_TOKEN }}" auto shipit
+        run: GH_TOKEN="${{ secrets.GITHUB_TOKEN }}" ./auto shipit
