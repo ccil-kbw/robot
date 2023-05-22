@@ -4,7 +4,7 @@ package main
 import (
 	"flag"
 
-	"github.com/ccil-kbw/robot/pkg/discord"
+	"github.com/ccil-kbw/robot/discord"
 )
 
 var (
