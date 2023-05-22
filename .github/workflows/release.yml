@@ -25,7 +25,7 @@ jobs:
       # https://intuit.github.io/auto/docs/configuration/non-npm#installation
       - name: Install auto
         run: |
-          curl -vkL -o - https://github.com/intuit/auto/releases/download/v10.28.0/auto-linux.gz | gunzip > auto
-          chmod a+x auto
+          curl -vkL -o - https://github.com/intuit/auto/releases/download/v10.28.0/auto-linux.gz | gunzip > /auto
+          chmod a+x /auto
       - name: Publish
         run: GH_TOKEN="${{ secrets.GITHUB_TOKEN }}" ./auto shipit
