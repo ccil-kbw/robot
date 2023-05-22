@@ -23,9 +23,10 @@ jobs:
           git config --global user.name "Khalid Ben Walid Pipeline Robot"
 
       # https://intuit.github.io/auto/docs/configuration/non-npm#installation
+      # https://docs.github.com/en/actions/learn-github-actions/contexts#example-usage-of-the-runner-context
       - name: Install auto
         run: |
-          curl -vkL -o - https://github.com/intuit/auto/releases/download/v10.28.0/auto-linux.gz | gunzip > /auto
-          chmod a+x /auto
+          curl -vkL -o - https://github.com/intuit/auto/releases/download/v10.28.0/auto-linux.gz | gunzip > ${{ runner.temp }}/auto
+          chmod a+x ${{ runner.temp }}/auto
       - name: Publish
         run: GH_TOKEN="${{ secrets.GITHUB_TOKEN }}" ./auto shipit
