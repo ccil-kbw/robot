@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        goos: [linux, windows, darwin]
-        goarch: [amd64, arm64]
+        goos: [linux, darwin]
+        goarch: [amd64]
     steps:
     - uses: actions/checkout@v3
     - uses: wangyoucao577/go-release-action@v1.34
@@ -22,4 +22,13 @@ jobs:
         goversion: "https://dl.google.com/go/go1.18.2.linux-amd64.tar.gz"
         project_path: "./cmd/discord_bot"
         binary_name: "iqamabot"
+        extra_files: README.md
+    - uses: wangyoucao577/go-release-action@v1.34
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        goos: ${{ matrix.goos }}
+        goarch: ${{ matrix.goarch }}
+        goversion: "https://dl.google.com/go/go1.18.2.linux-amd64.tar.gz"
+        project_path: "./cmd/darsrec"
+        binary_name: "darsrec"
         extra_files: README.md
