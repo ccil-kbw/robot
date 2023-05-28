@@ -22,3 +22,8 @@ go run ./cmd/discord_bot/main.go -guild 1234567890 -token 1234567890
 go install github.com/ccil-kbw/robot
 ```
 
+# LICENSE
+
+The current License is under the BSD 3-Clause, AKA you can copy and redistribute.
+
+بركة الله فيكم
