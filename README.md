@@ -1,29 +1,28 @@
-# CLI Tool
+<div align="center">
 
-To test the CLI tool simply run:
-``` shell
-go run ./cmd/cli/main.go
-```
+# Masjid's Droid
 
-# Discord
-First you need to create a discord bot and generate a token for it.
+![Latest commit](https://img.shields.io/github/last-commit/ccil-kbw/robot/master?style=flat-square)
+![GitHub issues](https://img.shields.io/github/issues/ccil-kbw/robot)
+[![Build Status: master](https://github.com/ccil-kbw/robot/actions/workflows/build-release-binaries.yaml/badge.svg)](https://github.com/ccil-kbw/robot/actions/workflows/build-release-binaries.yaml)
+![GitHub](https://img.shields.io/github/license/ccil-kbw/robot)
 
-Join a test server of your own and get your server's id
+</div>
 
-In the context of this code these are called Token and Guild. When you got those run the following command (replace those numbers with the guild id and token you got previously):
+### Table of Contents
+- [Introduction](#introduction)
+- [info](#info)
+- [License](#license)
 
-``` shell
-go run ./cmd/discord_bot/main.go -guild 1234567890 -token 1234567890
-```
 
-# Install
+# Introduction
 
-``` shell
-go install github.com/ccil-kbw/robot
-```
+The Masjid's Droid was initially created to serve the needs of the beloved Community of the Masjid Khaled Ben Walid but is intended to be Open and available for the Ummah, East to West.
 
-# LICENSE
+# Info
 
-The current License is under the BSD 3-Clause, AKA you can copy and redistribute.
+Documentation about installation and usage are found at [https://ccil-kbw.github.io](https://ccil-kbw.github.io)
 
-بركة الله فيكم
+# License
+
+BSD-3, see LICENSE
