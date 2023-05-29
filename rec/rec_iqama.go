@@ -84,7 +84,7 @@ func GetIqamaRecordingConfigs() []*RecordConfig {
 	return []*RecordConfig{
 		{
 			Description:   "Fajr Recording",
-			StartTime:     toTime(iqamaTimes.Fajr.Iqama).Add(1 * time.Hour),
+			StartTime:     toTime(iqamaTimes.Fajr.Iqama),
 			Duration:      DarsRecordDuration,
 			RecordingDays: EveryDay,
 		},
@@ -105,6 +105,12 @@ func GetIqamaRecordingConfigs() []*RecordConfig {
 			StartTime:     time.Date(2023, 1, 1, 11, 55, 0, 0, timeLocation),
 			Duration:      JumuaaRecordDuration,
 			RecordingDays: []time.Weekday{time.Friday},
+		},
+		{
+			Description:   "Fiqh Dars Recording",
+			StartTime:     toTime(iqamaTimes.Asr.Iqama),
+			Duration:      JumuaaRecordDuration,
+			RecordingDays: []time.Weekday{time.Thursday},
 		},
 	}
 }
