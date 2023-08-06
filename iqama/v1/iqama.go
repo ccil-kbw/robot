@@ -8,6 +8,16 @@ import (
 
 func Get() Resp {
 
+	body := GetRAW()
+
+	iqamaResp, err := UnmarshalResp(body)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	return iqamaResp
+}
+
+func GetRAW() []byte {
 	resp, err := http.Get("https://iqama.ccil-kbw.com/iqamatimes.php")
 	if err != nil {
 		log.Fatalln(err)
@@ -18,10 +28,5 @@ func Get() Resp {
 	if err != nil {
 		log.Fatalln(err)
 	}
-
-	iqamaResp, err := UnmarshalResp(body)
-	if err != nil {
-		log.Fatalln(err)
-	}
-	return iqamaResp
+	return body
 }
