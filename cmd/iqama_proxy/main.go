@@ -11,7 +11,7 @@ import (
 func main() {
 	http.HandleFunc("/today", today)
 
-	fmt.Println("Running iqama-proxy Go server on port :3333")
+	fmt.Println("watchtower test: Running iqama-proxy Go server on port :3333")
 	_ = http.ListenAndServe(":3333", nil)
 }
 
