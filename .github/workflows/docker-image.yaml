@@ -34,11 +34,20 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       
-      - name: Build and push Docker image
+      - name: AMD64 - Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
           file: ./build/docker/iqama_proxy/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: ARM64 - Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./build/docker/iqama_proxy/Dockerfile.arm64
+          push: true
+          tags: ${{ github.ref_name }}-arm64,latest-arm64
           labels: ${{ steps.meta.outputs.labels }}
