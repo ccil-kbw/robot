@@ -49,5 +49,6 @@ jobs:
           context: .
           file: ./build/docker/iqama_proxy/Dockerfile.arm64
           push: true
-          tags: ${{ github.ref_name }}-arm64,latest-arm64
+          # could be simplified, but I like the explicitness
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}-arm64,${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest-arm64
           labels: ${{ steps.meta.outputs.labels }}
