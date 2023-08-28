@@ -38,7 +38,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./build/docker/iqama_proxy/Dockerfile
+          file: ./build/docker/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -47,7 +47,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./build/docker/iqama_proxy/Dockerfile.arm64
+          file: ./build/docker/Dockerfile.arm64
           push: true
           # could be simplified, but I like the explicitness
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}-arm64,${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest-arm64

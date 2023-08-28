@@ -4,16 +4,16 @@ WORKDIR /app
 
 COPY . .
 
-RUN CGO_ENABLED=0 GOARCH=arm64 GOOS=linux go build -o /proxy ./cmd/iqama_proxy/main.go
+RUN CGO_ENABLED=0 GOARCH=arm64 GOOS=linux go build -o /monolith ./cmd/monolith/main.go
 
 FROM gcr.io/distroless/base-debian11:latest-arm64 AS build-release-stage
 
 WORKDIR /
 
-COPY --from=build-stage /proxy /proxy
+COPY --from=build-stage /monolith /monolith
 
 EXPOSE 3333
 
 USER nonroot:nonroot
 
-CMD ["/proxy"]
+CMD ["/monolith"]
