@@ -50,7 +50,7 @@ func getService() *youtube.Service {
 	client := getClient(context.TODO(), config)
 
 	service, err := youtube.New(client)
-	helpers.HandleError(err, "error creatin youtube client")
+	helpers.HandleError(err, "error creating youtube client")
 
 	return service
 }
