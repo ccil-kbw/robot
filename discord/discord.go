@@ -20,6 +20,10 @@ var (
 			Name:        "iqama",
 			Description: "Get Today's Iqama",
 		},
+		{
+			Name:        "test",
+			Description: "Some test command",
+		},
 	}
 
 	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
@@ -28,6 +32,31 @@ var (
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: mappers.IqamaTimesToDiscordInteractionResponseData(iqamav1.Get()),
 			})
+		},
+		"test": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+				Type: discordgo.InteractionResponseChannelMessageWithSource,
+				Data: &discordgo.InteractionResponseData{
+					Embeds: []*discordgo.MessageEmbed{
+						{
+							URL:         "https://ccil-kbw.com/iqama",
+							Type:        discordgo.EmbedTypeRich,
+							Title:       "Iqama Time",
+							Description: "Iqama pulled from https://ccil-kbw.com/iqama",
+							Color:       0x05993e,
+							Fields: func() []*discordgo.MessageEmbedField {
+								return []*discordgo.MessageEmbedField{
+									{
+										Name:  "Test",
+										Value: "Test",
+									},
+								}
+							}(),
+						},
+					},
+				},
+			},
+			)
 		},
 	}
 )
