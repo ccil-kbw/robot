@@ -4,9 +4,11 @@
 package discord
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"os/signal"
+	"time"
 
 	"github.com/ccil-kbw/robot/mappers"
 
@@ -21,34 +23,35 @@ var (
 			Description: "Get Today's Iqama",
 		},
 		{
-			Name:        "test",
-			Description: "Some test command",
+			Name:        "obs-start",
+			Description: "Start Recording on the Main Camera (e.g unscheduled speech @ccil-kbw)",
 		},
 	}
 
-	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
-		"iqama": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate, msgs chan string){
+		"iqama": func(s *discordgo.Session, i *discordgo.InteractionCreate, msgs chan string) {
 			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: mappers.IqamaTimesToDiscordInteractionResponseData(iqamav1.Get()),
 			})
 		},
-		"test": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+		"obs-start": func(s *discordgo.Session, i *discordgo.InteractionCreate, msgs chan string) {
 			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
 					Embeds: []*discordgo.MessageEmbed{
 						{
-							URL:         "https://ccil-kbw.com/iqama",
 							Type:        discordgo.EmbedTypeRich,
-							Title:       "Iqama Time",
-							Description: "Iqama pulled from https://ccil-kbw.com/iqama",
-							Color:       0x05993e,
+							Title:       "Scheduling Start",
+							Description: "OBS Scheduling Start Operation",
+							Color:       0x05294e,
 							Fields: func() []*discordgo.MessageEmbedField {
+								msgs <- "obs-start"
+								now := time.Now()
 								return []*discordgo.MessageEmbedField{
 									{
-										Name:  "Test",
-										Value: "Test",
+										Name:  "OBS Recording Started",
+										Value: fmt.Sprintf("Will be scheduling until %d:%d", now.Hour(), now.Minute()),
 									},
 								}
 							}(),
@@ -62,7 +65,7 @@ var (
 )
 
 // Run the Discord bot. NOTE: Function can be split
-func Run(guildID, botToken *string, removeCommands *bool) {
+func Run(guildID, botToken *string, removeCommands *bool, msgs chan string) {
 	var err error
 	var s *discordgo.Session
 
@@ -73,13 +76,14 @@ func Run(guildID, botToken *string, removeCommands *bool) {
 
 	s.AddHandler(func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		if h, ok := commandHandlers[i.ApplicationCommandData().Name]; ok {
-			h(s, i)
+			h(s, i, msgs)
 		}
 	})
 
 	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
 		log.Printf("Logged in as: %v#%v", s.State.User.Username, s.State.User.Discriminator)
 	})
+
 	err = s.Open()
 	if err != nil {
 		log.Fatalf("Cannot open the session: %v", err)
@@ -99,7 +103,7 @@ func Run(guildID, botToken *string, removeCommands *bool) {
 
 	stop := make(chan os.Signal, 1)
 	signal.Notify(stop, os.Interrupt)
-	log.Println("Press Ctrl+C to exit")
+	fmt.Println("Press Ctrl+C to exit")
 	<-stop
 
 	if *removeCommands {

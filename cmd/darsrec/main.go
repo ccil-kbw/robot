@@ -36,7 +36,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	client, err := rec.New(password)
+	client, err := rec.New("", password)
 	if err != nil {
 		panic(err)
 	}
