@@ -5,9 +5,13 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"os/signal"
+	"strings"
+	"time"
 
 	"github.com/ccil-kbw/robot/discord"
 	v1 "github.com/ccil-kbw/robot/iqama/v1"
+	"github.com/ccil-kbw/robot/rec"
 )
 
 var (
@@ -33,16 +37,34 @@ type Config struct {
 }
 
 func main() {
+	msgs := make(chan string)
+	stop := make(chan os.Signal, 1)
+	signal.Notify(stop, os.Interrupt)
+
 	if config.Features.Proxy {
 		go proxy()
 	}
 
 	if config.Features.DiscordBot {
-		go bot()
+		go bot(msgs)
 	}
 
-	// handle erroring, for now just block
-	<-make(chan struct{})
+	obs, _ := rec.New(os.Getenv("MDROID_BOT_OBS_HOST"), os.Getenv("MDROID_BOT_OBS_PASSWORD"))
+
+	select {
+	// discord msgs dispatcher
+	case msg := <-msgs:
+		fmt.Printf("%v, operation received from discord: %s\n", time.Now(), msg)
+		if strings.HasPrefix(msg, "obs-") {
+			obs.DispatchOperation(msg)
+		}
+	case <-stop:
+		// simplest way to wait for the nested go routines to clean up
+		// takes < 2 ms but better be safe
+		time.Sleep(10 * time.Second)
+		break
+	}
+
 }
 
 // proxy, move to apis, maybe pkg/apis/proxyserver/proxyserver.go
@@ -56,10 +78,10 @@ func proxy() {
 	_ = http.ListenAndServe(":3333", nil)
 }
 
-func bot() {
+func bot(msgs chan string) {
 	guildID := os.Getenv("MDROID_BOT_GUILD_ID")
 	botToken := os.Getenv("MDROID_BOT_TOKEN")
 	removeCommands := true
 
-	discord.Run(&guildID, &botToken, &removeCommands)
+	discord.Run(&guildID, &botToken, &removeCommands, msgs)
 }

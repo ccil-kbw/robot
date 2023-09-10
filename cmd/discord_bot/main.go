@@ -3,6 +3,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 
 	"github.com/ccil-kbw/robot/discord"
 )
@@ -16,5 +17,10 @@ var (
 func init() { flag.Parse() }
 
 func main() {
-	discord.Run(GuildID, BotToken, RemoveCommands)
+	msgs := make(chan string)
+	go discord.Run(GuildID, BotToken, RemoveCommands, msgs)
+
+	for msg := range msgs {
+		fmt.Println(msg)
+	}
 }
