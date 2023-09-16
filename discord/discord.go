@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/ccil-kbw/robot/mappers"
+	"github.com/ccil-kbw/robot/rec"
 
 	"github.com/bwmarrin/discordgo"
 	iqamav1 "github.com/ccil-kbw/robot/iqama/v1"
@@ -26,16 +27,20 @@ var (
 			Name:        "obs-start",
 			Description: "Start Recording on the Main Camera (e.g unscheduled speech @ccil-kbw)",
 		},
+		{
+			Name:        "obs-status",
+			Description: "See OBS and Recording Status on the Main Camera",
+		},
 	}
 
-	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate, msgs chan string){
-		"iqama": func(s *discordgo.Session, i *discordgo.InteractionCreate, msgs chan string) {
+	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder){
+		"iqama": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
 			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: mappers.IqamaTimesToDiscordInteractionResponseData(iqamav1.Get()),
 			})
 		},
-		"obs-start": func(s *discordgo.Session, i *discordgo.InteractionCreate, msgs chan string) {
+		"obs-start": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
 			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
@@ -46,7 +51,12 @@ var (
 							Description: "OBS Scheduling Start Operation",
 							Color:       0x05294e,
 							Fields: func() []*discordgo.MessageEmbedField {
-								msgs <- "obs-start"
+								fmt.Println("discord command called: /obs-start")
+								if obs == nil {
+									return []*discordgo.MessageEmbedField{
+										{Name: "Error", Value: "OBS Client not initialized"},
+									}
+								}
 								now := time.Now()
 								return []*discordgo.MessageEmbedField{
 									{
@@ -61,11 +71,51 @@ var (
 			},
 			)
 		},
+		"obs-status": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
+			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+				Type: discordgo.InteractionResponseChannelMessageWithSource,
+				Data: &discordgo.InteractionResponseData{
+					Embeds: []*discordgo.MessageEmbed{
+						{
+							Type:        discordgo.EmbedTypeRich,
+							Title:       "Scheduling Status",
+							Description: "OBS Scheduling Status Operation",
+							Color:       0x05294e,
+							Fields: func() []*discordgo.MessageEmbedField {
+								fmt.Println("discord command called: /obs-status")
+								if obs == nil {
+									return []*discordgo.MessageEmbedField{
+										{Name: "Error", Value: "OBS Client not initialized"},
+									}
+								}
+								isRecording, err := obs.IsRecording()
+								if err != nil {
+									return []*discordgo.MessageEmbedField{
+										{
+											Name:  "Record Status",
+											Value: "Could not access OBS",
+										},
+									}
+								}
+
+								return []*discordgo.MessageEmbedField{
+									{
+										Name:  "Record Status",
+										Value: fmt.Sprintf("recording: %v", isRecording),
+									},
+								}
+							}(),
+						},
+					},
+				},
+			},
+			)
+		},
 	}
 )
 
 // Run the Discord bot. NOTE: Function can be split
-func Run(guildID, botToken *string, removeCommands *bool, msgs chan string) {
+func Run(guildID, botToken *string, removeCommands *bool, obs *rec.Recorder) {
 	var err error
 	var s *discordgo.Session
 
@@ -76,7 +126,7 @@ func Run(guildID, botToken *string, removeCommands *bool, msgs chan string) {
 
 	s.AddHandler(func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		if h, ok := commandHandlers[i.ApplicationCommandData().Name]; ok {
-			h(s, i, msgs)
+			h(s, i, obs)
 		}
 	})
 
