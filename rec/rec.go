@@ -10,9 +10,13 @@ type Recorder struct {
 	client *goobs.Client
 }
 
-func New(password string) (*Recorder, error) {
+func New(host, password string) (*Recorder, error) {
 
-	client, err := goobs.New("localhost:4455", goobs.WithPassword(password))
+	if host == "" {
+		host = "localhost:4455"
+	}
+
+	client, err := goobs.New(host, goobs.WithPassword(password))
 	if err != nil {
 		return nil, err
 	}
@@ -30,6 +34,11 @@ func New(password string) (*Recorder, error) {
 	return &Recorder{
 		client: client,
 	}, nil
+}
+
+func (o *Recorder) DispatchOperation(msg string) error {
+	fmt.Printf("[todo] dispatching operation: %s\n", msg)
+	return nil
 }
 
 func (o *Recorder) Disconnect() error {

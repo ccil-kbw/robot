@@ -1,11 +1,14 @@
 package mappers
 
 import (
+	"fmt"
+
 	"github.com/bwmarrin/discordgo"
 	iqamav1 "github.com/ccil-kbw/robot/iqama/v1"
 )
 
 func IqamaTimesToDiscordInteractionResponseData(resp iqamav1.Resp) *discordgo.InteractionResponseData {
+	fmt.Println("discord command called: /iqama")
 	return &discordgo.InteractionResponseData{
 		Embeds: []*discordgo.MessageEmbed{
 			{

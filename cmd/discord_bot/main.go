@@ -16,5 +16,5 @@ var (
 func init() { flag.Parse() }
 
 func main() {
-	discord.Run(GuildID, BotToken, RemoveCommands)
+	go discord.Run(GuildID, BotToken, RemoveCommands, nil)
 }

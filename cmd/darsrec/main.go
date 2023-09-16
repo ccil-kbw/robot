@@ -30,13 +30,22 @@ func (ac *AsyncConf) Confs() []*rec.RecordConfig {
 
 func main() {
 
-	password := os.Getenv("OBS_WEBSOCKET_PASSWORD")
-	if password == "" {
-		fmt.Println("OBS_WEBSOCKET_PASSWORD is unset, cannot proceed")
-		os.Exit(1)
+	var host, password string
+	{
+		host = os.Getenv("OBS_WEBSOCKET_HOST")
+		if host == "" {
+			host = "localhost:4455"
+			fmt.Printf("OBS_WEBSOCKET_HOST not set, using default %s\f", host)
+		}
+
+		password = os.Getenv("OBS_WEBSOCKET_PASSWORD")
+		if password == "" {
+			fmt.Println("OBS_WEBSOCKET_PASSWORD is unset, cannot proceed")
+			os.Exit(1)
+		}
 	}
 
-	client, err := rec.New(password)
+	client, err := rec.New(host, password)
 	if err != nil {
 		panic(err)
 	}
