@@ -37,32 +37,49 @@ type Config struct {
 }
 
 func main() {
+	var err error
 	msgs := make(chan string)
 	stop := make(chan os.Signal, 1)
+
 	signal.Notify(stop, os.Interrupt)
 
 	if config.Features.Proxy {
 		go proxy()
 	}
 
-	if config.Features.DiscordBot {
-		go bot(msgs)
+	var obs *rec.Recorder
+
+	if config.Features.Record {
+		host := os.Getenv("MDROID_OBS_WEBSOCKET_HOST")
+		password := os.Getenv("MDROID_OBS_WEBSOCKET_PASSWORD")
+		obs, err = rec.New(host, password)
+		if err != nil {
+			fmt.Printf("could not reach or authenticate to OBS at %s, with password %s[...]%s", host, password[0:2], password[len(password)-3:len(password)-1])
+		}
 	}
 
-	obs, _ := rec.New(os.Getenv("MDROID_BOT_OBS_HOST"), os.Getenv("MDROID_BOT_OBS_PASSWORD"))
+	if config.Features.DiscordBot {
+		go bot(obs)
+	}
 
-	select {
-	// discord msgs dispatcher
-	case msg := <-msgs:
-		fmt.Printf("%v, operation received from discord: %s\n", time.Now(), msg)
-		if strings.HasPrefix(msg, "obs-") {
-			obs.DispatchOperation(msg)
+out:
+	for {
+		select {
+		// discord msgs dispatcher
+		case msg := <-msgs:
+			fmt.Printf("%v, operation received from discord: %s\n", time.Now(), msg)
+			if strings.HasPrefix(msg, "obs-") {
+				if config.Features.Record {
+					fmt.Println("feature enabled")
+					obs.DispatchOperation(msg)
+				}
+			}
+		case <-stop:
+			// simplest way to wait for the nested go routines to clean up
+			// takes < 2 ms but better be safe
+			time.Sleep(10 * time.Second)
+			break out
 		}
-	case <-stop:
-		// simplest way to wait for the nested go routines to clean up
-		// takes < 2 ms but better be safe
-		time.Sleep(10 * time.Second)
-		break
 	}
 
 }
@@ -78,10 +95,10 @@ func proxy() {
 	_ = http.ListenAndServe(":3333", nil)
 }
 
-func bot(msgs chan string) {
+func bot(obs *rec.Recorder) {
 	guildID := os.Getenv("MDROID_BOT_GUILD_ID")
 	botToken := os.Getenv("MDROID_BOT_TOKEN")
 	removeCommands := true
 
-	discord.Run(&guildID, &botToken, &removeCommands, msgs)
+	discord.Run(&guildID, &botToken, &removeCommands, obs)
 }
