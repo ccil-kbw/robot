@@ -22,6 +22,7 @@ var (
 		Features: Features{
 			Proxy:      true,
 			DiscordBot: true,
+			Record:     true,
 		},
 	}
 )
@@ -54,7 +55,7 @@ func main() {
 		password := os.Getenv("MDROID_OBS_WEBSOCKET_PASSWORD")
 		obs, err = rec.New(host, password)
 		if err != nil {
-			fmt.Printf("could not reach or authenticate to OBS at %s, with password %s[...]%s", host, password[0:2], password[len(password)-3:len(password)-1])
+			fmt.Printf("could not reach or authenticate to OBS")
 		}
 	}
 
@@ -99,6 +100,5 @@ func bot(obs *rec.Recorder) {
 	guildID := os.Getenv("MDROID_BOT_GUILD_ID")
 	botToken := os.Getenv("MDROID_BOT_TOKEN")
 	removeCommands := true
-
 	discord.Run(&guildID, &botToken, &removeCommands, obs)
 }
