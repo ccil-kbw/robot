@@ -24,12 +24,16 @@ var (
 			Description: "Get Today's Iqama",
 		},
 		{
-			Name:        "obs-start",
+			Name:        "rec-start",
 			Description: "Start Recording on the Main Camera (e.g unscheduled speech @ccil-kbw)",
 		},
 		{
-			Name:        "obs-status",
+			Name:        "rec-status",
 			Description: "See OBS and Recording Status on the Main Camera",
+		},
+		{
+			Name:        "rec-schedule",
+			Description: "See Recording Schedule",
 		},
 	}
 
@@ -40,7 +44,33 @@ var (
 				Data: mappers.IqamaTimesToDiscordInteractionResponseData(iqamav1.Get()),
 			})
 		},
-		"obs-start": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
+		"rec-schedule": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
+			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+				Type: discordgo.InteractionResponseChannelMessageWithSource,
+				Data: &discordgo.InteractionResponseData{
+					Embeds: []*discordgo.MessageEmbed{
+						{
+							Type:        discordgo.EmbedTypeRich,
+							Title:       "Scheduling Start",
+							Description: "OBS Scheduling Start Operation",
+							Color:       0x05294e,
+							Fields: func() []*discordgo.MessageEmbedField {
+								resp := []*discordgo.MessageEmbedField{}
+								for _, rec := range rec.GetIqamaRecordingConfigs() {
+									resp = append(resp, &discordgo.MessageEmbedField{
+										Name:  rec.Description,
+										Value: fmt.Sprintf("start: %d:%d, for %v on %v", rec.StartTime.Hour(), rec.StartTime.Minute(), rec.Duration, rec.RecordingDays),
+									})
+								}
+								return resp
+							}(),
+						},
+					},
+				},
+			},
+			)
+		},
+		"rec-start": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
 			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
@@ -71,7 +101,7 @@ var (
 			},
 			)
 		},
-		"obs-status": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
+		"rec-status": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
 			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
@@ -90,6 +120,7 @@ var (
 								}
 								isRecording, err := obs.IsRecording()
 								if err != nil {
+									fmt.Printf("error calling obs.IsRecording endpoint. %v", err)
 									return []*discordgo.MessageEmbedField{
 										{
 											Name:  "Record Status",
@@ -98,6 +129,7 @@ var (
 									}
 								}
 
+								fmt.Println("successfully called obs.IsRecording()")
 								return []*discordgo.MessageEmbedField{
 									{
 										Name:  "Record Status",
