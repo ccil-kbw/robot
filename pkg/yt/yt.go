@@ -1,4 +1,4 @@
-package main
+package yt
 
 import (
 	"fmt"
@@ -93,12 +93,10 @@ func getVideoIDs(service *youtube.Service, channelID, playlistID string) []strin
 	return ids
 }
 
-func uploadVideo(video Video) {
+func UploadVideo(video Video) {
 	service := getService()
 
-	channel := channelsList(service, []string{"snippet", "contentDetails", "statistics"})
-
-	upload(service, channel.Id, video)
+	upload(service, "UCGWuMVzuiaJBrE-HwcB7j-w", video)
 }
 
 func channelsList(service *youtube.Service, part []string) *youtube.Channel {
@@ -115,11 +113,15 @@ func channelsList(service *youtube.Service, part []string) *youtube.Channel {
 	return response.Items[0]
 }
 
+// upload quota is about 1650 (1600 for video.insert and 50 for playlistItems.insert), max quota per day is 10000
+// solution is to only upload 6 videos/day, so the backlog will take a few weeks to finish uploading
+
 func upload(service *youtube.Service, channelID string, v Video) {
 
 	call := service.Videos.Insert([]string{"snippet", "status"}, &youtube.Video{
 		Status: &youtube.VideoStatus{
-			PrivacyStatus: "private",
+			PrivacyStatus:           "private",
+			SelfDeclaredMadeForKids: false,
 		},
 		Snippet: &youtube.VideoSnippet{
 			ChannelId: channelID,
@@ -142,4 +144,13 @@ func upload(service *youtube.Service, channelID string, v Video) {
 	helpers.HandleError(err, "")
 
 	fmt.Printf("Upload successful! Video ID: %s\n", response.Id)
+
+	backlog := "PL1PP365t1jqj2xSIjh17vIB4tmDfJwJDQ"
+	callAddToPlaylist := service.PlaylistItems.Insert([]string{"snippet"}, &youtube.PlaylistItem{Snippet: &youtube.PlaylistItemSnippet{
+		PlaylistId: backlog, Position: 0, ResourceId: &youtube.ResourceId{Kind: "youtube#video", VideoId: response.Id}}})
+
+	respPlaylistInsert, err := callAddToPlaylist.Do()
+	helpers.HandleError(err, "")
+	fmt.Printf("Video with ID %s added successfully to playlist backlog (%s) Response ID: %s\n", response.Id, backlog, respPlaylistInsert.Id)
+
 }

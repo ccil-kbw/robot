@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/andreykaipov/goobs v0.12.0
 	github.com/bwmarrin/discordgo v0.26.1
+	github.com/fsnotify/fsnotify v1.6.0
 	github.com/jedib0t/go-pretty/v6 v6.4.3
 	golang.org/x/oauth2 v0.11.0
 	google.golang.org/api v0.138.0

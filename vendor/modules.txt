@@ -32,6 +32,9 @@ github.com/buger/jsonparser
 # github.com/bwmarrin/discordgo v0.26.1
 ## explicit; go 1.13
 github.com/bwmarrin/discordgo
+# github.com/fsnotify/fsnotify v1.6.0
+## explicit; go 1.16
+github.com/fsnotify/fsnotify
 # github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da
 ## explicit
 github.com/golang/groupcache/lru

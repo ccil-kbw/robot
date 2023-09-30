@@ -1,5 +1,5 @@
 /*
-package main
+package yt
 
 TODO: This doc file serves as notes on how to handle the automated-youtube uploader. Please delete and write proper docs when the feature is delivered
 
@@ -17,4 +17,4 @@ Upload the YouTube Videos automatically in a private playlist (flag the videos a
 The advantage of such a solution is that the heavy-lifting of looking for the video in the Cloud folder and uploading it to YouTube is done automatically,
 the manual part that is left is (hopefully) much simpler, we only need to trim the video which can be done on https://studio.youtube.com from any computer (no need of special software. Might even work from tablets or phone to-be-verified)
 */
-package main
+package yt
