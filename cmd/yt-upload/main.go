@@ -14,9 +14,19 @@ func main() {
 	go func(videos chan yt.Video) {
 		for {
 			// read from channel videos the metadata
-			yt.UploadVideo(<-videos)
-			// fmt.Printf("got new video %v", <-videos)
+			for {
+				video := <-videos
+				err := yt.UploadVideo(video)
+				if err == nil {
+					break
+				}
 
+				if strings.Contains(err.Error(), "quotaExceeded") {
+					duration := 1 * time.Hour
+					log.Printf("quota exceeded on google youtube api v3, trying file %v again in %v\n", video, duration)
+					time.Sleep(duration) // zzzz
+				}
+			}
 		}
 	}(videos)
 
@@ -50,7 +60,7 @@ func main() {
 					}
 				}
 				// this is to avoid rate limiting
-				time.Sleep(10 * time.Minute)
+				time.Sleep(3 * time.Minute)
 			case err, ok := <-watcher.Errors:
 				if !ok {
 					return
