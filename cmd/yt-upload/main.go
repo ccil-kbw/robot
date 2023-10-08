@@ -16,6 +16,7 @@ func main() {
 			// read from channel videos the metadata
 			for {
 				video := <-videos
+
 				err := yt.UploadVideo(video)
 				if err == nil {
 					break

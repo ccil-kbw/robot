@@ -72,7 +72,10 @@ out:
 			if strings.HasPrefix(msg, "obs-") {
 				if config.Features.Record {
 					fmt.Println("feature enabled")
-					obs.DispatchOperation(msg)
+					err := obs.DispatchOperation(msg)
+					if err != nil {
+						fmt.Println("failed dispatching operation")
+					}
 				}
 			}
 		case <-stop:
