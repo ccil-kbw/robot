@@ -45,7 +45,7 @@ func (o *Recorder) Disconnect() error {
 	return o.client.Disconnect()
 }
 
-// Rec records if didn't start recording, else continue recording for the specified duration
+// StartRecording records if didn't start recording, else continue recording for the specified duration
 func (o *Recorder) StartRecording() error {
 
 	// Get Record Status

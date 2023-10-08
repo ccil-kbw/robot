@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ccil-kbw/robot/iqama"
 	"io"
 	"net/http"
 	"os"
@@ -37,12 +38,59 @@ type Config struct {
 	Features Features
 }
 
+var (
+	stdHour    = "15"
+	stdMinutes = "4"
+)
+
 func main() {
 	var err error
 	msgs := make(chan string)
 	stop := make(chan os.Signal, 1)
+	notifyChan := make(chan string)
 
 	signal.Notify(stop, os.Interrupt)
+
+	var prayersData *iqama.PrayersData
+	{
+		prayersData = iqama.StartIqamaServer()
+	}
+
+	go func() {
+		go iqama.StartRecordingScheduleServer()
+
+		for {
+			now := time.Now()
+			if prayersData.Confs().Fajr.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
+				fmt.Println("Fajr: Iqama starts Now")
+				notifyChan <- "Fajr: Iqama starts Now"
+			}
+
+			if prayersData.Confs().Dhuhr.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
+				fmt.Println("Dhuhur: Iqama Starts Now")
+				notifyChan <- "Dhuhur: Iqama starts Now"
+
+			}
+
+			if prayersData.Confs().Asr.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
+				fmt.Println("Asr: Iqama Starts Now")
+				notifyChan <- "Asr: Iqama Starts Now"
+			}
+
+			if prayersData.Confs().Maghrib.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
+				fmt.Println("Maghrib: Iqama Starts Now")
+				notifyChan <- "Maghrib: Iqama Starts Now"
+			}
+
+			if prayersData.Confs().Isha.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
+				fmt.Println("Isha: Iqama Starts Now")
+				notifyChan <- "Isha: Iqama Starts Now"
+			}
+
+			time.Sleep(1 * time.Minute)
+		}
+
+	}()
 
 	if config.Features.Proxy {
 		go proxy()
@@ -60,7 +108,7 @@ func main() {
 	}
 
 	if config.Features.DiscordBot {
-		go bot(obs)
+		go bot(obs, notifyChan)
 	}
 
 out:
@@ -99,9 +147,9 @@ func proxy() {
 	_ = http.ListenAndServe(":3333", nil)
 }
 
-func bot(obs *rec.Recorder) {
+func bot(obs *rec.Recorder, notifyChan chan string) {
 	guildID := os.Getenv("MDROID_BOT_GUILD_ID")
 	botToken := os.Getenv("MDROID_BOT_TOKEN")
 	removeCommands := true
-	discord.Run(&guildID, &botToken, &removeCommands, obs)
+	discord.Run(&guildID, &botToken, &removeCommands, obs, notifyChan)
 }
