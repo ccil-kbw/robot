@@ -42,13 +42,3 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-      - name: ARM64 - Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./build/docker/Dockerfile.arm64
-          push: true
-          # could be simplified, but I like the explicitness
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}-arm64,${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest-arm64
-          labels: ${{ steps.meta.outputs.labels }}

@@ -2,24 +2,16 @@ version: '3.1'
 
 services:
 
-#  db:
-#    image: postgres
-#    restart: always
-#    environment:
-#      POSTGRES_PASSWORD: postgres
-#    ports:
-#    - 5432:5432
-
   monolith:
     image: ghcr.io/ccil-kbw/robot:latest-arm64
     restart: always
     ports:
       - 3333:3333
     environment:
-#        - MDROID_FEATURES_PROXY=$MDROID_FEATURES_PROXY
-#        - MDROID_FEATURES_BOT=$MDROID_FEATURES_BOT
         - MDROID_BOT_GUILD_ID=$MDROID_BOT_GUILD_ID
         - MDROID_BOT_TOKEN=$MDROID_BOT_TOKEN
+        - MDROID_OBS_WEBSOCKET_HOST=127.0.0.1:4455
+        - MDROID_OBS_WEBSOCKET_PASSWORD=1234567890
 
   watchtower:
     image: containrrr/watchtower
