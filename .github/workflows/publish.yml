@@ -51,7 +51,7 @@ jobs:
     steps:
       - name: Release Version
         env:
-          RELEASE_VERSION: ${{ needs.jobs.release.outputs.version }}
+          RELEASE_VERSION: ${{ needs.release.outputs.version }}
         run: echo "$RELEASE_VERSION"
       - uses: actions/checkout@v3
       - uses: wangyoucao577/go-release-action@v1.40
@@ -118,5 +118,5 @@ jobs:
           context: .
           file: ./build/docker/Dockerfile
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest,${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.release.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
