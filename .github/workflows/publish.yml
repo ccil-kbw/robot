@@ -20,7 +20,11 @@ jobs:
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+        with: # https://stackoverflow.com/a/65081720
+          ref: ${{ github.event.workflow_run.head_branch }}
+          fetch-depth: "0"
       - name: Install Auto
         run : npm i -g auto @auto-it/upload-assets @auto-it/git-tag @auto-it/pr-body-labels @auto-it/exec
       - name: Configure git
