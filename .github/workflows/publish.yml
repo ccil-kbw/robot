@@ -1,0 +1,33 @@
+# mvp: https://github.com/mariadb-corporation/skysql-api-go/blob/main/.github/workflows/publish.yml
+name: Publish
+on:
+  push:
+    branches:
+      - master
+      - next
+  workflow_dispatch:
+jobs:
+  release:
+    name: Publish new release
+    if: github.ref == 'refs/heads/master'
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Check Out Repo
+        uses: actions/checkout@v2
+        with: # https://stackoverflow.com/a/65081720
+          ref: ${{ github.event.workflow_run.head_branch }}
+          fetch-depth: "0"
+      - name: Install Auto
+        run : npm i -g auto @auto-it/upload-assets @auto-it/git-tag @auto-it/pr-body-labels @auto-it/exec
+      - name: Configure git
+        run: |
+          git config --global user.email "kbw-ci-bot@mail.ccil-kbw.com"
+          git config --global user.name "kbw-ci-bot"
+      - name: Publish new version
+        run: GH_TOKEN="${{ secrets.GITHUB_TOKEN }}" auto shipit
+      - id: version
+        name: Output new version
+        run: echo "::set-output name=version::$(git describe --tags)"
