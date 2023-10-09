@@ -118,5 +118,5 @@ jobs:
           context: .
           file: ./build/docker/Dockerfile
           push: true
-          tags: ${{ needs.jobs.release.outputs.version }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           labels: ${{ steps.meta.outputs.labels }}
