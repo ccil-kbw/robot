@@ -147,7 +147,7 @@ var (
 )
 
 // Run the Discord bot. NOTE: Function can be split
-func Run(guildID, botToken *string, removeCommands *bool, obs *rec.Recorder) {
+func Run(guildID, botToken *string, removeCommands *bool, obs *rec.Recorder, notifyChan chan string) {
 	var err error
 	var s *discordgo.Session
 
@@ -183,6 +183,18 @@ func Run(guildID, botToken *string, removeCommands *bool, obs *rec.Recorder) {
 
 	defer s.Close()
 
+	var channelID string
+	{
+		channelID = os.Getenv("MDROID_DISCORD_CHANNEL_ID")
+		if channelID == "" {
+			channelID = "1044684995127676958"
+		}
+	}
+	go func() {
+		for {
+			s.ChannelMessageSend(channelID, <-notifyChan)
+		}
+	}()
 	stop := make(chan os.Signal, 1)
 	signal.Notify(stop, os.Interrupt)
 	fmt.Println("Press Ctrl+C to exit")

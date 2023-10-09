@@ -28,7 +28,7 @@ type RecordConfig struct {
 	RecordingDays []time.Weekday
 }
 
-// SupposedToBeRecording, just what the func name is saying.
+// SupposedToBeRecording just what the func name is saying.
 // Please add doc wherever you think it was unreadable, else refactor the portion
 func SupposedToBeRecording(confs []*RecordConfig) bool {
 

@@ -2,31 +2,12 @@ package main
 
 import (
 	"fmt"
+	"github.com/ccil-kbw/robot/iqama"
 	"os"
-	"sync"
 	"time"
 
 	"github.com/ccil-kbw/robot/rec"
 )
-
-// AsyncConf (sync.Mutex) is used to handle the RecordConfig asynchronously as it's used in the main and some sub routines
-type AsyncConf struct {
-	mu    sync.Mutex
-	confs []*rec.RecordConfig
-}
-
-// Refresh updates the scheduling configurations
-func (ac *AsyncConf) Refresh() {
-	ac.mu.Lock()
-	ac.confs = rec.GetIqamaRecordingConfigs()
-	ac.mu.Unlock()
-}
-
-func (ac *AsyncConf) Confs() []*rec.RecordConfig {
-	ac.mu.Lock()
-	defer ac.mu.Unlock()
-	return ac.confs
-}
 
 func main() {
 
@@ -52,16 +33,7 @@ func main() {
 
 	defer client.Disconnect()
 
-	ac := AsyncConf{}
-	ac.Refresh()
-
-	ticker := time.NewTicker(1 * time.Hour)
-	go func() {
-		for range ticker.C {
-			fmt.Printf("%s: Updating Iqama time...\n", time.Now().Format(time.Kitchen))
-			ac.Refresh()
-		}
-	}()
+	data := iqama.StartRecordingScheduleServer()
 
 	for {
 
@@ -70,7 +42,7 @@ func main() {
 			panic(err)
 		}
 
-		shouldRecord := rec.SupposedToBeRecording(ac.Confs())
+		shouldRecord := rec.SupposedToBeRecording(data.Confs())
 
 		// Start recording if supposed to be recording but currently not recording
 		if shouldRecord && !isRecording {
