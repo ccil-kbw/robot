@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	root = "/home/seraf/Documents/MEGAKBW"
+	root = "/data"
 )
 
 type File struct {

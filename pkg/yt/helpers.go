@@ -35,7 +35,7 @@ func getClient(ctx context.Context, config *oauth2.Config) *http.Client {
 }
 func getService() *youtube.Service {
 
-	b, err := ioutil.ReadFile("/home/seraf/.ytcreds.json")
+	b, err := ioutil.ReadFile("/credentials.json")
 	if err != nil {
 		log.Fatalf("Unable to read client secret file: %v", err)
 	}

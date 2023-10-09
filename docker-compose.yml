@@ -20,3 +20,11 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     command: --interval 600
+
+  yt-uploader-v2:
+    image: ghcr.io/ccil-kbw/robot:latest
+    restart: always
+    volumes:
+      - /home/seraf/Documents/MEGAKBW:/data
+      - /home/seraf/.ytcreds.json:/credentials.json
+    command: "/yt-upload-v2"
