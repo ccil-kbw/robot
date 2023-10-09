@@ -63,7 +63,7 @@ jobs:
           project_path: "./cmd/discord_bot"
           binary_name: "iqamabot"
           extra_files: README.md
-          release_tag: ${{ jobs.release.outputs.version }}
+          release_tag: ${{ needs.jobs.release.outputs.version }}
 
       - uses: wangyoucao577/go-release-action@v1.40
         with:
@@ -74,7 +74,7 @@ jobs:
           project_path: "./cmd/darsrec"
           binary_name: "darsrec"
           extra_files: README.md
-          release_tag: ${{ jobs.release.outputs.version }}
+          release_tag: ${{ needs.jobs.release.outputs.version }}
 
       - uses: wangyoucao577/go-release-action@v1.40
         with:
@@ -85,7 +85,7 @@ jobs:
           project_path: "./cmd/yt-upload-v2"
           binary_name: "yt-upload-v2"
           extra_files: README.md
-          release_tag: ${{ jobs.release.outputs.version }}
+          release_tag: ${{ needs.jobs.release.outputs.version }}
 
   docker-push:
     needs: release
@@ -118,5 +118,5 @@ jobs:
           context: .
           file: ./build/docker/Dockerfile
           push: true
-          tags: ${{ jobs.release.outputs.version }}
+          tags: ${{ needs.jobs.release.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
