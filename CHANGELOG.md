@@ -1,3 +1,17 @@
+# v0.0.2 (Mon Oct 09 2023)
+
+#### ⚠️ Pushed to `master`
+
+- fix: job dependency ([@serafdev](https://github.com/serafdev))
+- feat: add envs ([@serafdev](https://github.com/serafdev))
+- feat: merge all workflows to simplify ci ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v0.0.1 (Mon Oct 09 2023)
 
 #### 🍜 Breaking Change
