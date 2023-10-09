@@ -38,6 +38,7 @@ jobs:
         run: echo "::set-output name=version::$(git describe --tags)"
 
   releases-matrix:
+    needs: release
     name: Release Go Binary
     runs-on: ubuntu-latest
     strategy:
@@ -46,7 +47,7 @@ jobs:
         goarch: [amd64]
     steps:
       - uses: actions/checkout@v3
-      - uses: wangyoucao577/go-release-action@v1.34
+      - uses: wangyoucao577/go-release-action@v1.40
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           goos: ${{ matrix.goos }}
@@ -55,8 +56,9 @@ jobs:
           project_path: "./cmd/discord_bot"
           binary_name: "iqamabot"
           extra_files: README.md
+          release_tag: ${{ needs.jobs.release.outputs.version }}
 
-      - uses: wangyoucao577/go-release-action@v1.34
+      - uses: wangyoucao577/go-release-action@v1.40
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           goos: ${{ matrix.goos }}
@@ -65,8 +67,9 @@ jobs:
           project_path: "./cmd/darsrec"
           binary_name: "darsrec"
           extra_files: README.md
+          release_tag: ${{ needs.jobs.release.outputs.version }}
 
-      - uses: wangyoucao577/go-release-action@v1.34
+      - uses: wangyoucao577/go-release-action@v1.40
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           goos: ${{ matrix.goos }}
@@ -75,8 +78,10 @@ jobs:
           project_path: "./cmd/yt-upload-v2"
           binary_name: "yt-upload-v2"
           extra_files: README.md
+          release_tag: ${{ needs.jobs.release.outputs.version }}
 
   docker-push:
+    needs: release
     runs-on: ubuntu-latest
 
     permissions:
@@ -106,5 +111,5 @@ jobs:
           context: .
           file: ./build/docker/Dockerfile
           push: true
-          tags: ${{ needs.release.outputs.version }}
+          tags: ${{ needs.jobs.release.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
