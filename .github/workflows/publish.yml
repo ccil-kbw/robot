@@ -35,7 +35,9 @@ jobs:
         run: GH_TOKEN="${{ secrets.GITHUB_TOKEN }}" auto shipit
       - id: version
         name: Output new version
-        run: echo "::set-output name=version::$(git describe --tags)"
+        run: |
+          echo "$(git describe --tags)"
+          echo "::set-output name=version::$(git describe --tags)"
 
   releases-matrix:
     needs: release
