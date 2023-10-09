@@ -106,5 +106,5 @@ jobs:
           context: .
           file: ./build/docker/Dockerfile
           push: true
-          tags: ${{ jobs.release.outputs.version }}
+          tags: ${{ needs.release.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
