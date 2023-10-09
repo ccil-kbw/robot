@@ -20,11 +20,7 @@ jobs:
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
-      - name: Check Out Repo
-        uses: actions/checkout@v2
-        with: # https://stackoverflow.com/a/65081720
-          ref: ${{ github.event.workflow_run.head_branch }}
-          fetch-depth: "0"
+      - uses: actions/checkout@v4
       - name: Install Auto
         run : npm i -g auto @auto-it/upload-assets @auto-it/git-tag @auto-it/pr-body-labels @auto-it/exec
       - name: Configure git
@@ -53,7 +49,7 @@ jobs:
         env:
           RELEASE_VERSION: ${{ needs.release.outputs.version }}
         run: echo "$RELEASE_VERSION"
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: wangyoucao577/go-release-action@v1.40
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -97,7 +93,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Log in to the Container registry
         uses: docker/login-action@v2
