@@ -1,3 +1,15 @@
+# v0.0.9 (Mon Oct 09 2023)
+
+#### ⚠️ Pushed to `master`
+
+- fix(docker): timezone in docker image ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v0.0.8 (Mon Oct 09 2023)
 
 #### ⚠️ Pushed to `master`
