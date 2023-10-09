@@ -51,7 +51,7 @@ jobs:
     steps:
       - name: Release Version
         env:
-          RELEASE_VERSION: ${{ jobs.release.outputs.version }}
+          RELEASE_VERSION: ${{ needs.jobs.release.outputs.version }}
         run: echo "$RELEASE_VERSION"
       - uses: actions/checkout@v3
       - uses: wangyoucao577/go-release-action@v1.40
