@@ -1,0 +1,40 @@
+{
+  "plugins": [
+    "git-tag"
+  ],
+  "owner": "ccil-kbw",
+  "repo": "robot",
+  "name": "kbw-ci-bot",
+  "email": "no-reply@mail.ccil-kbw.com",
+  "noDefaultLabels": true,
+  "labels": [
+    {
+      "name": "major",
+      "changelogTitle": "🍜 Breaking Change",
+      "description": "Increment the major version when merged",
+      "releaseType": "patch",
+      "color": "#0219BF"
+    },
+    {
+      "name": "minor",
+      "changelogTitle": "🍘 Feature Change",
+      "description": "Increment the minor version when merged",
+      "releaseType": "patch",
+      "color": "#02BF08"
+    },
+    {
+      "name": "patch",
+      "changelogTitle": "🍪 Hotfix",
+      "description": "Increment the patch version when merged",
+      "releaseType": "patch",
+      "color": "#E88309"
+    },
+    {
+      "name": "ops",
+      "changelogTitle": "🍣 Dependency, DevOps, Documentation and more Cleaning",
+      "description": "Not Code related",
+      "releaseType": "patch",
+      "color": "#5E0981"
+    }
+  ]
+}
