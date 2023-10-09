@@ -6,6 +6,11 @@ on:
       - master
       - next
   workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
 jobs:
   release:
     name: Publish new release
