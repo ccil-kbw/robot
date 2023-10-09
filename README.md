@@ -4,7 +4,7 @@
 
 ![Latest commit](https://img.shields.io/github/last-commit/ccil-kbw/robot/master?style=flat-square)
 ![GitHub issues](https://img.shields.io/github/issues/ccil-kbw/robot)
-[![Build Status: master](https://github.com/ccil-kbw/robot/actions/workflows/build-release-binaries.yaml/badge.svg)](https://github.com/ccil-kbw/robot/actions/workflows/build-release-binaries.yaml)
+[![Publish](https://github.com/ccil-kbw/robot/actions/workflows/publish.yml/badge.svg)](https://github.com/ccil-kbw/robot/actions/workflows/publish.yml)
 ![GitHub](https://img.shields.io/github/license/ccil-kbw/robot)
 
 </div>
