@@ -1,3 +1,15 @@
+# v0.0.12 (Mon Oct 09 2023)
+
+#### ⚠️ Pushed to `master`
+
+- fix(docker): Add Docker Build on QA Image (PR) ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v0.0.11 (Mon Oct 09 2023)
 
 #### ⚠️ Pushed to `master`
