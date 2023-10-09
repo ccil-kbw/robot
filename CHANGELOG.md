@@ -1,3 +1,15 @@
+# v0.0.3 (Mon Oct 09 2023)
+
+#### ⚠️ Pushed to `master`
+
+- fix: workflow jobs dependencies ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v0.0.2 (Mon Oct 09 2023)
 
 #### ⚠️ Pushed to `master`
