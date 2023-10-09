@@ -107,10 +107,22 @@ func GetIqamaRecordingConfigs() []*RecordConfig {
 			RecordingDays: []time.Weekday{time.Friday},
 		},
 		{
-			Description:   "Fiqh Dars Recording",
+			Description:   "Thursday Fiqh Dars Recording",
 			StartTime:     toTime(iqamaTimes.Maghrib.Iqama),
 			Duration:      JumuaaRecordDuration,
 			RecordingDays: []time.Weekday{time.Thursday},
+		},
+		{
+			Description:   "Monday Maghrib Dars Recording",
+			StartTime:     toTime(iqamaTimes.Maghrib.Iqama),
+			Duration:      JumuaaRecordDuration,
+			RecordingDays: []time.Weekday{time.Monday},
+		},
+		{
+			Description:   "Sunday Isha Dars Recording",
+			StartTime:     toTime(iqamaTimes.Maghrib.Iqama),
+			Duration:      JumuaaRecordDuration,
+			RecordingDays: []time.Weekday{time.Sunday},
 		},
 	}
 }
