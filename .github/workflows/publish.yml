@@ -37,7 +37,7 @@ jobs:
         name: Output new version
         run: |
           echo "$(git describe --tags)"
-          echo "::set-output name=version::$(git describe --tags)"
+          echo "version=$(git describe --tags)" >> "$GITHUB_OUTPUT"
 
   releases-matrix:
     needs: release
@@ -47,7 +47,12 @@ jobs:
       matrix:
         goos: [linux, darwin]
         goarch: [amd64]
+
     steps:
+      - name: Release Version
+        env:
+          RELEASE_VERSION: ${{ jobs.release.outputs.version }}
+        run: echo "$RELEASE_VERSION"
       - uses: actions/checkout@v3
       - uses: wangyoucao577/go-release-action@v1.40
         with:
@@ -58,7 +63,7 @@ jobs:
           project_path: "./cmd/discord_bot"
           binary_name: "iqamabot"
           extra_files: README.md
-          release_tag: ${{ needs.jobs.release.outputs.version }}
+          release_tag: ${{ jobs.release.outputs.version }}
 
       - uses: wangyoucao577/go-release-action@v1.40
         with:
@@ -69,7 +74,7 @@ jobs:
           project_path: "./cmd/darsrec"
           binary_name: "darsrec"
           extra_files: README.md
-          release_tag: ${{ needs.jobs.release.outputs.version }}
+          release_tag: ${{ jobs.release.outputs.version }}
 
       - uses: wangyoucao577/go-release-action@v1.40
         with:
@@ -80,7 +85,7 @@ jobs:
           project_path: "./cmd/yt-upload-v2"
           binary_name: "yt-upload-v2"
           extra_files: README.md
-          release_tag: ${{ needs.jobs.release.outputs.version }}
+          release_tag: ${{ jobs.release.outputs.version }}
 
   docker-push:
     needs: release
@@ -113,5 +118,5 @@ jobs:
           context: .
           file: ./build/docker/Dockerfile
           push: true
-          tags: ${{ needs.jobs.release.outputs.version }}
+          tags: ${{ jobs.release.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
