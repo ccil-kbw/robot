@@ -1,3 +1,16 @@
+# (Mon Oct 09 2023)
+
+#### ⚠️ Pushed to `master`
+
+- feat(ci): Add Publish Release CI ([@serafdev](https://github.com/serafdev))
+- Create .autorc ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v0.0.3 (Mon May 22 2023)
 
 #### 🚢 Bug Fix
