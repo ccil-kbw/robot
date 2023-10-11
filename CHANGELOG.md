@@ -1,3 +1,15 @@
+# v0.0.15 (Wed Oct 11 2023)
+
+#### ⚠️ Pushed to `master`
+
+- feat(bot): Switch Notification Channel to #iqama ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v0.0.14 (Mon Oct 09 2023)
 
 #### ⚠️ Pushed to `master`
