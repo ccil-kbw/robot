@@ -1,3 +1,15 @@
+# v0.0.16 (Wed Oct 11 2023)
+
+#### ⚠️ Pushed to `master`
+
+- feat(bot): Add Notification 15 minutes before Iqama ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v0.0.15 (Wed Oct 11 2023)
 
 #### ⚠️ Pushed to `master`
