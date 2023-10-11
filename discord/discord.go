@@ -191,8 +191,18 @@ func Run(guildID, botToken *string, removeCommands *bool, obs *rec.Recorder, not
 		}
 	}
 	go func() {
+		previousMessageID := ""
 		for {
-			s.ChannelMessageSend(channelID, <-notifyChan)
+			m, err := s.ChannelMessageSend(channelID, <-notifyChan)
+			if err != nil {
+				log.Println("Couldn't send Message")
+			}
+			if previousMessageID != "" {
+				if err := s.ChannelMessageDelete(channelID, previousMessageID); err != nil {
+					log.Println("Couldn't delete the Previous Message, please clean up the channel manually.")
+				}
+			}
+			previousMessageID = m.ID
 		}
 	}()
 	stop := make(chan os.Signal, 1)

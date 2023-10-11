@@ -60,34 +60,11 @@ func main() {
 		go iqama.StartRecordingScheduleServer()
 
 		for {
-			now := time.Now()
-			if prayersData.Confs().Fajr.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
-				fmt.Println("Fajr: Iqama starts Now")
-				notifyChan <- "Fajr: Iqama starts Now"
-			}
+			in := 15 * time.Minute
+			notifyFunc(notifyChan, prayersData, in)
+			notifyFunc(notifyChan, prayersData, 0)
+			time.Sleep(10 * time.Second)
 
-			if prayersData.Confs().Dhuhr.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
-				fmt.Println("Dhuhur: Iqama Starts Now")
-				notifyChan <- "Dhuhur: Iqama starts Now"
-
-			}
-
-			if prayersData.Confs().Asr.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
-				fmt.Println("Asr: Iqama Starts Now")
-				notifyChan <- "Asr: Iqama Starts Now"
-			}
-
-			if prayersData.Confs().Maghrib.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
-				fmt.Println("Maghrib: Iqama Starts Now")
-				notifyChan <- "Maghrib: Iqama Starts Now"
-			}
-
-			if prayersData.Confs().Isha.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
-				fmt.Println("Isha: Iqama Starts Now")
-				notifyChan <- "Isha: Iqama Starts Now"
-			}
-
-			time.Sleep(1 * time.Minute)
 		}
 
 	}()
@@ -152,4 +129,42 @@ func bot(obs *rec.Recorder, notifyChan chan string) {
 	botToken := os.Getenv("MDROID_BOT_TOKEN")
 	removeCommands := true
 	discord.Run(&guildID, &botToken, &removeCommands, obs, notifyChan)
+}
+
+func notifyFunc(notifyChan chan string, prayersData *iqama.PrayersData, in time.Duration) {
+	now := time.Now().Add(in)
+
+	if prayersData.Confs().Fajr.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
+		notifyPrayer("Fajr", prayersData.Confs().Fajr.Iqama, in, notifyChan)
+	}
+
+	if prayersData.Confs().Dhuhr.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
+		notifyPrayer("Dhuhr", prayersData.Confs().Dhuhr.Iqama, in, notifyChan)
+
+	}
+
+	if prayersData.Confs().Asr.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
+		notifyPrayer("Asr", prayersData.Confs().Asr.Iqama, in, notifyChan)
+	}
+
+	if prayersData.Confs().Maghrib.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
+		notifyPrayer("Maghrib", prayersData.Confs().Maghrib.Iqama, in, notifyChan)
+	}
+
+	if prayersData.Confs().Isha.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
+		notifyPrayer("Isha", prayersData.Confs().Isha.Iqama, in, notifyChan)
+	}
+
+}
+
+func notifyPrayer(prayerName, prayerTime string, in time.Duration, notifyChan chan string) {
+	var msg string
+	{
+		if in == 0 {
+			msg = fmt.Sprintf("%s's Iqama Time now, it's %s!", prayerName, prayerTime)
+		} else {
+			msg = fmt.Sprintf("%s's Iqama in %v, at %s", prayerName, in, prayerTime)
+		}
+	}
+	notifyChan <- msg
 }
