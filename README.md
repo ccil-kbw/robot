@@ -2,6 +2,8 @@
 
 # Masjid's Droid
 
+<img src="./assets/img/fares___blueprint.png" width="512" alt="M-Droid Blueprint"/>
+
 ![Latest commit](https://img.shields.io/github/last-commit/ccil-kbw/robot/master?style=flat-square)
 ![GitHub issues](https://img.shields.io/github/issues/ccil-kbw/robot)
 [![Publish](https://github.com/ccil-kbw/robot/actions/workflows/publish.yml/badge.svg)](https://github.com/ccil-kbw/robot/actions/workflows/publish.yml)

@@ -187,7 +187,7 @@ func Run(guildID, botToken *string, removeCommands *bool, obs *rec.Recorder, not
 	{
 		channelID = os.Getenv("MDROID_DISCORD_CHANNEL_ID")
 		if channelID == "" {
-			channelID = "1044684995127676958"
+			channelID = "1161464871792160789"
 		}
 	}
 	go func() {
