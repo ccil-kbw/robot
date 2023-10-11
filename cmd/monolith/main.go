@@ -117,7 +117,7 @@ out:
 func proxy() {
 	http.HandleFunc("/today", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Printf("request: %s, %s\n", r.Method, r.URL)
-		io.WriteString(w, string(v1.GetRAW()))
+		_, _ = io.WriteString(w, string(v1.GetRAW()))
 	})
 
 	fmt.Println("Running iqama-proxy Go server on port :3333")

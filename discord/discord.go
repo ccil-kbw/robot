@@ -39,13 +39,13 @@ var (
 
 	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder){
 		"iqama": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
-			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+			_ = s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: mappers.IqamaTimesToDiscordInteractionResponseData(iqamav1.Get()),
 			})
 		},
 		"rec-schedule": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
-			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+			_ = s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
 					Embeds: []*discordgo.MessageEmbed{
@@ -71,7 +71,7 @@ var (
 			)
 		},
 		"rec-start": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
-			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+			_ = s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
 					Embeds: []*discordgo.MessageEmbed{
@@ -102,7 +102,7 @@ var (
 			)
 		},
 		"rec-status": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
-			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+			_ = s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
 					Embeds: []*discordgo.MessageEmbed{
@@ -181,7 +181,9 @@ func Run(guildID, botToken *string, removeCommands *bool, obs *rec.Recorder, not
 		registeredCommands[i] = cmd
 	}
 
-	defer s.Close()
+	defer func(s *discordgo.Session) {
+		_ = s.Close()
+	}(s)
 
 	var channelID string
 	{
