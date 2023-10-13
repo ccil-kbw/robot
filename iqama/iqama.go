@@ -11,17 +11,17 @@ import (
 // RecordingsData (sync.Mutex) is used to handle the RecordConfig asynchronously as it's used in the main and some sub routines
 type RecordingsData struct {
 	mu    sync.Mutex
-	confs []*rec.RecordConfig
+	confs *[]rec.RecordConfig
 }
 
 // Refresh updates the scheduling configurations
 func (ac *RecordingsData) Refresh() {
 	ac.mu.Lock()
-	ac.confs = rec.GetIqamaRecordingConfigs()
+	ac.confs = rec.RecordConfigData.Get()
 	ac.mu.Unlock()
 }
 
-func (ac *RecordingsData) Confs() []*rec.RecordConfig {
+func (ac *RecordingsData) Confs() *[]rec.RecordConfig {
 	ac.mu.Lock()
 	defer ac.mu.Unlock()
 	return ac.confs
@@ -36,8 +36,8 @@ type PrayersData struct {
 func (i *PrayersData) Refresh() {
 	i.mu.Lock()
 	defer i.mu.Unlock()
-	resp := v1.Get()
-	i.confs = &resp
+	resp, _ := v1.Get()
+	i.confs = resp
 }
 
 func (i *PrayersData) Confs() *v1.Resp {

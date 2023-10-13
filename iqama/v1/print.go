@@ -7,13 +7,21 @@ import (
 )
 
 func GetDiscordPrettified() string {
-	t := toTable(Get())
+	d, err := Get()
+	if err != nil {
+		return ""
+	}
+	t := toTable(*d)
 
 	return "```markdown\n" + t.Render() + "\n```"
 }
 
 func GetShellPrettified() string {
-	t := toTable(Get())
+	d, err := Get()
+	if err != nil {
+		return ""
+	}
+	t := toTable(*d)
 
 	return t.Render()
 }
