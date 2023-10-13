@@ -12,14 +12,14 @@
       "name": "major",
       "changelogTitle": "🍜 Breaking Change",
       "description": "Increment the major version when merged",
-      "releaseType": "patch",
+      "releaseType": "major",
       "color": "#0219BF"
     },
     {
       "name": "minor",
       "changelogTitle": "🍘 Feature Change",
       "description": "Increment the minor version when merged",
-      "releaseType": "patch",
+      "releaseType": "minor",
       "color": "#02BF08"
     },
     {
