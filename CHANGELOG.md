@@ -1,3 +1,21 @@
+# v0.0.17 (Fri Oct 13 2023)
+
+#### 🐛 Bug Fix
+
+- Revert .autorc to default values [#23](https://github.com/ccil-kbw/robot/pull/23) ([@serafdev](https://github.com/serafdev))
+- Update .autorc [#22](https://github.com/ccil-kbw/robot/pull/22) ([@serafdev](https://github.com/serafdev))
+- feat: add error handling [#21](https://github.com/ccil-kbw/robot/pull/21) ([@serafdev](https://github.com/serafdev))
+
+#### ⚠️ Pushed to `master`
+
+- chores: Add explicit ignores on Unhandled errors ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v0.0.17 (Wed Oct 11 2023)
 
 #### ⚠️ Pushed to `master`
