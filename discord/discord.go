@@ -39,9 +39,10 @@ var (
 
 	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder){
 		"iqama": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
+			resp, _ := iqamav1.Get()
 			_ = s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
-				Data: mappers.IqamaTimesToDiscordInteractionResponseData(iqamav1.Get()),
+				Data: mappers.IqamaTimesToDiscordInteractionResponseData(*resp),
 			})
 		},
 		"rec-schedule": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
@@ -56,7 +57,7 @@ var (
 							Color:       0x05294e,
 							Fields: func() []*discordgo.MessageEmbedField {
 								resp := []*discordgo.MessageEmbedField{}
-								for _, rec := range rec.GetIqamaRecordingConfigs() {
+								for _, rec := range *rec.RecordConfigData.Get() {
 									resp = append(resp, &discordgo.MessageEmbedField{
 										Name:  rec.Description,
 										Value: fmt.Sprintf("start: %d:%d, for %v on %v", rec.StartTime.Hour(), rec.StartTime.Minute(), rec.Duration, rec.RecordingDays),

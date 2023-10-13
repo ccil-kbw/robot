@@ -93,3 +93,11 @@ func (o *Recorder) IsRecording() (bool, error) {
 
 	return resp.OutputActive, nil
 }
+
+func (o *Recorder) RecordTime() float64 {
+	r, err := o.client.Record.GetRecordStatus()
+	if err != nil {
+		fmt.Println(err)
+	}
+	return r.OutputDuration
+}

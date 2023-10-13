@@ -6,15 +6,15 @@ import (
 	"net/http"
 )
 
-func Get() Resp {
+func Get() (*Resp, error) {
 
 	body := GetRAW()
 
 	iqamaResp, err := UnmarshalResp(body)
 	if err != nil {
-		log.Fatalln(err)
+		return nil, err
 	}
-	return iqamaResp
+	return &iqamaResp, err
 }
 
 func GetRAW() []byte {

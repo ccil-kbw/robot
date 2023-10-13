@@ -2,6 +2,7 @@ package rec
 
 import (
 	"fmt"
+	"sync"
 	"time"
 
 	v1 "github.com/ccil-kbw/robot/iqama/v1"
@@ -12,7 +13,25 @@ var (
 	JumuaaRecordDuration time.Duration  = 2 * time.Hour
 	DarsRecordDuration   time.Duration  = 1 * time.Hour
 	location             string         = "America/Montreal"
+	RecordConfigData     RecordConfigDataS
 )
+
+type RecordConfigDataS struct {
+	data *[]RecordConfig
+	mu   sync.Mutex
+}
+
+func (rc *RecordConfigDataS) Get() *[]RecordConfig {
+	defer rc.mu.Unlock()
+	rc.mu.Lock()
+	return rc.data
+}
+
+func (rc *RecordConfigDataS) Replace(conf []RecordConfig) {
+	defer rc.mu.Unlock()
+	rc.mu.Lock()
+	rc.data = &conf
+}
 
 type RecordConfig struct {
 	Description string
@@ -30,7 +49,7 @@ type RecordConfig struct {
 
 // SupposedToBeRecording just what the func name is saying.
 // Please add doc wherever you think it was unreadable, else refactor the portion
-func SupposedToBeRecording(confs []*RecordConfig) bool {
+func SupposedToBeRecording() bool {
 
 	// Added this outside of the for loop to have better logging internally by looking at all records before returning
 	shouldRecord := false
@@ -38,7 +57,7 @@ func SupposedToBeRecording(confs []*RecordConfig) bool {
 	now := time.Now()
 
 	fmt.Printf("current time: %s \n", now.Format("15:04:05"))
-	for _, conf := range confs {
+	for _, conf := range *RecordConfigData.Get() {
 		recordToday := false
 
 		// Check if should be recording today
@@ -69,19 +88,30 @@ func SupposedToBeRecording(confs []*RecordConfig) bool {
 	return shouldRecord
 }
 
-func GetIqamaRecordingConfigs() []*RecordConfig {
+func GetIqamaRecordingConfigs() {
+
 	timeLocation, err := time.LoadLocation("America/Montreal")
 	if err != nil {
-		panic(err)
+		fmt.Println("couldn't access remote iqama")
 	}
 
-	iqamaTimes := v1.Get()
+	iqamaTimes, err := v1.Get()
+	if err != nil || iqamaTimes == nil {
+		fmt.Println("couldn't fetch iqama times, keeping current data")
+		if RecordConfigData.Get() == nil {
+			RecordConfigData.Replace([]RecordConfig{
+				{
+					Description:   "Jumuaa Recording",
+					StartTime:     time.Date(2023, 1, 1, 11, 55, 0, 0, timeLocation),
+					Duration:      JumuaaRecordDuration,
+					RecordingDays: []time.Weekday{time.Friday},
+				},
+			})
+		}
+		return
+	}
 
-	fmt.Printf("fajr time: %s\n", iqamaTimes.Fajr.Iqama)
-	fmt.Printf("dhuhur time: %s\n", iqamaTimes.Dhuhr.Iqama)
-	fmt.Printf("isha time: %s\n", iqamaTimes.Isha.Iqama)
-
-	return []*RecordConfig{
+	RecordConfigData.Replace([]RecordConfig{
 		{
 			Description:   "Fajr Recording",
 			StartTime:     toTime(iqamaTimes.Fajr.Iqama),
@@ -100,12 +130,7 @@ func GetIqamaRecordingConfigs() []*RecordConfig {
 			Duration:      DarsRecordDuration,
 			RecordingDays: EveryDay,
 		},
-		{
-			Description:   "Jumuaa Recording",
-			StartTime:     time.Date(2023, 1, 1, 11, 55, 0, 0, timeLocation),
-			Duration:      JumuaaRecordDuration,
-			RecordingDays: []time.Weekday{time.Friday},
-		},
+
 		{
 			Description:   "Thursday Fiqh Dars Recording",
 			StartTime:     toTime(iqamaTimes.Maghrib.Iqama),
@@ -124,7 +149,7 @@ func GetIqamaRecordingConfigs() []*RecordConfig {
 			Duration:      JumuaaRecordDuration,
 			RecordingDays: []time.Weekday{time.Sunday},
 		},
-	}
+	})
 }
 
 func toTime(s string) time.Time {
