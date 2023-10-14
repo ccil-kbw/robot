@@ -9,21 +9,21 @@
   "noDefaultLabels": true,
   "labels": [
     {
-      "name": "major",
+      "name": "breaking",
       "changelogTitle": "💥 Breaking Change",
       "description": "Increment the major version when merged",
       "releaseType": "major",
       "color": "#C5000B"
     },
     {
-      "name": "minor",
+      "name": "feature",
       "changelogTitle": "🚀 Enhancement",
       "description": "Increment the minor version when merged",
       "releaseType": "minor",
       "color": "#F1A60E"
     },
     {
-      "name": "patch",
+      "name": "bugfix",
       "changelogTitle": "🐛 Bug Fix",
       "description": "Increment the patch version when merged",
       "releaseType": "patch",
