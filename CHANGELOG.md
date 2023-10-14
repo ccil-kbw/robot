@@ -1,3 +1,15 @@
+# v1.0.0 (Sat Oct 14 2023)
+
+#### 💥 Breaking Change
+
+- Fix Release Labels [#24](https://github.com/ccil-kbw/robot/pull/24) ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v0.0.17 (Fri Oct 13 2023)
 
 #### 🐛 Bug Fix
