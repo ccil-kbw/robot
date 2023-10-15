@@ -57,12 +57,7 @@ var (
 							Color:       0x05294e,
 							Fields: func() []*discordgo.MessageEmbedField {
 								resp := []*discordgo.MessageEmbedField{}
-								for _, rec := range *rec.RecordConfigData.Get() {
-									resp = append(resp, &discordgo.MessageEmbedField{
-										Name:  rec.Description,
-										Value: fmt.Sprintf("start: %d:%d, for %v on %v", rec.StartTime.Hour(), rec.StartTime.Minute(), rec.Duration, rec.RecordingDays),
-									})
-								}
+
 								return resp
 							}(),
 						},

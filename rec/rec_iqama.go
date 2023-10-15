@@ -2,10 +2,9 @@ package rec
 
 import (
 	"fmt"
+	v1 "github.com/ccil-kbw/robot/iqama/v1"
 	"sync"
 	"time"
-
-	v1 "github.com/ccil-kbw/robot/iqama/v1"
 )
 
 var (
@@ -13,7 +12,6 @@ var (
 	JumuaaRecordDuration time.Duration  = 2 * time.Hour
 	DarsRecordDuration   time.Duration  = 1 * time.Hour
 	location             string         = "America/Montreal"
-	RecordConfigData     RecordConfigDataS
 )
 
 type RecordConfigDataS struct {
@@ -21,75 +19,20 @@ type RecordConfigDataS struct {
 	mu   sync.Mutex
 }
 
+func NewRecordConfigDataS() *RecordConfigDataS {
+	rc := &RecordConfigDataS{}
+	rc.Refresh()
+	return rc
+}
 func (rc *RecordConfigDataS) Get() *[]RecordConfig {
 	defer rc.mu.Unlock()
 	rc.mu.Lock()
 	return rc.data
 }
 
-func (rc *RecordConfigDataS) Replace(conf []RecordConfig) {
+func (rc *RecordConfigDataS) Refresh() {
 	defer rc.mu.Unlock()
 	rc.mu.Lock()
-	rc.data = &conf
-}
-
-type RecordConfig struct {
-	Description string
-
-	// Only check Hours and Minutes
-	StartTime time.Time
-
-	// Duration of the Recording,
-	// StopTime is StartTime + Duration
-	Duration time.Duration
-
-	// For everyday use helper EveryDay)
-	RecordingDays []time.Weekday
-}
-
-// SupposedToBeRecording just what the func name is saying.
-// Please add doc wherever you think it was unreadable, else refactor the portion
-func SupposedToBeRecording() bool {
-
-	// Added this outside of the for loop to have better logging internally by looking at all records before returning
-	shouldRecord := false
-
-	now := time.Now()
-
-	fmt.Printf("current time: %s \n", now.Format("15:04:05"))
-	for _, conf := range *RecordConfigData.Get() {
-		recordToday := false
-
-		// Check if should be recording today
-		for _, day := range conf.RecordingDays {
-			if day == time.Now().Weekday() {
-				recordToday = true
-			}
-		}
-
-		if !recordToday {
-			continue
-		}
-
-		// Set today's start time for this prayer time for Today
-		startTime := timeToday(conf.StartTime.Hour(), conf.StartTime.Minute())
-
-		fmt.Printf("%s %v %v ", conf.Description, conf.StartTime.Format("15:04:05"), conf.StartTime.Add(conf.Duration).Format("15:04:05"))
-
-		// Check if we're in the time range (from conf.StartTime to conf.StartTime+Duration)
-		if now.After(startTime) && now.Before(startTime.Add(conf.Duration)) {
-			shouldRecord = true
-		}
-
-		fmt.Printf("--- in time range: %v\n", shouldRecord)
-
-	}
-
-	return shouldRecord
-}
-
-func GetIqamaRecordingConfigs() {
-
 	timeLocation, err := time.LoadLocation("America/Montreal")
 	if err != nil {
 		fmt.Println("couldn't access remote iqama")
@@ -98,20 +41,20 @@ func GetIqamaRecordingConfigs() {
 	iqamaTimes, err := v1.Get()
 	if err != nil || iqamaTimes == nil {
 		fmt.Println("couldn't fetch iqama times, keeping current data")
-		if RecordConfigData.Get() == nil {
-			RecordConfigData.Replace([]RecordConfig{
+		if rc.Get() == nil {
+			rc.data = &[]RecordConfig{
 				{
 					Description:   "Jumuaa Recording",
 					StartTime:     time.Date(2023, 1, 1, 11, 55, 0, 0, timeLocation),
 					Duration:      JumuaaRecordDuration,
 					RecordingDays: []time.Weekday{time.Friday},
 				},
-			})
+			}
 		}
 		return
 	}
 
-	RecordConfigData.Replace([]RecordConfig{
+	rc.data = &[]RecordConfig{
 		{
 			Description:   "Fajr Recording",
 			StartTime:     toTime(iqamaTimes.Fajr.Iqama),
@@ -149,7 +92,66 @@ func GetIqamaRecordingConfigs() {
 			Duration:      JumuaaRecordDuration,
 			RecordingDays: []time.Weekday{time.Sunday},
 		},
-	})
+	}
+}
+
+type RecordConfig struct {
+	Description string
+
+	// Only check Hours and Minutes
+	StartTime time.Time
+
+	// Duration of the Recording,
+	// StopTime is StartTime + Duration
+	Duration time.Duration
+
+	// For everyday use helper EveryDay)
+	RecordingDays []time.Weekday
+}
+
+// SupposedToBeRecording just what the func name is saying.
+// Please add doc wherever you think it was unreadable, else refactor the portion
+func SupposedToBeRecording(data *RecordConfigDataS) bool {
+
+	// Added this outside of the for loop to have better logging internally by looking at all records before returning
+	shouldRecord := false
+
+	now := time.Now()
+
+	fmt.Printf("current time: %s \n", now.Format("15:04:05"))
+	for _, conf := range *data.Get() {
+		recordToday := false
+
+		// Check if should be recording today
+		for _, day := range conf.RecordingDays {
+			if day == time.Now().Weekday() {
+				recordToday = true
+			}
+		}
+
+		if !recordToday {
+			continue
+		}
+
+		// Set today's start time for this prayer time for Today
+		startTime := timeToday(conf.StartTime.Hour(), conf.StartTime.Minute())
+
+		fmt.Printf("%s %v %v ", conf.Description, conf.StartTime.Format("15:04:05"), conf.StartTime.Add(conf.Duration).Format("15:04:05"))
+
+		// Check if we're in the time range (from conf.StartTime to conf.StartTime+Duration)
+		if now.After(startTime) && now.Before(startTime.Add(conf.Duration)) {
+			shouldRecord = true
+		}
+
+		fmt.Printf("--- in time range: %v\n", shouldRecord)
+
+	}
+
+	return shouldRecord
+}
+
+func GetIqamaRecordingConfigs() {
+
 }
 
 func toTime(s string) time.Time {

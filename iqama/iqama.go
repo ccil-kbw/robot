@@ -17,7 +17,7 @@ type RecordingsData struct {
 // Refresh updates the scheduling configurations
 func (ac *RecordingsData) Refresh() {
 	ac.mu.Lock()
-	ac.confs = rec.RecordConfigData.Get()
+	// ac.confs = rec.RecordConfigData.Get()
 	ac.mu.Unlock()
 }
 

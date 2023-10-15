@@ -78,7 +78,9 @@ func main() {
 	if config.Features.Record {
 		host := os.Getenv("MDROID_OBS_WEBSOCKET_HOST")
 		password := os.Getenv("MDROID_OBS_WEBSOCKET_PASSWORD")
-		obs, err = rec.New(host, password)
+		data := rec.NewRecordConfigDataS()
+
+		err = rec.StartRecServer(host, password, data)
 		if err != nil {
 			fmt.Printf("could not reach or authenticate to OBS")
 		}
