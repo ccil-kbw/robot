@@ -1,3 +1,15 @@
+# v1.0.1 (Sun Oct 15 2023)
+
+#### ⚠️ Pushed to `master`
+
+- fix: recorder ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v1.0.0 (Sat Oct 14 2023)
 
 #### 💥 Breaking Change
