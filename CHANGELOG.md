@@ -1,3 +1,15 @@
+# v1.0.2 (Sun Oct 15 2023)
+
+#### ⚠️ Pushed to `master`
+
+- fix: goroutine ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v1.0.1 (Sun Oct 15 2023)
 
 #### ⚠️ Pushed to `master`
