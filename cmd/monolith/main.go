@@ -80,10 +80,13 @@ func main() {
 		password := os.Getenv("MDROID_OBS_WEBSOCKET_PASSWORD")
 		data := rec.NewRecordConfigDataS()
 
-		err = rec.StartRecServer(host, password, data)
-		if err != nil {
-			fmt.Printf("could not reach or authenticate to OBS")
-		}
+		go func() {
+			err = rec.StartRecServer(host, password, data)
+			if err != nil {
+				fmt.Printf("could not reach or authenticate to OBS")
+			}
+		}()
+
 	}
 
 	if config.Features.DiscordBot {
