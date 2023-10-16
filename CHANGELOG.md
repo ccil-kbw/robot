@@ -1,3 +1,15 @@
+# v1.0.3 (Mon Oct 16 2023)
+
+#### ⚠️ Pushed to `master`
+
+- Update main.go ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v1.0.2 (Sun Oct 15 2023)
 
 #### ⚠️ Pushed to `master`
