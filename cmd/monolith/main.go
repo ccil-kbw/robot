@@ -63,7 +63,7 @@ func main() {
 			in := 15 * time.Minute
 			notifyFunc(notifyChan, prayersData, in)
 			notifyFunc(notifyChan, prayersData, 0)
-			time.Sleep(10 * time.Second)
+			time.Sleep(31 * time.Second)
 
 		}
 
@@ -99,7 +99,7 @@ out:
 		// discord msgs dispatcher
 		case msg := <-msgs:
 			fmt.Printf("%v, operation received from discord: %s\n", time.Now(), msg)
-			if strings.HasPrefix(msg, "obs-") {
+			if strings.HasPrefix(msg, "rec-") {
 				if config.Features.Record {
 					fmt.Println("feature enabled")
 					err := obs.DispatchOperation(msg)
