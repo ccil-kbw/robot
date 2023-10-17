@@ -63,7 +63,7 @@ func main() {
 			in := 15 * time.Minute
 			notifyFunc(notifyChan, prayersData, in)
 			notifyFunc(notifyChan, prayersData, 0)
-			time.Sleep(31 * time.Second)
+			time.Sleep(55 * time.Second)
 
 		}
 
