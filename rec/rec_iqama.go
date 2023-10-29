@@ -70,27 +70,14 @@ func (rc *RecordConfigDataS) Refresh() {
 		{
 			Description:   "Isha Recording",
 			StartTime:     toTime(iqamaTimes.Isha.Iqama),
-			Duration:      DarsRecordDuration,
+			Duration:      JumuaaRecordDuration,
 			RecordingDays: EveryDay,
 		},
-
 		{
-			Description:   "Thursday Fiqh Dars Recording",
-			StartTime:     toTime(iqamaTimes.Maghrib.Iqama),
+			Description:   "Jumuaa Recording",
+			StartTime:     time.Date(2023, 1, 1, 11, 55, 0, 0, timeLocation),
 			Duration:      JumuaaRecordDuration,
-			RecordingDays: []time.Weekday{time.Thursday},
-		},
-		{
-			Description:   "Monday Maghrib Dars Recording",
-			StartTime:     toTime(iqamaTimes.Maghrib.Iqama),
-			Duration:      JumuaaRecordDuration,
-			RecordingDays: []time.Weekday{time.Monday},
-		},
-		{
-			Description:   "Sunday Isha Dars Recording",
-			StartTime:     toTime(iqamaTimes.Maghrib.Iqama),
-			Duration:      JumuaaRecordDuration,
-			RecordingDays: []time.Weekday{time.Sunday},
+			RecordingDays: []time.Weekday{time.Friday},
 		},
 	}
 }

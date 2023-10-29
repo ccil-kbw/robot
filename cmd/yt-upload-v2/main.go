@@ -16,6 +16,7 @@ const (
 
 type File struct {
 	Name     string
+	Size     int64
 	FullPath string
 	BasePath string
 	Uploaded bool
@@ -96,28 +97,33 @@ func refreshFileList() {
 
 	var refreshedFileList []File
 
-	for _, f := range folders {
-		fileBasePath := fmt.Sprintf("%s/%s", root, f.Name())
-		fs, err := os.ReadDir(fileBasePath)
-		if err != nil {
-			log.Fatal(err)
-		}
+	for _, file := range folders {
+		fullPath := fmt.Sprintf("%s/%s", root, file.Name())
 
-		for _, file := range fs {
-			fullPath := fmt.Sprintf("%s/%s/%s", root, f.Name(), file.Name())
-
-			if strings.HasSuffix(file.Name(), ".mkv") {
-				uploaded := false
-				if _, err := os.Stat(fmt.Sprintf("%s/.%s-uploaded", fileBasePath, file.Name())); err == nil {
-					uploaded = true
-				}
-				refreshedFileList = append(refreshedFileList, File{
-					Name:     file.Name(),
-					BasePath: fileBasePath,
-					FullPath: fullPath,
-					Uploaded: uploaded,
-				})
+		if strings.HasSuffix(file.Name(), ".mkv") {
+			uploaded := false
+			if _, err := os.Stat(fmt.Sprintf("%s/.%s-uploaded", root, file.Name())); err == nil {
+				uploaded = true
 			}
+
+			fileInfo, err := file.Info()
+			if err != nil {
+				continue
+			}
+
+			// If size is smaller than 5 MegaByte, skip for now (is 0 if still not uploaded; skipping bad videos too)
+			if fileInfo.Size() < 5<<20 {
+				fmt.Printf("%s video too small, don't think should upload (%d bytes)\n", file.Name(), fileInfo.Size())
+				continue
+			}
+
+			refreshedFileList = append(refreshedFileList, File{
+				Name:     file.Name(),
+				Size:     fileInfo.Size(),
+				BasePath: root,
+				FullPath: fullPath,
+				Uploaded: uploaded,
+			})
 		}
 	}
 
