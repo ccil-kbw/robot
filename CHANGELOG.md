@@ -1,3 +1,15 @@
+# v1.0.5 (Sun Oct 29 2023)
+
+#### ⚠️ Pushed to `master`
+
+- feat: Change Recording Schedule ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v1.0.4 (Tue Oct 17 2023)
 
 #### ⚠️ Pushed to `master`
