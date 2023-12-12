@@ -16,7 +16,6 @@
 - [info](#info)
 - [License](#license)
 
-
 # Introduction
 
 The Masjid's Droid was initially created to serve the needs of the beloved Community of the Masjid Khaled Ben Walid but is intended to be Open and available for the Ummah, East to West.
