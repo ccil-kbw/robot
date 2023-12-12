@@ -1,3 +1,15 @@
+# v1.0.6 (Tue Dec 12 2023)
+
+#### ⚠️ Pushed to `master`
+
+- Add Webhook for Discord ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v1.0.5 (Sun Oct 29 2023)
 
 #### ⚠️ Pushed to `master`
