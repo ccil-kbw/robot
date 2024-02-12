@@ -1,3 +1,15 @@
+# v1.0.7 (Mon Feb 12 2024)
+
+#### ⚠️ Pushed to `master`
+
+- Update README.md ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v1.0.6 (Tue Dec 12 2023)
 
 #### ⚠️ Pushed to `master`
