@@ -27,3 +27,4 @@ Documentation about installation and usage are found at [https://ccil-kbw.github
 # License
 
 BSD-3, see LICENSE
+
