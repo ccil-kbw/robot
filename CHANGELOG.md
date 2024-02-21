@@ -1,3 +1,15 @@
+# v1.0.8 (Wed Feb 21 2024)
+
+#### ⚠️ Pushed to `master`
+
+- Add files via upload ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v1.0.7 (Mon Feb 12 2024)
 
 #### ⚠️ Pushed to `master`
