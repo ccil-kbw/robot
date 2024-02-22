@@ -1,3 +1,17 @@
+# v1.0.9 (Thu Feb 22 2024)
+
+#### ⚠️ Pushed to `master`
+
+- Update publish.yml ([@serafdev](https://github.com/serafdev))
+- Update docs.go ([@serafdev](https://github.com/serafdev))
+- Update iqama_2024.csv ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v1.0.8 (Wed Feb 21 2024)
 
 #### ⚠️ Pushed to `master`
