@@ -9,15 +9,16 @@ import (
 )
 
 // Render renders the Table in a human-readable "pretty" format. Example:
-//  ┌─────┬────────────┬───────────┬────────┬─────────────────────────────┐
-//  │   # │ FIRST NAME │ LAST NAME │ SALARY │                             │
-//  ├─────┼────────────┼───────────┼────────┼─────────────────────────────┤
-//  │   1 │ Arya       │ Stark     │   3000 │                             │
-//  │  20 │ Jon        │ Snow      │   2000 │ You know nothing, Jon Snow! │
-//  │ 300 │ Tyrion     │ Lannister │   5000 │                             │
-//  ├─────┼────────────┼───────────┼────────┼─────────────────────────────┤
-//  │     │            │ TOTAL     │  10000 │                             │
-//  └─────┴────────────┴───────────┴────────┴─────────────────────────────┘
+//
+//	┌─────┬────────────┬───────────┬────────┬─────────────────────────────┐
+//	│   # │ FIRST NAME │ LAST NAME │ SALARY │                             │
+//	├─────┼────────────┼───────────┼────────┼─────────────────────────────┤
+//	│   1 │ Arya       │ Stark     │   3000 │                             │
+//	│  20 │ Jon        │ Snow      │   2000 │ You know nothing, Jon Snow! │
+//	│ 300 │ Tyrion     │ Lannister │   5000 │                             │
+//	├─────┼────────────┼───────────┼────────┼─────────────────────────────┤
+//	│     │            │ TOTAL     │  10000 │                             │
+//	└─────┴────────────┴───────────┴────────┴─────────────────────────────┘
 func (t *Table) Render() string {
 	t.initForRender()
 
@@ -365,15 +366,16 @@ func (t *Table) renderRowsHeader(out *strings.Builder) {
 func (t *Table) renderTitle(out *strings.Builder) {
 	if t.title != "" {
 		colors := t.style.Title.Colors
+		colorsBorder := t.getBorderColors(renderHint{isTitleRow: true})
 		rowLength := t.maxRowLength
 		if t.allowedRowLength != 0 && t.allowedRowLength < rowLength {
 			rowLength = t.allowedRowLength
 		}
 		if t.style.Options.DrawBorder {
 			lenBorder := rowLength - text.RuneWidthWithoutEscSequences(t.style.Box.TopLeft+t.style.Box.TopRight)
-			out.WriteString(colors.Sprint(t.style.Box.TopLeft))
-			out.WriteString(colors.Sprint(text.RepeatAndTrim(t.style.Box.MiddleHorizontal, lenBorder)))
-			out.WriteString(colors.Sprint(t.style.Box.TopRight))
+			out.WriteString(colorsBorder.Sprint(t.style.Box.TopLeft))
+			out.WriteString(colorsBorder.Sprint(text.RepeatAndTrim(t.style.Box.MiddleHorizontal, lenBorder)))
+			out.WriteString(colorsBorder.Sprint(t.style.Box.TopRight))
 		}
 
 		lenText := rowLength - text.RuneWidthWithoutEscSequences(t.style.Box.PaddingLeft+t.style.Box.PaddingRight)
@@ -382,12 +384,12 @@ func (t *Table) renderTitle(out *strings.Builder) {
 		}
 		titleText := text.WrapText(t.title, lenText)
 		for _, titleLine := range strings.Split(titleText, "\n") {
-			t.renderTitleLine(out, lenText, titleLine, colors)
+			t.renderTitleLine(out, lenText, titleLine, colors, colorsBorder)
 		}
 	}
 }
 
-func (t *Table) renderTitleLine(out *strings.Builder, lenText int, titleLine string, colors text.Colors) {
+func (t *Table) renderTitleLine(out *strings.Builder, lenText int, titleLine string, colors text.Colors, colorsBorder text.Colors) {
 	titleLine = strings.TrimSpace(titleLine)
 	titleLine = t.style.Title.Format.Apply(titleLine)
 	titleLine = t.style.Title.Align.Apply(titleLine, lenText)
@@ -397,10 +399,10 @@ func (t *Table) renderTitleLine(out *strings.Builder, lenText int, titleLine str
 		out.WriteRune('\n')
 	}
 	if t.style.Options.DrawBorder {
-		out.WriteString(colors.Sprint(t.style.Box.Left))
+		out.WriteString(colorsBorder.Sprint(t.style.Box.Left))
 	}
 	out.WriteString(colors.Sprint(titleLine))
 	if t.style.Options.DrawBorder {
-		out.WriteString(colors.Sprint(t.style.Box.Right))
+		out.WriteString(colorsBorder.Sprint(t.style.Box.Right))
 	}
 }

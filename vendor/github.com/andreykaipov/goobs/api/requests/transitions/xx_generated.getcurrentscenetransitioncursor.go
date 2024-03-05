@@ -12,6 +12,8 @@ func (o *GetCurrentSceneTransitionCursorParams) GetRequestName() string {
 
 // Represents the response body for the GetCurrentSceneTransitionCursor request.
 type GetCurrentSceneTransitionCursorResponse struct {
+	_response
+
 	// Cursor position, between 0.0 and 1.0
 	TransitionCursor float64 `json:"transitionCursor,omitempty"`
 }
@@ -29,5 +31,5 @@ func (c *Client) GetCurrentSceneTransitionCursor(
 	}
 	params := paramss[0]
 	data := &GetCurrentSceneTransitionCursorResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

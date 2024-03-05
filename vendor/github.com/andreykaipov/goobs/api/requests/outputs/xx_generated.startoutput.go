@@ -5,7 +5,15 @@ package outputs
 // Represents the request body for the StartOutput request.
 type StartOutputParams struct {
 	// Output name
-	OutputName string `json:"outputName,omitempty"`
+	OutputName *string `json:"outputName,omitempty"`
+}
+
+func NewStartOutputParams() *StartOutputParams {
+	return &StartOutputParams{}
+}
+func (o *StartOutputParams) WithOutputName(x string) *StartOutputParams {
+	o.OutputName = &x
+	return o
 }
 
 // Returns the associated request.
@@ -14,10 +22,12 @@ func (o *StartOutputParams) GetRequestName() string {
 }
 
 // Represents the response body for the StartOutput request.
-type StartOutputResponse struct{}
+type StartOutputResponse struct {
+	_response
+}
 
 // Starts an output.
 func (c *Client) StartOutput(params *StartOutputParams) (*StartOutputResponse, error) {
 	data := &StartOutputResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

@@ -12,6 +12,8 @@ func (o *ToggleReplayBufferParams) GetRequestName() string {
 
 // Represents the response body for the ToggleReplayBuffer request.
 type ToggleReplayBufferResponse struct {
+	_response
+
 	// Whether the output is active
 	OutputActive bool `json:"outputActive,omitempty"`
 }
@@ -23,5 +25,5 @@ func (c *Client) ToggleReplayBuffer(paramss ...*ToggleReplayBufferParams) (*Togg
 	}
 	params := paramss[0]
 	data := &ToggleReplayBufferResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

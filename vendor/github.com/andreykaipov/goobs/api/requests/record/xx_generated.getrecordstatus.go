@@ -12,6 +12,8 @@ func (o *GetRecordStatusParams) GetRequestName() string {
 
 // Represents the response body for the GetRecordStatus request.
 type GetRecordStatusResponse struct {
+	_response
+
 	// Whether the output is active
 	OutputActive bool `json:"outputActive,omitempty"`
 
@@ -35,5 +37,5 @@ func (c *Client) GetRecordStatus(paramss ...*GetRecordStatusParams) (*GetRecordS
 	}
 	params := paramss[0]
 	data := &GetRecordStatusResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

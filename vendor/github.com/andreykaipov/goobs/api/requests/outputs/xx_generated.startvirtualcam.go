@@ -11,7 +11,9 @@ func (o *StartVirtualCamParams) GetRequestName() string {
 }
 
 // Represents the response body for the StartVirtualCam request.
-type StartVirtualCamResponse struct{}
+type StartVirtualCamResponse struct {
+	_response
+}
 
 // Starts the virtualcam output.
 func (c *Client) StartVirtualCam(paramss ...*StartVirtualCamParams) (*StartVirtualCamResponse, error) {
@@ -20,5 +22,5 @@ func (c *Client) StartVirtualCam(paramss ...*StartVirtualCamParams) (*StartVirtu
 	}
 	params := paramss[0]
 	data := &StartVirtualCamResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

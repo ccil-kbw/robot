@@ -12,6 +12,8 @@ func (o *GetStatsParams) GetRequestName() string {
 
 // Represents the response body for the GetStats request.
 type GetStatsResponse struct {
+	_response
+
 	// Current FPS being rendered
 	ActiveFps float64 `json:"activeFps,omitempty"`
 
@@ -53,5 +55,5 @@ func (c *Client) GetStats(paramss ...*GetStatsParams) (*GetStatsResponse, error)
 	}
 	params := paramss[0]
 	data := &GetStatsResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

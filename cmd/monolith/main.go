@@ -44,7 +44,6 @@ var (
 )
 
 func main() {
-	var err error
 	msgs := make(chan string)
 	stop := make(chan os.Signal, 1)
 	notifyChan := make(chan string)
@@ -64,7 +63,6 @@ func main() {
 			notifyFunc(notifyChan, prayersData, in)
 			notifyFunc(notifyChan, prayersData, 0)
 			time.Sleep(55 * time.Second)
-
 		}
 
 	}()
@@ -80,10 +78,22 @@ func main() {
 		password := os.Getenv("MDROID_OBS_WEBSOCKET_PASSWORD")
 		data := rec.NewRecordConfigDataS()
 
+		// Calculate the duration until midnight
+		now := time.Now()
+		midnight := time.Date(now.Year(), now.Month(), now.Day()+1, 0, 0, 0, 0, now.Location())
+		duration := midnight.Sub(now)
+
+		// Create a timer that waits until midnight
+		timer := time.NewTimer(duration)
+		<-timer.C // This blocks until the timer fires
+
+		// Now that it's midnight, start a ticker that ticks every 24 hours
+		ticker := time.NewTicker(24 * time.Hour)
+
+		// Call rec.StartRecServer every time the ticker ticks
 		go func() {
-			err = rec.StartRecServer(host, password, data)
-			if err != nil {
-				fmt.Printf("could not reach or authenticate to OBS")
+			for range ticker.C {
+				startServerWithRetry(host, password, data)
 			}
 		}()
 
@@ -172,4 +182,16 @@ func notifyPrayer(prayerName, prayerTime string, in time.Duration, notifyChan ch
 		}
 	}
 	notifyChan <- msg
+}
+
+func startServerWithRetry(host string, password string, data *rec.RecordConfigDataS) {
+	for {
+		err := rec.StartRecServer(host, password, data)
+		if err != nil {
+			fmt.Printf("could not reach or authenticate to OBS, retrying in 5 minutes...\n")
+			time.Sleep(5 * time.Minute)
+		} else {
+			break
+		}
+	}
 }

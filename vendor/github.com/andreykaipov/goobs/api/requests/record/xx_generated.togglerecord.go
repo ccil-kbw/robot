@@ -11,7 +11,12 @@ func (o *ToggleRecordParams) GetRequestName() string {
 }
 
 // Represents the response body for the ToggleRecord request.
-type ToggleRecordResponse struct{}
+type ToggleRecordResponse struct {
+	_response
+
+	// The new active state of the output
+	OutputActive bool `json:"outputActive,omitempty"`
+}
 
 // Toggles the status of the record output.
 func (c *Client) ToggleRecord(paramss ...*ToggleRecordParams) (*ToggleRecordResponse, error) {
@@ -20,5 +25,5 @@ func (c *Client) ToggleRecord(paramss ...*ToggleRecordParams) (*ToggleRecordResp
 	}
 	params := paramss[0]
 	data := &ToggleRecordResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

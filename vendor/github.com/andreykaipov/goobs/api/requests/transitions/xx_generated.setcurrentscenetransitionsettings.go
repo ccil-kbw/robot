@@ -8,7 +8,22 @@ type SetCurrentSceneTransitionSettingsParams struct {
 	Overlay *bool `json:"overlay,omitempty"`
 
 	// Settings object to apply to the transition. Can be `{}`
-	TransitionSettings map[string]interface{} `json:"transitionSettings,omitempty"`
+	TransitionSettings map[string]any `json:"transitionSettings,omitempty"`
+}
+
+func NewSetCurrentSceneTransitionSettingsParams() *SetCurrentSceneTransitionSettingsParams {
+	return &SetCurrentSceneTransitionSettingsParams{}
+}
+func (o *SetCurrentSceneTransitionSettingsParams) WithOverlay(x bool) *SetCurrentSceneTransitionSettingsParams {
+	o.Overlay = &x
+	return o
+}
+
+func (o *SetCurrentSceneTransitionSettingsParams) WithTransitionSettings(
+	x map[string]any,
+) *SetCurrentSceneTransitionSettingsParams {
+	o.TransitionSettings = x
+	return o
 }
 
 // Returns the associated request.
@@ -17,12 +32,14 @@ func (o *SetCurrentSceneTransitionSettingsParams) GetRequestName() string {
 }
 
 // Represents the response body for the SetCurrentSceneTransitionSettings request.
-type SetCurrentSceneTransitionSettingsResponse struct{}
+type SetCurrentSceneTransitionSettingsResponse struct {
+	_response
+}
 
 // Sets the settings of the current scene transition.
 func (c *Client) SetCurrentSceneTransitionSettings(
 	params *SetCurrentSceneTransitionSettingsParams,
 ) (*SetCurrentSceneTransitionSettingsResponse, error) {
 	data := &SetCurrentSceneTransitionSettingsResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

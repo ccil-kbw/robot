@@ -8,6 +8,14 @@ type GetInputKindListParams struct {
 	Unversioned *bool `json:"unversioned,omitempty"`
 }
 
+func NewGetInputKindListParams() *GetInputKindListParams {
+	return &GetInputKindListParams{}
+}
+func (o *GetInputKindListParams) WithUnversioned(x bool) *GetInputKindListParams {
+	o.Unversioned = &x
+	return o
+}
+
 // Returns the associated request.
 func (o *GetInputKindListParams) GetRequestName() string {
 	return "GetInputKindList"
@@ -15,6 +23,8 @@ func (o *GetInputKindListParams) GetRequestName() string {
 
 // Represents the response body for the GetInputKindList request.
 type GetInputKindListResponse struct {
+	_response
+
 	// Array of input kinds
 	InputKinds []string `json:"inputKinds,omitempty"`
 }
@@ -26,5 +36,5 @@ func (c *Client) GetInputKindList(paramss ...*GetInputKindListParams) (*GetInput
 	}
 	params := paramss[0]
 	data := &GetInputKindListResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

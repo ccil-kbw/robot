@@ -12,6 +12,8 @@ func (o *GetVirtualCamStatusParams) GetRequestName() string {
 
 // Represents the response body for the GetVirtualCamStatus request.
 type GetVirtualCamStatusResponse struct {
+	_response
+
 	// Whether the output is active
 	OutputActive bool `json:"outputActive,omitempty"`
 }
@@ -23,5 +25,5 @@ func (c *Client) GetVirtualCamStatus(paramss ...*GetVirtualCamStatusParams) (*Ge
 	}
 	params := paramss[0]
 	data := &GetVirtualCamStatusResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

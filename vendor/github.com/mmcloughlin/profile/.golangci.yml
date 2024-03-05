@@ -1,0 +1,60 @@
+linters:
+  disable-all: true
+  enable:
+    - asciicheck
+    - deadcode
+    - depguard
+    - dupl
+    - errcheck
+    - errorlint
+    - exhaustive
+    - exportloopref
+    - forbidigo
+    - forcetypeassert
+    - gci
+    - gocognit
+    - gocritic
+    - gocyclo
+    - godot
+    - godox
+    - gofumpt
+    - goimports
+    - golint
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - govet
+    - importas
+    - ineffassign
+    - lll
+    - makezero
+    - misspell
+    - nakedret
+    - nestif
+    - nilerr
+    - predeclared
+    - revive
+    - staticcheck
+    - structcheck
+    - stylecheck
+    - thelper
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - varcheck
+    - wastedassign
+    - whitespace
+
+linters-settings:
+  depguard:
+    list-type: whitelist
+    packages:
+      - github.com/mmcloughlin/profile
+
+  lll:
+    line-length: 140
+    tab-width: 4
+
+issues:
+  exclude-use-default: false

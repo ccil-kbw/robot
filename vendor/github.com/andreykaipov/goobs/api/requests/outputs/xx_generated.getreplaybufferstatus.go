@@ -12,6 +12,8 @@ func (o *GetReplayBufferStatusParams) GetRequestName() string {
 
 // Represents the response body for the GetReplayBufferStatus request.
 type GetReplayBufferStatusResponse struct {
+	_response
+
 	// Whether the output is active
 	OutputActive bool `json:"outputActive,omitempty"`
 }
@@ -25,5 +27,5 @@ func (c *Client) GetReplayBufferStatus(
 	}
 	params := paramss[0]
 	data := &GetReplayBufferStatusResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

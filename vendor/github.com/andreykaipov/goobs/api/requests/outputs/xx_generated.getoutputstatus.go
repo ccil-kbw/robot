@@ -5,7 +5,15 @@ package outputs
 // Represents the request body for the GetOutputStatus request.
 type GetOutputStatusParams struct {
 	// Output name
-	OutputName string `json:"outputName,omitempty"`
+	OutputName *string `json:"outputName,omitempty"`
+}
+
+func NewGetOutputStatusParams() *GetOutputStatusParams {
+	return &GetOutputStatusParams{}
+}
+func (o *GetOutputStatusParams) WithOutputName(x string) *GetOutputStatusParams {
+	o.OutputName = &x
+	return o
 }
 
 // Returns the associated request.
@@ -15,6 +23,8 @@ func (o *GetOutputStatusParams) GetRequestName() string {
 
 // Represents the response body for the GetOutputStatus request.
 type GetOutputStatusResponse struct {
+	_response
+
 	// Whether the output is active
 	OutputActive bool `json:"outputActive,omitempty"`
 
@@ -43,5 +53,5 @@ type GetOutputStatusResponse struct {
 // Gets the status of an output.
 func (c *Client) GetOutputStatus(params *GetOutputStatusParams) (*GetOutputStatusResponse, error) {
 	data := &GetOutputStatusResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

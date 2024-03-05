@@ -12,6 +12,8 @@ func (o *GetCurrentSceneTransitionParams) GetRequestName() string {
 
 // Represents the response body for the GetCurrentSceneTransition request.
 type GetCurrentSceneTransitionResponse struct {
+	_response
+
 	// Whether the transition supports being configured
 	TransitionConfigurable bool `json:"transitionConfigurable,omitempty"`
 
@@ -28,7 +30,10 @@ type GetCurrentSceneTransitionResponse struct {
 	TransitionName string `json:"transitionName,omitempty"`
 
 	// Object of settings for the transition. `null` if transition is not configurable
-	TransitionSettings map[string]interface{} `json:"transitionSettings,omitempty"`
+	TransitionSettings map[string]any `json:"transitionSettings,omitempty"`
+
+	// UUID of the transition
+	TransitionUuid string `json:"transitionUuid,omitempty"`
 }
 
 // Gets information about the current scene transition.
@@ -40,5 +45,5 @@ func (c *Client) GetCurrentSceneTransition(
 	}
 	params := paramss[0]
 	data := &GetCurrentSceneTransitionResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

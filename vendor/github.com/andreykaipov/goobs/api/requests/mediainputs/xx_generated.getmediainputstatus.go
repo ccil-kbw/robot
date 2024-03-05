@@ -5,7 +5,22 @@ package mediainputs
 // Represents the request body for the GetMediaInputStatus request.
 type GetMediaInputStatusParams struct {
 	// Name of the media input
-	InputName string `json:"inputName,omitempty"`
+	InputName *string `json:"inputName,omitempty"`
+
+	// UUID of the media input
+	InputUuid *string `json:"inputUuid,omitempty"`
+}
+
+func NewGetMediaInputStatusParams() *GetMediaInputStatusParams {
+	return &GetMediaInputStatusParams{}
+}
+func (o *GetMediaInputStatusParams) WithInputName(x string) *GetMediaInputStatusParams {
+	o.InputName = &x
+	return o
+}
+func (o *GetMediaInputStatusParams) WithInputUuid(x string) *GetMediaInputStatusParams {
+	o.InputUuid = &x
+	return o
 }
 
 // Returns the associated request.
@@ -15,6 +30,8 @@ func (o *GetMediaInputStatusParams) GetRequestName() string {
 
 // Represents the response body for the GetMediaInputStatus request.
 type GetMediaInputStatusResponse struct {
+	_response
+
 	// Position of the cursor in milliseconds. `null` if not playing
 	MediaCursor float64 `json:"mediaCursor,omitempty"`
 
@@ -39,7 +56,11 @@ Media States:
 - `OBS_MEDIA_STATE_ENDED`
 - `OBS_MEDIA_STATE_ERROR`
 */
-func (c *Client) GetMediaInputStatus(params *GetMediaInputStatusParams) (*GetMediaInputStatusResponse, error) {
+func (c *Client) GetMediaInputStatus(paramss ...*GetMediaInputStatusParams) (*GetMediaInputStatusResponse, error) {
+	if len(paramss) == 0 {
+		paramss = []*GetMediaInputStatusParams{{}}
+	}
+	params := paramss[0]
 	data := &GetMediaInputStatusResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

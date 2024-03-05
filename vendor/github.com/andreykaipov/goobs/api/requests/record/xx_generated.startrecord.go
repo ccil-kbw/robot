@@ -11,7 +11,9 @@ func (o *StartRecordParams) GetRequestName() string {
 }
 
 // Represents the response body for the StartRecord request.
-type StartRecordResponse struct{}
+type StartRecordResponse struct {
+	_response
+}
 
 // Starts the record output.
 func (c *Client) StartRecord(paramss ...*StartRecordParams) (*StartRecordResponse, error) {
@@ -20,5 +22,5 @@ func (c *Client) StartRecord(paramss ...*StartRecordParams) (*StartRecordRespons
 	}
 	params := paramss[0]
 	data := &StartRecordResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

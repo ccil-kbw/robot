@@ -12,6 +12,8 @@ func (o *GetVersionParams) GetRequestName() string {
 
 // Represents the response body for the GetVersion request.
 type GetVersionResponse struct {
+	_response
+
 	// Array of available RPC requests for the currently negotiated RPC version
 	AvailableRequests []string `json:"availableRequests,omitempty"`
 
@@ -41,5 +43,5 @@ func (c *Client) GetVersion(paramss ...*GetVersionParams) (*GetVersionResponse, 
 	}
 	params := paramss[0]
 	data := &GetVersionResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

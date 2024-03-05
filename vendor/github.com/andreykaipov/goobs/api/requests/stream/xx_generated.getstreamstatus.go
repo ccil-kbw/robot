@@ -12,6 +12,8 @@ func (o *GetStreamStatusParams) GetRequestName() string {
 
 // Represents the response body for the GetStreamStatus request.
 type GetStreamStatusResponse struct {
+	_response
+
 	// Whether the output is active
 	OutputActive bool `json:"outputActive,omitempty"`
 
@@ -44,5 +46,5 @@ func (c *Client) GetStreamStatus(paramss ...*GetStreamStatusParams) (*GetStreamS
 	}
 	params := paramss[0]
 	data := &GetStreamStatusResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

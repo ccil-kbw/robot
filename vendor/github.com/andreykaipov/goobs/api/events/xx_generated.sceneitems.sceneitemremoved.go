@@ -11,11 +11,17 @@ This event is not emitted when the scene the item is in is removed.
 */
 type SceneItemRemoved struct {
 	// Numeric ID of the scene item
-	SceneItemId float64 `json:"sceneItemId,omitempty"`
+	SceneItemId int `json:"sceneItemId,omitempty"`
 
 	// Name of the scene the item was removed from
 	SceneName string `json:"sceneName,omitempty"`
 
+	// UUID of the scene the item was removed from
+	SceneUuid string `json:"sceneUuid,omitempty"`
+
 	// Name of the underlying source (input/scene)
 	SourceName string `json:"sourceName,omitempty"`
+
+	// UUID of the underlying source (input/scene)
+	SourceUuid string `json:"sourceUuid,omitempty"`
 }

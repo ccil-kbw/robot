@@ -12,6 +12,8 @@ func (o *StopRecordParams) GetRequestName() string {
 
 // Represents the response body for the StopRecord request.
 type StopRecordResponse struct {
+	_response
+
 	// File name for the saved recording
 	OutputPath string `json:"outputPath,omitempty"`
 }
@@ -23,5 +25,5 @@ func (c *Client) StopRecord(paramss ...*StopRecordParams) (*StopRecordResponse, 
 	}
 	params := paramss[0]
 	data := &StopRecordResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

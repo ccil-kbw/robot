@@ -11,7 +11,9 @@ func (o *PauseRecordParams) GetRequestName() string {
 }
 
 // Represents the response body for the PauseRecord request.
-type PauseRecordResponse struct{}
+type PauseRecordResponse struct {
+	_response
+}
 
 // Pauses the record output.
 func (c *Client) PauseRecord(paramss ...*PauseRecordParams) (*PauseRecordResponse, error) {
@@ -20,5 +22,5 @@ func (c *Client) PauseRecord(paramss ...*PauseRecordParams) (*PauseRecordRespons
 	}
 	params := paramss[0]
 	data := &PauseRecordResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

@@ -11,7 +11,9 @@ func (o *SaveReplayBufferParams) GetRequestName() string {
 }
 
 // Represents the response body for the SaveReplayBuffer request.
-type SaveReplayBufferResponse struct{}
+type SaveReplayBufferResponse struct {
+	_response
+}
 
 // Saves the contents of the replay buffer output.
 func (c *Client) SaveReplayBuffer(paramss ...*SaveReplayBufferParams) (*SaveReplayBufferResponse, error) {
@@ -20,5 +22,5 @@ func (c *Client) SaveReplayBuffer(paramss ...*SaveReplayBufferParams) (*SaveRepl
 	}
 	params := paramss[0]
 	data := &SaveReplayBufferResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

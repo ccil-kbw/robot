@@ -12,6 +12,8 @@ func (o *GetGroupListParams) GetRequestName() string {
 
 // Represents the response body for the GetGroupList request.
 type GetGroupListResponse struct {
+	_response
+
 	// Array of group names
 	Groups []string `json:"groups,omitempty"`
 }
@@ -27,5 +29,5 @@ func (c *Client) GetGroupList(paramss ...*GetGroupListParams) (*GetGroupListResp
 	}
 	params := paramss[0]
 	data := &GetGroupListResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

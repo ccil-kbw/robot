@@ -14,12 +14,21 @@ func (o *GetSceneListParams) GetRequestName() string {
 
 // Represents the response body for the GetSceneList request.
 type GetSceneListResponse struct {
-	// Current preview scene. `null` if not in studio mode
+	_response
+
+	// Current preview scene name. `null` if not in studio mode
 	CurrentPreviewSceneName string `json:"currentPreviewSceneName,omitempty"`
 
-	// Current program scene
+	// Current preview scene UUID. `null` if not in studio mode
+	CurrentPreviewSceneUuid string `json:"currentPreviewSceneUuid,omitempty"`
+
+	// Current program scene name. Can be `null` if internal state desync
 	CurrentProgramSceneName string `json:"currentProgramSceneName,omitempty"`
 
+	// Current program scene UUID. Can be `null` if internal state desync
+	CurrentProgramSceneUuid string `json:"currentProgramSceneUuid,omitempty"`
+
+	// Array of scenes
 	Scenes []*typedefs.Scene `json:"scenes,omitempty"`
 }
 
@@ -30,5 +39,5 @@ func (c *Client) GetSceneList(paramss ...*GetSceneListParams) (*GetSceneListResp
 	}
 	params := paramss[0]
 	data := &GetSceneListResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

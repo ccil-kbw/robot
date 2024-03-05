@@ -11,7 +11,9 @@ func (o *StartStreamParams) GetRequestName() string {
 }
 
 // Represents the response body for the StartStream request.
-type StartStreamResponse struct{}
+type StartStreamResponse struct {
+	_response
+}
 
 // Starts the stream output.
 func (c *Client) StartStream(paramss ...*StartStreamParams) (*StartStreamResponse, error) {
@@ -20,5 +22,5 @@ func (c *Client) StartStream(paramss ...*StartStreamParams) (*StartStreamRespons
 	}
 	params := paramss[0]
 	data := &StartStreamResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

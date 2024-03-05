@@ -9,14 +9,20 @@ A scene item has been created.
 */
 type SceneItemCreated struct {
 	// Numeric ID of the scene item
-	SceneItemId float64 `json:"sceneItemId,omitempty"`
+	SceneItemId int `json:"sceneItemId,omitempty"`
 
 	// Index position of the item
-	SceneItemIndex float64 `json:"sceneItemIndex,omitempty"`
+	SceneItemIndex int `json:"sceneItemIndex,omitempty"`
 
 	// Name of the scene the item was added to
 	SceneName string `json:"sceneName,omitempty"`
 
+	// UUID of the scene the item was added to
+	SceneUuid string `json:"sceneUuid,omitempty"`
+
 	// Name of the underlying source (input/scene)
 	SourceName string `json:"sourceName,omitempty"`
+
+	// UUID of the underlying source (input/scene)
+	SourceUuid string `json:"sourceUuid,omitempty"`
 }

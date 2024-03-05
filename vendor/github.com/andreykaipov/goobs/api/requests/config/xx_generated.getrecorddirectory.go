@@ -12,6 +12,8 @@ func (o *GetRecordDirectoryParams) GetRequestName() string {
 
 // Represents the response body for the GetRecordDirectory request.
 type GetRecordDirectoryResponse struct {
+	_response
+
 	// Output directory
 	RecordDirectory string `json:"recordDirectory,omitempty"`
 }
@@ -23,5 +25,5 @@ func (c *Client) GetRecordDirectory(paramss ...*GetRecordDirectoryParams) (*GetR
 	}
 	params := paramss[0]
 	data := &GetRecordDirectoryResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

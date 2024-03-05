@@ -12,6 +12,8 @@ func (o *ToggleVirtualCamParams) GetRequestName() string {
 
 // Represents the response body for the ToggleVirtualCam request.
 type ToggleVirtualCamResponse struct {
+	_response
+
 	// Whether the output is active
 	OutputActive bool `json:"outputActive,omitempty"`
 }
@@ -23,5 +25,5 @@ func (c *Client) ToggleVirtualCam(paramss ...*ToggleVirtualCamParams) (*ToggleVi
 	}
 	params := paramss[0]
 	data := &ToggleVirtualCamResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

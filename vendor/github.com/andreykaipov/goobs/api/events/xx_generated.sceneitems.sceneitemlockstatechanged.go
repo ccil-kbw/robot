@@ -9,11 +9,14 @@ A scene item's lock state has changed.
 */
 type SceneItemLockStateChanged struct {
 	// Numeric ID of the scene item
-	SceneItemId float64 `json:"sceneItemId,omitempty"`
+	SceneItemId int `json:"sceneItemId,omitempty"`
 
 	// Whether the scene item is locked
 	SceneItemLocked bool `json:"sceneItemLocked,omitempty"`
 
 	// Name of the scene the item is in
 	SceneName string `json:"sceneName,omitempty"`
+
+	// UUID of the scene the item is in
+	SceneUuid string `json:"sceneUuid,omitempty"`
 }

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC.
+// Copyright 2024 Google LLC.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -7,6 +7,17 @@
 // Package youtube provides access to the YouTube Data API v3.
 //
 // For product documentation, see: https://developers.google.com/youtube/
+//
+// # Library status
+//
+// These client libraries are officially supported by Google. However, this
+// library is considered complete and is in maintenance mode. This means
+// that we will address critical bugs and security issues but will not add
+// any new features.
+//
+// When possible, we recommend using our newer
+// [Cloud Client Libraries for Go](https://pkg.go.dev/cloud.google.com/go)
+// that are still actively being worked and iterated on.
 //
 // # Creating a client
 //
@@ -17,28 +28,31 @@
 //	ctx := context.Background()
 //	youtubeService, err := youtube.NewService(ctx)
 //
-// In this example, Google Application Default Credentials are used for authentication.
-//
-// For information on how to create and obtain Application Default Credentials, see https://developers.google.com/identity/protocols/application-default-credentials.
+// In this example, Google Application Default Credentials are used for
+// authentication. For information on how to create and obtain Application
+// Default Credentials, see https://developers.google.com/identity/protocols/application-default-credentials.
 //
 // # Other authentication options
 //
-// By default, all available scopes (see "Constants") are used to authenticate. To restrict scopes, use option.WithScopes:
+// By default, all available scopes (see "Constants") are used to authenticate.
+// To restrict scopes, use [google.golang.org/api/option.WithScopes]:
 //
 //	youtubeService, err := youtube.NewService(ctx, option.WithScopes(youtube.YoutubepartnerChannelAuditScope))
 //
-// To use an API key for authentication (note: some APIs do not support API keys), use option.WithAPIKey:
+// To use an API key for authentication (note: some APIs do not support API
+// keys), use [google.golang.org/api/option.WithAPIKey]:
 //
 //	youtubeService, err := youtube.NewService(ctx, option.WithAPIKey("AIza..."))
 //
-// To use an OAuth token (e.g., a user token obtained via a three-legged OAuth flow), use option.WithTokenSource:
+// To use an OAuth token (e.g., a user token obtained via a three-legged OAuth
+// flow, use [google.golang.org/api/option.WithTokenSource]:
 //
 //	config := &oauth2.Config{...}
 //	// ...
 //	token, err := config.Exchange(ctx, ...)
 //	youtubeService, err := youtube.NewService(ctx, option.WithTokenSource(config.TokenSource(ctx, token)))
 //
-// See https://godoc.org/google.golang.org/api/option/ for details on options.
+// See [google.golang.org/api/option.ClientOption] for details on options.
 package youtube // import "google.golang.org/api/youtube/v3"
 
 import (
@@ -81,7 +95,9 @@ const apiId = "youtube:v3"
 const apiName = "youtube"
 const apiVersion = "v3"
 const basePath = "https://youtube.googleapis.com/"
+const basePathTemplate = "https://youtube.UNIVERSE_DOMAIN/"
 const mtlsBasePath = "https://youtube.mtls.googleapis.com/"
+const defaultUniverseDomain = "googleapis.com"
 
 // OAuth2 scopes used by this API.
 const (
@@ -124,7 +140,9 @@ func NewService(ctx context.Context, opts ...option.ClientOption) (*Service, err
 	// NOTE: prepend, so we don't override user-specified scopes.
 	opts = append([]option.ClientOption{scopesOption}, opts...)
 	opts = append(opts, internaloption.WithDefaultEndpoint(basePath))
+	opts = append(opts, internaloption.WithDefaultEndpointTemplate(basePathTemplate))
 	opts = append(opts, internaloption.WithDefaultMTLSEndpoint(mtlsBasePath))
+	opts = append(opts, internaloption.WithDefaultUniverseDomain(defaultUniverseDomain))
 	client, endpoint, err := htransport.NewClient(ctx, opts...)
 	if err != nil {
 		return nil, err
@@ -166,6 +184,7 @@ func New(client *http.Client) (*Service, error) {
 	s.LiveStreams = NewLiveStreamsService(s)
 	s.Members = NewMembersService(s)
 	s.MembershipsLevels = NewMembershipsLevelsService(s)
+	s.PlaylistImages = NewPlaylistImagesService(s)
 	s.PlaylistItems = NewPlaylistItemsService(s)
 	s.Playlists = NewPlaylistsService(s)
 	s.Search = NewSearchService(s)
@@ -220,6 +239,8 @@ type Service struct {
 	Members *MembersService
 
 	MembershipsLevels *MembershipsLevelsService
+
+	PlaylistImages *PlaylistImagesService
 
 	PlaylistItems *PlaylistItemsService
 
@@ -405,6 +426,15 @@ func NewMembershipsLevelsService(s *Service) *MembershipsLevelsService {
 }
 
 type MembershipsLevelsService struct {
+	s *Service
+}
+
+func NewPlaylistImagesService(s *Service) *PlaylistImagesService {
+	rs := &PlaylistImagesService{s: s}
+	return rs
+}
+
+type PlaylistImagesService struct {
 	s *Service
 }
 
@@ -2576,6 +2606,9 @@ func (s *ChannelStatus) MarshalJSON() ([]byte, error) {
 // ChannelToStoreLinkDetails: Information specific to a store on a
 // merchandising platform linked to a YouTube channel.
 type ChannelToStoreLinkDetails struct {
+	// BillingDetails: Information specific to billing (read-only).
+	BillingDetails *ChannelToStoreLinkDetailsBillingDetails `json:"billingDetails,omitempty"`
+
 	// MerchantId: Google Merchant Center id of the store.
 	MerchantId uint64 `json:"merchantId,omitempty,string"`
 
@@ -2585,7 +2618,7 @@ type ChannelToStoreLinkDetails struct {
 	// StoreUrl: Landing page of the store.
 	StoreUrl string `json:"storeUrl,omitempty"`
 
-	// ForceSendFields is a list of field names (e.g. "MerchantId") to
+	// ForceSendFields is a list of field names (e.g. "BillingDetails") to
 	// unconditionally include in API requests. By default, fields with
 	// empty or default values are omitted from API requests. However, any
 	// non-pointer, non-interface field appearing in ForceSendFields will be
@@ -2593,17 +2626,53 @@ type ChannelToStoreLinkDetails struct {
 	// This may be used to include empty fields in Patch requests.
 	ForceSendFields []string `json:"-"`
 
-	// NullFields is a list of field names (e.g. "MerchantId") to include in
-	// API requests with the JSON null value. By default, fields with empty
-	// values are omitted from API requests. However, any field with an
-	// empty value appearing in NullFields will be sent to the server as
-	// null. It is an error if a field in this list has a non-empty value.
-	// This may be used to include null fields in Patch requests.
+	// NullFields is a list of field names (e.g. "BillingDetails") to
+	// include in API requests with the JSON null value. By default, fields
+	// with empty values are omitted from API requests. However, any field
+	// with an empty value appearing in NullFields will be sent to the
+	// server as null. It is an error if a field in this list has a
+	// non-empty value. This may be used to include null fields in Patch
+	// requests.
 	NullFields []string `json:"-"`
 }
 
 func (s *ChannelToStoreLinkDetails) MarshalJSON() ([]byte, error) {
 	type NoMethod ChannelToStoreLinkDetails
+	raw := NoMethod(*s)
+	return gensupport.MarshalJSON(raw, s.ForceSendFields, s.NullFields)
+}
+
+// ChannelToStoreLinkDetailsBillingDetails: Information specific to
+// billing.
+type ChannelToStoreLinkDetailsBillingDetails struct {
+	// BillingStatus: The current billing profile status.
+	//
+	// Possible values:
+	//   "billingStatusUnspecified"
+	//   "billingStatusPending"
+	//   "billingStatusActive"
+	//   "billingStatusInactive"
+	BillingStatus string `json:"billingStatus,omitempty"`
+
+	// ForceSendFields is a list of field names (e.g. "BillingStatus") to
+	// unconditionally include in API requests. By default, fields with
+	// empty or default values are omitted from API requests. However, any
+	// non-pointer, non-interface field appearing in ForceSendFields will be
+	// sent to the server regardless of whether the field is empty or not.
+	// This may be used to include empty fields in Patch requests.
+	ForceSendFields []string `json:"-"`
+
+	// NullFields is a list of field names (e.g. "BillingStatus") to include
+	// in API requests with the JSON null value. By default, fields with
+	// empty values are omitted from API requests. However, any field with
+	// an empty value appearing in NullFields will be sent to the server as
+	// null. It is an error if a field in this list has a non-empty value.
+	// This may be used to include null fields in Patch requests.
+	NullFields []string `json:"-"`
+}
+
+func (s *ChannelToStoreLinkDetailsBillingDetails) MarshalJSON() ([]byte, error) {
+	type NoMethod ChannelToStoreLinkDetailsBillingDetails
 	raw := NoMethod(*s)
 	return gensupport.MarshalJSON(raw, s.ForceSendFields, s.NullFields)
 }
@@ -4150,12 +4219,13 @@ type CuepointSchedule struct {
 	Enabled bool `json:"enabled,omitempty"`
 
 	// PauseAdsUntil: If set, automatic cuepoint insertion is paused until
-	// this timestamp ("No Ad Zone").
+	// this timestamp ("No Ad Zone"). The value is specified in ISO 8601
+	// format.
 	PauseAdsUntil string `json:"pauseAdsUntil,omitempty"`
 
-	// RepeatInterval: Interval frequency that api uses to insert cuepoints
-	// automatically.
-	RepeatInterval string `json:"repeatInterval,omitempty"`
+	// RepeatIntervalSecs: Interval frequency in seconds that api uses to
+	// insert cuepoints automatically.
+	RepeatIntervalSecs int64 `json:"repeatIntervalSecs,omitempty"`
 
 	// ScheduleStrategy: The strategy to use when scheduling cuepoints.
 	//
@@ -5815,7 +5885,7 @@ func (s *LiveChatMessageRetractedDetails) MarshalJSON() ([]byte, error) {
 	return gensupport.MarshalJSON(raw, s.ForceSendFields, s.NullFields)
 }
 
-// LiveChatMessageSnippet: Next ID: 33
+// LiveChatMessageSnippet: Next ID: 34
 type LiveChatMessageSnippet struct {
 	// AuthorChannelId: The ID of the user that authored this message, this
 	// field is not always filled. textMessageEvent - the user that wrote
@@ -5828,7 +5898,7 @@ type LiveChatMessageSnippet struct {
 	// messageRetractedEvent - the author that retracted their message
 	// userBannedEvent - the moderator that took the action superChatEvent -
 	// the user that made the purchase superStickerEvent - the user that
-	// made the purchase
+	// made the purchase pollEvent - the user that created the poll
 	AuthorChannelId string `json:"authorChannelId,omitempty"`
 
 	// DisplayMessage: Contains a string that can be displayed to the user.
@@ -5868,6 +5938,10 @@ type LiveChatMessageSnippet struct {
 	// "member" is the new term for "sponsor".
 	NewSponsorDetails *LiveChatNewSponsorDetails `json:"newSponsorDetails,omitempty"`
 
+	// PollDetails: Details about the poll event, this is only set if the
+	// type is 'pollEvent'.
+	PollDetails *LiveChatPollDetails `json:"pollDetails,omitempty"`
+
 	// PublishedAt: The date and time when the message was orignally
 	// published.
 	PublishedAt string `json:"publishedAt,omitempty"`
@@ -5904,6 +5978,7 @@ type LiveChatMessageSnippet struct {
 	//   "userBannedEvent"
 	//   "superChatEvent"
 	//   "superStickerEvent"
+	//   "pollEvent"
 	Type string `json:"type,omitempty"`
 
 	UserBannedDetails *LiveChatUserBannedMessageDetails `json:"userBannedDetails,omitempty"`
@@ -6095,6 +6170,96 @@ type LiveChatNewSponsorDetails struct {
 
 func (s *LiveChatNewSponsorDetails) MarshalJSON() ([]byte, error) {
 	type NoMethod LiveChatNewSponsorDetails
+	raw := NoMethod(*s)
+	return gensupport.MarshalJSON(raw, s.ForceSendFields, s.NullFields)
+}
+
+type LiveChatPollDetails struct {
+	Metadata *LiveChatPollDetailsPollMetadata `json:"metadata,omitempty"`
+
+	// Possible values:
+	//   "unknown"
+	//   "active"
+	//   "closed"
+	Status string `json:"status,omitempty"`
+
+	// ForceSendFields is a list of field names (e.g. "Metadata") to
+	// unconditionally include in API requests. By default, fields with
+	// empty or default values are omitted from API requests. However, any
+	// non-pointer, non-interface field appearing in ForceSendFields will be
+	// sent to the server regardless of whether the field is empty or not.
+	// This may be used to include empty fields in Patch requests.
+	ForceSendFields []string `json:"-"`
+
+	// NullFields is a list of field names (e.g. "Metadata") to include in
+	// API requests with the JSON null value. By default, fields with empty
+	// values are omitted from API requests. However, any field with an
+	// empty value appearing in NullFields will be sent to the server as
+	// null. It is an error if a field in this list has a non-empty value.
+	// This may be used to include null fields in Patch requests.
+	NullFields []string `json:"-"`
+}
+
+func (s *LiveChatPollDetails) MarshalJSON() ([]byte, error) {
+	type NoMethod LiveChatPollDetails
+	raw := NoMethod(*s)
+	return gensupport.MarshalJSON(raw, s.ForceSendFields, s.NullFields)
+}
+
+type LiveChatPollDetailsPollMetadata struct {
+	// Options: The options will be returned in the order that is displayed
+	// in 1P
+	Options []*LiveChatPollDetailsPollMetadataPollOption `json:"options,omitempty"`
+
+	QuestionText string `json:"questionText,omitempty"`
+
+	// ForceSendFields is a list of field names (e.g. "Options") to
+	// unconditionally include in API requests. By default, fields with
+	// empty or default values are omitted from API requests. However, any
+	// non-pointer, non-interface field appearing in ForceSendFields will be
+	// sent to the server regardless of whether the field is empty or not.
+	// This may be used to include empty fields in Patch requests.
+	ForceSendFields []string `json:"-"`
+
+	// NullFields is a list of field names (e.g. "Options") to include in
+	// API requests with the JSON null value. By default, fields with empty
+	// values are omitted from API requests. However, any field with an
+	// empty value appearing in NullFields will be sent to the server as
+	// null. It is an error if a field in this list has a non-empty value.
+	// This may be used to include null fields in Patch requests.
+	NullFields []string `json:"-"`
+}
+
+func (s *LiveChatPollDetailsPollMetadata) MarshalJSON() ([]byte, error) {
+	type NoMethod LiveChatPollDetailsPollMetadata
+	raw := NoMethod(*s)
+	return gensupport.MarshalJSON(raw, s.ForceSendFields, s.NullFields)
+}
+
+type LiveChatPollDetailsPollMetadataPollOption struct {
+	OptionText string `json:"optionText,omitempty"`
+
+	Tally int64 `json:"tally,omitempty,string"`
+
+	// ForceSendFields is a list of field names (e.g. "OptionText") to
+	// unconditionally include in API requests. By default, fields with
+	// empty or default values are omitted from API requests. However, any
+	// non-pointer, non-interface field appearing in ForceSendFields will be
+	// sent to the server regardless of whether the field is empty or not.
+	// This may be used to include empty fields in Patch requests.
+	ForceSendFields []string `json:"-"`
+
+	// NullFields is a list of field names (e.g. "OptionText") to include in
+	// API requests with the JSON null value. By default, fields with empty
+	// values are omitted from API requests. However, any field with an
+	// empty value appearing in NullFields will be sent to the server as
+	// null. It is an error if a field in this list has a non-empty value.
+	// This may be used to include null fields in Patch requests.
+	NullFields []string `json:"-"`
+}
+
+func (s *LiveChatPollDetailsPollMetadataPollOption) MarshalJSON() ([]byte, error) {
+	type NoMethod LiveChatPollDetailsPollMetadataPollOption
 	raw := NoMethod(*s)
 	return gensupport.MarshalJSON(raw, s.ForceSendFields, s.NullFields)
 }
@@ -7202,6 +7367,143 @@ type PlaylistContentDetails struct {
 
 func (s *PlaylistContentDetails) MarshalJSON() ([]byte, error) {
 	type NoMethod PlaylistContentDetails
+	raw := NoMethod(*s)
+	return gensupport.MarshalJSON(raw, s.ForceSendFields, s.NullFields)
+}
+
+type PlaylistImage struct {
+	// Id: Identifies this resource (playlist id and image type).
+	Id string `json:"id,omitempty"`
+
+	// Kind: Identifies what kind of resource this is. Value: the fixed
+	// string "youtube#playlistImages".
+	Kind string `json:"kind,omitempty"`
+
+	Snippet *PlaylistImageSnippet `json:"snippet,omitempty"`
+
+	// ServerResponse contains the HTTP response code and headers from the
+	// server.
+	googleapi.ServerResponse `json:"-"`
+
+	// ForceSendFields is a list of field names (e.g. "Id") to
+	// unconditionally include in API requests. By default, fields with
+	// empty or default values are omitted from API requests. However, any
+	// non-pointer, non-interface field appearing in ForceSendFields will be
+	// sent to the server regardless of whether the field is empty or not.
+	// This may be used to include empty fields in Patch requests.
+	ForceSendFields []string `json:"-"`
+
+	// NullFields is a list of field names (e.g. "Id") to include in API
+	// requests with the JSON null value. By default, fields with empty
+	// values are omitted from API requests. However, any field with an
+	// empty value appearing in NullFields will be sent to the server as
+	// null. It is an error if a field in this list has a non-empty value.
+	// This may be used to include null fields in Patch requests.
+	NullFields []string `json:"-"`
+}
+
+func (s *PlaylistImage) MarshalJSON() ([]byte, error) {
+	type NoMethod PlaylistImage
+	raw := NoMethod(*s)
+	return gensupport.MarshalJSON(raw, s.ForceSendFields, s.NullFields)
+}
+
+type PlaylistImageListResponse struct {
+	Items []*PlaylistImage `json:"items,omitempty"`
+
+	// Kind: Identifies what kind of resource this is. Value: the fixed
+	// string "youtube#playlistImageListResponse".
+	Kind string `json:"kind,omitempty"`
+
+	// NextPageToken: The token that can be used as the value of the
+	// pageToken parameter to retrieve the next page in the result set.
+	NextPageToken string `json:"nextPageToken,omitempty"`
+
+	// PageInfo: General pagination information.
+	PageInfo *PageInfo `json:"pageInfo,omitempty"`
+
+	// PrevPageToken: The token that can be used as the value of the
+	// pageToken parameter to retrieve the previous page in the result set.
+	PrevPageToken string `json:"prevPageToken,omitempty"`
+
+	// ServerResponse contains the HTTP response code and headers from the
+	// server.
+	googleapi.ServerResponse `json:"-"`
+
+	// ForceSendFields is a list of field names (e.g. "Items") to
+	// unconditionally include in API requests. By default, fields with
+	// empty or default values are omitted from API requests. However, any
+	// non-pointer, non-interface field appearing in ForceSendFields will be
+	// sent to the server regardless of whether the field is empty or not.
+	// This may be used to include empty fields in Patch requests.
+	ForceSendFields []string `json:"-"`
+
+	// NullFields is a list of field names (e.g. "Items") to include in API
+	// requests with the JSON null value. By default, fields with empty
+	// values are omitted from API requests. However, any field with an
+	// empty value appearing in NullFields will be sent to the server as
+	// null. It is an error if a field in this list has a non-empty value.
+	// This may be used to include null fields in Patch requests.
+	NullFields []string `json:"-"`
+}
+
+func (s *PlaylistImageListResponse) MarshalJSON() ([]byte, error) {
+	type NoMethod PlaylistImageListResponse
+	raw := NoMethod(*s)
+	return gensupport.MarshalJSON(raw, s.ForceSendFields, s.NullFields)
+}
+
+// PlaylistImageSnippet: A *playlistImage* resource identifies another
+// resource, such as a image, that is associated with a playlist. In
+// addition, the playlistImage resource contains details about the
+// included resource that pertain specifically to how that resource is
+// used in that playlist. YouTube uses playlists to identify special
+// collections of videos for a channel, such as: - uploaded videos -
+// favorite videos - positively rated (liked) videos - watch history To
+// be more specific, these lists are associated with a channel, which is
+// a collection of a person, group, or company's videos, playlists, and
+// other YouTube information. You can retrieve the playlist IDs for each
+// of these lists from the channel resource for a given channel. You can
+// then use the playlistImages.list method to retrieve image data for
+// any of those playlists. You can also add or remove images from those
+// lists by calling the playlistImages.insert and playlistImages.delete
+// methods.
+type PlaylistImageSnippet struct {
+	// Height: The image height.
+	Height int64 `json:"height,omitempty"`
+
+	// PlaylistId: The Playlist ID of the playlist this image is associated
+	// with.
+	PlaylistId string `json:"playlistId,omitempty"`
+
+	// Type: The image type.
+	//
+	// Possible values:
+	//   "hero" - The main image that will be used for this playlist.
+	Type string `json:"type,omitempty"`
+
+	// Width: The image width.
+	Width int64 `json:"width,omitempty"`
+
+	// ForceSendFields is a list of field names (e.g. "Height") to
+	// unconditionally include in API requests. By default, fields with
+	// empty or default values are omitted from API requests. However, any
+	// non-pointer, non-interface field appearing in ForceSendFields will be
+	// sent to the server regardless of whether the field is empty or not.
+	// This may be used to include empty fields in Patch requests.
+	ForceSendFields []string `json:"-"`
+
+	// NullFields is a list of field names (e.g. "Height") to include in API
+	// requests with the JSON null value. By default, fields with empty
+	// values are omitted from API requests. However, any field with an
+	// empty value appearing in NullFields will be sent to the server as
+	// null. It is an error if a field in this list has a non-empty value.
+	// This may be used to include null fields in Patch requests.
+	NullFields []string `json:"-"`
+}
+
+func (s *PlaylistImageSnippet) MarshalJSON() ([]byte, error) {
+	type NoMethod PlaylistImageSnippet
 	raw := NoMethod(*s)
 	return gensupport.MarshalJSON(raw, s.ForceSendFields, s.NullFields)
 }
@@ -12992,6 +13294,13 @@ func (c *ChannelsListCall) CategoryId(categoryId string) *ChannelsListCall {
 	return c
 }
 
+// ForHandle sets the optional parameter "forHandle": Return the channel
+// associated with a YouTube handle.
+func (c *ChannelsListCall) ForHandle(forHandle string) *ChannelsListCall {
+	c.urlParams_.Set("forHandle", forHandle)
+	return c
+}
+
 // ForUsername sets the optional parameter "forUsername": Return the
 // channel associated with a YouTube username.
 func (c *ChannelsListCall) ForUsername(forUsername string) *ChannelsListCall {
@@ -13178,6 +13487,11 @@ func (c *ChannelsListCall) Do(opts ...googleapi.CallOption) (*ChannelListRespons
 	//   "parameters": {
 	//     "categoryId": {
 	//       "description": "Return the channels within the specified guide category ID.",
+	//       "location": "query",
+	//       "type": "string"
+	//     },
+	//     "forHandle": {
+	//       "description": "Return the channel associated with a YouTube handle.",
 	//       "location": "query",
 	//       "type": "string"
 	//     },
@@ -19030,6 +19344,836 @@ func (c *MembershipsLevelsListCall) Do(opts ...googleapi.CallOption) (*Membershi
 
 }
 
+// method id "youtube.playlistImages.delete":
+
+type PlaylistImagesDeleteCall struct {
+	s          *Service
+	urlParams_ gensupport.URLParams
+	ctx_       context.Context
+	header_    http.Header
+}
+
+// Delete: Deletes a resource.
+func (r *PlaylistImagesService) Delete() *PlaylistImagesDeleteCall {
+	c := &PlaylistImagesDeleteCall{s: r.s, urlParams_: make(gensupport.URLParams)}
+	return c
+}
+
+// Id sets the optional parameter "id": Id to identify this image. This
+// is returned from by the List method.
+func (c *PlaylistImagesDeleteCall) Id(id string) *PlaylistImagesDeleteCall {
+	c.urlParams_.Set("id", id)
+	return c
+}
+
+// OnBehalfOfContentOwner sets the optional parameter
+// "onBehalfOfContentOwner": *Note:* This parameter is intended
+// exclusively for YouTube content partners. The
+// *onBehalfOfContentOwner* parameter indicates that the request's
+// authorization credentials identify a YouTube CMS user who is acting
+// on behalf of the content owner specified in the parameter value. This
+// parameter is intended for YouTube content partners that own and
+// manage many different YouTube channels. It allows content owners to
+// authenticate once and get access to all their video and channel data,
+// without having to provide authentication credentials for each
+// individual channel. The CMS account that the user authenticates with
+// must be linked to the specified YouTube content owner.
+func (c *PlaylistImagesDeleteCall) OnBehalfOfContentOwner(onBehalfOfContentOwner string) *PlaylistImagesDeleteCall {
+	c.urlParams_.Set("onBehalfOfContentOwner", onBehalfOfContentOwner)
+	return c
+}
+
+// Fields allows partial responses to be retrieved. See
+// https://developers.google.com/gdata/docs/2.0/basics#PartialResponse
+// for more information.
+func (c *PlaylistImagesDeleteCall) Fields(s ...googleapi.Field) *PlaylistImagesDeleteCall {
+	c.urlParams_.Set("fields", googleapi.CombineFields(s))
+	return c
+}
+
+// Context sets the context to be used in this call's Do method. Any
+// pending HTTP request will be aborted if the provided context is
+// canceled.
+func (c *PlaylistImagesDeleteCall) Context(ctx context.Context) *PlaylistImagesDeleteCall {
+	c.ctx_ = ctx
+	return c
+}
+
+// Header returns an http.Header that can be modified by the caller to
+// add HTTP headers to the request.
+func (c *PlaylistImagesDeleteCall) Header() http.Header {
+	if c.header_ == nil {
+		c.header_ = make(http.Header)
+	}
+	return c.header_
+}
+
+func (c *PlaylistImagesDeleteCall) doRequest(alt string) (*http.Response, error) {
+	reqHeaders := make(http.Header)
+	reqHeaders.Set("x-goog-api-client", "gl-go/"+gensupport.GoVersion()+" gdcl/"+internal.Version)
+	for k, v := range c.header_ {
+		reqHeaders[k] = v
+	}
+	reqHeaders.Set("User-Agent", c.s.userAgent())
+	var body io.Reader = nil
+	c.urlParams_.Set("alt", alt)
+	c.urlParams_.Set("prettyPrint", "false")
+	urls := googleapi.ResolveRelative(c.s.BasePath, "youtube/v3/playlistImages")
+	urls += "?" + c.urlParams_.Encode()
+	req, err := http.NewRequest("DELETE", urls, body)
+	if err != nil {
+		return nil, err
+	}
+	req.Header = reqHeaders
+	return gensupport.SendRequest(c.ctx_, c.s.client, req)
+}
+
+// Do executes the "youtube.playlistImages.delete" call.
+func (c *PlaylistImagesDeleteCall) Do(opts ...googleapi.CallOption) error {
+	gensupport.SetOptions(c.urlParams_, opts...)
+	res, err := c.doRequest("json")
+	if err != nil {
+		return err
+	}
+	defer googleapi.CloseBody(res)
+	if err := googleapi.CheckResponse(res); err != nil {
+		return gensupport.WrapError(err)
+	}
+	return nil
+	// {
+	//   "description": "Deletes a resource.",
+	//   "flatPath": "youtube/v3/playlistImages",
+	//   "httpMethod": "DELETE",
+	//   "id": "youtube.playlistImages.delete",
+	//   "parameterOrder": [],
+	//   "parameters": {
+	//     "id": {
+	//       "description": "Id to identify this image. This is returned from by the List method.",
+	//       "location": "query",
+	//       "type": "string"
+	//     },
+	//     "onBehalfOfContentOwner": {
+	//       "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
+	//       "location": "query",
+	//       "type": "string"
+	//     }
+	//   },
+	//   "path": "youtube/v3/playlistImages",
+	//   "scopes": [
+	//     "https://www.googleapis.com/auth/youtube",
+	//     "https://www.googleapis.com/auth/youtube.force-ssl",
+	//     "https://www.googleapis.com/auth/youtubepartner"
+	//   ]
+	// }
+
+}
+
+// method id "youtube.playlistImages.insert":
+
+type PlaylistImagesInsertCall struct {
+	s             *Service
+	playlistimage *PlaylistImage
+	urlParams_    gensupport.URLParams
+	mediaInfo_    *gensupport.MediaInfo
+	ctx_          context.Context
+	header_       http.Header
+}
+
+// Insert: Inserts a new resource into this collection.
+func (r *PlaylistImagesService) Insert(playlistimage *PlaylistImage) *PlaylistImagesInsertCall {
+	c := &PlaylistImagesInsertCall{s: r.s, urlParams_: make(gensupport.URLParams)}
+	c.playlistimage = playlistimage
+	return c
+}
+
+// OnBehalfOfContentOwner sets the optional parameter
+// "onBehalfOfContentOwner": *Note:* This parameter is intended
+// exclusively for YouTube content partners. The
+// *onBehalfOfContentOwner* parameter indicates that the request's
+// authorization credentials identify a YouTube CMS user who is acting
+// on behalf of the content owner specified in the parameter value. This
+// parameter is intended for YouTube content partners that own and
+// manage many different YouTube channels. It allows content owners to
+// authenticate once and get access to all their video and channel data,
+// without having to provide authentication credentials for each
+// individual channel. The CMS account that the user authenticates with
+// must be linked to the specified YouTube content owner.
+func (c *PlaylistImagesInsertCall) OnBehalfOfContentOwner(onBehalfOfContentOwner string) *PlaylistImagesInsertCall {
+	c.urlParams_.Set("onBehalfOfContentOwner", onBehalfOfContentOwner)
+	return c
+}
+
+// OnBehalfOfContentOwnerChannel sets the optional parameter
+// "onBehalfOfContentOwnerChannel": This parameter can only be used in a
+// properly authorized request. *Note:* This parameter is intended
+// exclusively for YouTube content partners. The
+// *onBehalfOfContentOwnerChannel* parameter specifies the YouTube
+// channel ID of the channel to which a video is being added. This
+// parameter is required when a request specifies a value for the
+// onBehalfOfContentOwner parameter, and it can only be used in
+// conjunction with that parameter. In addition, the request must be
+// authorized using a CMS account that is linked to the content owner
+// that the onBehalfOfContentOwner parameter specifies. Finally, the
+// channel that the onBehalfOfContentOwnerChannel parameter value
+// specifies must be linked to the content owner that the
+// onBehalfOfContentOwner parameter specifies. This parameter is
+// intended for YouTube content partners that own and manage many
+// different YouTube channels. It allows content owners to authenticate
+// once and perform actions on behalf of the channel specified in the
+// parameter value, without having to provide authentication credentials
+// for each separate channel.
+func (c *PlaylistImagesInsertCall) OnBehalfOfContentOwnerChannel(onBehalfOfContentOwnerChannel string) *PlaylistImagesInsertCall {
+	c.urlParams_.Set("onBehalfOfContentOwnerChannel", onBehalfOfContentOwnerChannel)
+	return c
+}
+
+// Part sets the optional parameter "part": The *part* parameter
+// specifies the properties that the API response will include.
+func (c *PlaylistImagesInsertCall) Part(part ...string) *PlaylistImagesInsertCall {
+	c.urlParams_.SetMulti("part", append([]string{}, part...))
+	return c
+}
+
+// Media specifies the media to upload in one or more chunks. The chunk
+// size may be controlled by supplying a MediaOption generated by
+// googleapi.ChunkSize. The chunk size defaults to
+// googleapi.DefaultUploadChunkSize.The Content-Type header used in the
+// upload request will be determined by sniffing the contents of r,
+// unless a MediaOption generated by googleapi.ContentType is
+// supplied.
+// At most one of Media and ResumableMedia may be set.
+func (c *PlaylistImagesInsertCall) Media(r io.Reader, options ...googleapi.MediaOption) *PlaylistImagesInsertCall {
+	c.mediaInfo_ = gensupport.NewInfoFromMedia(r, options)
+	return c
+}
+
+// ResumableMedia specifies the media to upload in chunks and can be
+// canceled with ctx.
+//
+// Deprecated: use Media instead.
+//
+// At most one of Media and ResumableMedia may be set. mediaType
+// identifies the MIME media type of the upload, such as "image/png". If
+// mediaType is "", it will be auto-detected. The provided ctx will
+// supersede any context previously provided to the Context method.
+func (c *PlaylistImagesInsertCall) ResumableMedia(ctx context.Context, r io.ReaderAt, size int64, mediaType string) *PlaylistImagesInsertCall {
+	c.ctx_ = ctx
+	c.mediaInfo_ = gensupport.NewInfoFromResumableMedia(r, size, mediaType)
+	return c
+}
+
+// ProgressUpdater provides a callback function that will be called
+// after every chunk. It should be a low-latency function in order to
+// not slow down the upload operation. This should only be called when
+// using ResumableMedia (as opposed to Media).
+func (c *PlaylistImagesInsertCall) ProgressUpdater(pu googleapi.ProgressUpdater) *PlaylistImagesInsertCall {
+	c.mediaInfo_.SetProgressUpdater(pu)
+	return c
+}
+
+// Fields allows partial responses to be retrieved. See
+// https://developers.google.com/gdata/docs/2.0/basics#PartialResponse
+// for more information.
+func (c *PlaylistImagesInsertCall) Fields(s ...googleapi.Field) *PlaylistImagesInsertCall {
+	c.urlParams_.Set("fields", googleapi.CombineFields(s))
+	return c
+}
+
+// Context sets the context to be used in this call's Do method. Any
+// pending HTTP request will be aborted if the provided context is
+// canceled.
+// This context will supersede any context previously provided to the
+// ResumableMedia method.
+func (c *PlaylistImagesInsertCall) Context(ctx context.Context) *PlaylistImagesInsertCall {
+	c.ctx_ = ctx
+	return c
+}
+
+// Header returns an http.Header that can be modified by the caller to
+// add HTTP headers to the request.
+func (c *PlaylistImagesInsertCall) Header() http.Header {
+	if c.header_ == nil {
+		c.header_ = make(http.Header)
+	}
+	return c.header_
+}
+
+func (c *PlaylistImagesInsertCall) doRequest(alt string) (*http.Response, error) {
+	reqHeaders := make(http.Header)
+	reqHeaders.Set("x-goog-api-client", "gl-go/"+gensupport.GoVersion()+" gdcl/"+internal.Version)
+	for k, v := range c.header_ {
+		reqHeaders[k] = v
+	}
+	reqHeaders.Set("User-Agent", c.s.userAgent())
+	var body io.Reader = nil
+	body, err := googleapi.WithoutDataWrapper.JSONReader(c.playlistimage)
+	if err != nil {
+		return nil, err
+	}
+	reqHeaders.Set("Content-Type", "application/json")
+	c.urlParams_.Set("alt", alt)
+	c.urlParams_.Set("prettyPrint", "false")
+	urls := googleapi.ResolveRelative(c.s.BasePath, "youtube/v3/playlistImages")
+	if c.mediaInfo_ != nil {
+		urls = googleapi.ResolveRelative(c.s.BasePath, "/upload/youtube/v3/playlistImages")
+		c.urlParams_.Set("uploadType", c.mediaInfo_.UploadType())
+	}
+	if body == nil {
+		body = new(bytes.Buffer)
+		reqHeaders.Set("Content-Type", "application/json")
+	}
+	body, getBody, cleanup := c.mediaInfo_.UploadRequest(reqHeaders, body)
+	defer cleanup()
+	urls += "?" + c.urlParams_.Encode()
+	req, err := http.NewRequest("POST", urls, body)
+	if err != nil {
+		return nil, err
+	}
+	req.Header = reqHeaders
+	req.GetBody = getBody
+	return gensupport.SendRequest(c.ctx_, c.s.client, req)
+}
+
+// Do executes the "youtube.playlistImages.insert" call.
+// Exactly one of *PlaylistImage or error will be non-nil. Any non-2xx
+// status code is an error. Response headers are in either
+// *PlaylistImage.ServerResponse.Header or (if a response was returned
+// at all) in error.(*googleapi.Error).Header. Use
+// googleapi.IsNotModified to check whether the returned error was
+// because http.StatusNotModified was returned.
+func (c *PlaylistImagesInsertCall) Do(opts ...googleapi.CallOption) (*PlaylistImage, error) {
+	gensupport.SetOptions(c.urlParams_, opts...)
+	res, err := c.doRequest("json")
+	if res != nil && res.StatusCode == http.StatusNotModified {
+		if res.Body != nil {
+			res.Body.Close()
+		}
+		return nil, gensupport.WrapError(&googleapi.Error{
+			Code:   res.StatusCode,
+			Header: res.Header,
+		})
+	}
+	if err != nil {
+		return nil, err
+	}
+	defer googleapi.CloseBody(res)
+	if err := googleapi.CheckResponse(res); err != nil {
+		return nil, gensupport.WrapError(err)
+	}
+	rx := c.mediaInfo_.ResumableUpload(res.Header.Get("Location"))
+	if rx != nil {
+		rx.Client = c.s.client
+		rx.UserAgent = c.s.userAgent()
+		ctx := c.ctx_
+		if ctx == nil {
+			ctx = context.TODO()
+		}
+		res, err = rx.Upload(ctx)
+		if err != nil {
+			return nil, err
+		}
+		defer res.Body.Close()
+		if err := googleapi.CheckResponse(res); err != nil {
+			return nil, gensupport.WrapError(err)
+		}
+	}
+	ret := &PlaylistImage{
+		ServerResponse: googleapi.ServerResponse{
+			Header:         res.Header,
+			HTTPStatusCode: res.StatusCode,
+		},
+	}
+	target := &ret
+	if err := gensupport.DecodeResponse(target, res); err != nil {
+		return nil, err
+	}
+	return ret, nil
+	// {
+	//   "description": "Inserts a new resource into this collection.",
+	//   "flatPath": "youtube/v3/playlistImages",
+	//   "httpMethod": "POST",
+	//   "id": "youtube.playlistImages.insert",
+	//   "mediaUpload": {
+	//     "accept": [
+	//       "image/jpeg",
+	//       "image/png",
+	//       "application/octet-stream"
+	//     ],
+	//     "maxSize": "2097152",
+	//     "protocols": {
+	//       "resumable": {
+	//         "multipart": true,
+	//         "path": "/resumable/upload/youtube/v3/playlistImages"
+	//       },
+	//       "simple": {
+	//         "multipart": true,
+	//         "path": "/upload/youtube/v3/playlistImages"
+	//       }
+	//     }
+	//   },
+	//   "parameterOrder": [],
+	//   "parameters": {
+	//     "onBehalfOfContentOwner": {
+	//       "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
+	//       "location": "query",
+	//       "type": "string"
+	//     },
+	//     "onBehalfOfContentOwnerChannel": {
+	//       "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.",
+	//       "location": "query",
+	//       "type": "string"
+	//     },
+	//     "part": {
+	//       "description": "The *part* parameter specifies the properties that the API response will include.",
+	//       "location": "query",
+	//       "repeated": true,
+	//       "type": "string"
+	//     }
+	//   },
+	//   "path": "youtube/v3/playlistImages",
+	//   "request": {
+	//     "$ref": "PlaylistImage"
+	//   },
+	//   "response": {
+	//     "$ref": "PlaylistImage"
+	//   },
+	//   "scopes": [
+	//     "https://www.googleapis.com/auth/youtube",
+	//     "https://www.googleapis.com/auth/youtube.force-ssl",
+	//     "https://www.googleapis.com/auth/youtubepartner"
+	//   ],
+	//   "supportsMediaUpload": true
+	// }
+
+}
+
+// method id "youtube.playlistImages.list":
+
+type PlaylistImagesListCall struct {
+	s            *Service
+	urlParams_   gensupport.URLParams
+	ifNoneMatch_ string
+	ctx_         context.Context
+	header_      http.Header
+}
+
+// List: Retrieves a list of resources, possibly filtered.
+func (r *PlaylistImagesService) List() *PlaylistImagesListCall {
+	c := &PlaylistImagesListCall{s: r.s, urlParams_: make(gensupport.URLParams)}
+	return c
+}
+
+// MaxResults sets the optional parameter "maxResults": The *maxResults*
+// parameter specifies the maximum number of items that should be
+// returned in the result set.
+func (c *PlaylistImagesListCall) MaxResults(maxResults int64) *PlaylistImagesListCall {
+	c.urlParams_.Set("maxResults", fmt.Sprint(maxResults))
+	return c
+}
+
+// OnBehalfOfContentOwner sets the optional parameter
+// "onBehalfOfContentOwner": *Note:* This parameter is intended
+// exclusively for YouTube content partners. The
+// *onBehalfOfContentOwner* parameter indicates that the request's
+// authorization credentials identify a YouTube CMS user who is acting
+// on behalf of the content owner specified in the parameter value. This
+// parameter is intended for YouTube content partners that own and
+// manage many different YouTube channels. It allows content owners to
+// authenticate once and get access to all their video and channel data,
+// without having to provide authentication credentials for each
+// individual channel. The CMS account that the user authenticates with
+// must be linked to the specified YouTube content owner.
+func (c *PlaylistImagesListCall) OnBehalfOfContentOwner(onBehalfOfContentOwner string) *PlaylistImagesListCall {
+	c.urlParams_.Set("onBehalfOfContentOwner", onBehalfOfContentOwner)
+	return c
+}
+
+// OnBehalfOfContentOwnerChannel sets the optional parameter
+// "onBehalfOfContentOwnerChannel": This parameter can only be used in a
+// properly authorized request. *Note:* This parameter is intended
+// exclusively for YouTube content partners. The
+// *onBehalfOfContentOwnerChannel* parameter specifies the YouTube
+// channel ID of the channel to which a video is being added. This
+// parameter is required when a request specifies a value for the
+// onBehalfOfContentOwner parameter, and it can only be used in
+// conjunction with that parameter. In addition, the request must be
+// authorized using a CMS account that is linked to the content owner
+// that the onBehalfOfContentOwner parameter specifies. Finally, the
+// channel that the onBehalfOfContentOwnerChannel parameter value
+// specifies must be linked to the content owner that the
+// onBehalfOfContentOwner parameter specifies. This parameter is
+// intended for YouTube content partners that own and manage many
+// different YouTube channels. It allows content owners to authenticate
+// once and perform actions on behalf of the channel specified in the
+// parameter value, without having to provide authentication credentials
+// for each separate channel.
+func (c *PlaylistImagesListCall) OnBehalfOfContentOwnerChannel(onBehalfOfContentOwnerChannel string) *PlaylistImagesListCall {
+	c.urlParams_.Set("onBehalfOfContentOwnerChannel", onBehalfOfContentOwnerChannel)
+	return c
+}
+
+// PageToken sets the optional parameter "pageToken": The *pageToken*
+// parameter identifies a specific page in the result set that should be
+// returned. In an API response, the nextPageToken and prevPageToken
+// properties identify other pages that could be retrieved.
+func (c *PlaylistImagesListCall) PageToken(pageToken string) *PlaylistImagesListCall {
+	c.urlParams_.Set("pageToken", pageToken)
+	return c
+}
+
+// Parent sets the optional parameter "parent": Return PlaylistImages
+// for this playlist id.
+func (c *PlaylistImagesListCall) Parent(parent string) *PlaylistImagesListCall {
+	c.urlParams_.Set("parent", parent)
+	return c
+}
+
+// Part sets the optional parameter "part": The *part* parameter
+// specifies a comma-separated list of one or more playlistImage
+// resource properties that the API response will include. If the
+// parameter identifies a property that contains child properties, the
+// child properties will be included in the response.
+func (c *PlaylistImagesListCall) Part(part ...string) *PlaylistImagesListCall {
+	c.urlParams_.SetMulti("part", append([]string{}, part...))
+	return c
+}
+
+// Fields allows partial responses to be retrieved. See
+// https://developers.google.com/gdata/docs/2.0/basics#PartialResponse
+// for more information.
+func (c *PlaylistImagesListCall) Fields(s ...googleapi.Field) *PlaylistImagesListCall {
+	c.urlParams_.Set("fields", googleapi.CombineFields(s))
+	return c
+}
+
+// IfNoneMatch sets the optional parameter which makes the operation
+// fail if the object's ETag matches the given value. This is useful for
+// getting updates only after the object has changed since the last
+// request. Use googleapi.IsNotModified to check whether the response
+// error from Do is the result of In-None-Match.
+func (c *PlaylistImagesListCall) IfNoneMatch(entityTag string) *PlaylistImagesListCall {
+	c.ifNoneMatch_ = entityTag
+	return c
+}
+
+// Context sets the context to be used in this call's Do method. Any
+// pending HTTP request will be aborted if the provided context is
+// canceled.
+func (c *PlaylistImagesListCall) Context(ctx context.Context) *PlaylistImagesListCall {
+	c.ctx_ = ctx
+	return c
+}
+
+// Header returns an http.Header that can be modified by the caller to
+// add HTTP headers to the request.
+func (c *PlaylistImagesListCall) Header() http.Header {
+	if c.header_ == nil {
+		c.header_ = make(http.Header)
+	}
+	return c.header_
+}
+
+func (c *PlaylistImagesListCall) doRequest(alt string) (*http.Response, error) {
+	reqHeaders := make(http.Header)
+	reqHeaders.Set("x-goog-api-client", "gl-go/"+gensupport.GoVersion()+" gdcl/"+internal.Version)
+	for k, v := range c.header_ {
+		reqHeaders[k] = v
+	}
+	reqHeaders.Set("User-Agent", c.s.userAgent())
+	if c.ifNoneMatch_ != "" {
+		reqHeaders.Set("If-None-Match", c.ifNoneMatch_)
+	}
+	var body io.Reader = nil
+	c.urlParams_.Set("alt", alt)
+	c.urlParams_.Set("prettyPrint", "false")
+	urls := googleapi.ResolveRelative(c.s.BasePath, "youtube/v3/playlistImages")
+	urls += "?" + c.urlParams_.Encode()
+	req, err := http.NewRequest("GET", urls, body)
+	if err != nil {
+		return nil, err
+	}
+	req.Header = reqHeaders
+	return gensupport.SendRequest(c.ctx_, c.s.client, req)
+}
+
+// Do executes the "youtube.playlistImages.list" call.
+// Exactly one of *PlaylistImageListResponse or error will be non-nil.
+// Any non-2xx status code is an error. Response headers are in either
+// *PlaylistImageListResponse.ServerResponse.Header or (if a response
+// was returned at all) in error.(*googleapi.Error).Header. Use
+// googleapi.IsNotModified to check whether the returned error was
+// because http.StatusNotModified was returned.
+func (c *PlaylistImagesListCall) Do(opts ...googleapi.CallOption) (*PlaylistImageListResponse, error) {
+	gensupport.SetOptions(c.urlParams_, opts...)
+	res, err := c.doRequest("json")
+	if res != nil && res.StatusCode == http.StatusNotModified {
+		if res.Body != nil {
+			res.Body.Close()
+		}
+		return nil, gensupport.WrapError(&googleapi.Error{
+			Code:   res.StatusCode,
+			Header: res.Header,
+		})
+	}
+	if err != nil {
+		return nil, err
+	}
+	defer googleapi.CloseBody(res)
+	if err := googleapi.CheckResponse(res); err != nil {
+		return nil, gensupport.WrapError(err)
+	}
+	ret := &PlaylistImageListResponse{
+		ServerResponse: googleapi.ServerResponse{
+			Header:         res.Header,
+			HTTPStatusCode: res.StatusCode,
+		},
+	}
+	target := &ret
+	if err := gensupport.DecodeResponse(target, res); err != nil {
+		return nil, err
+	}
+	return ret, nil
+	// {
+	//   "description": "Retrieves a list of resources, possibly filtered.",
+	//   "flatPath": "youtube/v3/playlistImages",
+	//   "httpMethod": "GET",
+	//   "id": "youtube.playlistImages.list",
+	//   "parameterOrder": [],
+	//   "parameters": {
+	//     "maxResults": {
+	//       "default": "5",
+	//       "description": "The *maxResults* parameter specifies the maximum number of items that should be returned in the result set.",
+	//       "format": "uint32",
+	//       "location": "query",
+	//       "maximum": "50",
+	//       "minimum": "0",
+	//       "type": "integer"
+	//     },
+	//     "onBehalfOfContentOwner": {
+	//       "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
+	//       "location": "query",
+	//       "type": "string"
+	//     },
+	//     "onBehalfOfContentOwnerChannel": {
+	//       "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.",
+	//       "location": "query",
+	//       "type": "string"
+	//     },
+	//     "pageToken": {
+	//       "description": "The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.",
+	//       "location": "query",
+	//       "type": "string"
+	//     },
+	//     "parent": {
+	//       "description": "Return PlaylistImages for this playlist id.",
+	//       "location": "query",
+	//       "type": "string"
+	//     },
+	//     "part": {
+	//       "description": "The *part* parameter specifies a comma-separated list of one or more playlistImage resource properties that the API response will include. If the parameter identifies a property that contains child properties, the child properties will be included in the response.",
+	//       "location": "query",
+	//       "repeated": true,
+	//       "type": "string"
+	//     }
+	//   },
+	//   "path": "youtube/v3/playlistImages",
+	//   "response": {
+	//     "$ref": "PlaylistImageListResponse"
+	//   },
+	//   "scopes": [
+	//     "https://www.googleapis.com/auth/youtube",
+	//     "https://www.googleapis.com/auth/youtube.force-ssl",
+	//     "https://www.googleapis.com/auth/youtube.readonly",
+	//     "https://www.googleapis.com/auth/youtubepartner"
+	//   ]
+	// }
+
+}
+
+// Pages invokes f for each page of results.
+// A non-nil error returned from f will halt the iteration.
+// The provided context supersedes any context provided to the Context method.
+func (c *PlaylistImagesListCall) Pages(ctx context.Context, f func(*PlaylistImageListResponse) error) error {
+	c.ctx_ = ctx
+	defer c.PageToken(c.urlParams_.Get("pageToken")) // reset paging to original point
+	for {
+		x, err := c.Do()
+		if err != nil {
+			return err
+		}
+		if err := f(x); err != nil {
+			return err
+		}
+		if x.NextPageToken == "" {
+			return nil
+		}
+		c.PageToken(x.NextPageToken)
+	}
+}
+
+// method id "youtube.playlistImages.update":
+
+type PlaylistImagesUpdateCall struct {
+	s             *Service
+	playlistimage *PlaylistImage
+	urlParams_    gensupport.URLParams
+	ctx_          context.Context
+	header_       http.Header
+}
+
+// Update: Updates an existing resource.
+func (r *PlaylistImagesService) Update(playlistimage *PlaylistImage) *PlaylistImagesUpdateCall {
+	c := &PlaylistImagesUpdateCall{s: r.s, urlParams_: make(gensupport.URLParams)}
+	c.playlistimage = playlistimage
+	return c
+}
+
+// OnBehalfOfContentOwner sets the optional parameter
+// "onBehalfOfContentOwner": *Note:* This parameter is intended
+// exclusively for YouTube content partners. The
+// *onBehalfOfContentOwner* parameter indicates that the request's
+// authorization credentials identify a YouTube CMS user who is acting
+// on behalf of the content owner specified in the parameter value. This
+// parameter is intended for YouTube content partners that own and
+// manage many different YouTube channels. It allows content owners to
+// authenticate once and get access to all their video and channel data,
+// without having to provide authentication credentials for each
+// individual channel. The CMS account that the user authenticates with
+// must be linked to the specified YouTube content owner.
+func (c *PlaylistImagesUpdateCall) OnBehalfOfContentOwner(onBehalfOfContentOwner string) *PlaylistImagesUpdateCall {
+	c.urlParams_.Set("onBehalfOfContentOwner", onBehalfOfContentOwner)
+	return c
+}
+
+// Part sets the optional parameter "part": The *part* parameter
+// specifies the properties that the API response will include.
+func (c *PlaylistImagesUpdateCall) Part(part ...string) *PlaylistImagesUpdateCall {
+	c.urlParams_.SetMulti("part", append([]string{}, part...))
+	return c
+}
+
+// Fields allows partial responses to be retrieved. See
+// https://developers.google.com/gdata/docs/2.0/basics#PartialResponse
+// for more information.
+func (c *PlaylistImagesUpdateCall) Fields(s ...googleapi.Field) *PlaylistImagesUpdateCall {
+	c.urlParams_.Set("fields", googleapi.CombineFields(s))
+	return c
+}
+
+// Context sets the context to be used in this call's Do method. Any
+// pending HTTP request will be aborted if the provided context is
+// canceled.
+func (c *PlaylistImagesUpdateCall) Context(ctx context.Context) *PlaylistImagesUpdateCall {
+	c.ctx_ = ctx
+	return c
+}
+
+// Header returns an http.Header that can be modified by the caller to
+// add HTTP headers to the request.
+func (c *PlaylistImagesUpdateCall) Header() http.Header {
+	if c.header_ == nil {
+		c.header_ = make(http.Header)
+	}
+	return c.header_
+}
+
+func (c *PlaylistImagesUpdateCall) doRequest(alt string) (*http.Response, error) {
+	reqHeaders := make(http.Header)
+	reqHeaders.Set("x-goog-api-client", "gl-go/"+gensupport.GoVersion()+" gdcl/"+internal.Version)
+	for k, v := range c.header_ {
+		reqHeaders[k] = v
+	}
+	reqHeaders.Set("User-Agent", c.s.userAgent())
+	var body io.Reader = nil
+	body, err := googleapi.WithoutDataWrapper.JSONReader(c.playlistimage)
+	if err != nil {
+		return nil, err
+	}
+	reqHeaders.Set("Content-Type", "application/json")
+	c.urlParams_.Set("alt", alt)
+	c.urlParams_.Set("prettyPrint", "false")
+	urls := googleapi.ResolveRelative(c.s.BasePath, "youtube/v3/playlistImages")
+	urls += "?" + c.urlParams_.Encode()
+	req, err := http.NewRequest("PUT", urls, body)
+	if err != nil {
+		return nil, err
+	}
+	req.Header = reqHeaders
+	return gensupport.SendRequest(c.ctx_, c.s.client, req)
+}
+
+// Do executes the "youtube.playlistImages.update" call.
+// Exactly one of *PlaylistImage or error will be non-nil. Any non-2xx
+// status code is an error. Response headers are in either
+// *PlaylistImage.ServerResponse.Header or (if a response was returned
+// at all) in error.(*googleapi.Error).Header. Use
+// googleapi.IsNotModified to check whether the returned error was
+// because http.StatusNotModified was returned.
+func (c *PlaylistImagesUpdateCall) Do(opts ...googleapi.CallOption) (*PlaylistImage, error) {
+	gensupport.SetOptions(c.urlParams_, opts...)
+	res, err := c.doRequest("json")
+	if res != nil && res.StatusCode == http.StatusNotModified {
+		if res.Body != nil {
+			res.Body.Close()
+		}
+		return nil, gensupport.WrapError(&googleapi.Error{
+			Code:   res.StatusCode,
+			Header: res.Header,
+		})
+	}
+	if err != nil {
+		return nil, err
+	}
+	defer googleapi.CloseBody(res)
+	if err := googleapi.CheckResponse(res); err != nil {
+		return nil, gensupport.WrapError(err)
+	}
+	ret := &PlaylistImage{
+		ServerResponse: googleapi.ServerResponse{
+			Header:         res.Header,
+			HTTPStatusCode: res.StatusCode,
+		},
+	}
+	target := &ret
+	if err := gensupport.DecodeResponse(target, res); err != nil {
+		return nil, err
+	}
+	return ret, nil
+	// {
+	//   "description": "Updates an existing resource.",
+	//   "flatPath": "youtube/v3/playlistImages",
+	//   "httpMethod": "PUT",
+	//   "id": "youtube.playlistImages.update",
+	//   "parameterOrder": [],
+	//   "parameters": {
+	//     "onBehalfOfContentOwner": {
+	//       "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
+	//       "location": "query",
+	//       "type": "string"
+	//     },
+	//     "part": {
+	//       "description": "The *part* parameter specifies the properties that the API response will include.",
+	//       "location": "query",
+	//       "repeated": true,
+	//       "type": "string"
+	//     }
+	//   },
+	//   "path": "youtube/v3/playlistImages",
+	//   "request": {
+	//     "$ref": "PlaylistImage"
+	//   },
+	//   "response": {
+	//     "$ref": "PlaylistImage"
+	//   },
+	//   "scopes": [
+	//     "https://www.googleapis.com/auth/youtube",
+	//     "https://www.googleapis.com/auth/youtube.force-ssl",
+	//     "https://www.googleapis.com/auth/youtubepartner"
+	//   ]
+	// }
+
+}
+
 // method id "youtube.playlistItems.delete":
 
 type PlaylistItemsDeleteCall struct {
@@ -20722,13 +21866,6 @@ func (c *SearchListCall) RegionCode(regionCode string) *SearchListCall {
 	return c
 }
 
-// RelatedToVideoId sets the optional parameter "relatedToVideoId":
-// Search related to a resource.
-func (c *SearchListCall) RelatedToVideoId(relatedToVideoId string) *SearchListCall {
-	c.urlParams_.Set("relatedToVideoId", relatedToVideoId)
-	return c
-}
-
 // RelevanceLanguage sets the optional parameter "relevanceLanguage":
 // Return results relevant to this language.
 func (c *SearchListCall) RelevanceLanguage(relevanceLanguage string) *SearchListCall {
@@ -20877,6 +22014,21 @@ func (c *SearchListCall) VideoEmbeddable(videoEmbeddable string) *SearchListCall
 // that they create. Learn more.
 func (c *SearchListCall) VideoLicense(videoLicense string) *SearchListCall {
 	c.urlParams_.Set("videoLicense", videoLicense)
+	return c
+}
+
+// VideoPaidProductPlacement sets the optional parameter
+// "videoPaidProductPlacement":
+//
+// Possible values:
+//
+//	"videoPaidProductPlacementUnspecified"
+//	"any" - Return all videos, paid product placement or not.
+//	"true" - Restrict results to only videos with paid product
+//
+// placement.
+func (c *SearchListCall) VideoPaidProductPlacement(videoPaidProductPlacement string) *SearchListCall {
+	c.urlParams_.Set("videoPaidProductPlacement", videoPaidProductPlacement)
 	return c
 }
 
@@ -21145,11 +22297,6 @@ func (c *SearchListCall) Do(opts ...googleapi.CallOption) (*SearchListResponse, 
 	//       "location": "query",
 	//       "type": "string"
 	//     },
-	//     "relatedToVideoId": {
-	//       "description": "Search related to a resource.",
-	//       "location": "query",
-	//       "type": "string"
-	//     },
 	//     "relevanceLanguage": {
 	//       "description": "Return results relevant to this language.",
 	//       "location": "query",
@@ -21281,6 +22428,20 @@ func (c *SearchListCall) Do(opts ...googleapi.CallOption) (*SearchListResponse, 
 	//         "Return all videos, regardless of which license they have, that match the query parameters.",
 	//         "Only return videos that have the standard YouTube license.",
 	//         "Only return videos that have a Creative Commons license. Users can reuse videos with this license in other videos that they create. Learn more."
+	//       ],
+	//       "location": "query",
+	//       "type": "string"
+	//     },
+	//     "videoPaidProductPlacement": {
+	//       "enum": [
+	//         "videoPaidProductPlacementUnspecified",
+	//         "any",
+	//         "true"
+	//       ],
+	//       "enumDescriptions": [
+	//         "",
+	//         "Return all videos, paid product placement or not.",
+	//         "Restrict results to only videos with paid product placement."
 	//       ],
 	//       "location": "query",
 	//       "type": "string"

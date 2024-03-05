@@ -12,6 +12,8 @@ func (o *GetVideoSettingsParams) GetRequestName() string {
 
 // Represents the response body for the GetVideoSettings request.
 type GetVideoSettingsResponse struct {
+	_response
+
 	// Height of the base (canvas) resolution in pixels
 	BaseHeight float64 `json:"baseHeight,omitempty"`
 
@@ -42,5 +44,5 @@ func (c *Client) GetVideoSettings(paramss ...*GetVideoSettingsParams) (*GetVideo
 	}
 	params := paramss[0]
 	data := &GetVideoSettingsResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

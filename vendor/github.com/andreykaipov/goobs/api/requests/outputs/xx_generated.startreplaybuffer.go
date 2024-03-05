@@ -11,7 +11,9 @@ func (o *StartReplayBufferParams) GetRequestName() string {
 }
 
 // Represents the response body for the StartReplayBuffer request.
-type StartReplayBufferResponse struct{}
+type StartReplayBufferResponse struct {
+	_response
+}
 
 // Starts the replay buffer output.
 func (c *Client) StartReplayBuffer(paramss ...*StartReplayBufferParams) (*StartReplayBufferResponse, error) {
@@ -20,5 +22,5 @@ func (c *Client) StartReplayBuffer(paramss ...*StartReplayBufferParams) (*StartR
 	}
 	params := paramss[0]
 	data := &StartReplayBufferResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

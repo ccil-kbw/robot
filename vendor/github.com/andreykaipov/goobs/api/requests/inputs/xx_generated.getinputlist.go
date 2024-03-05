@@ -7,7 +7,15 @@ import typedefs "github.com/andreykaipov/goobs/api/typedefs"
 // Represents the request body for the GetInputList request.
 type GetInputListParams struct {
 	// Restrict the array to only inputs of the specified kind
-	InputKind string `json:"inputKind,omitempty"`
+	InputKind *string `json:"inputKind,omitempty"`
+}
+
+func NewGetInputListParams() *GetInputListParams {
+	return &GetInputListParams{}
+}
+func (o *GetInputListParams) WithInputKind(x string) *GetInputListParams {
+	o.InputKind = &x
+	return o
 }
 
 // Returns the associated request.
@@ -17,6 +25,9 @@ func (o *GetInputListParams) GetRequestName() string {
 
 // Represents the response body for the GetInputList request.
 type GetInputListResponse struct {
+	_response
+
+	// Array of inputs
 	Inputs []*typedefs.Input `json:"inputs,omitempty"`
 }
 
@@ -27,5 +38,5 @@ func (c *Client) GetInputList(paramss ...*GetInputListParams) (*GetInputListResp
 	}
 	params := paramss[0]
 	data := &GetInputListResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

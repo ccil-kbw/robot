@@ -14,12 +14,18 @@ func (o *GetSceneTransitionListParams) GetRequestName() string {
 
 // Represents the response body for the GetSceneTransitionList request.
 type GetSceneTransitionListResponse struct {
+	_response
+
 	// Kind of the current scene transition. Can be null
 	CurrentSceneTransitionKind string `json:"currentSceneTransitionKind,omitempty"`
 
 	// Name of the current scene transition. Can be null
 	CurrentSceneTransitionName string `json:"currentSceneTransitionName,omitempty"`
 
+	// UUID of the current scene transition. Can be null
+	CurrentSceneTransitionUuid string `json:"currentSceneTransitionUuid,omitempty"`
+
+	// Array of transitions
 	Transitions []*typedefs.Transition `json:"transitions,omitempty"`
 }
 
@@ -32,5 +38,5 @@ func (c *Client) GetSceneTransitionList(
 	}
 	params := paramss[0]
 	data := &GetSceneTransitionListResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

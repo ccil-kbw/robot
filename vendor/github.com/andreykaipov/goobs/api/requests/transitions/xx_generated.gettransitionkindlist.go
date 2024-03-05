@@ -12,6 +12,8 @@ func (o *GetTransitionKindListParams) GetRequestName() string {
 
 // Represents the response body for the GetTransitionKindList request.
 type GetTransitionKindListResponse struct {
+	_response
+
 	// Array of transition kinds
 	TransitionKinds []string `json:"transitionKinds,omitempty"`
 }
@@ -29,5 +31,5 @@ func (c *Client) GetTransitionKindList(
 	}
 	params := paramss[0]
 	data := &GetTransitionKindListResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

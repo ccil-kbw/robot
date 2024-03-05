@@ -11,7 +11,9 @@ func (o *StopVirtualCamParams) GetRequestName() string {
 }
 
 // Represents the response body for the StopVirtualCam request.
-type StopVirtualCamResponse struct{}
+type StopVirtualCamResponse struct {
+	_response
+}
 
 // Stops the virtualcam output.
 func (c *Client) StopVirtualCam(paramss ...*StopVirtualCamParams) (*StopVirtualCamResponse, error) {
@@ -20,5 +22,5 @@ func (c *Client) StopVirtualCam(paramss ...*StopVirtualCamParams) (*StopVirtualC
 	}
 	params := paramss[0]
 	data := &StopVirtualCamResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

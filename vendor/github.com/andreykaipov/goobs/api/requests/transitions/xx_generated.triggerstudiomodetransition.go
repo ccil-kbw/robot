@@ -11,7 +11,9 @@ func (o *TriggerStudioModeTransitionParams) GetRequestName() string {
 }
 
 // Represents the response body for the TriggerStudioModeTransition request.
-type TriggerStudioModeTransitionResponse struct{}
+type TriggerStudioModeTransitionResponse struct {
+	_response
+}
 
 // Triggers the current scene transition. Same functionality as the `Transition` button in studio mode.
 func (c *Client) TriggerStudioModeTransition(
@@ -22,5 +24,5 @@ func (c *Client) TriggerStudioModeTransition(
 	}
 	params := paramss[0]
 	data := &TriggerStudioModeTransitionResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

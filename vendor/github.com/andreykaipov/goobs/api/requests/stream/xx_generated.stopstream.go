@@ -11,7 +11,9 @@ func (o *StopStreamParams) GetRequestName() string {
 }
 
 // Represents the response body for the StopStream request.
-type StopStreamResponse struct{}
+type StopStreamResponse struct {
+	_response
+}
 
 // Stops the stream output.
 func (c *Client) StopStream(paramss ...*StopStreamParams) (*StopStreamResponse, error) {
@@ -20,5 +22,5 @@ func (c *Client) StopStream(paramss ...*StopStreamParams) (*StopStreamResponse, 
 	}
 	params := paramss[0]
 	data := &StopStreamResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

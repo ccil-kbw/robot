@@ -12,6 +12,8 @@ func (o *GetStudioModeEnabledParams) GetRequestName() string {
 
 // Represents the response body for the GetStudioModeEnabled request.
 type GetStudioModeEnabledResponse struct {
+	_response
+
 	// Whether studio mode is enabled
 	StudioModeEnabled bool `json:"studioModeEnabled,omitempty"`
 }
@@ -23,5 +25,5 @@ func (c *Client) GetStudioModeEnabled(paramss ...*GetStudioModeEnabledParams) (*
 	}
 	params := paramss[0]
 	data := &GetStudioModeEnabledResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

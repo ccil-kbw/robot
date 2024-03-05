@@ -12,6 +12,8 @@ func (o *GetSceneCollectionListParams) GetRequestName() string {
 
 // Represents the response body for the GetSceneCollectionList request.
 type GetSceneCollectionListResponse struct {
+	_response
+
 	// The name of the current scene collection
 	CurrentSceneCollectionName string `json:"currentSceneCollectionName,omitempty"`
 
@@ -28,5 +30,5 @@ func (c *Client) GetSceneCollectionList(
 	}
 	params := paramss[0]
 	data := &GetSceneCollectionListResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

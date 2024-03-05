@@ -12,6 +12,8 @@ func (o *GetProfileListParams) GetRequestName() string {
 
 // Represents the response body for the GetProfileList request.
 type GetProfileListResponse struct {
+	_response
+
 	// The name of the current profile
 	CurrentProfileName string `json:"currentProfileName,omitempty"`
 
@@ -26,5 +28,5 @@ func (c *Client) GetProfileList(paramss ...*GetProfileListParams) (*GetProfileLi
 	}
 	params := paramss[0]
 	data := &GetProfileListResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

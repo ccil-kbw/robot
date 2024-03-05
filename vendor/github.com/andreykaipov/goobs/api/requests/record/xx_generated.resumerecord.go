@@ -11,7 +11,9 @@ func (o *ResumeRecordParams) GetRequestName() string {
 }
 
 // Represents the response body for the ResumeRecord request.
-type ResumeRecordResponse struct{}
+type ResumeRecordResponse struct {
+	_response
+}
 
 // Resumes the record output.
 func (c *Client) ResumeRecord(paramss ...*ResumeRecordParams) (*ResumeRecordResponse, error) {
@@ -20,5 +22,5 @@ func (c *Client) ResumeRecord(paramss ...*ResumeRecordParams) (*ResumeRecordResp
 	}
 	params := paramss[0]
 	data := &ResumeRecordResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

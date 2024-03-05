@@ -1,7 +1,5 @@
-goobs_version                  := $(shell grep obs_version                    version.go | cut -d= -f2 | tr -dc '[0-9.]')
-obs_websocket_protocol_version := $(shell grep obs_websocket_protocol_version version.go | cut -d= -f2 | tr -dc '[0-9.]')
+obs_websocket_protocol_version := $(shell grep ProtocolVersion version.go | tr -dc '[0-9.]')
 
-export goobs_version
 export obs_websocket_protocol_version
 
 help:
@@ -12,8 +10,9 @@ help:
 test: test.unit test.functional
 test.unit:
 	cd internal; go test -v -count 1 ./...
+	cd internal/sample; go test -v -count 1 ./...
 test.functional:
-	./test.sh
+	./script/test.sh
 
 generate: generate.protocol generate.tests
 	$(MAKE) format
@@ -23,10 +22,8 @@ generate.tests:
 	cd internal; go run ./generate/tests/...
 
 format:
-	go install github.com/segmentio/golines@latest
-	golines --shorten-comments --max-len=120 --reformat-tags --write-output *.go api
-	go install golang.org/x/tools/cmd/goimports@latest
-	go list -f '{{.Dir}}' ./... | xargs goimports -w
+	go run github.com/segmentio/golines@latest --shorten-comments --max-len=120 --reformat-tags --write-output *.go api
+	go list -f '{{.Dir}}' ./... | xargs go run golang.org/x/tools/cmd/goimports@latest -w
 
 clean:
 	find . -regextype awk -regex "./cover.+(out|html)" | xargs rm -f

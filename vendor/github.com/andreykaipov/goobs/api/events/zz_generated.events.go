@@ -2,7 +2,7 @@
 
 package events
 
-func GetType(name string) interface{} {
+func GetType(name string) any {
 	switch name {
 	case "CurrentSceneCollectionChanging":
 		return &CurrentSceneCollectionChanging{}
@@ -24,6 +24,8 @@ func GetType(name string) interface{} {
 		return &SourceFilterRemoved{}
 	case "SourceFilterNameChanged":
 		return &SourceFilterNameChanged{}
+	case "SourceFilterSettingsChanged":
+		return &SourceFilterSettingsChanged{}
 	case "SourceFilterEnableStateChanged":
 		return &SourceFilterEnableStateChanged{}
 	case "ExitStarted":
@@ -34,6 +36,8 @@ func GetType(name string) interface{} {
 		return &InputRemoved{}
 	case "InputNameChanged":
 		return &InputNameChanged{}
+	case "InputSettingsChanged":
+		return &InputSettingsChanged{}
 	case "InputActiveStateChanged":
 		return &InputActiveStateChanged{}
 	case "InputShowStateChanged":

@@ -12,6 +12,8 @@ func (o *GetSpecialInputsParams) GetRequestName() string {
 
 // Represents the response body for the GetSpecialInputs request.
 type GetSpecialInputsResponse struct {
+	_response
+
 	// Name of the Desktop Audio input
 	Desktop1 string `json:"desktop1,omitempty"`
 
@@ -38,5 +40,5 @@ func (c *Client) GetSpecialInputs(paramss ...*GetSpecialInputsParams) (*GetSpeci
 	}
 	params := paramss[0]
 	data := &GetSpecialInputsResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

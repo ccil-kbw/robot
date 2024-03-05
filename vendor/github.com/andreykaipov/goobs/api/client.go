@@ -1,8 +1,13 @@
+// Package api is the intermediary API between the top-level goobs client and
+// the category-level subclients.
+//
+// Nothing in this package should be of interest to a user.
 package api
 
 import (
 	"encoding/json"
 	"fmt"
+	"sync"
 	"time"
 
 	"github.com/andreykaipov/goobs/api/opcodes"
@@ -12,40 +17,53 @@ import (
 
 type Params interface{ GetRequestName() string }
 
-// Client represents a requests client to the OBS websocket server. Its
-// intention is to provide a means of communication between the top-level client
-// and the category-level clients, so while its fields are exported, they should
-// be of no interest to consumers of this library.
+type ResponseCommon struct{ raw json.RawMessage }
+
+func (o *ResponseCommon) setRaw(raw json.RawMessage) { o.raw = raw }
+func (o *ResponseCommon) GetRaw() json.RawMessage    { return o.raw }
+
+type Response interface {
+	setRaw(json.RawMessage)
+	GetRaw() json.RawMessage
+}
+
+// Client represents a minimal client to the OBS websocket server.
 type Client struct {
 	// The time we're willing to wait to receive a response from the server.
 	ResponseTimeout time.Duration
 
-	IncomingEvents    chan interface{}
+	// This client sends raw opcodes it got from the server to this channel.
+	Opcodes chan opcodes.Opcode
+
+	// Once the top-level has parsed the raw opcode, it sends the response
+	// to this channel.
 	IncomingResponses chan *opcodes.RequestResponse
-	Opcodes           chan opcodes.Opcode
-	Log               Logger
+
+	// Ya like logs?
+	Log Logger
+
+	Disconnected chan bool
+
+	mutex sync.Mutex
 }
 
 // SendRequest abstracts the logic every subclient uses to send a request and
 // receive the corresponding response.
 //
-// To get the response for a sent request, we can just read the next response
-// from our channel. This works fine in a single-threaded context, and the
-// message IDs of both the sent request and response should match. In
-// a concurrent context, this isn't necessarily true, but since
-// gorilla/websocket doesn't handle concurrency (it'll panic; see
-// https://github.com/gorilla/websocket/issues/119), who cares?
+// To get the response for a sent request, we simply read the next response
+// off our incoming responses channel. This works fine in a single-threaded
+// context, and the message IDs of both the sent request and response should
+// match.
 //
-// Technically a request ID and response ID mismatch could happen if the server
-// processes requests in a different order it received them (e.g. we should 1,
-// then 2; but it processes 2, and then 1), then yeah... there'll be an error.
-// We could add a mutex wrapping sending our request and reading from the
-// channel, but I personally haven't experienced this yet, so
+// A request ID and response ID mismatch could happen if the server processes
+// requests in a different order it received them (e.g. we should 1, then 2; but
+// it processes 2, and then 1). In this case there'll be an error, so note the
+// mutex lock and deferred unlock to prevent this from happening.
 //
 // It should be noted multiple connections to the server are totally fine.
 // Phrased differently, mesasge IDs are unique per client. Moreover, events will
 // be broadcast to every client.
-func (c *Client) SendRequest(requestBody Params, responseBody interface{}) error {
+func (c *Client) SendRequest(requestBody Params, responseBody Response) error {
 	uid, err := uuid.NewV4()
 	if err != nil {
 		return err
@@ -54,18 +72,29 @@ func (c *Client) SendRequest(requestBody Params, responseBody interface{}) error
 	name := requestBody.GetRequestName()
 	id := uid.String()
 
-	c.Log.Printf("[INFO] Sending %s Request with ID %s", name, id)
+	c.Log.Printf("[TRACE] Sending %s Request with ID %s", name, id)
 
-	c.Opcodes <- &opcodes.Request{
-		Type: name,
-		ID:   id,
-		Data: requestBody,
+	c.mutex.Lock()
+	defer c.mutex.Unlock()
+
+	select {
+	case <-c.Disconnected:
+		return fmt.Errorf("request %s: client already disconnected", name)
+	default:
+		c.Opcodes <- &opcodes.Request{
+			Type: name,
+			ID:   id,
+			Data: requestBody,
+		}
 	}
 
 	var response *opcodes.RequestResponse
+
+	timer := time.NewTimer(c.ResponseTimeout * time.Millisecond)
+	defer timer.Stop()
 	select {
 	case response = <-c.IncomingResponses:
-	case <-time.After(c.ResponseTimeout * time.Millisecond):
+	case <-timer.C:
 		return fmt.Errorf("request %s: timeout waiting for response from server", name)
 	}
 
@@ -105,6 +134,8 @@ func (c *Client) SendRequest(requestBody Params, responseBody interface{}) error
 	if data == nil {
 		data = []byte("{}")
 	}
+
+	responseBody.setRaw(data)
 
 	if err := json.Unmarshal(data, responseBody); err != nil {
 		return fmt.Errorf(

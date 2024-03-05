@@ -11,7 +11,9 @@ func (o *ToggleRecordPauseParams) GetRequestName() string {
 }
 
 // Represents the response body for the ToggleRecordPause request.
-type ToggleRecordPauseResponse struct{}
+type ToggleRecordPauseResponse struct {
+	_response
+}
 
 // Toggles pause on the record output.
 func (c *Client) ToggleRecordPause(paramss ...*ToggleRecordPauseParams) (*ToggleRecordPauseResponse, error) {
@@ -20,5 +22,5 @@ func (c *Client) ToggleRecordPause(paramss ...*ToggleRecordPauseParams) (*Toggle
 	}
 	params := paramss[0]
 	data := &ToggleRecordPauseResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }

@@ -11,7 +11,9 @@ func (o *StopReplayBufferParams) GetRequestName() string {
 }
 
 // Represents the response body for the StopReplayBuffer request.
-type StopReplayBufferResponse struct{}
+type StopReplayBufferResponse struct {
+	_response
+}
 
 // Stops the replay buffer output.
 func (c *Client) StopReplayBuffer(paramss ...*StopReplayBufferParams) (*StopReplayBufferResponse, error) {
@@ -20,5 +22,5 @@ func (c *Client) StopReplayBuffer(paramss ...*StopReplayBufferParams) (*StopRepl
 	}
 	params := paramss[0]
 	data := &StopReplayBufferResponse{}
-	return data, c.SendRequest(params, data)
+	return data, c.client.SendRequest(params, data)
 }
