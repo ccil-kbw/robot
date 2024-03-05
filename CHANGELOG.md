@@ -1,3 +1,15 @@
+# v1.0.10 (Tue Mar 05 2024)
+
+#### ⚠️ Pushed to `master`
+
+- fix: add retry logic and bump to go1.22 ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v1.0.9 (Thu Feb 22 2024)
 
 #### ⚠️ Pushed to `master`
