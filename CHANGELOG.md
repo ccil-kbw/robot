@@ -1,3 +1,15 @@
+# v1.0.13 (Sat Mar 09 2024)
+
+#### ⚠️ Pushed to `master`
+
+- feat: bump to 1.22.1 in pipelines ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v1.0.12 (Sat Mar 09 2024)
 
 #### ⚠️ Pushed to `master`
