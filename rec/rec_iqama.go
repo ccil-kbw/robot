@@ -69,7 +69,7 @@ func (rc *RecordConfigDataS) Refresh() {
 		},
 		{
 			Description:   "Isha Recording",
-			StartTime:     toTime(iqamaTimes.Isha.Iqama),
+			StartTime:     toTime(iqamaTimes.Isha.Iqama).Add(-30 * time.Minute),
 			Duration:      JumuaaRecordDuration,
 			RecordingDays: EveryDay,
 		},
@@ -123,14 +123,13 @@ func SupposedToBeRecording(data *RecordConfigDataS) bool {
 		// Set today's start time for this prayer time for Today
 		startTime := timeToday(conf.StartTime.Hour(), conf.StartTime.Minute())
 
-		fmt.Printf("%s %v %v ", conf.Description, conf.StartTime.Format("15:04:05"), conf.StartTime.Add(conf.Duration).Format("15:04:05"))
+		fmt.Printf("%s %v %v \n", conf.Description, conf.StartTime.Format("15:04:05"), conf.StartTime.Add(conf.Duration).Format("15:04:05"))
 
 		// Check if we're in the time range (from conf.StartTime to conf.StartTime+Duration)
 		if now.After(startTime) && now.Before(startTime.Add(conf.Duration)) {
 			shouldRecord = true
+			break
 		}
-
-		fmt.Printf("--- in time range: %v\n", shouldRecord)
 
 	}
 
