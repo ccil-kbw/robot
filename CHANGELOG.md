@@ -1,3 +1,15 @@
+# v1.0.11 (Sat Mar 09 2024)
+
+#### ⚠️ Pushed to `master`
+
+- feat: add daily server refresh ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v1.0.10 (Tue Mar 05 2024)
 
 #### ⚠️ Pushed to `master`
