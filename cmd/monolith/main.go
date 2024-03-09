@@ -78,10 +78,12 @@ func main() {
 		password := os.Getenv("MDROID_OBS_WEBSOCKET_PASSWORD")
 		data := rec.NewRecordConfigDataS()
 
+		obsClient := startServerWithRetry(host, password, data)
+
 		// Calculate the duration until midnight
 		now := time.Now()
-		midnight := time.Date(now.Year(), now.Month(), now.Day()+1, 0, 0, 0, 0, now.Location())
-		duration := midnight.Sub(now)
+		night := time.Date(now.Year(), now.Month(), now.Day()+1, 2, 0, 0, 0, now.Location())
+		duration := night.Sub(now)
 
 		// Create a timer that waits until midnight
 		timer := time.NewTimer(duration)
@@ -93,7 +95,11 @@ func main() {
 		// Call rec.StartRecServer every time the ticker ticks
 		go func() {
 			for range ticker.C {
-				startServerWithRetry(host, password, data)
+				err := obsClient.Disconnect()
+				if err != nil {
+					return
+				}
+				obsClient = startServerWithRetry(host, password, data)
 			}
 		}()
 
@@ -184,14 +190,14 @@ func notifyPrayer(prayerName, prayerTime string, in time.Duration, notifyChan ch
 	notifyChan <- msg
 }
 
-func startServerWithRetry(host string, password string, data *rec.RecordConfigDataS) {
+func startServerWithRetry(host string, password string, data *rec.RecordConfigDataS) *rec.Recorder {
 	for {
-		err := rec.StartRecServer(host, password, data)
+		obs, err := rec.StartRecServer(host, password, data)
 		if err != nil {
-			fmt.Printf("could not reach or authenticate to OBS, retrying in 5 minutes...\n")
-			time.Sleep(5 * time.Minute)
+			fmt.Printf("could not reach or authenticate to OBS, retrying in 1 minutes...\n")
+			time.Sleep(1 * time.Minute)
 		} else {
-			break
+			return obs
 		}
 	}
 }

@@ -10,6 +10,10 @@ type Recorder struct {
 	client *goobs.Client
 }
 
+func (o *Recorder) GetClient() *goobs.Client {
+	return o.client
+}
+
 func New(host, password string) (*Recorder, error) {
 
 	if host == "" {

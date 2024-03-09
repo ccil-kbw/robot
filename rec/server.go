@@ -5,50 +5,48 @@ import (
 	"time"
 )
 
-func StartRecServer(host, password string, data *RecordConfigDataS) error {
+func StartRecServer(host, password string, data *RecordConfigDataS) (*Recorder, error) {
 	client, err := New(host, password)
 	if err != nil {
 		fmt.Println("could not initiate client")
-		return nil
+		return nil, nil
 	}
 
-	defer func(client *Recorder) {
-		err := client.Disconnect()
-		if err != nil {
-			fmt.Println("couldn't disconnect client")
-		}
-	}(client)
+	fmt.Println("Starting OBS recording control routine")
+	go func() {
+		for {
 
-	for {
-
-		isRecording, err := client.IsRecording()
-		if err != nil {
-			fmt.Println("couldn't check if OBS is recording")
-		}
-
-		shouldRecord := SupposedToBeRecording(data)
-
-		// Start recording if supposed to be recording but currently not recording
-		if shouldRecord && !isRecording {
-			err := client.StartRecording()
+			isRecording, err := client.IsRecording()
 			if err != nil {
-				fmt.Println("couldn't start recording")
+				fmt.Println("couldn't check if OBS is recording")
 			}
-		}
 
-		var recordTimeLimit float64
-		{
-			recordTimeLimit = 2 * 60 * 60 * 1000
-		}
+			shouldRecord := SupposedToBeRecording(data)
 
-		// Stop recording if not supposed to be recording but currently recording
-		if !shouldRecord && isRecording && (client.RecordTime() > recordTimeLimit) {
-			err := client.StopRecording()
-			if err != nil {
-				fmt.Println("couldn't stop recording")
+			// Start recording if supposed to be recording but currently not recording
+			if shouldRecord && !isRecording {
+				err := client.StartRecording()
+				if err != nil {
+					fmt.Println("couldn't start recording")
+				}
 			}
-		}
 
-		time.Sleep(1 * time.Minute)
-	}
+			var recordTimeLimit float64
+			{
+				recordTimeLimit = 2 * 60 * 60 * 1000
+			}
+
+			// Stop recording if not supposed to be recording but currently recording
+			if !shouldRecord && isRecording && (client.RecordTime() > recordTimeLimit) {
+				err := client.StopRecording()
+				if err != nil {
+					fmt.Println("couldn't stop recording")
+				}
+			}
+
+			time.Sleep(1 * time.Minute)
+		}
+	}()
+
+	return client, nil
 }
