@@ -1,0 +1,367 @@
+date,dateHijri,adhanFajr,iqamaFajr,shourouk,adhanDhuhr,iqamaDhuhr,adhanAsr,iqamaAsr,adhanMaghrib,iqamaMaghrib,adhanIsha,iqamaIsha,Jumua1,Jumua2
+01/01/2024,"AlArbia'a, 01 Muharram, 2024",6:05 am,6:20 am,7:34 am,11:58 am,1:30 pm,2:04 pm,2:09 pm,4:22 pm,4:25 pm,5:51 pm,7:00 pm,12:00 pm,1:00 pm
+01/02/2024,"AlKhamis, 02 Muharram, 2024",6:05 am,6:20 am,7:34 am,11:59 am,1:30 pm,2:05 pm,2:08 pm,4:23 pm,4:26 pm,5:52 pm,7:00 pm,12:00 pm,1:00 pm
+01/03/2024,"AlJumaa, 03 Muharram, 2024",6:05 am,6:20 am,7:34 am,11:59 am,1:30 pm,2:06 pm,2:09 pm,4:24 pm,4:27 pm,5:53 pm,7:00 pm,12:00 pm,1:00 pm
+01/04/2024,"AsSabt, 04 Muharram, 2024",6:05 am,6:20 am,7:34 am,12:00 pm,1:30 pm,2:07 pm,2:10 pm,4:25 pm,4:28 pm,5:54 pm,7:00 pm,12:00 pm,1:00 pm
+01/05/2024,"AlAhad, 05 Muharram, 2024",6:05 am,6:20 am,7:34 am,12:00 pm,1:30 pm,2:08 pm,2:11 pm,4:26 pm,4:29 pm,5:55 pm,7:00 pm,12:00 pm,1:00 pm
+01/06/2024,"AlEthnien, 06 Muharram, 2024",6:05 am,6:20 am,7:34 am,12:01 pm,1:30 pm,2:09 pm,2:12 pm,4:27 pm,4:30 pm,5:56 pm,7:00 pm,12:00 pm,1:00 pm
+01/07/2024,"AthThulatha, 07 Muharram, 2024",6:05 am,6:20 am,7:33 am,12:01 pm,1:30 pm,2:10 pm,2:13 pm,4:28 pm,4:31 pm,5:57 pm,7:00 pm,12:00 pm,1:00 pm
+01/08/2024,"AlArbia'a, 08 Muharram, 2024",6:05 am,6:20 am,7:33 am,12:01 pm,1:30 pm,2:11 pm,2:14 pm,4:29 pm,4:32 pm,5:58 pm,7:00 pm,12:00 pm,1:00 pm
+01/09/2024,"AlKhamis, 09 Muharram, 2024",6:05 am,6:20 am,7:33 am,12:02 pm,1:30 pm,2:12 pm,2:16 pm,4:30 pm,4:33 pm,5:59 pm,7:00 pm,12:00 pm,1:00 pm
+01/10/2024,"AlJumaa, 10 Muharram, 2024",6:05 am,6:20 am,7:33 am,12:02 pm,1:30 pm,2:13 pm,2:17 pm,4:31 pm,4:34 pm,6:00 pm,7:00 pm,12:00 pm,1:00 pm
+01/11/2024,"AsSabt, 11 Muharram, 2024",6:04 am,6:20 am,7:32 am,12:03 pm,1:30 pm,2:14 pm,2:17 pm,4:32 pm,4:35 pm,6:01 pm,7:00 pm,12:00 pm,1:00 pm
+01/12/2024,"AlAhad, 12 Muharram, 2024",6:04 am,6:20 am,7:32 am,12:03 pm,1:30 pm,2:15 pm,2:19 pm,4:34 pm,4:37 pm,6:02 pm,7:00 pm,12:00 pm,1:00 pm
+01/13/2024,"AlEthnien, 13 Muharram, 2024",6:04 am,6:20 am,7:31 am,12:03 pm,1:30 pm,2:16 pm,2:20 pm,4:35 pm,4:38 pm,6:03 pm,7:00 pm,12:00 pm,1:00 pm
+01/14/2024,"AthThulatha, 14 Muharram, 2024",6:03 am,6:15 am,7:31 am,12:04 pm,1:30 pm,2:17 pm,2:21 pm,4:36 pm,4:39 pm,6:04 pm,7:00 pm,12:00 pm,1:00 pm
+01/15/2024,"AlArbia'a, 15 Muharram, 2024",6:03 am,6:15 am,7:30 am,12:04 pm,1:30 pm,2:18 pm,2:22 pm,4:37 pm,4:40 pm,6:05 pm,7:00 pm,12:00 pm,1:00 pm
+01/16/2024,"AlKhamis, 16 Muharram, 2024",6:03 am,6:15 am,7:30 am,12:04 pm,1:30 pm,2:19 pm,2:23 pm,4:39 pm,4:42 pm,6:06 pm,7:00 pm,12:00 pm,1:00 pm
+01/17/2024,"AlJumaa, 17 Muharram, 2024",6:02 am,6:15 am,7:29 am,12:05 pm,1:30 pm,2:20 pm,2:24 pm,4:40 pm,4:43 pm,6:07 pm,7:00 pm,12:00 pm,1:00 pm
+01/18/2024,"AsSabt, 18 Muharram, 2024",6:02 am,6:15 am,7:28 am,12:05 pm,1:30 pm,2:21 pm,2:25 pm,4:41 pm,4:44 pm,6:09 pm,7:00 pm,12:00 pm,1:00 pm
+01/19/2024,"AlAhad, 19 Muharram, 2024",6:01 am,6:15 am,7:28 am,12:05 pm,1:30 pm,2:23 pm,2:26 pm,4:43 pm,4:46 pm,6:10 pm,7:00 pm,12:00 pm,1:00 pm
+01/20/2024,"AlEthnien, 20 Muharram, 2024",6:01 am,6:15 am,7:27 am,12:06 pm,1:30 pm,2:24 pm,2:28 pm,4:44 pm,4:47 pm,6:11 pm,7:00 pm,12:00 pm,1:00 pm
+01/21/2024,"AthThulatha, 21 Muharram, 2024",6:00 am,6:15 am,7:26 am,12:06 pm,1:30 pm,2:25 pm,2:29 pm,4:45 pm,4:48 pm,6:12 pm,7:00 pm,12:00 pm,1:00 pm
+01/22/2024,"AlArbia'a, 22 Muharram, 2024",5:59 am,6:15 am,7:25 am,12:06 pm,1:30 pm,2:26 pm,2:30 pm,4:47 pm,4:50 pm,6:13 pm,7:00 pm,12:00 pm,1:00 pm
+01/23/2024,"AlKhamis, 23 Muharram, 2024",5:59 am,6:15 am,7:25 am,12:07 pm,1:30 pm,2:27 pm,2:31 pm,4:48 pm,4:51 pm,6:14 pm,7:00 pm,12:00 pm,1:00 pm
+01/24/2024,"AlJumaa, 24 Muharram, 2024",5:58 am,6:15 am,7:24 am,12:07 pm,1:30 pm,2:29 pm,2:32 pm,4:49 pm,4:52 pm,6:16 pm,7:00 pm,12:00 pm,1:00 pm
+01/25/2024,"AsSabt, 25 Muharram, 2024",5:57 am,6:15 am,7:23 am,12:07 pm,1:30 pm,2:30 pm,2:34 pm,4:51 pm,4:54 pm,6:17 pm,7:00 pm,12:00 pm,1:00 pm
+01/26/2024,"AlAhad, 26 Muharram, 2024",5:56 am,6:15 am,7:22 am,12:07 pm,1:30 pm,2:31 pm,2:35 pm,4:52 pm,4:55 pm,6:18 pm,7:00 pm,12:00 pm,1:00 pm
+01/27/2024,"AlEthnien, 27 Muharram, 2024",5:56 am,6:15 am,7:21 am,12:07 pm,1:30 pm,2:32 pm,2:36 pm,4:54 pm,4:57 pm,6:19 pm,7:00 pm,12:00 pm,1:00 pm
+01/28/2024,"AthThulatha, 28 Muharram, 2024",5:55 am,6:15 am,7:20 am,12:08 pm,1:15 pm,2:33 pm,3:30 pm,4:55 pm,4:58 pm,6:21 pm,7:00 pm,12:00 pm,1:00 pm
+01/29/2024,"AlArbia'a, 29 Muharram, 2024",5:54 am,6:15 am,7:19 am,12:08 pm,1:15 pm,2:35 pm,3:30 pm,4:57 pm,5:00 pm,6:22 pm,7:00 pm,12:00 pm,1:00 pm
+01/30/2024,"AlKhamis, 30 Muharram, 2024",5:53 am,6:15 am,7:18 am,12:08 pm,1:15 pm,2:36 pm,3:30 pm,4:58 pm,5:01 pm,6:23 pm,7:00 pm,12:00 pm,1:00 pm
+01/31/2024,"AlJumaa, 31 Muharram, 2024",5:52 am,6:15 am,7:16 am,12:08 pm,1:15 pm,2:37 pm,3:30 pm,4:59 pm,5:02 pm,6:24 pm,7:00 pm,12:00 pm,1:00 pm
+02/01/2024,"AsSabt, 01 Safar, 2024",5:51 am,6:15 am,7:15 am,12:08 pm,1:15 pm,2:38 pm,3:30 pm,5:01 pm,5:04 pm,6:26 pm,7:00 pm,12:00 pm,1:00 pm
+02/02/2024,"AlAhad, 02 Safar, 2024",5:50 am,6:15 am,7:14 am,12:08 pm,1:15 pm,2:39 pm,3:30 pm,5:02 pm,5:05 pm,6:27 pm,7:00 pm,12:00 pm,1:00 pm
+02/03/2024,"AlEthnien, 03 Safar, 2024",5:49 am,6:15 am,7:13 am,12:09 pm,1:15 pm,2:41 pm,3:30 pm,5:04 pm,5:07 pm,6:28 pm,7:00 pm,12:00 pm,1:00 pm
+02/04/2024,"AthThulatha, 04 Safar, 2024",5:48 am,6:00 am,7:12 am,12:09 pm,1:15 pm,2:42 pm,3:45 pm,5:05 pm,5:08 pm,6:30 pm,7:00 pm,12:00 pm,1:00 pm
+02/05/2024,"AlArbia'a, 05 Safar, 2024",5:47 am,6:00 am,7:10 am,12:09 pm,1:15 pm,2:43 pm,4:00 pm,5:07 pm,5:10 pm,6:31 pm,7:00 pm,12:00 pm,1:00 pm
+02/06/2024,"AlKhamis, 06 Safar, 2024",5:45 am,6:00 am,7:09 am,12:09 pm,1:15 pm,2:44 pm,4:00 pm,5:08 pm,5:11 pm,6:32 pm,7:00 pm,12:00 pm,1:00 pm
+02/07/2024,"AlJumaa, 07 Safar, 2024",5:44 am,6:00 am,7:08 am,12:09 pm,1:15 pm,2:45 pm,4:00 pm,5:10 pm,5:13 pm,6:33 pm,7:00 pm,12:00 pm,1:00 pm
+02/08/2024,"AsSabt, 08 Safar, 2024",5:43 am,6:00 am,7:06 am,12:09 pm,1:15 pm,2:46 pm,4:00 pm,5:11 pm,5:14 pm,6:35 pm,7:00 pm,12:00 pm,1:00 pm
+02/09/2024,"AlAhad, 09 Safar, 2024",5:42 am,6:00 am,7:05 am,12:09 pm,1:15 pm,2:48 pm,4:00 pm,5:13 pm,5:16 pm,6:36 pm,7:00 pm,12:00 pm,1:00 pm
+02/10/2024,"AlEthnien, 10 Safar, 2024",5:41 am,6:00 am,7:04 am,12:09 pm,1:15 pm,2:49 pm,4:00 pm,5:14 pm,5:17 pm,6:37 pm,7:00 pm,12:00 pm,1:00 pm
+02/11/2024,"AthThulatha, 11 Safar, 2024",5:39 am,6:00 am,7:02 am,12:09 pm,1:15 pm,2:50 pm,4:00 pm,5:16 pm,5:18 pm,6:39 pm,7:00 pm,12:00 pm,1:00 pm
+02/12/2024,"AlArbia'a, 12 Safar, 2024",5:38 am,6:00 am,7:01 am,12:09 pm,1:15 pm,2:51 pm,4:00 pm,5:17 pm,5:20 pm,6:40 pm,7:00 pm,12:00 pm,1:00 pm
+02/13/2024,"AlKhamis, 13 Safar, 2024",5:37 am,6:00 am,6:59 am,12:09 pm,1:15 pm,2:52 pm,4:00 pm,5:18 pm,5:21 pm,6:41 pm,7:00 pm,12:00 pm,1:00 pm
+02/14/2024,"AlJumaa, 14 Safar, 2024",5:35 am,6:00 am,6:58 am,12:09 pm,1:15 pm,2:53 pm,4:00 pm,5:20 pm,5:23 pm,6:43 pm,7:00 pm,12:00 pm,1:00 pm
+02/15/2024,"AsSabt, 15 Safar, 2024",5:34 am,6:00 am,6:56 am,12:09 pm,1:15 pm,2:55 pm,4:00 pm,5:21 pm,5:24 pm,6:44 pm,7:00 pm,12:00 pm,1:00 pm
+02/16/2024,"AlAhad, 16 Safar, 2024",5:32 am,6:00 am,6:55 am,12:09 pm,1:15 pm,2:56 pm,4:00 pm,5:23 pm,5:26 pm,6:45 pm,7:00 pm,12:00 pm,1:00 pm
+02/17/2024,"AlEthnien, 17 Safar, 2024",5:31 am,6:00 am,6:53 am,12:09 pm,1:15 pm,2:57 pm,4:00 pm,5:24 pm,5:27 pm,6:47 pm,7:00 pm,12:00 pm,1:00 pm
+02/18/2024,"AthThulatha, 18 Safar, 2024",5:29 am,5:45 am,6:51 am,12:09 pm,1:15 pm,2:58 pm,4:00 pm,5:26 pm,5:29 pm,6:48 pm,7:00 pm,12:00 pm,1:00 pm
+02/19/2024,"AlArbia'a, 19 Safar, 2024",5:28 am,5:45 am,6:50 am,12:09 pm,1:15 pm,2:59 pm,4:00 pm,5:27 pm,5:30 pm,6:49 pm,7:00 pm,12:00 pm,1:00 pm
+02/20/2024,"AlKhamis, 20 Safar, 2024",5:26 am,5:45 am,6:48 am,12:09 pm,1:15 pm,3:00 pm,4:00 pm,5:29 pm,5:31 pm,6:51 pm,7:00 pm,12:00 pm,1:00 pm
+02/21/2024,"AlJumaa, 21 Safar, 2024",5:25 am,5:45 am,6:47 am,12:08 pm,1:15 pm,3:01 pm,4:00 pm,5:30 pm,5:33 pm,6:52 pm,7:00 pm,12:00 pm,1:00 pm
+02/22/2024,"AsSabt, 22 Safar, 2024",5:23 am,5:45 am,6:45 am,12:08 pm,1:15 pm,3:02 pm,4:00 pm,5:31 pm,5:34 pm,6:53 pm,7:00 pm,12:00 pm,1:00 pm
+02/23/2024,"AlAhad, 23 Safar, 2024",5:22 am,5:45 am,6:43 am,12:08 pm,1:15 pm,3:03 pm,4:00 pm,5:33 pm,5:36 pm,6:55 pm,7:00 pm,12:00 pm,1:00 pm
+02/24/2024,"AlEthnien, 24 Safar, 2024",5:20 am,5:45 am,6:42 am,12:08 pm,1:15 pm,3:04 pm,4:00 pm,5:34 pm,5:37 pm,6:56 pm,7:00 pm,12:00 pm,1:00 pm
+02/25/2024,"AthThulatha, 25 Safar, 2024",5:18 am,5:45 am,6:40 am,12:08 pm,1:15 pm,3:05 pm,4:15 pm,5:36 pm,5:39 pm,6:57 pm,7:15 pm,12:00 pm,1:00 pm
+02/26/2024,"AlArbia'a, 26 Safar, 2024",5:17 am,5:45 am,6:38 am,12:08 pm,1:15 pm,3:06 pm,4:15 pm,5:37 pm,5:40 pm,6:59 pm,7:15 pm,12:00 pm,1:00 pm
+02/27/2024,"AlKhamis, 27 Safar, 2024",5:15 am,5:45 am,6:36 am,12:08 pm,1:15 pm,3:07 pm,4:15 pm,5:38 pm,5:41 pm,7:00 pm,7:15 pm,12:00 pm,1:00 pm
+02/28/2024,"AlJumaa, 28 Safar, 2024",5:13 am,5:45 am,6:35 am,12:07 pm,1:15 pm,3:08 pm,4:15 pm,5:40 pm,5:43 pm,7:01 pm,7:15 pm,12:00 pm,1:00 pm
+02/29/2024,"AsSabt, 29 Safar, 2024",5:12 am,5:45 am,6:33 am,12:07 pm,1:15 pm,3:09 pm,4:15 pm,5:41 pm,5:44 pm,7:03 pm,7:15 pm,12:00 pm,1:00 pm
+03/01/2024,"AlAhad, 01 Rabi' Awwal, 2024",5:10 am,5:45 am,6:31 am,12:07 pm,1:15 pm,3:10 pm,4:15 pm,5:43 pm,5:46 pm,7:04 pm,7:15 pm,12:00 pm,1:00 pm
+03/02/2024,"AlEthnien, 02 Rabi' Awwal, 2024",5:08 am,5:45 am,6:29 am,12:07 pm,1:15 pm,3:11 pm,4:15 pm,5:44 pm,5:47 pm,7:05 pm,7:15 pm,12:00 pm,1:00 pm
+03/03/2024,"AthThulatha, 03 Rabi' Awwal, 2024",5:06 am,5:30 am,6:28 am,12:07 pm,1:15 pm,3:12 pm,4:30 pm,5:45 pm,5:48 pm,7:07 pm,7:15 pm,12:00 pm,1:00 pm
+03/04/2024,"AlArbia'a, 04 Rabi' Awwal, 2024",5:04 am,5:30 am,6:26 am,12:06 pm,1:15 pm,3:13 pm,4:30 pm,5:47 pm,5:50 pm,7:08 pm,7:15 pm,12:00 pm,1:00 pm
+03/05/2024,"AlKhamis, 05 Rabi' Awwal, 2024",5:03 am,5:30 am,6:24 am,12:06 pm,1:15 pm,3:14 pm,4:30 pm,5:48 pm,5:51 pm,7:10 pm,7:15 pm,12:00 pm,1:00 pm
+03/06/2024,"AlJumaa, 06 Rabi' Awwal, 2024",5:01 am,5:30 am,6:22 am,12:06 pm,1:15 pm,3:15 pm,4:30 pm,5:49 pm,5:52 pm,7:11 pm,7:15 pm,12:00 pm,1:00 pm
+03/07/2024,"AsSabt, 07 Rabi' Awwal, 2024",4:59 am,5:30 am,6:20 am,12:06 pm,1:15 pm,3:16 pm,4:30 pm,5:51 pm,5:54 pm,7:12 pm,7:15 pm,12:00 pm,1:00 pm
+03/08/2024,"AlAhad, 08 Rabi' Awwal, 2024",4:57 am,5:30 am,6:18 am,12:05 pm,1:15 pm,3:16 pm,4:30 pm,5:52 pm,6:54 pm,7:14 pm,7:15 pm,12:00 pm,1:00 pm
+03/09/2024,"AlEthnien, 09 Rabi' Awwal, 2024",4:55 am,5:30 am,6:17 am,12:05 pm,1:15 pm,3:17 pm,4:30 pm,5:53 pm,6:55 pm,7:15 pm,7:15 pm,12:00 pm,1:00 pm
+03/10/2024,"AthThulatha, 10 Rabi' Awwal, 2024",5:55 am,6:30 am,7:17 am,1:05 pm,1:15 pm,4:17 pm,5:30 pm,6:53 pm,6:56 pm,8:15 pm,8:16 pm,12:00 pm,1:00 pm
+03/11/2024,"AlArbia'a, 11 Rabi' Awwal, 2024",5:53 am,6:30 am,7:15 am,1:05 pm,1:15 pm,4:18 pm,5:30 pm,6:55 pm,6:58 pm,8:16 pm,8:17 pm,12:00 pm,1:00 pm
+03/12/2024,"AlKhamis, 12 Rabi' Awwal, 2024",5:51 am,6:01 am,7:13 am,1:05 pm,1:15 pm,4:19 pm,5:45 pm,6:56 pm,6:59 pm,8:18 pm,8:17 pm,12:00 pm,1:00 pm
+03/13/2024,"AlJumaa, 13 Rabi' Awwal, 2024",5:49 am,5:59 am,7:11 am,1:04 pm,1:15 pm,4:20 pm,5:45 pm,6:58 pm,7:01 pm,8:19 pm,8:19 pm,12:00 pm,1:00 pm
+03/14/2024,"AsSabt, 14 Rabi' Awwal, 2024",5:48 am,5:58 am,7:09 am,1:04 pm,1:15 pm,4:21 pm,5:45 pm,6:59 pm,7:02 pm,8:21 pm,8:20 pm,12:00 pm,1:00 pm
+03/15/2024,"AlAhad, 15 Rabi' Awwal, 2024",5:46 am,5:56 am,7:07 am,1:04 pm,1:15 pm,4:21 pm,5:45 pm,7:00 pm,7:03 pm,8:22 pm,8:22 pm,12:00 pm,1:00 pm
+03/16/2024,"AlEthnien, 16 Rabi' Awwal, 2024",5:44 am,5:54 am,7:05 am,1:04 pm,1:15 pm,4:22 pm,5:45 pm,7:01 pm,7:05 pm,8:23 pm,8:23 pm,12:00 pm,1:00 pm
+03/17/2024,"AthThulatha, 17 Rabi' Awwal, 2024",5:42 am,5:52 am,7:03 am,1:03 pm,1:15 pm,4:23 pm,6:00 pm,7:03 pm,7:06 pm,8:25 pm,8:24 pm,12:00 pm,1:00 pm
+03/18/2024,"AlArbia'a, 18 Rabi' Awwal, 2024",5:40 am,5:50 am,7:02 am,1:03 pm,1:15 pm,4:24 pm,6:00 pm,7:04 pm,7:07 pm,8:26 pm,8:26 pm,12:00 pm,1:00 pm
+03/19/2024,"AlKhamis, 19 Rabi' Awwal, 2024",5:38 am,5:48 am,7:00 am,1:03 pm,1:15 pm,4:24 pm,6:00 pm,7:05 pm,7:08 pm,8:28 pm,8:27 pm,12:00 pm,1:00 pm
+03/20/2024,"AlJumaa, 20 Rabi' Awwal, 2024",5:36 am,5:46 am,6:58 am,1:02 pm,1:15 pm,4:25 pm,6:00 pm,7:07 pm,7:10 pm,8:29 pm,8:29 pm,12:00 pm,1:00 pm
+03/21/2024,"AsSabt, 21 Rabi' Awwal, 2024",5:34 am,5:44 am,6:56 am,1:02 pm,1:15 pm,4:26 pm,6:00 pm,7:08 pm,7:11 pm,8:31 pm,8:30 pm,12:00 pm,1:00 pm
+03/22/2024,"AlAhad, 22 Rabi' Awwal, 2024",5:32 am,5:42 am,6:54 am,1:02 pm,1:15 pm,4:27 pm,6:00 pm,7:09 pm,7:12 pm,8:32 pm,8:32 pm,12:00 pm,1:00 pm
+03/23/2024,"AlEthnien, 23 Rabi' Awwal, 2024",5:29 am,5:39 am,6:52 am,1:01 pm,1:15 pm,4:27 pm,6:00 pm,7:11 pm,7:14 pm,8:33 pm,8:33 pm,12:00 pm,1:00 pm
+03/24/2024,"AthThulatha, 24 Rabi' Awwal, 2024",5:27 am,5:37 am,6:50 am,1:01 pm,1:15 pm,4:28 pm,6:00 pm,7:12 pm,7:15 pm,8:35 pm,8:34 pm,12:00 pm,1:00 pm
+03/25/2024,"AlArbia'a, 25 Rabi' Awwal, 2024",5:25 am,5:35 am,6:48 am,1:01 pm,1:15 pm,4:29 pm,6:00 pm,7:13 pm,7:16 pm,8:36 pm,8:36 pm,12:00 pm,1:00 pm
+03/26/2024,"AlKhamis, 26 Rabi' Awwal, 2024",5:23 am,5:33 am,6:46 am,1:01 pm,1:15 pm,4:29 pm,6:00 pm,7:15 pm,7:18 pm,8:38 pm,8:37 pm,12:00 pm,1:00 pm
+03/27/2024,"AlJumaa, 27 Rabi' Awwal, 2024",5:21 am,5:31 am,6:44 am,1:00 pm,1:15 pm,4:30 pm,6:00 pm,7:16 pm,7:19 pm,8:39 pm,8:39 pm,12:00 pm,1:00 pm
+03/28/2024,"AsSabt, 28 Rabi' Awwal, 2024",5:19 am,5:29 am,6:43 am,1:00 pm,1:15 pm,4:31 pm,6:00 pm,7:17 pm,7:20 pm,8:41 pm,8:40 pm,12:00 pm,1:00 pm
+03/29/2024,"AlAhad, 29 Rabi' Awwal, 2024",5:17 am,5:27 am,6:41 am,1:00 pm,1:15 pm,4:31 pm,6:00 pm,7:19 pm,7:22 pm,8:42 pm,8:42 pm,12:00 pm,1:00 pm
+03/30/2024,"AlEthnien, 30 Rabi' Awwal, 2024",5:15 am,5:25 am,6:39 am,12:59 pm,1:15 pm,4:32 pm,6:00 pm,7:20 pm,7:23 pm,8:44 pm,8:43 pm,12:00 pm,1:00 pm
+03/31/2024,"AthThulatha, 31 Rabi' Awwal, 2024",5:13 am,5:23 am,6:37 am,12:59 pm,1:15 pm,4:33 pm,6:15 pm,7:21 pm,7:24 pm,8:45 pm,8:45 pm,12:00 pm,1:00 pm
+04/01/2024,"AlArbia'a, 01 Rabi' Thani, 2024",5:11 am,5:21 am,6:35 am,12:59 pm,1:15 pm,4:33 pm,6:15 pm,7:22 pm,7:25 pm,8:47 pm,8:46 pm,12:00 pm,1:00 pm
+04/02/2024,"AlKhamis, 02 Rabi' Thani, 2024",5:09 am,5:19 am,6:33 am,12:58 pm,1:15 pm,4:34 pm,6:15 pm,7:24 pm,7:27 pm,8:48 pm,8:48 pm,12:00 pm,1:00 pm
+04/03/2024,"AlJumaa, 03 Rabi' Thani, 2024",5:06 am,5:16 am,6:31 am,12:58 pm,1:15 pm,4:34 pm,6:15 pm,7:25 pm,7:28 pm,8:50 pm,8:49 pm,12:00 pm,1:00 pm
+04/04/2024,"AsSabt, 04 Rabi' Thani, 2024",5:04 am,5:14 am,6:29 am,12:58 pm,1:15 pm,4:35 pm,6:15 pm,7:26 pm,7:29 pm,8:51 pm,8:51 pm,12:00 pm,1:00 pm
+04/05/2024,"AlAhad, 05 Rabi' Thani, 2024",5:02 am,5:12 am,6:27 am,12:58 pm,1:15 pm,4:36 pm,6:15 pm,7:28 pm,7:31 pm,8:53 pm,8:53 pm,12:00 pm,1:00 pm
+04/06/2024,"AlEthnien, 06 Rabi' Thani, 2024",5:00 am,5:10 am,6:26 am,12:57 pm,1:15 pm,4:36 pm,6:15 pm,7:29 pm,7:32 pm,8:55 pm,8:54 pm,12:00 pm,1:00 pm
+04/07/2024,"AthThulatha, 07 Rabi' Thani, 2024",4:58 am,5:08 am,6:24 am,12:57 pm,1:15 pm,4:37 pm,6:15 pm,7:30 pm,7:33 pm,8:56 pm,8:56 pm,12:00 pm,1:00 pm
+04/08/2024,"AlArbia'a, 08 Rabi' Thani, 2024",4:56 am,5:06 am,6:22 am,12:57 pm,1:15 pm,4:37 pm,6:15 pm,7:31 pm,7:34 pm,8:58 pm,8:57 pm,12:00 pm,1:00 pm
+04/09/2024,"AlKhamis, 09 Rabi' Thani, 2024",4:54 am,5:04 am,6:20 am,12:56 pm,1:15 pm,4:38 pm,6:15 pm,7:33 pm,7:36 pm,8:59 pm,8:59 pm,12:00 pm,1:00 pm
+04/10/2024,"AlJumaa, 10 Rabi' Thani, 2024",4:51 am,5:15 am,6:18 am,12:56 pm,1:15 pm,4:38 pm,6:15 pm,7:34 pm,7:37 pm,9:01 pm,9:01 pm,12:00 pm,1:00 pm
+04/11/2024,"AsSabt, 11 Rabi' Thani, 2024",4:49 am,5:15 am,6:16 am,12:56 pm,1:15 pm,4:39 pm,6:15 pm,7:35 pm,7:38 pm,9:03 pm,9:02 pm,12:00 pm,1:00 pm
+04/12/2024,"AlAhad, 12 Rabi' Thani, 2024",4:47 am,5:15 am,6:15 am,12:56 pm,1:15 pm,4:39 pm,6:15 pm,7:37 pm,7:40 pm,9:04 pm,9:04 pm,12:00 pm,1:00 pm
+04/13/2024,"AlEthnien, 13 Rabi' Thani, 2024",4:45 am,5:15 am,6:13 am,12:55 pm,1:15 pm,4:40 pm,6:15 pm,7:38 pm,7:41 pm,9:06 pm,9:05 pm,12:00 pm,1:00 pm
+04/14/2024,"AthThulatha, 14 Rabi' Thani, 2024",4:43 am,5:15 am,6:11 am,12:55 pm,1:15 pm,4:41 pm,6:15 pm,7:39 pm,7:42 pm,9:07 pm,9:07 pm,12:00 pm,1:00 pm
+04/15/2024,"AlArbia'a, 15 Rabi' Thani, 2024",4:41 am,5:15 am,6:09 am,12:55 pm,1:15 pm,4:41 pm,6:15 pm,7:41 pm,7:44 pm,9:09 pm,9:09 pm,12:00 pm,1:00 pm
+04/16/2024,"AlKhamis, 16 Rabi' Thani, 2024",4:39 am,5:15 am,6:07 am,12:55 pm,1:15 pm,4:42 pm,6:15 pm,7:42 pm,7:45 pm,9:11 pm,9:10 pm,12:00 pm,1:00 pm
+04/17/2024,"AlJumaa, 17 Rabi' Thani, 2024",4:36 am,5:15 am,6:06 am,12:54 pm,1:15 pm,4:42 pm,6:15 pm,7:43 pm,7:46 pm,9:12 pm,9:12 pm,12:00 pm,1:00 pm
+04/18/2024,"AsSabt, 18 Rabi' Thani, 2024",4:34 am,5:15 am,6:04 am,12:54 pm,1:15 pm,4:43 pm,6:15 pm,7:44 pm,7:47 pm,9:14 pm,9:14 pm,12:00 pm,1:00 pm
+04/19/2024,"AlAhad, 19 Rabi' Thani, 2024",4:32 am,5:15 am,6:02 am,12:54 pm,1:15 pm,4:43 pm,6:15 pm,7:46 pm,7:49 pm,9:16 pm,9:15 pm,12:00 pm,1:00 pm
+04/20/2024,"AlEthnien, 20 Rabi' Thani, 2024",4:30 am,5:15 am,6:00 am,12:54 pm,1:15 pm,4:44 pm,6:15 pm,7:47 pm,7:50 pm,9:18 pm,9:17 pm,12:00 pm,1:00 pm
+04/21/2024,"AthThulatha, 21 Rabi' Thani, 2024",4:28 am,5:00 am,5:59 am,12:54 pm,1:15 pm,4:44 pm,6:15 pm,7:48 pm,7:51 pm,9:19 pm,9:19 pm,12:00 pm,1:00 pm
+04/22/2024,"AlArbia'a, 22 Rabi' Thani, 2024",4:26 am,5:00 am,5:57 am,12:53 pm,1:15 pm,4:44 pm,6:15 pm,7:50 pm,7:53 pm,9:21 pm,9:21 pm,12:00 pm,1:00 pm
+04/23/2024,"AlKhamis, 23 Rabi' Thani, 2024",4:24 am,5:00 am,5:55 am,12:53 pm,1:15 pm,4:45 pm,6:15 pm,7:51 pm,7:54 pm,9:23 pm,9:22 pm,12:00 pm,1:00 pm
+04/24/2024,"AlJumaa, 24 Rabi' Thani, 2024",4:21 am,5:00 am,5:54 am,12:53 pm,1:15 pm,4:45 pm,6:15 pm,7:52 pm,7:55 pm,9:24 pm,9:24 pm,12:00 pm,1:00 pm
+04/25/2024,"AsSabt, 25 Rabi' Thani, 2024",4:19 am,5:00 am,5:52 am,12:53 pm,1:15 pm,4:46 pm,6:15 pm,7:53 pm,7:56 pm,9:26 pm,9:26 pm,12:00 pm,1:00 pm
+04/26/2024,"AlAhad, 26 Rabi' Thani, 2024",4:17 am,5:00 am,5:50 am,12:53 pm,1:15 pm,4:46 pm,6:15 pm,7:55 pm,7:58 pm,9:28 pm,9:28 pm,12:00 pm,1:00 pm
+04/27/2024,"AlEthnien, 27 Rabi' Thani, 2024",4:15 am,5:00 am,5:49 am,12:52 pm,1:15 pm,4:47 pm,6:15 pm,7:56 pm,7:59 pm,9:30 pm,9:29 pm,12:00 pm,1:00 pm
+04/28/2024,"AthThulatha, 28 Rabi' Thani, 2024",4:13 am,4:45 am,5:47 am,12:52 pm,1:15 pm,4:47 pm,6:30 pm,7:57 pm,8:00 pm,9:32 pm,9:31 pm,12:00 pm,1:00 pm
+04/29/2024,"AlArbia'a, 29 Rabi' Thani, 2024",4:11 am,4:45 am,5:46 am,12:52 pm,1:15 pm,4:48 pm,6:30 pm,7:58 pm,8:02 pm,9:33 pm,9:33 pm,12:00 pm,1:00 pm
+04/30/2024,"AlKhamis, 30 Rabi' Thani, 2024",4:09 am,4:45 am,5:44 am,12:52 pm,1:15 pm,4:48 pm,6:30 pm,8:00 pm,8:03 pm,9:35 pm,9:35 pm,12:00 pm,1:00 pm
+05/01/2024,"AlJumaa, 01 Jamada El Oula, 2024",4:07 am,4:45 am,5:43 am,12:52 pm,1:15 pm,4:49 pm,6:30 pm,8:01 pm,8:04 pm,9:37 pm,9:36 pm,12:00 pm,1:00 pm
+05/02/2024,"AsSabt, 02 Jamada El Oula, 2024",4:05 am,4:45 am,5:41 am,12:52 pm,1:15 pm,4:49 pm,6:30 pm,8:02 pm,8:05 pm,9:39 pm,9:43 pm,12:00 pm,1:00 pm
+05/03/2024,"AlAhad, 03 Jamada El Oula, 2024",4:03 am,4:45 am,5:40 am,12:52 pm,1:15 pm,4:49 pm,6:30 pm,8:04 pm,8:07 pm,9:40 pm,9:45 pm,12:00 pm,1:00 pm
+05/04/2024,"AlEthnien, 04 Jamada El Oula, 2024",4:01 am,4:45 am,5:38 am,12:52 pm,1:15 pm,4:50 pm,6:30 pm,8:05 pm,8:08 pm,9:42 pm,9:47 pm,12:00 pm,1:00 pm
+05/05/2024,"AthThulatha, 05 Jamada El Oula, 2024",3:59 am,4:45 am,5:37 am,12:52 pm,1:15 pm,4:50 pm,6:45 pm,8:06 pm,8:09 pm,9:44 pm,9:49 pm,12:00 pm,1:00 pm
+05/06/2024,"AlArbia'a, 06 Jamada El Oula, 2024",3:57 am,4:45 am,5:35 am,12:51 pm,1:15 pm,4:51 pm,6:45 pm,8:07 pm,8:10 pm,9:46 pm,9:50 pm,12:00 pm,1:00 pm
+05/07/2024,"AlKhamis, 07 Jamada El Oula, 2024",3:55 am,4:45 am,5:34 am,12:51 pm,1:15 pm,4:51 pm,6:45 pm,8:09 pm,8:12 pm,9:48 pm,9:52 pm,12:00 pm,1:00 pm
+05/08/2024,"AlJumaa, 08 Jamada El Oula, 2024",3:53 am,4:45 am,5:33 am,12:51 pm,1:15 pm,4:52 pm,6:45 pm,8:10 pm,8:13 pm,9:50 pm,9:54 pm,12:00 pm,1:00 pm
+05/09/2024,"AsSabt, 09 Jamada El Oula, 2024",3:51 am,4:45 am,5:31 am,12:51 pm,1:15 pm,4:52 pm,6:45 pm,8:11 pm,8:14 pm,9:51 pm,9:56 pm,12:00 pm,1:00 pm
+05/10/2024,"AlAhad, 10 Jamada El Oula, 2024",3:49 am,4:45 am,5:30 am,12:51 pm,1:15 pm,4:52 pm,6:45 pm,8:12 pm,8:15 pm,9:53 pm,9:58 pm,12:00 pm,1:00 pm
+05/11/2024,"AlEthnien, 11 Jamada El Oula, 2024",3:47 am,4:45 am,5:29 am,12:51 pm,1:15 pm,4:53 pm,6:45 pm,8:13 pm,8:17 pm,9:55 pm,9:59 pm,12:00 pm,1:00 pm
+05/12/2024,"AthThulatha, 12 Jamada El Oula, 2024",3:46 am,4:30 am,5:27 am,12:51 pm,1:15 pm,4:53 pm,6:45 pm,8:15 pm,8:18 pm,9:57 pm,10:01 pm,12:00 pm,1:00 pm
+05/13/2024,"AlArbia'a, 13 Jamada El Oula, 2024",3:44 am,4:30 am,5:26 am,12:51 pm,1:15 pm,4:54 pm,6:45 pm,8:16 pm,8:19 pm,9:59 pm,10:03 pm,12:00 pm,1:00 pm
+05/14/2024,"AlKhamis, 14 Jamada El Oula, 2024",3:42 am,4:30 am,5:25 am,12:51 pm,1:15 pm,4:54 pm,6:45 pm,8:17 pm,8:20 pm,10:00 pm,10:03 pm,12:00 pm,1:00 pm
+05/15/2024,"AlJumaa, 15 Jamada El Oula, 2024",3:40 am,4:30 am,5:24 am,12:51 pm,1:15 pm,4:54 pm,6:45 pm,8:18 pm,8:21 pm,10:02 pm,10:07 pm,12:00 pm,1:00 pm
+05/16/2024,"AsSabt, 16 Jamada El Oula, 2024",3:38 am,4:30 am,5:23 am,12:51 pm,1:15 pm,4:55 pm,6:45 pm,8:19 pm,8:22 pm,10:04 pm,10:08 pm,12:00 pm,1:00 pm
+05/17/2024,"AlAhad, 17 Jamada El Oula, 2024",3:37 am,4:30 am,5:22 am,12:51 pm,1:15 pm,4:55 pm,6:45 pm,8:21 pm,8:24 pm,10:06 pm,10:10 pm,12:00 pm,1:00 pm
+05/18/2024,"AlEthnien, 18 Jamada El Oula, 2024",3:35 am,4:30 am,5:20 am,12:51 pm,1:15 pm,4:56 pm,6:45 pm,8:22 pm,8:25 pm,10:07 pm,10:12 pm,12:00 pm,1:00 pm
+05/19/2024,"AthThulatha, 19 Jamada El Oula, 2024",3:33 am,4:30 am,5:19 am,12:51 pm,1:15 pm,4:56 pm,7:00 pm,8:23 pm,8:26 pm,10:09 pm,10:14 pm,12:00 pm,1:00 pm
+05/20/2024,"AlArbia'a, 20 Jamada El Oula, 2024",3:32 am,4:30 am,5:18 am,12:51 pm,1:15 pm,4:56 pm,7:00 pm,8:24 pm,8:27 pm,10:11 pm,10:15 pm,12:00 pm,1:00 pm
+05/21/2024,"AlKhamis, 21 Jamada El Oula, 2024",3:30 am,4:30 am,5:17 am,12:51 pm,1:15 pm,4:57 pm,7:00 pm,8:25 pm,8:28 pm,10:13 pm,10:17 pm,12:00 pm,1:00 pm
+05/22/2024,"AlJumaa, 22 Jamada El Oula, 2024",3:29 am,4:30 am,5:16 am,12:51 pm,1:15 pm,4:57 pm,7:00 pm,8:26 pm,8:29 pm,10:14 pm,10:19 pm,12:00 pm,1:00 pm
+05/23/2024,"AsSabt, 23 Jamada El Oula, 2024",3:27 am,4:30 am,5:16 am,12:52 pm,1:15 pm,4:58 pm,7:00 pm,8:27 pm,8:30 pm,10:16 pm,10:20 pm,12:00 pm,1:00 pm
+05/24/2024,"AlAhad, 24 Jamada El Oula, 2024",3:26 am,4:30 am,5:15 am,12:52 pm,1:15 pm,4:58 pm,7:00 pm,8:28 pm,8:31 pm,10:18 pm,10:22 pm,12:00 pm,1:00 pm
+05/25/2024,"AlEthnien, 25 Jamada El Oula, 2024",3:24 am,4:30 am,5:14 am,12:52 pm,1:15 pm,4:58 pm,7:00 pm,8:29 pm,8:32 pm,10:19 pm,10:24 pm,12:00 pm,1:00 pm
+05/26/2024,"AthThulatha, 26 Jamada El Oula, 2024",3:23 am,4:15 am,5:13 am,12:52 pm,1:15 pm,4:59 pm,7:00 pm,8:30 pm,8:33 pm,10:21 pm,10:25 pm,12:00 pm,1:00 pm
+05/27/2024,"AlArbia'a, 27 Jamada El Oula, 2024",3:22 am,4:15 am,5:12 am,12:52 pm,1:15 pm,4:59 pm,7:00 pm,8:31 pm,8:34 pm,10:22 pm,10:27 pm,12:00 pm,1:00 pm
+05/28/2024,"AlKhamis, 28 Jamada El Oula, 2024",3:20 am,4:15 am,5:11 am,12:52 pm,1:15 pm,5:00 pm,7:00 pm,8:32 pm,8:35 pm,10:24 pm,10:29 pm,12:00 pm,1:00 pm
+05/29/2024,"AlJumaa, 29 Jamada El Oula, 2024",3:19 am,4:15 am,5:11 am,12:52 pm,1:15 pm,5:00 pm,7:00 pm,8:33 pm,8:36 pm,10:25 pm,10:30 pm,12:00 pm,1:00 pm
+05/30/2024,"AsSabt, 30 Jamada El Oula, 2024",3:18 am,4:15 am,5:10 am,12:52 pm,1:15 pm,5:00 pm,7:00 pm,8:34 pm,8:37 pm,10:27 pm,10:32 pm,12:00 pm,1:00 pm
+05/31/2024,"AlAhad, 31 Jamada El Oula, 2024",3:17 am,4:15 am,5:09 am,12:52 pm,1:15 pm,5:01 pm,7:00 pm,8:35 pm,8:38 pm,10:28 pm,10:33 pm,12:00 pm,1:00 pm
+06/01/2024,"AlEthnien, 01 Jamada El Thaniah, 2024",3:16 am,4:15 am,5:09 am,12:53 pm,1:15 pm,5:01 pm,7:00 pm,8:36 pm,8:39 pm,10:30 pm,10:34 pm,12:00 pm,1:00 pm
+06/02/2024,"AthThulatha, 02 Jamada El Thaniah, 2024",3:14 am,4:15 am,5:08 am,12:53 pm,1:15 pm,5:01 pm,7:00 pm,8:37 pm,8:40 pm,10:31 pm,10:36 pm,12:00 pm,1:00 pm
+06/03/2024,"AlArbia'a, 03 Jamada El Thaniah, 2024",3:13 am,4:15 am,5:08 am,12:53 pm,1:15 pm,5:02 pm,7:00 pm,8:38 pm,8:41 pm,10:32 pm,10:37 pm,12:00 pm,1:00 pm
+06/04/2024,"AlKhamis, 04 Jamada El Thaniah, 2024",3:13 am,4:15 am,5:07 am,12:53 pm,1:15 pm,5:02 pm,7:00 pm,8:38 pm,8:41 pm,10:34 pm,10:38 pm,12:00 pm,1:00 pm
+06/05/2024,"AlJumaa, 05 Jamada El Thaniah, 2024",3:12 am,4:15 am,5:07 am,12:53 pm,1:15 pm,5:02 pm,7:00 pm,8:39 pm,8:42 pm,10:35 pm,10:40 pm,12:00 pm,1:00 pm
+06/06/2024,"AsSabt, 06 Jamada El Thaniah, 2024",3:11 am,4:15 am,5:06 am,12:53 pm,1:15 pm,5:03 pm,7:00 pm,8:40 pm,8:43 pm,10:36 pm,10:41 pm,12:00 pm,1:00 pm
+06/07/2024,"AlAhad, 07 Jamada El Thaniah, 2024",3:10 am,4:15 am,5:06 am,12:54 pm,1:15 pm,5:03 pm,7:00 pm,8:41 pm,8:44 pm,10:37 pm,10:43 pm,12:00 pm,1:00 pm
+06/08/2024,"AlEthnien, 08 Jamada El Thaniah, 2024",3:09 am,4:15 am,5:06 am,12:54 pm,1:15 pm,5:03 pm,7:00 pm,8:41 pm,8:44 pm,10:38 pm,10:44 pm,12:00 pm,1:00 pm
+06/09/2024,"AthThulatha, 09 Jamada El Thaniah, 2024",3:09 am,4:15 am,5:05 am,12:54 pm,1:15 pm,5:04 pm,7:00 pm,8:42 pm,8:45 pm,10:39 pm,10:45 pm,12:00 pm,1:00 pm
+06/10/2024,"AlArbia'a, 10 Jamada El Thaniah, 2024",3:08 am,4:15 am,5:05 am,12:54 pm,1:15 pm,5:04 pm,7:00 pm,8:43 pm,8:46 pm,10:40 pm,10:46 pm,12:00 pm,1:00 pm
+06/11/2024,"AlKhamis, 11 Jamada El Thaniah, 2024",3:08 am,4:15 am,5:05 am,12:54 pm,1:15 pm,5:04 pm,7:00 pm,8:43 pm,8:46 pm,10:41 pm,10:47 pm,12:00 pm,1:00 pm
+06/12/2024,"AlJumaa, 12 Jamada El Thaniah, 2024",3:07 am,4:15 am,5:05 am,12:55 pm,1:15 pm,5:05 pm,7:00 pm,8:44 pm,8:47 pm,10:42 pm,10:48 pm,12:00 pm,1:00 pm
+06/13/2024,"AsSabt, 13 Jamada El Thaniah, 2024",3:07 am,4:15 am,5:05 am,12:55 pm,1:15 pm,5:05 pm,7:00 pm,8:44 pm,8:47 pm,10:43 pm,10:48 pm,12:00 pm,1:00 pm
+06/14/2024,"AlAhad, 14 Jamada El Thaniah, 2024",3:07 am,4:15 am,5:05 am,12:55 pm,1:15 pm,5:05 pm,7:00 pm,8:45 pm,8:48 pm,10:43 pm,10:49 pm,12:00 pm,1:00 pm
+06/15/2024,"AlEthnien, 15 Jamada El Thaniah, 2024",3:06 am,4:15 am,5:05 am,12:55 pm,1:15 pm,5:05 pm,7:00 pm,8:45 pm,8:48 pm,10:44 pm,10:50 pm,12:00 pm,1:00 pm
+06/16/2024,"AthThulatha, 16 Jamada El Thaniah, 2024",3:06 am,4:15 am,5:05 am,12:55 pm,1:15 pm,5:06 pm,7:00 pm,8:46 pm,8:49 pm,10:45 pm,10:50 pm,12:00 pm,1:00 pm
+06/17/2024,"AlArbia'a, 17 Jamada El Thaniah, 2024",3:06 am,4:15 am,5:05 am,12:56 pm,1:15 pm,5:06 pm,7:00 pm,8:46 pm,8:49 pm,10:45 pm,10:51 pm,12:00 pm,1:00 pm
+06/18/2024,"AlKhamis, 18 Jamada El Thaniah, 2024",3:06 am,4:15 am,5:05 am,12:56 pm,1:15 pm,5:06 pm,7:00 pm,8:46 pm,8:49 pm,10:46 pm,10:51 pm,12:00 pm,1:00 pm
+06/19/2024,"AlJumaa, 19 Jamada El Thaniah, 2024",3:06 am,4:15 am,5:05 am,12:56 pm,1:15 pm,5:06 pm,7:00 pm,8:47 pm,8:50 pm,10:46 pm,10:51 pm,12:00 pm,1:00 pm
+06/20/2024,"AsSabt, 20 Jamada El Thaniah, 2024",3:06 am,4:15 am,5:05 am,12:56 pm,1:15 pm,5:07 pm,7:00 pm,8:47 pm,8:50 pm,10:46 pm,10:52 pm,12:00 pm,1:00 pm
+06/21/2024,"AlAhad, 21 Jamada El Thaniah, 2024",3:07 am,4:15 am,5:05 am,12:57 pm,1:15 pm,5:07 pm,7:00 pm,8:47 pm,8:50 pm,10:47 pm,10:52 pm,12:00 pm,1:00 pm
+06/22/2024,"AlEthnien, 22 Jamada El Thaniah, 2024",3:07 am,4:15 am,5:05 am,12:57 pm,1:15 pm,5:07 pm,7:00 pm,8:47 pm,8:50 pm,10:47 pm,10:52 pm,12:00 pm,1:00 pm
+06/23/2024,"AthThulatha, 23 Jamada El Thaniah, 2024",3:07 am,4:15 am,5:06 am,12:57 pm,1:15 pm,5:07 pm,7:00 pm,8:47 pm,8:51 pm,10:47 pm,10:52 pm,12:00 pm,1:00 pm
+06/24/2024,"AlArbia'a, 24 Jamada El Thaniah, 2024",3:08 am,4:15 am,5:06 am,12:57 pm,1:15 pm,5:07 pm,7:00 pm,8:48 pm,8:51 pm,10:47 pm,10:52 pm,12:00 pm,1:00 pm
+06/25/2024,"AlKhamis, 25 Jamada El Thaniah, 2024",3:08 am,4:15 am,5:06 am,12:57 pm,1:15 pm,5:08 pm,7:00 pm,8:48 pm,8:51 pm,10:47 pm,10:52 pm,12:00 pm,1:00 pm
+06/26/2024,"AlJumaa, 26 Jamada El Thaniah, 2024",3:09 am,4:15 am,5:07 am,12:58 pm,1:15 pm,5:08 pm,7:00 pm,8:48 pm,8:51 pm,10:47 pm,10:52 pm,12:00 pm,1:00 pm
+06/27/2024,"AsSabt, 27 Jamada El Thaniah, 2024",3:09 am,4:15 am,5:07 am,12:58 pm,1:15 pm,5:08 pm,7:00 pm,8:48 pm,8:51 pm,10:46 pm,10:51 pm,12:00 pm,1:00 pm
+06/28/2024,"AlAhad, 28 Jamada El Thaniah, 2024",3:10 am,4:15 am,5:07 am,12:58 pm,1:15 pm,5:08 pm,7:00 pm,8:48 pm,8:51 pm,10:46 pm,10:51 pm,12:00 pm,1:00 pm
+06/29/2024,"AlEthnien, 29 Jamada El Thaniah, 2024",3:11 am,4:15 am,5:08 am,12:58 pm,1:15 pm,5:08 pm,7:00 pm,8:48 pm,8:51 pm,10:46 pm,10:51 pm,12:00 pm,1:00 pm
+06/30/2024,"AthThulatha, 30 Jamada El Thaniah, 2024",3:12 am,4:15 am,5:08 am,12:58 pm,1:15 pm,5:08 pm,7:00 pm,8:47 pm,8:50 pm,10:45 pm,10:51 pm,12:00 pm,1:00 pm
+07/01/2024,"AlArbia'a, 01 Rajab, 2024",3:12 am,4:15 am,5:09 am,12:59 pm,1:15 pm,5:08 pm,7:00 pm,8:47 pm,8:50 pm,10:45 pm,10:50 pm,12:00 pm,1:00 pm
+07/02/2024,"AlKhamis, 02 Rajab, 2024",3:13 am,4:15 am,5:09 am,12:59 pm,1:15 pm,5:09 pm,7:00 pm,8:47 pm,8:50 pm,10:44 pm,10:50 pm,12:00 pm,1:00 pm
+07/03/2024,"AlJumaa, 03 Rajab, 2024",3:14 am,4:15 am,5:10 am,12:59 pm,1:15 pm,5:09 pm,7:00 pm,8:47 pm,8:50 pm,10:44 pm,10:49 pm,12:00 pm,1:00 pm
+07/04/2024,"AsSabt, 04 Rajab, 2024",3:15 am,4:15 am,5:11 am,12:59 pm,1:15 pm,5:09 pm,7:00 pm,8:46 pm,8:50 pm,10:43 pm,10:48 pm,12:00 pm,1:00 pm
+07/05/2024,"AlAhad, 05 Rajab, 2024",3:16 am,4:15 am,5:11 am,12:59 pm,1:15 pm,5:09 pm,7:00 pm,8:46 pm,8:49 pm,10:42 pm,10:48 pm,12:00 pm,1:00 pm
+07/06/2024,"AlEthnien, 06 Rajab, 2024",3:18 am,4:15 am,5:12 am,1:00 pm,1:15 pm,5:09 pm,7:00 pm,8:46 pm,8:49 pm,10:42 pm,10:47 pm,12:00 pm,1:00 pm
+07/07/2024,"AthThulatha, 07 Rajab, 2024",3:19 am,4:30 am,5:13 am,1:00 pm,1:15 pm,5:09 pm,7:00 pm,8:45 pm,8:48 pm,10:41 pm,10:46 pm,12:00 pm,1:00 pm
+07/08/2024,"AlArbia'a, 08 Rajab, 2024",3:20 am,4:30 am,5:13 am,1:00 pm,1:15 pm,5:09 pm,7:00 pm,8:45 pm,8:48 pm,10:40 pm,10:45 pm,12:00 pm,1:00 pm
+07/09/2024,"AlKhamis, 09 Rajab, 2024",3:21 am,4:30 am,5:14 am,1:00 pm,1:15 pm,5:09 pm,7:00 pm,8:44 pm,8:48 pm,10:39 pm,10:44 pm,12:00 pm,1:00 pm
+07/10/2024,"AlJumaa, 10 Rajab, 2024",3:23 am,4:30 am,5:15 am,1:00 pm,1:15 pm,5:09 pm,7:00 pm,8:44 pm,8:47 pm,10:38 pm,10:43 pm,12:00 pm,1:00 pm
+07/11/2024,"AsSabt, 11 Rajab, 2024",3:24 am,4:30 am,5:16 am,1:00 pm,1:15 pm,5:09 pm,7:00 pm,8:43 pm,8:46 pm,10:37 pm,10:42 pm,12:00 pm,1:00 pm
+07/12/2024,"AlAhad, 12 Rajab, 2024",3:25 am,4:30 am,5:17 am,1:00 pm,1:15 pm,5:08 pm,7:00 pm,8:43 pm,8:46 pm,10:36 pm,10:41 pm,12:00 pm,1:00 pm
+07/13/2024,"AlEthnien, 13 Rajab, 2024",3:27 am,4:30 am,5:18 am,1:01 pm,1:15 pm,5:08 pm,7:00 pm,8:42 pm,8:45 pm,10:34 pm,10:40 pm,12:00 pm,1:00 pm
+07/14/2024,"AthThulatha, 14 Rajab, 2024",3:28 am,4:30 am,5:18 am,1:01 pm,1:15 pm,5:08 pm,7:00 pm,8:41 pm,8:45 pm,10:33 pm,10:39 pm,12:00 pm,1:00 pm
+07/15/2024,"AlArbia'a, 15 Rajab, 2024",3:30 am,4:30 am,5:19 am,1:01 pm,1:15 pm,5:08 pm,7:00 pm,8:41 pm,8:44 pm,10:32 pm,10:37 pm,12:00 pm,1:00 pm
+07/16/2024,"AlKhamis, 16 Rajab, 2024",3:31 am,4:30 am,5:20 am,1:01 pm,1:15 pm,5:08 pm,7:00 pm,8:40 pm,8:43 pm,10:31 pm,10:36 pm,12:00 pm,1:00 pm
+07/17/2024,"AlJumaa, 17 Rajab, 2024",3:33 am,4:30 am,5:21 am,1:01 pm,1:15 pm,5:08 pm,7:00 pm,8:39 pm,8:42 pm,10:29 pm,10:35 pm,12:00 pm,1:00 pm
+07/18/2024,"AsSabt, 18 Rajab, 2024",3:34 am,4:30 am,5:22 am,1:01 pm,1:15 pm,5:08 pm,7:00 pm,8:38 pm,8:41 pm,10:28 pm,10:33 pm,12:00 pm,1:00 pm
+07/19/2024,"AlAhad, 19 Rajab, 2024",3:36 am,4:30 am,5:23 am,1:01 pm,1:15 pm,5:07 pm,7:00 pm,8:38 pm,8:41 pm,10:26 pm,10:32 pm,12:00 pm,1:00 pm
+07/20/2024,"AlEthnien, 20 Rajab, 2024",3:38 am,4:30 am,5:24 am,1:01 pm,1:15 pm,5:07 pm,7:00 pm,8:37 pm,8:40 pm,10:25 pm,10:30 pm,12:00 pm,1:00 pm
+07/21/2024,"AthThulatha, 21 Rajab, 2024",3:39 am,4:45 am,5:25 am,1:01 pm,1:15 pm,5:07 pm,7:00 pm,8:36 pm,8:39 pm,10:23 pm,10:29 pm,12:00 pm,1:00 pm
+07/22/2024,"AlArbia'a, 22 Rajab, 2024",3:41 am,4:45 am,5:26 am,1:01 pm,1:15 pm,5:07 pm,7:00 pm,8:35 pm,8:38 pm,10:22 pm,10:27 pm,12:00 pm,1:00 pm
+07/23/2024,"AlKhamis, 23 Rajab, 2024",3:43 am,4:45 am,5:27 am,1:01 pm,1:15 pm,5:06 pm,7:00 pm,8:34 pm,8:37 pm,10:20 pm,10:26 pm,12:00 pm,1:00 pm
+07/24/2024,"AlJumaa, 24 Rajab, 2024",3:44 am,4:45 am,5:28 am,1:01 pm,1:15 pm,5:06 pm,7:00 pm,8:33 pm,8:36 pm,10:18 pm,10:24 pm,12:00 pm,1:00 pm
+07/25/2024,"AsSabt, 25 Rajab, 2024",3:46 am,4:45 am,5:29 am,1:01 pm,1:15 pm,5:06 pm,7:00 pm,8:32 pm,8:35 pm,10:17 pm,10:22 pm,12:00 pm,1:00 pm
+07/26/2024,"AlAhad, 26 Rajab, 2024",3:48 am,4:45 am,5:31 am,1:01 pm,1:15 pm,5:05 pm,7:00 pm,8:31 pm,8:34 pm,10:15 pm,10:21 pm,12:00 pm,1:00 pm
+07/27/2024,"AlEthnien, 27 Rajab, 2024",3:49 am,4:45 am,5:32 am,1:01 pm,1:15 pm,5:05 pm,7:00 pm,8:29 pm,8:33 pm,10:13 pm,10:19 pm,12:00 pm,1:00 pm
+07/28/2024,"AthThulatha, 28 Rajab, 2024",3:51 am,4:45 am,5:33 am,1:01 pm,1:15 pm,5:04 pm,6:45 pm,8:28 pm,8:31 pm,10:12 pm,10:17 pm,12:00 pm,1:00 pm
+07/29/2024,"AlArbia'a, 29 Rajab, 2024",3:53 am,4:45 am,5:34 am,1:01 pm,1:15 pm,5:04 pm,6:45 pm,8:27 pm,8:30 pm,10:10 pm,10:15 pm,12:00 pm,1:00 pm
+07/30/2024,"AlKhamis, 30 Rajab, 2024",3:55 am,4:45 am,5:35 am,1:01 pm,1:15 pm,5:04 pm,6:45 pm,8:26 pm,8:29 pm,10:08 pm,10:14 pm,12:00 pm,1:00 pm
+07/31/2024,"AlJumaa, 31 Rajab, 2024",3:56 am,4:45 am,5:36 am,1:01 pm,1:15 pm,5:03 pm,6:45 pm,8:25 pm,8:28 pm,10:06 pm,10:12 pm,12:00 pm,1:00 pm
+08/01/2024,"AsSabt, 01 Sha'ban, 2024",3:58 am,4:45 am,5:37 am,1:01 pm,1:15 pm,5:03 pm,6:45 pm,8:23 pm,8:26 pm,10:04 pm,10:10 pm,12:00 pm,1:00 pm
+08/02/2024,"AlAhad, 02 Sha'ban, 2024",4:00 am,4:45 am,5:38 am,1:01 pm,1:15 pm,5:02 pm,6:45 pm,8:22 pm,8:25 pm,10:02 pm,10:08 pm,12:00 pm,1:00 pm
+08/03/2024,"AlEthnien, 03 Sha'ban, 2024",4:02 am,4:45 am,5:40 am,1:01 pm,1:15 pm,5:02 pm,6:45 pm,8:21 pm,8:24 pm,10:00 pm,10:06 pm,12:00 pm,1:00 pm
+08/04/2024,"AthThulatha, 04 Sha'ban, 2024",4:03 am,5:00 am,5:41 am,1:01 pm,1:15 pm,5:01 pm,6:45 pm,8:19 pm,8:22 pm,9:58 pm,10:04 pm,12:00 pm,1:00 pm
+08/05/2024,"AlArbia'a, 05 Sha'ban, 2024",4:05 am,5:00 am,5:42 am,1:01 pm,1:15 pm,5:00 pm,6:45 pm,8:18 pm,8:21 pm,9:57 pm,10:02 pm,12:00 pm,1:00 pm
+08/06/2024,"AlKhamis, 06 Sha'ban, 2024",4:07 am,5:00 am,5:43 am,1:01 pm,1:15 pm,5:00 pm,6:45 pm,8:17 pm,8:20 pm,9:55 pm,10:00 pm,12:00 pm,1:00 pm
+08/07/2024,"AlJumaa, 07 Sha'ban, 2024",4:09 am,5:00 am,5:44 am,1:01 pm,1:15 pm,4:59 pm,6:45 pm,8:15 pm,8:18 pm,9:53 pm,9:58 pm,12:00 pm,1:00 pm
+08/08/2024,"AsSabt, 08 Sha'ban, 2024",4:10 am,5:00 am,5:46 am,1:01 pm,1:15 pm,4:59 pm,6:45 pm,8:14 pm,8:17 pm,9:51 pm,9:56 pm,12:00 pm,1:00 pm
+08/09/2024,"AlAhad, 09 Sha'ban, 2024",4:12 am,5:00 am,5:47 am,1:00 pm,1:15 pm,4:58 pm,6:45 pm,8:12 pm,8:15 pm,9:49 pm,9:54 pm,12:00 pm,1:00 pm
+08/10/2024,"AlEthnien, 10 Sha'ban, 2024",4:14 am,5:00 am,5:48 am,1:00 pm,1:15 pm,4:57 pm,6:45 pm,8:11 pm,8:14 pm,9:47 pm,9:52 pm,12:00 pm,1:00 pm
+08/11/2024,"AthThulatha, 11 Sha'ban, 2024",4:16 am,5:00 am,5:49 am,1:00 pm,1:15 pm,4:57 pm,6:45 pm,8:09 pm,8:12 pm,9:44 pm,9:50 pm,12:00 pm,1:00 pm
+08/12/2024,"AlArbia'a, 12 Sha'ban, 2024",4:17 am,5:00 am,5:50 am,1:00 pm,1:15 pm,4:56 pm,6:45 pm,8:08 pm,8:11 pm,9:42 pm,9:48 pm,12:00 pm,1:00 pm
+08/13/2024,"AlKhamis, 13 Sha'ban, 2024",4:19 am,5:00 am,5:52 am,1:00 pm,1:15 pm,4:55 pm,6:45 pm,8:06 pm,8:09 pm,9:40 pm,9:46 pm,12:00 pm,1:00 pm
+08/14/2024,"AlJumaa, 14 Sha'ban, 2024",4:21 am,5:00 am,5:53 am,1:00 pm,1:15 pm,4:54 pm,6:45 pm,8:05 pm,8:08 pm,9:38 pm,9:44 pm,12:00 pm,1:00 pm
+08/15/2024,"AsSabt, 15 Sha'ban, 2024",4:23 am,5:00 am,5:54 am,12:59 pm,1:15 pm,4:54 pm,6:45 pm,8:03 pm,8:06 pm,9:36 pm,9:42 pm,12:00 pm,1:00 pm
+08/16/2024,"AlAhad, 16 Sha'ban, 2024",4:24 am,5:00 am,5:55 am,12:59 pm,1:15 pm,4:53 pm,6:45 pm,8:01 pm,8:04 pm,9:34 pm,9:40 pm,12:00 pm,1:00 pm
+08/17/2024,"AlEthnien, 17 Sha'ban, 2024",4:26 am,5:00 am,5:56 am,12:59 pm,1:15 pm,4:52 pm,6:45 pm,8:00 pm,8:03 pm,9:32 pm,9:38 pm,12:00 pm,1:00 pm
+08/18/2024,"AthThulatha, 18 Sha'ban, 2024",4:28 am,5:15 am,5:58 am,12:59 pm,1:15 pm,4:51 pm,6:30 pm,7:58 pm,8:01 pm,9:30 pm,9:36 pm,12:00 pm,1:00 pm
+08/19/2024,"AlArbia'a, 19 Sha'ban, 2024",4:29 am,5:15 am,5:59 am,12:59 pm,1:15 pm,4:50 pm,6:30 pm,7:56 pm,7:59 pm,9:28 pm,9:33 pm,12:00 pm,1:00 pm
+08/20/2024,"AlKhamis, 20 Sha'ban, 2024",4:31 am,5:15 am,6:00 am,12:58 pm,1:15 pm,4:49 pm,6:30 pm,7:55 pm,7:58 pm,9:26 pm,9:31 pm,12:00 pm,1:00 pm
+08/21/2024,"AlJumaa, 21 Sha'ban, 2024",4:33 am,5:15 am,6:01 am,12:58 pm,1:15 pm,4:48 pm,6:30 pm,7:53 pm,7:56 pm,9:23 pm,9:29 pm,12:00 pm,1:00 pm
+08/22/2024,"AsSabt, 22 Sha'ban, 2024",4:34 am,5:15 am,6:02 am,12:58 pm,1:15 pm,4:47 pm,6:30 pm,7:51 pm,7:54 pm,9:21 pm,9:27 pm,12:00 pm,1:00 pm
+08/23/2024,"AlAhad, 23 Sha'ban, 2024",4:36 am,5:15 am,6:04 am,12:58 pm,1:15 pm,4:46 pm,6:30 pm,7:49 pm,7:53 pm,9:19 pm,9:25 pm,12:00 pm,1:00 pm
+08/24/2024,"AlEthnien, 24 Sha'ban, 2024",4:38 am,5:15 am,6:05 am,12:57 pm,1:15 pm,4:46 pm,6:30 pm,7:48 pm,7:51 pm,9:17 pm,9:23 pm,12:00 pm,1:00 pm
+08/25/2024,"AthThulatha, 25 Sha'ban, 2024",4:39 am,5:15 am,6:06 am,12:57 pm,1:15 pm,4:45 pm,6:15 pm,7:46 pm,7:49 pm,9:15 pm,9:21 pm,12:00 pm,1:00 pm
+08/26/2024,"AlArbia'a, 26 Sha'ban, 2024",4:41 am,5:15 am,6:07 am,12:57 pm,1:15 pm,4:44 pm,6:15 pm,7:44 pm,7:47 pm,9:13 pm,9:18 pm,12:00 pm,1:00 pm
+08/27/2024,"AlKhamis, 27 Sha'ban, 2024",4:42 am,5:15 am,6:09 am,12:56 pm,1:15 pm,4:42 pm,6:15 pm,7:42 pm,7:46 pm,9:10 pm,9:16 pm,12:00 pm,1:00 pm
+08/28/2024,"AlJumaa, 28 Sha'ban, 2024",4:44 am,5:15 am,6:10 am,12:56 pm,1:15 pm,4:41 pm,6:15 pm,7:41 pm,7:44 pm,9:08 pm,9:14 pm,12:00 pm,1:00 pm
+08/29/2024,"AsSabt, 29 Sha'ban, 2024",4:45 am,5:15 am,6:11 am,12:56 pm,1:15 pm,4:40 pm,6:15 pm,7:39 pm,7:42 pm,9:06 pm,9:12 pm,12:00 pm,1:00 pm
+08/30/2024,"AlAhad, 30 Sha'ban, 2024",4:47 am,5:15 am,6:12 am,12:56 pm,1:15 pm,4:39 pm,6:15 pm,7:37 pm,7:40 pm,9:04 pm,9:10 pm,12:00 pm,1:00 pm
+08/31/2024,"AlEthnien, 31 Sha'ban, 2024",4:49 am,5:15 am,6:13 am,12:55 pm,1:15 pm,4:38 pm,6:15 pm,7:35 pm,7:38 pm,9:02 pm,9:08 pm,12:00 pm,1:00 pm
+09/01/2024,"AthThulatha, 01 Ramadan, 2024",4:50 am,5:30 am,6:15 am,12:55 pm,1:15 pm,4:37 pm,6:00 pm,7:33 pm,7:36 pm,9:00 pm,9:05 pm,12:00 pm,1:00 pm
+09/02/2024,"AlArbia'a, 02 Ramadan, 2024",4:52 am,5:30 am,6:16 am,12:55 pm,1:15 pm,4:36 pm,6:00 pm,7:31 pm,7:35 pm,8:57 pm,9:03 pm,12:00 pm,1:00 pm
+09/03/2024,"AlKhamis, 03 Ramadan, 2024",4:53 am,5:30 am,6:17 am,12:54 pm,1:15 pm,4:35 pm,6:00 pm,7:30 pm,7:33 pm,8:55 pm,9:01 pm,12:00 pm,1:00 pm
+09/04/2024,"AlJumaa, 04 Ramadan, 2024",4:55 am,5:30 am,6:18 am,12:54 pm,1:15 pm,4:34 pm,6:00 pm,7:28 pm,7:31 pm,8:53 pm,8:59 pm,12:00 pm,1:00 pm
+09/05/2024,"AsSabt, 05 Ramadan, 2024",4:56 am,5:30 am,6:20 am,12:54 pm,1:15 pm,4:33 pm,6:00 pm,7:26 pm,7:29 pm,8:51 pm,8:57 pm,12:00 pm,1:00 pm
+09/06/2024,"AlAhad, 06 Ramadan, 2024",4:58 am,5:30 am,6:21 am,12:53 pm,1:15 pm,4:31 pm,6:00 pm,7:24 pm,7:27 pm,8:49 pm,8:55 pm,12:00 pm,1:00 pm
+09/07/2024,"AlEthnien, 07 Ramadan, 2024",4:59 am,5:30 am,6:22 am,12:53 pm,1:15 pm,4:30 pm,6:00 pm,7:22 pm,7:25 pm,8:47 pm,8:52 pm,12:00 pm,1:00 pm
+09/08/2024,"AthThulatha, 08 Ramadan, 2024",5:01 am,5:45 am,6:23 am,12:53 pm,1:15 pm,4:29 pm,6:00 pm,7:20 pm,7:23 pm,8:44 pm,8:45 pm,12:00 pm,1:00 pm
+09/09/2024,"AlArbia'a, 09 Ramadan, 2024",5:02 am,5:45 am,6:24 am,12:52 pm,1:15 pm,4:28 pm,6:00 pm,7:18 pm,7:21 pm,8:42 pm,8:45 pm,12:00 pm,1:00 pm
+09/10/2024,"AlKhamis, 10 Ramadan, 2024",5:04 am,5:45 am,6:26 am,12:52 pm,1:15 pm,4:26 pm,6:00 pm,7:16 pm,7:19 pm,8:40 pm,8:45 pm,12:00 pm,1:00 pm
+09/11/2024,"AlJumaa, 11 Ramadan, 2024",5:05 am,5:45 am,6:27 am,12:52 pm,1:15 pm,4:25 pm,6:00 pm,7:14 pm,7:18 pm,8:38 pm,8:45 pm,12:00 pm,1:00 pm
+09/12/2024,"AsSabt, 12 Ramadan, 2024",5:06 am,5:45 am,6:28 am,12:51 pm,1:15 pm,4:24 pm,6:00 pm,7:12 pm,7:16 pm,8:36 pm,8:45 pm,12:00 pm,1:00 pm
+09/13/2024,"AlAhad, 13 Ramadan, 2024",5:08 am,5:45 am,6:29 am,12:51 pm,1:15 pm,4:23 pm,6:00 pm,7:11 pm,7:14 pm,8:34 pm,8:45 pm,12:00 pm,1:00 pm
+09/14/2024,"AlEthnien, 14 Ramadan, 2024",5:09 am,5:45 am,6:30 am,12:50 pm,1:15 pm,4:21 pm,6:00 pm,7:09 pm,7:12 pm,8:32 pm,8:45 pm,12:00 pm,1:00 pm
+09/15/2024,"AthThulatha, 15 Ramadan, 2024",5:11 am,5:45 am,6:32 am,12:50 pm,1:15 pm,4:20 pm,5:45 pm,7:07 pm,7:10 pm,8:30 pm,8:30 pm,12:00 pm,1:00 pm
+09/16/2024,"AlArbia'a, 16 Ramadan, 2024",5:12 am,5:45 am,6:33 am,12:50 pm,1:15 pm,4:19 pm,5:45 pm,7:05 pm,7:08 pm,8:27 pm,8:30 pm,12:00 pm,1:00 pm
+09/17/2024,"AlKhamis, 17 Ramadan, 2024",5:14 am,5:45 am,6:34 am,12:49 pm,1:15 pm,4:17 pm,5:45 pm,7:03 pm,7:06 pm,8:25 pm,8:30 pm,12:00 pm,1:00 pm
+09/18/2024,"AlJumaa, 18 Ramadan, 2024",5:15 am,5:45 am,6:35 am,12:49 pm,1:15 pm,4:16 pm,5:45 pm,7:01 pm,7:04 pm,8:23 pm,8:30 pm,12:00 pm,1:00 pm
+09/19/2024,"AsSabt, 19 Ramadan, 2024",5:16 am,5:45 am,6:37 am,12:49 pm,1:15 pm,4:15 pm,5:45 pm,6:59 pm,7:02 pm,8:21 pm,8:30 pm,12:00 pm,1:00 pm
+09/20/2024,"AlAhad, 20 Ramadan, 2024",5:18 am,5:45 am,6:38 am,12:48 pm,1:15 pm,4:13 pm,5:45 pm,6:57 pm,7:00 pm,8:19 pm,8:30 pm,12:00 pm,1:00 pm
+09/21/2024,"AlEthnien, 21 Ramadan, 2024",5:19 am,5:45 am,6:39 am,12:48 pm,1:15 pm,4:12 pm,5:45 pm,6:55 pm,6:58 pm,8:17 pm,8:30 pm,12:00 pm,1:00 pm
+09/22/2024,"AthThulatha, 22 Ramadan, 2024",5:20 am,6:00 am,6:40 am,12:48 pm,1:15 pm,4:11 pm,5:30 pm,6:53 pm,6:56 pm,8:15 pm,8:30 pm,12:00 pm,1:00 pm
+09/23/2024,"AlArbia'a, 23 Ramadan, 2024",5:22 am,6:00 am,6:41 am,12:47 pm,1:15 pm,4:09 pm,5:30 pm,6:51 pm,6:54 pm,8:13 pm,8:30 pm,12:00 pm,1:00 pm
+09/24/2024,"AlKhamis, 24 Ramadan, 2024",5:23 am,6:00 am,6:43 am,12:47 pm,1:15 pm,4:08 pm,5:30 pm,6:49 pm,6:52 pm,8:11 pm,8:30 pm,12:00 pm,1:00 pm
+09/25/2024,"AlJumaa, 25 Ramadan, 2024",5:24 am,6:00 am,6:44 am,12:47 pm,1:15 pm,4:07 pm,5:30 pm,6:47 pm,6:50 pm,8:09 pm,8:30 pm,12:00 pm,1:00 pm
+09/26/2024,"AsSabt, 26 Ramadan, 2024",5:26 am,6:00 am,6:45 am,12:46 pm,1:15 pm,4:05 pm,5:30 pm,6:45 pm,6:49 pm,8:07 pm,8:30 pm,12:00 pm,1:00 pm
+09/27/2024,"AlAhad, 27 Ramadan, 2024",5:27 am,6:00 am,6:46 am,12:46 pm,1:15 pm,4:04 pm,5:30 pm,6:44 pm,6:47 pm,8:05 pm,8:30 pm,12:00 pm,1:00 pm
+09/28/2024,"AlEthnien, 28 Ramadan, 2024",5:28 am,6:00 am,6:48 am,12:46 pm,1:15 pm,4:02 pm,5:30 pm,6:42 pm,6:45 pm,8:03 pm,8:30 pm,12:00 pm,1:00 pm
+09/29/2024,"AthThulatha, 29 Ramadan, 2024",5:30 am,6:00 am,6:49 am,12:45 pm,1:15 pm,4:01 pm,4:45 pm,6:40 pm,6:43 pm,8:01 pm,8:15 pm,12:00 pm,1:00 pm
+09/30/2024,"AlArbia'a, 30 Ramadan, 2024",5:31 am,6:00 am,6:50 am,12:45 pm,1:15 pm,4:00 pm,4:45 pm,6:38 pm,6:41 pm,7:59 pm,8:15 pm,12:00 pm,1:00 pm
+10/01/2024,"AlKhamis, 01 Shawwal, 2024",5:32 am,6:00 am,6:51 am,12:45 pm,1:15 pm,3:58 pm,4:45 pm,6:36 pm,6:39 pm,7:57 pm,8:15 pm,12:00 pm,1:00 pm
+10/02/2024,"AlJumaa, 02 Shawwal, 2024",5:34 am,6:00 am,6:53 am,12:44 pm,1:15 pm,3:57 pm,4:45 pm,6:34 pm,6:37 pm,7:55 pm,8:15 pm,12:00 pm,1:00 pm
+10/03/2024,"AsSabt, 03 Shawwal, 2024",5:35 am,6:00 am,6:54 am,12:44 pm,1:15 pm,3:55 pm,4:45 pm,6:32 pm,6:35 pm,7:53 pm,8:15 pm,12:00 pm,1:00 pm
+10/04/2024,"AlAhad, 04 Shawwal, 2024",5:36 am,6:00 am,6:55 am,12:44 pm,1:15 pm,3:54 pm,4:45 pm,6:30 pm,6:33 pm,7:51 pm,8:15 pm,12:00 pm,1:00 pm
+10/05/2024,"AlEthnien, 05 Shawwal, 2024",5:37 am,6:00 am,6:57 am,12:43 pm,1:15 pm,3:53 pm,4:45 pm,6:28 pm,6:31 pm,7:49 pm,8:15 pm,12:00 pm,1:00 pm
+10/06/2024,"AthThulatha, 06 Shawwal, 2024",5:39 am,6:00 am,6:58 am,12:43 pm,1:15 pm,3:51 pm,4:45 pm,6:26 pm,6:30 pm,7:47 pm,8:15 pm,12:00 pm,1:00 pm
+10/07/2024,"AlArbia'a, 07 Shawwal, 2024",5:40 am,6:15 am,6:59 am,12:43 pm,1:15 pm,3:50 pm,4:45 pm,6:25 pm,6:28 pm,7:45 pm,8:00 pm,12:00 pm,1:00 pm
+10/08/2024,"AlKhamis, 08 Shawwal, 2024",5:41 am,6:15 am,7:00 am,12:42 pm,1:15 pm,3:48 pm,4:45 pm,6:23 pm,6:26 pm,7:44 pm,8:00 pm,12:00 pm,1:00 pm
+10/09/2024,"AlJumaa, 09 Shawwal, 2024",5:43 am,6:15 am,7:02 am,12:42 pm,1:15 pm,3:47 pm,4:45 pm,6:21 pm,6:24 pm,7:42 pm,8:00 pm,12:00 pm,1:00 pm
+10/10/2024,"AsSabt, 10 Shawwal, 2024",5:44 am,6:15 am,7:03 am,12:42 pm,1:15 pm,3:46 pm,4:45 pm,6:19 pm,6:22 pm,7:40 pm,8:00 pm,12:00 pm,1:00 pm
+10/11/2024,"AlAhad, 11 Shawwal, 2024",5:45 am,6:15 am,7:04 am,12:42 pm,1:15 pm,3:44 pm,4:45 pm,6:17 pm,6:20 pm,7:38 pm,8:00 pm,12:00 pm,1:00 pm
+10/12/2024,"AlEthnien, 12 Shawwal, 2024",5:46 am,6:15 am,7:06 am,12:41 pm,1:15 pm,3:43 pm,4:45 pm,6:15 pm,6:19 pm,7:36 pm,8:00 pm,12:00 pm,1:00 pm
+10/13/2024,"AthThulatha, 13 Shawwal, 2024",5:48 am,6:15 am,7:07 am,12:41 pm,1:15 pm,3:41 pm,4:45 pm,6:14 pm,6:17 pm,7:35 pm,7:45 pm,12:00 pm,1:00 pm
+10/14/2024,"AlArbia'a, 14 Shawwal, 2024",5:49 am,6:15 am,7:08 am,12:41 pm,1:15 pm,3:40 pm,4:45 pm,6:12 pm,6:15 pm,7:33 pm,7:45 pm,12:00 pm,1:00 pm
+10/15/2024,"AlKhamis, 15 Shawwal, 2024",5:50 am,6:15 am,7:10 am,12:41 pm,1:15 pm,3:39 pm,4:45 pm,6:10 pm,6:13 pm,7:31 pm,7:45 pm,12:00 pm,1:00 pm
+10/16/2024,"AlJumaa, 16 Shawwal, 2024",5:51 am,6:15 am,7:11 am,12:40 pm,1:15 pm,3:37 pm,4:45 pm,6:08 pm,6:11 pm,7:29 pm,7:45 pm,12:00 pm,1:00 pm
+10/17/2024,"AsSabt, 17 Shawwal, 2024",5:53 am,6:15 am,7:12 am,12:40 pm,1:15 pm,3:36 pm,4:45 pm,6:07 pm,6:10 pm,7:28 pm,7:45 pm,12:00 pm,1:00 pm
+10/18/2024,"AlAhad, 18 Shawwal, 2024",5:54 am,6:15 am,7:13 am,12:40 pm,1:15 pm,3:35 pm,4:45 pm,6:05 pm,6:08 pm,7:26 pm,7:45 pm,12:00 pm,1:00 pm
+10/19/2024,"AlEthnien, 19 Shawwal, 2024",5:55 am,6:15 am,7:15 am,12:40 pm,1:15 pm,3:33 pm,4:45 pm,6:03 pm,6:06 pm,7:24 pm,7:45 pm,12:00 pm,1:00 pm
+10/20/2024,"AthThulatha, 20 Shawwal, 2024",5:57 am,6:15 am,7:16 am,12:40 pm,1:15 pm,3:32 pm,4:45 pm,6:01 pm,6:05 pm,7:23 pm,7:30 pm,12:00 pm,1:00 pm
+10/21/2024,"AlArbia'a, 21 Shawwal, 2024",5:58 am,6:15 am,7:18 am,12:39 pm,1:15 pm,3:31 pm,4:45 pm,6:00 pm,6:03 pm,7:21 pm,7:30 pm,12:00 pm,1:00 pm
+10/22/2024,"AlKhamis, 22 Shawwal, 2024",5:59 am,6:15 am,7:19 am,12:39 pm,1:15 pm,3:29 pm,4:45 pm,5:58 pm,6:01 pm,7:20 pm,7:30 pm,12:00 pm,1:00 pm
+10/23/2024,"AlJumaa, 23 Shawwal, 2024",6:00 am,6:15 am,7:20 am,12:39 pm,1:15 pm,3:28 pm,4:45 pm,5:56 pm,6:00 pm,7:18 pm,7:30 pm,12:00 pm,1:00 pm
+10/24/2024,"AsSabt, 24 Shawwal, 2024",6:02 am,6:15 am,7:22 am,12:39 pm,1:15 pm,3:27 pm,4:45 pm,5:55 pm,5:58 pm,7:17 pm,7:30 pm,12:00 pm,1:00 pm
+10/25/2024,"AlAhad, 25 Shawwal, 2024",6:03 am,6:15 am,7:23 am,12:39 pm,1:15 pm,3:25 pm,4:45 pm,5:53 pm,5:56 pm,7:15 pm,7:30 pm,12:00 pm,1:00 pm
+10/26/2024,"AlEthnien, 26 Shawwal, 2024",6:04 am,6:15 am,7:24 am,12:39 pm,1:15 pm,3:24 pm,4:45 pm,5:52 pm,5:55 pm,7:14 pm,7:30 pm,12:00 pm,1:00 pm
+10/27/2024,"AthThulatha, 27 Shawwal, 2024",6:05 am,6:20 am,7:26 am,12:39 pm,1:15 pm,3:23 pm,4:45 pm,5:50 pm,5:53 pm,7:12 pm,7:15 pm,12:00 pm,1:00 pm
+10/28/2024,"AlArbia'a, 28 Shawwal, 2024",6:07 am,6:20 am,7:27 am,12:39 pm,1:15 pm,3:22 pm,4:45 pm,5:48 pm,5:52 pm,7:11 pm,7:15 pm,12:00 pm,1:00 pm
+10/29/2024,"AlKhamis, 29 Shawwal, 2024",6:08 am,6:20 am,7:28 am,12:39 pm,1:15 pm,3:20 pm,4:45 pm,5:47 pm,5:50 pm,7:09 pm,7:15 pm,12:00 pm,1:00 pm
+10/30/2024,"AlJumaa, 30 Shawwal, 2024",6:09 am,6:20 am,7:30 am,12:38 pm,1:15 pm,3:19 pm,4:45 pm,5:45 pm,5:49 pm,7:08 pm,7:15 pm,12:00 pm,1:00 pm
+10/31/2024,"AsSabt, 31 Shawwal, 2024",6:10 am,6:20 am,7:31 am,12:38 pm,1:15 pm,3:18 pm,4:45 pm,5:44 pm,5:47 pm,7:07 pm,7:15 pm,12:00 pm,1:00 pm
+11/01/2024,"AlAhad, 01 Thoul Ki'dah, 2024",6:11 am,6:20 am,7:33 am,12:38 pm,1:15 pm,3:17 pm,4:45 pm,5:43 pm,4:44 pm,7:05 pm,7:15 pm,12:00 pm,1:00 pm
+11/02/2024,"AlEthnien, 02 Thoul Ki'dah, 2024",6:13 am,6:20 am,7:34 am,12:38 pm,1:15 pm,3:16 pm,4:45 pm,5:41 pm,4:43 pm,7:04 pm,7:15 pm,12:00 pm,1:00 pm
+11/03/2024,"AthThulatha, 03 Thoul Ki'dah, 2024",5:15 am,5:45 am,6:37 am,11:38 am,1:30 pm,2:13 pm,2:13 pm,4:38 pm,4:41 pm,6:01 pm,7:00 pm,12:00 pm,1:00 pm
+11/04/2024,"AlArbia'a, 04 Thoul Ki'dah, 2024",5:16 am,5:45 am,6:38 am,11:38 am,1:30 pm,2:12 pm,2:12 pm,4:37 pm,4:40 pm,6:00 pm,7:00 pm,12:00 pm,1:00 pm
+11/05/2024,"AlKhamis, 05 Thoul Ki'dah, 2024",5:18 am,5:45 am,6:40 am,11:38 am,1:30 pm,2:11 pm,2:11 pm,4:36 pm,4:39 pm,5:59 pm,7:00 pm,12:00 pm,1:00 pm
+11/06/2024,"AlJumaa, 06 Thoul Ki'dah, 2024",5:19 am,5:45 am,6:41 am,11:38 am,1:30 pm,2:10 pm,2:10 pm,4:34 pm,4:37 pm,5:58 pm,7:00 pm,12:00 pm,1:00 pm
+11/07/2024,"AsSabt, 07 Thoul Ki'dah, 2024",5:20 am,5:45 am,6:42 am,11:39 am,1:30 pm,2:09 pm,2:09 pm,4:33 pm,4:36 pm,5:57 pm,7:00 pm,12:00 pm,1:00 pm
+11/08/2024,"AlAhad, 08 Thoul Ki'dah, 2024",5:21 am,5:45 am,6:44 am,11:39 am,1:30 pm,2:08 pm,2:08 pm,4:32 pm,4:35 pm,5:56 pm,7:00 pm,12:00 pm,1:00 pm
+11/09/2024,"AlEthnien, 09 Thoul Ki'dah, 2024",5:23 am,5:45 am,6:45 am,11:39 am,1:30 pm,2:07 pm,2:07 pm,4:31 pm,4:34 pm,5:55 pm,7:00 pm,12:00 pm,1:00 pm
+11/10/2024,"AthThulatha, 10 Thoul Ki'dah, 2024",5:24 am,6:00 am,6:47 am,11:39 am,1:30 pm,2:06 pm,2:06 pm,4:29 pm,4:32 pm,5:54 pm,7:00 pm,12:00 pm,1:00 pm
+11/11/2024,"AlArbia'a, 11 Thoul Ki'dah, 2024",5:25 am,6:00 am,6:48 am,11:39 am,1:30 pm,2:05 pm,2:05 pm,4:28 pm,4:31 pm,5:53 pm,7:00 pm,12:00 pm,1:00 pm
+11/12/2024,"AlKhamis, 12 Thoul Ki'dah, 2024",5:26 am,6:00 am,6:49 am,11:39 am,1:30 pm,2:05 pm,2:05 pm,4:27 pm,4:30 pm,5:52 pm,7:00 pm,12:00 pm,1:00 pm
+11/13/2024,"AlJumaa, 13 Thoul Ki'dah, 2024",5:27 am,6:00 am,6:51 am,11:39 am,1:30 pm,2:04 pm,2:04 pm,4:26 pm,4:29 pm,5:51 pm,7:00 pm,12:00 pm,1:00 pm
+11/14/2024,"AsSabt, 14 Thoul Ki'dah, 2024",5:29 am,6:00 am,6:52 am,11:39 am,1:30 pm,2:03 pm,2:03 pm,4:25 pm,4:28 pm,5:50 pm,7:00 pm,12:00 pm,1:00 pm
+11/15/2024,"AlAhad, 15 Thoul Ki'dah, 2024",5:30 am,6:00 am,6:54 am,11:40 am,1:30 pm,2:02 pm,2:02 pm,4:24 pm,4:27 pm,5:49 pm,7:00 pm,12:00 pm,1:00 pm
+11/16/2024,"AlEthnien, 16 Thoul Ki'dah, 2024",5:31 am,6:00 am,6:55 am,11:40 am,1:30 pm,2:01 pm,2:01 pm,4:23 pm,4:26 pm,5:49 pm,7:00 pm,12:00 pm,1:00 pm
+11/17/2024,"AthThulatha, 17 Thoul Ki'dah, 2024",5:32 am,6:15 am,6:56 am,11:40 am,1:30 pm,2:01 pm,2:01 pm,4:22 pm,4:25 pm,5:48 pm,7:00 pm,12:00 pm,1:00 pm
+11/18/2024,"AlArbia'a, 18 Thoul Ki'dah, 2024",5:33 am,6:15 am,6:58 am,11:40 am,1:30 pm,2:00 pm,2:00 pm,4:21 pm,4:24 pm,5:47 pm,7:00 pm,12:00 pm,1:00 pm
+11/19/2024,"AlKhamis, 19 Thoul Ki'dah, 2024",5:34 am,6:15 am,6:59 am,11:40 am,1:30 pm,1:59 pm,1:59 pm,4:20 pm,4:23 pm,5:46 pm,7:00 pm,12:00 pm,1:00 pm
+11/20/2024,"AlJumaa, 20 Thoul Ki'dah, 2024",5:35 am,6:15 am,7:00 am,11:41 am,1:30 pm,1:59 pm,1:59 pm,4:19 pm,4:22 pm,5:46 pm,7:00 pm,12:00 pm,1:00 pm
+11/21/2024,"AsSabt, 21 Thoul Ki'dah, 2024",5:37 am,6:15 am,7:02 am,11:41 am,1:30 pm,1:58 pm,1:58 pm,4:19 pm,4:22 pm,5:45 pm,7:00 pm,12:00 pm,1:00 pm
+11/22/2024,"AlAhad, 22 Thoul Ki'dah, 2024",5:38 am,6:15 am,7:03 am,11:41 am,1:30 pm,1:57 pm,1:57 pm,4:18 pm,4:21 pm,5:45 pm,7:00 pm,12:00 pm,1:00 pm
+11/23/2024,"AlEthnien, 23 Thoul Ki'dah, 2024",5:39 am,6:15 am,7:04 am,11:41 am,1:30 pm,1:57 pm,1:57 pm,4:17 pm,4:20 pm,5:44 pm,7:00 pm,12:00 pm,1:00 pm
+11/24/2024,"AthThulatha, 24 Thoul Ki'dah, 2024",5:40 am,6:15 am,7:06 am,11:42 am,1:30 pm,1:56 pm,1:56 pm,4:16 pm,4:19 pm,5:43 pm,7:00 pm,12:00 pm,1:00 pm
+11/25/2024,"AlArbia'a, 25 Thoul Ki'dah, 2024",5:41 am,6:15 am,7:07 am,11:42 am,1:30 pm,1:56 pm,1:56 pm,4:16 pm,4:19 pm,5:43 pm,7:00 pm,12:00 pm,1:00 pm
+11/26/2024,"AlKhamis, 26 Thoul Ki'dah, 2024",5:42 am,6:15 am,7:08 am,11:42 am,1:30 pm,1:56 pm,1:59 pm,4:15 pm,4:18 pm,5:43 pm,7:00 pm,12:00 pm,1:00 pm
+11/27/2024,"AlJumaa, 27 Thoul Ki'dah, 2024",5:43 am,6:15 am,7:09 am,11:43 am,1:30 pm,1:55 pm,1:55 pm,4:15 pm,4:18 pm,5:42 pm,7:00 pm,12:00 pm,1:00 pm
+11/28/2024,"AsSabt, 28 Thoul Ki'dah, 2024",5:44 am,6:15 am,7:11 am,11:43 am,1:30 pm,1:55 pm,1:55 pm,4:14 pm,4:17 pm,5:42 pm,7:00 pm,12:00 pm,1:00 pm
+11/29/2024,"AlAhad, 29 Thoul Ki'dah, 2024",5:45 am,6:15 am,7:12 am,11:43 am,1:30 pm,1:54 pm,1:54 pm,4:14 pm,4:17 pm,5:42 pm,7:00 pm,12:00 pm,1:00 pm
+11/30/2024,"AlEthnien, 30 Thoul Ki'dah, 2024",5:46 am,6:15 am,7:13 am,11:44 am,1:30 pm,1:54 pm,1:54 pm,4:13 pm,4:16 pm,5:41 pm,7:00 pm,12:00 pm,1:00 pm
+12/01/2024,"AthThulatha, 01 Thoul Hijjah, 2024",5:47 am,6:15 am,7:14 am,11:44 am,1:30 pm,1:54 pm,1:54 pm,4:13 pm,4:16 pm,5:41 pm,7:00 pm,12:00 pm,1:00 pm
+12/02/2024,"AlArbia'a, 02 Thoul Hijjah, 2024",5:48 am,6:15 am,7:15 am,11:44 am,1:30 pm,1:54 pm,1:54 pm,4:12 pm,4:15 pm,5:41 pm,7:00 pm,12:00 pm,1:00 pm
+12/03/2024,"AlKhamis, 03 Thoul Hijjah, 2024",5:49 am,6:15 am,7:16 am,11:45 am,1:30 pm,1:54 pm,1:54 pm,4:12 pm,4:15 pm,5:41 pm,7:00 pm,12:00 pm,1:00 pm
+12/04/2024,"AlJumaa, 04 Thoul Hijjah, 2024",5:50 am,6:15 am,7:17 am,11:45 am,1:30 pm,1:53 pm,1:53 pm,4:12 pm,4:15 pm,5:41 pm,7:00 pm,12:00 pm,1:00 pm
+12/05/2024,"AsSabt, 05 Thoul Hijjah, 2024",5:51 am,6:15 am,7:18 am,11:46 am,1:30 pm,1:53 pm,1:53 pm,4:12 pm,4:15 pm,5:41 pm,7:00 pm,12:00 pm,1:00 pm
+12/06/2024,"AlAhad, 06 Thoul Hijjah, 2024",5:52 am,6:15 am,7:19 am,11:46 am,1:30 pm,1:53 pm,1:53 pm,4:12 pm,4:15 pm,5:40 pm,7:00 pm,12:00 pm,1:00 pm
+12/07/2024,"AlEthnien, 07 Thoul Hijjah, 2024",5:53 am,6:15 am,7:20 am,11:47 am,1:30 pm,1:53 pm,1:53 pm,4:11 pm,4:14 pm,5:40 pm,7:00 pm,12:00 pm,1:00 pm
+12/08/2024,"AthThulatha, 08 Thoul Hijjah, 2024",5:53 am,6:15 am,7:21 am,11:47 am,1:30 pm,1:53 pm,1:53 pm,4:11 pm,4:14 pm,5:41 pm,7:00 pm,12:00 pm,1:00 pm
+12/09/2024,"AlArbia'a, 09 Thoul Hijjah, 2024",5:54 am,6:15 am,7:22 am,11:47 am,1:30 pm,1:53 pm,1:53 pm,4:11 pm,4:14 pm,5:41 pm,7:00 pm,12:00 pm,1:00 pm
+12/10/2024,"AlKhamis, 10 Thoul Hijjah, 2024",5:55 am,6:15 am,7:23 am,11:48 am,1:30 pm,1:53 pm,1:53 pm,4:11 pm,4:14 pm,5:41 pm,7:00 pm,12:00 pm,1:00 pm
+12/11/2024,"AlJumaa, 11 Thoul Hijjah, 2024",5:56 am,6:15 am,7:24 am,11:48 am,1:30 pm,1:54 pm,1:54 pm,4:11 pm,4:14 pm,5:41 pm,7:00 pm,12:00 pm,1:00 pm
+12/12/2024,"AsSabt, 12 Thoul Hijjah, 2024",5:57 am,6:15 am,7:25 am,11:49 am,1:30 pm,1:54 pm,1:54 pm,4:11 pm,4:14 pm,5:41 pm,7:00 pm,12:00 pm,1:00 pm
+12/13/2024,"AlAhad, 13 Thoul Hijjah, 2024",5:57 am,6:15 am,7:26 am,11:49 am,1:30 pm,1:54 pm,1:54 pm,4:12 pm,4:15 pm,5:41 pm,7:00 pm,12:00 pm,1:00 pm
+12/14/2024,"AlEthnien, 14 Thoul Hijjah, 2024",5:58 am,6:15 am,7:27 am,11:50 am,1:30 pm,1:54 pm,1:54 pm,4:12 pm,4:15 pm,5:42 pm,7:00 pm,12:00 pm,1:00 pm
+12/15/2024,"AthThulatha, 15 Thoul Hijjah, 2024",5:59 am,6:15 am,7:27 am,11:50 am,1:30 pm,1:55 pm,1:55 pm,4:12 pm,4:15 pm,5:42 pm,7:00 pm,12:00 pm,1:00 pm
+12/16/2024,"AlArbia'a, 16 Thoul Hijjah, 2024",5:59 am,6:15 am,7:28 am,11:51 am,1:30 pm,1:55 pm,1:55 pm,4:12 pm,4:15 pm,5:42 pm,7:00 pm,12:00 pm,1:00 pm
+12/17/2024,"AlKhamis, 17 Thoul Hijjah, 2024",6:00 am,6:15 am,7:29 am,11:51 am,1:30 pm,1:55 pm,1:55 pm,4:13 pm,4:16 pm,5:43 pm,7:00 pm,12:00 pm,1:00 pm
+12/18/2024,"AlJumaa, 18 Thoul Hijjah, 2024",6:00 am,6:15 am,7:29 am,11:52 am,1:30 pm,1:56 pm,1:56 pm,4:13 pm,4:16 pm,5:43 pm,7:00 pm,12:00 pm,1:00 pm
+12/19/2024,"AsSabt, 19 Thoul Hijjah, 2024",6:01 am,6:15 am,7:30 am,11:52 am,1:30 pm,1:56 pm,1:56 pm,4:13 pm,4:16 pm,5:43 pm,7:00 pm,12:00 pm,1:00 pm
+12/20/2024,"AlAhad, 20 Thoul Hijjah, 2024",6:02 am,6:15 am,7:31 am,11:53 am,1:30 pm,1:57 pm,1:56 pm,4:14 pm,4:17 pm,5:44 pm,7:00 pm,12:00 pm,1:00 pm
+12/21/2024,"AlEthnien, 21 Thoul Hijjah, 2024",6:02 am,6:15 am,7:31 am,11:53 am,1:30 pm,1:57 pm,1:57 pm,4:14 pm,4:17 pm,5:44 pm,7:00 pm,12:00 pm,1:00 pm
+12/22/2024,"AthThulatha, 22 Thoul Hijjah, 2024",6:02 am,6:20 am,7:32 am,11:54 am,1:30 pm,1:58 pm,1:58 pm,4:15 pm,4:18 pm,5:45 pm,7:00 pm,12:00 pm,1:00 pm
+12/23/2024,"AlArbia'a, 23 Thoul Hijjah, 2024",6:03 am,6:20 am,7:32 am,11:54 am,1:30 pm,1:58 pm,1:58 pm,4:16 pm,4:18 pm,5:45 pm,7:00 pm,12:00 pm,1:00 pm
+12/24/2024,"AlKhamis, 24 Thoul Hijjah, 2024",6:03 am,6:20 am,7:32 am,11:55 am,1:30 pm,1:59 pm,1:59 pm,4:16 pm,4:19 pm,5:46 pm,7:00 pm,12:00 pm,1:00 pm
+12/25/2024,"AlJumaa, 25 Thoul Hijjah, 2024",6:04 am,6:20 am,7:33 am,11:55 am,1:30 pm,1:59 pm,1:59 pm,4:17 pm,4:20 pm,5:47 pm,7:00 pm,12:00 pm,1:00 pm
+12/26/2024,"AsSabt, 26 Thoul Hijjah, 2024",6:04 am,6:20 am,7:33 am,11:56 am,1:30 pm,2:00 pm,2:00 pm,4:17 pm,4:20 pm,5:47 pm,7:00 pm,12:00 pm,1:00 pm
+12/27/2024,"AlAhad, 27 Thoul Hijjah, 2024",6:04 am,6:20 am,7:33 am,11:56 am,1:30 pm,2:01 pm,2:01 pm,4:18 pm,4:21 pm,5:48 pm,7:00 pm,12:00 pm,1:00 pm
+12/28/2024,"AlEthnien, 28 Thoul Hijjah, 2024",6:05 am,6:20 am,7:33 am,11:57 am,1:30 pm,2:02 pm,2:02 pm,4:19 pm,4:22 pm,5:49 pm,7:00 pm,12:00 pm,1:00 pm
+12/29/2024,"AthThulatha, 29 Thoul Hijjah, 2024",6:05 am,6:20 am,7:34 am,11:57 am,1:30 pm,2:02 pm,2:02 pm,4:20 pm,4:23 pm,5:50 pm,7:00 pm,12:00 pm,1:00 pm
+12/30/2024,"AlArbia'a, 30 Thoul Hijjah, 2024",6:05 am,6:20 am,7:34 am,11:58 am,1:30 pm,2:03 pm,2:03 pm,4:21 pm,4:24 pm,5:50 pm,7:00 pm,12:00 pm,1:00 pm
+12/31/2024,"AlKhamis, 31 Thoul Hijjah, 2024",6:05 am,6:20 am,7:34 am,11:58 am,1:30 pm,2:04 pm,2:04 pm,4:22 pm,4:25 pm,5:51 pm,7:00 pm,12:00 pm,1:00 pm
