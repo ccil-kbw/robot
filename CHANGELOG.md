@@ -1,3 +1,15 @@
+# v2.0.0 (Sat Mar 16 2024)
+
+#### 💥 Breaking Change
+
+- feat: remove api dependency [#26](https://github.com/ccil-kbw/robot/pull/26) ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v1.0.13 (Sat Mar 09 2024)
 
 #### ⚠️ Pushed to `master`
