@@ -21,7 +21,7 @@ type RecordConfigDataS struct {
 
 func NewRecordConfigDataS() *RecordConfigDataS {
 	rc := &RecordConfigDataS{}
-	rc.Refresh()
+	//rc.Refresh()
 	return rc
 }
 func (rc *RecordConfigDataS) Get() *[]RecordConfig {

@@ -140,6 +140,4 @@ func TestIqamaCSV_GetDiscordPrettified(t *testing.T) {
 			}
 		})
 	}
-
-	x := time.RFC3339
 }
