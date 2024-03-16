@@ -84,6 +84,7 @@ var (
 									}
 								}
 								now := time.Now()
+
 								return []*discordgo.MessageEmbedField{
 									{
 										Name:  "OBS Recording Started",
@@ -146,7 +147,7 @@ var (
 func Run(guildID, botToken *string, removeCommands *bool, obs *rec.Recorder, notifyChan chan string) {
 	var err error
 	var s *discordgo.Session
-
+	fmt.Println("Starting Discord Bot")
 	s, err = discordgo.New("Bot " + *botToken)
 	if err != nil {
 		log.Fatalf("Invalid bot parameters: %v", err)

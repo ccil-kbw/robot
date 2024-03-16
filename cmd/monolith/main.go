@@ -62,8 +62,11 @@ func main() {
 
 		}()
 	*/
-
 	var obs *rec.Recorder
+
+	if config.Features.DiscordBot {
+		go bot(obs, notifyChan)
+	}
 
 	if config.Features.Record {
 		host := os.Getenv("MDROID_OBS_WEBSOCKET_HOST")
@@ -95,10 +98,6 @@ func main() {
 			}
 		}()
 
-	}
-
-	if config.Features.DiscordBot {
-		go bot(obs, notifyChan)
 	}
 
 out:
