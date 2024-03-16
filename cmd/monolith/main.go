@@ -3,15 +3,12 @@ package main
 import (
 	"fmt"
 	"github.com/ccil-kbw/robot/iqama"
-	"io"
-	"net/http"
 	"os"
 	"os/signal"
 	"strings"
 	"time"
 
 	"github.com/ccil-kbw/robot/discord"
-	v1 "github.com/ccil-kbw/robot/iqama/v1"
 	"github.com/ccil-kbw/robot/rec"
 )
 
@@ -21,7 +18,6 @@ var (
 	// Double check on the env side if we need the feature at run time (e.g openbroadcaster is configured, proxy is required, etc)
 	config = Config{
 		Features: Features{
-			Proxy:      true,
 			DiscordBot: true,
 			Record:     true,
 		},
@@ -49,27 +45,23 @@ func main() {
 	notifyChan := make(chan string)
 
 	signal.Notify(stop, os.Interrupt)
-
-	var prayersData *iqama.PrayersData
-	{
-		prayersData = iqama.StartIqamaServer()
-	}
-
-	go func() {
-		go iqama.StartRecordingScheduleServer()
-
-		for {
-			in := 15 * time.Minute
-			notifyFunc(notifyChan, prayersData, in)
-			notifyFunc(notifyChan, prayersData, 0)
-			time.Sleep(55 * time.Second)
+	/*
+		var prayersData *iqama.PrayersData
+		{
+			prayersData = iqama.StartIqamaServer()
 		}
+		go func() {
+			go iqama.StartRecordingScheduleServer()
 
-	}()
+			for {
+				in := 15 * time.Minute
+				notifyFunc(notifyChan, prayersData, in)
+				notifyFunc(notifyChan, prayersData, 0)
+				time.Sleep(55 * time.Second)
+			}
 
-	if config.Features.Proxy {
-		go proxy()
-	}
+		}()
+	*/
 
 	var obs *rec.Recorder
 
@@ -136,13 +128,7 @@ out:
 
 // proxy, move to apis, maybe pkg/apis/proxyserver/proxyserver.go
 func proxy() {
-	http.HandleFunc("/today", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Printf("request: %s, %s\n", r.Method, r.URL)
-		_, _ = io.WriteString(w, string(v1.GetRAW()))
-	})
-
-	fmt.Println("Running iqama-proxy Go server on port :3333")
-	_ = http.ListenAndServe(":3333", nil)
+	fmt.Println("implement me")
 }
 
 func bot(obs *rec.Recorder, notifyChan chan string) {

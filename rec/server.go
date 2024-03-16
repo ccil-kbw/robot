@@ -2,7 +2,6 @@ package rec
 
 import (
 	"fmt"
-	"time"
 )
 
 func StartRecServer(host, password string, data *RecordConfigDataS) (*Recorder, error) {
@@ -13,7 +12,7 @@ func StartRecServer(host, password string, data *RecordConfigDataS) (*Recorder, 
 	}
 
 	fmt.Println("Starting OBS recording control routine")
-	go func() {
+	/*	go func() {
 		for {
 
 			isRecording, err := client.IsRecording()
@@ -46,7 +45,7 @@ func StartRecServer(host, password string, data *RecordConfigDataS) (*Recorder, 
 
 			time.Sleep(1 * time.Minute)
 		}
-	}()
+	}()*/
 
 	return client, nil
 }
