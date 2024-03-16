@@ -1,3 +1,15 @@
+# v2.0.1 (Sat Mar 16 2024)
+
+#### ⚠️ Pushed to `master`
+
+- fix: bot routine wasn't running ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.0.0 (Sat Mar 16 2024)
 
 #### 💥 Breaking Change
