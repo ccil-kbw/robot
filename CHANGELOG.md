@@ -1,3 +1,15 @@
+# v2.0.2 (Tue Mar 19 2024)
+
+#### 🐛 Bug Fix
+
+- feat: add hardcoded record times [#27](https://github.com/ccil-kbw/robot/pull/27) ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.0.1 (Sat Mar 16 2024)
 
 #### ⚠️ Pushed to `master`
