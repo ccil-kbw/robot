@@ -20,7 +20,28 @@ type RecordConfigDataS struct {
 }
 
 func NewRecordConfigDataS() *RecordConfigDataS {
-	rc := &RecordConfigDataS{}
+	rc := &RecordConfigDataS{
+		data: &[]RecordConfig{
+			{
+				Description:   "Jumuaa Recording",
+				StartTime:     time.Date(2024, 1, 1, 11, 55, 0, 0, time.Local),
+				Duration:      JumuaaRecordDuration,
+				RecordingDays: []time.Weekday{time.Friday},
+			},
+			{
+				Description:   "Fajr Recording",
+				StartTime:     time.Date(2024, 1, 1, 5, 30, 0, 0, time.Local),
+				Duration:      DarsRecordDuration,
+				RecordingDays: EveryDay,
+			},
+			{
+				Description:   "Tarawih Recording",
+				StartTime:     time.Date(2024, 1, 1, 20, 0, 0, 0, time.Local),
+				Duration:      3 * time.Hour,
+				RecordingDays: EveryDay,
+			},
+		},
+	}
 	//rc.Refresh()
 	return rc
 }
