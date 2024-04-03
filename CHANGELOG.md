@@ -1,3 +1,15 @@
+# v2.0.3 (Wed Apr 03 2024)
+
+#### ⚠️ Pushed to `master`
+
+- Update rec_iqama.go ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.0.2 (Tue Mar 19 2024)
 
 #### 🐛 Bug Fix
