@@ -30,7 +30,7 @@ func NewRecordConfigDataS() *RecordConfigDataS {
 			},
 			{
 				Description:   "Fajr Recording",
-				StartTime:     time.Date(2024, 1, 1, 5, 30, 0, 0, time.Local),
+				StartTime:     time.Date(2024, 1, 1, 5, 0, 0, 0, time.Local),
 				Duration:      DarsRecordDuration,
 				RecordingDays: EveryDay,
 			},
