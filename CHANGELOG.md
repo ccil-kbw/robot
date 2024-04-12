@@ -1,3 +1,15 @@
+# v2.0.4 (Fri Apr 12 2024)
+
+#### 🐛 Bug Fix
+
+- feat: read iqama and adhan times from the CSV [#29](https://github.com/ccil-kbw/robot/pull/29) ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.0.3 (Wed Apr 03 2024)
 
 #### ⚠️ Pushed to `master`
