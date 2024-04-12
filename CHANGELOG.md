@@ -1,3 +1,15 @@
+# v2.0.5 (Fri Apr 12 2024)
+
+#### 🐛 Bug Fix
+
+- fix: migrate to v2 for discord bot [#30](https://github.com/ccil-kbw/robot/pull/30) ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.0.4 (Fri Apr 12 2024)
 
 #### 🐛 Bug Fix
