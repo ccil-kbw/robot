@@ -1,9 +1,12 @@
 package main
 
 import (
-	iqamav1 "github.com/ccil-kbw/robot/iqama/v1"
+	"fmt"
+	iqamav2 "github.com/ccil-kbw/robot/iqama/v2"
 )
 
 func main() {
-	_ = iqamav1.GetShellPrettified()
+	client := iqamav2.NewIqamaCSV("iqama_2024.csv")
+
+	fmt.Println(client.GetShellPrettified())
 }
