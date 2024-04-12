@@ -4,10 +4,10 @@ import (
 	"fmt"
 
 	"github.com/bwmarrin/discordgo"
-	iqamav1 "github.com/ccil-kbw/robot/iqama/v1"
+	"github.com/ccil-kbw/robot/iqama/v2"
 )
 
-func IqamaTimesToDiscordInteractionResponseData(resp iqamav1.Resp) *discordgo.InteractionResponseData {
+func IqamaTimesToDiscordInteractionResponseData(resp v2.IqamaDailyTimes) *discordgo.InteractionResponseData {
 	fmt.Println("discord command called: /iqama")
 	return &discordgo.InteractionResponseData{
 		Embeds: []*discordgo.MessageEmbed{
@@ -21,23 +21,23 @@ func IqamaTimesToDiscordInteractionResponseData(resp iqamav1.Resp) *discordgo.In
 					return []*discordgo.MessageEmbedField{
 						{
 							Name:  "Fajr",
-							Value: resp.Fajr.Iqama,
+							Value: v2.FormatTime(resp.Fajr.Iqama),
 						},
 						{
 							Name:  "Dhuhr",
-							Value: resp.Dhuhr.Iqama,
+							Value: v2.FormatTime(resp.Dhuhr.Iqama),
 						},
 						{
 							Name:  "Asr",
-							Value: resp.Asr.Iqama,
+							Value: v2.FormatTime(resp.Asr.Iqama),
 						},
 						{
 							Name:  "Maghrib",
-							Value: resp.Maghrib.Iqama,
+							Value: v2.FormatTime(resp.Maghrib.Iqama),
 						},
 						{
 							Name:  "Isha",
-							Value: resp.Isha.Iqama,
+							Value: v2.FormatTime(resp.Isha.Iqama),
 						},
 						{
 							Name:  "Friday Prayer 1",

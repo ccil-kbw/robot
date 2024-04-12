@@ -3,6 +3,7 @@ package rec
 import (
 	"fmt"
 	v1 "github.com/ccil-kbw/robot/iqama/v1"
+	v2 "github.com/ccil-kbw/robot/iqama/v2"
 	"sync"
 	"time"
 )
@@ -10,17 +11,28 @@ import (
 var (
 	EveryDay             []time.Weekday = []time.Weekday{time.Sunday, time.Monday, time.Tuesday, time.Wednesday, time.Thursday, time.Friday, time.Saturday}
 	JumuaaRecordDuration time.Duration  = 2 * time.Hour
-	DarsRecordDuration   time.Duration  = 1 * time.Hour
+	DarsRecordDuration   time.Duration  = 45 * time.Minute
 	location             string         = "America/Montreal"
 )
 
 type RecordConfigDataS struct {
-	data *[]RecordConfig
-	mu   sync.Mutex
+	data  *[]RecordConfig
+	iqama v2.Iqama
+	mu    sync.Mutex
 }
 
 func NewRecordConfigDataS() *RecordConfigDataS {
+	iqamaClient := v2.NewIqamaCSV("iqama_2024.csv")
+	today, err := iqamaClient.GetTodayTimes()
+	if err != nil {
+		fmt.Println("couldn't fetch iqama times, keeping current data")
+	}
+
+	fajr := today.Fajr.Iqama
+	dhuhr := today.Dhuhr.Iqama
+	isha := today.Isha.Iqama
 	rc := &RecordConfigDataS{
+		iqama: iqamaClient,
 		data: &[]RecordConfig{
 			{
 				Description:   "Jumuaa Recording",
@@ -30,14 +42,20 @@ func NewRecordConfigDataS() *RecordConfigDataS {
 			},
 			{
 				Description:   "Fajr Recording",
-				StartTime:     time.Date(2024, 1, 1, 5, 0, 0, 0, time.Local),
+				StartTime:     fajr,
 				Duration:      DarsRecordDuration,
 				RecordingDays: EveryDay,
 			},
 			{
-				Description:   "Tarawih Recording",
-				StartTime:     time.Date(2024, 1, 1, 20, 0, 0, 0, time.Local),
-				Duration:      3 * time.Hour,
+				Description:   "Dhuhur Recording",
+				StartTime:     dhuhr,
+				Duration:      DarsRecordDuration,
+				RecordingDays: EveryDay,
+			},
+			{
+				Description:   "Isha Recording",
+				StartTime:     isha,
+				Duration:      DarsRecordDuration,
 				RecordingDays: EveryDay,
 			},
 		},
