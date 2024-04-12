@@ -14,7 +14,7 @@ import (
 	"github.com/ccil-kbw/robot/rec"
 
 	"github.com/bwmarrin/discordgo"
-	iqamav1 "github.com/ccil-kbw/robot/iqama/v1"
+	iqamav2 "github.com/ccil-kbw/robot/iqama/v2"
 )
 
 var (
@@ -37,9 +37,11 @@ var (
 		},
 	}
 
+	iqamaClient = iqamav2.NewIqamaCSV("iqama_2024.csv")
+
 	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder){
 		"iqama": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
-			resp, _ := iqamav1.Get()
+			resp, _ := iqamaClient.GetTodayTimes()
 			_ = s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: mappers.IqamaTimesToDiscordInteractionResponseData(*resp),
