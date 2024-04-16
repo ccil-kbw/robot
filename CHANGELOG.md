@@ -1,3 +1,15 @@
+# v2.0.6 (Tue Apr 16 2024)
+
+#### ⚠️ Pushed to `master`
+
+- feat: switch suffix to mp4 for uploaded videos ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.0.5 (Fri Apr 12 2024)
 
 #### 🐛 Bug Fix
