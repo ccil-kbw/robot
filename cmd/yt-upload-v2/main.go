@@ -100,7 +100,7 @@ func refreshFileList() {
 	for _, file := range folders {
 		fullPath := fmt.Sprintf("%s/%s", root, file.Name())
 
-		if strings.HasSuffix(file.Name(), ".mkv") {
+		if strings.HasSuffix(file.Name(), ".mp4") {
 			uploaded := false
 			if _, err := os.Stat(fmt.Sprintf("%s/.%s-uploaded", root, file.Name())); err == nil {
 				uploaded = true
