@@ -16,7 +16,7 @@ func TestNewIqamaCSV(t *testing.T) {
 		{
 			name: "TestNewIqamaCSV",
 			args: args{
-				filePath: "test_assets/ccil_kbw_iqama.csv",
+				filePath: "Chomedey Laval QC/@ccil_kbw",
 			},
 		},
 	}
@@ -30,7 +30,7 @@ func TestNewIqamaCSV(t *testing.T) {
 
 func TestIqamaCSV_GetTodayTimes(t *testing.T) {
 	// Manually Load CSV and read Today's Record
-	i := NewIqamaCSV("test_assets/ccil_kbw_iqama.csv")
+	i := NewIqamaCSV("Chomedey Laval QC/@ccil_kbw")
 	daily, err := i.GetTodayTimes()
 	if err != nil {
 		t.Errorf("IqamaCSV.GetTodayTimes() error = %v", err)
@@ -83,7 +83,7 @@ func TestIqamaCSV_GetDiscordPrettified(t *testing.T) {
 		{
 			name: "TestIqamaCSV_GetDiscordPrettified",
 			fields: fields{
-				filePath:   "test_assets/ccil_kbw_iqama.csv",
+				filePath:   "Chomedey Laval QC/@ccil_kbw",
 				iqamaTimes: nil,
 			},
 			want: "```markdown\n+------+------+--------+-----+---------+------+\n| DATE | FAJR | DHUHUR | ASR | MAGHRIB | ISHA |\n+------+------+--------+-----+---------+------+\n+------+------+--------+-----+---------+------+\n```",

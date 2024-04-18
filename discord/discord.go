@@ -4,7 +4,6 @@
 package discord
 
 import (
-	"encoding/json"
 	"github.com/ccil-kbw/robot/rec"
 	"log"
 	"os"
@@ -62,7 +61,6 @@ func (d *bot) run(removeCommands bool, obs *rec.Recorder, notifyChan chan string
 		zap.Bool("isPublic", d.isPublic),
 		zap.String("InvitationLink", "https://discord.com/api/oauth2/authorize?client_id="+d.session.State.User.ID+"&scope=bot%20applications.commands"),
 	)
-	d.deleteApplicationCommands()
 	d.addApplicationCommands()
 
 	defer func(s *discordgo.Session) {
@@ -130,8 +128,7 @@ func (d *bot) addApplicationCommands() {
 	defer d.logger.Info("Application Commands Added")
 	registeredCommands := make([]*discordgo.ApplicationCommand, len(publicCommands))
 	for i, v := range publicCommands {
-		commandJSON, _ := json.MarshalIndent(v, "", "  ")
-		d.logger.Info("Registering Command", zap.String("Name", v.Name), zap.String("Description", v.Description), zap.String("CommandJson", string(commandJSON)))
+		d.logger.Info("Registering Command", zap.String("Name", v.Name), zap.String("Description", v.Description))
 		cmd, err := d.session.ApplicationCommandCreate(d.session.State.User.ID, "", v)
 		if err != nil {
 			log.Panicf("Cannot create '%v' command: %v", v.Name, err)

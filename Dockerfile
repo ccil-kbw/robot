@@ -16,6 +16,7 @@ WORKDIR /
 
 COPY --from=build-stage /monolith /monolith
 COPY --from=build-stage /yt-upload-v2 /yt-upload-v2
+COPY --from=build-stage /app/assets /assets
 
 EXPOSE 3333
 

@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
+
+	"github.com/ccil-kbw/robot/discord"
+	"go.uber.org/zap"
 	"os"
 	"os/signal"
 	"strings"
 	"time"
-
-	"github.com/ccil-kbw/robot/iqama"
 
 	"github.com/ccil-kbw/robot/rec"
 	"github.com/joho/godotenv"
@@ -48,6 +49,10 @@ func main() {
 	signal.Notify(stop, os.Interrupt)
 
 	var obs *rec.Recorder
+
+	if config.Features.DiscordBot {
+		go bot()
+	}
 
 	if config.Features.Record {
 		host := os.Getenv("MDROID_OBS_WEBSOCKET_HOST")
@@ -106,47 +111,13 @@ out:
 
 }
 
-// proxy, move to apis, maybe pkg/apis/proxyserver/proxyserver.go
-func proxy() {
-	fmt.Println("implement me")
-}
+func bot() {
+	guildID := os.Getenv("MDROID_BOT_GUILD_ID")
+	botToken := os.Getenv("MDROID_BOT_TOKEN")
 
-func notifyFunc(notifyChan chan string, prayersData *iqama.PrayersData, in time.Duration) {
-	now := time.Now().Add(in)
-
-	if prayersData.Confs().Fajr.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
-		notifyPrayer("Fajr", prayersData.Confs().Fajr.Iqama, in, notifyChan)
-	}
-
-	if prayersData.Confs().Dhuhr.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
-		notifyPrayer("Dhuhr", prayersData.Confs().Dhuhr.Iqama, in, notifyChan)
-
-	}
-
-	if prayersData.Confs().Asr.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
-		notifyPrayer("Asr", prayersData.Confs().Asr.Iqama, in, notifyChan)
-	}
-
-	if prayersData.Confs().Maghrib.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
-		notifyPrayer("Maghrib", prayersData.Confs().Maghrib.Iqama, in, notifyChan)
-	}
-
-	if prayersData.Confs().Isha.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
-		notifyPrayer("Isha", prayersData.Confs().Isha.Iqama, in, notifyChan)
-	}
-
-}
-
-func notifyPrayer(prayerName, prayerTime string, in time.Duration, notifyChan chan string) {
-	var msg string
-	{
-		if in == 0 {
-			msg = fmt.Sprintf("%s's Iqama Time now, it's %s!", prayerName, prayerTime)
-		} else {
-			msg = fmt.Sprintf("%s's Iqama in %v, at %s", prayerName, in, prayerTime)
-		}
-	}
-	notifyChan <- msg
+	logger, _ := zap.NewProduction()
+	discordBot := discord.NewDiscordBot(logger, guildID, botToken, true)
+	discordBot.StartBot()
 }
 
 func startServerWithRetry(host string, password string, data *rec.RecordConfigDataS) *rec.Recorder {
