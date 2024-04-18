@@ -4,223 +4,154 @@
 package discord
 
 import (
-	"fmt"
+	"encoding/json"
+	"github.com/ccil-kbw/robot/rec"
 	"log"
 	"os"
 	"os/signal"
 	"time"
 
-	"github.com/ccil-kbw/robot/mappers"
-	"github.com/ccil-kbw/robot/rec"
-
 	"github.com/bwmarrin/discordgo"
-	iqamav2 "github.com/ccil-kbw/robot/iqama/v2"
+	"go.uber.org/zap"
 )
 
-var (
-	commands = []*discordgo.ApplicationCommand{
-		{
-			Name:        "iqama",
-			Description: "Get Today's Iqama",
-		},
-		{
-			Name:        "rec-start",
-			Description: "Start Recording on the Main Camera (e.g unscheduled speech @ccil-kbw)",
-		},
-		{
-			Name:        "rec-status",
-			Description: "See OBS and Recording Status on the Main Camera",
-		},
-		{
-			Name:        "rec-schedule",
-			Description: "See Recording Schedule",
-		},
-	}
+type Bot interface {
+	StartBot()
+}
 
-	iqamaClient = iqamav2.NewIqamaCSV("iqama_2024.csv")
+type bot struct {
+	adminGuildID string
+	session      *discordgo.Session
+	logger       *zap.Logger
+	isPublic     bool
+}
 
-	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder){
-		"iqama": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
-			resp, _ := iqamaClient.GetTodayTimes()
-			_ = s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
-				Type: discordgo.InteractionResponseChannelMessageWithSource,
-				Data: mappers.IqamaTimesToDiscordInteractionResponseData(*resp),
-			})
-		},
-		"rec-schedule": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
-			_ = s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
-				Type: discordgo.InteractionResponseChannelMessageWithSource,
-				Data: &discordgo.InteractionResponseData{
-					Embeds: []*discordgo.MessageEmbed{
-						{
-							Type:        discordgo.EmbedTypeRich,
-							Title:       "Scheduling Start",
-							Description: "OBS Scheduling Start Operation",
-							Color:       0x05294e,
-							Fields: func() []*discordgo.MessageEmbedField {
-								resp := []*discordgo.MessageEmbedField{}
-
-								return resp
-							}(),
-						},
-					},
-				},
-			},
-			)
-		},
-		"rec-start": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
-			_ = s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
-				Type: discordgo.InteractionResponseChannelMessageWithSource,
-				Data: &discordgo.InteractionResponseData{
-					Embeds: []*discordgo.MessageEmbed{
-						{
-							Type:        discordgo.EmbedTypeRich,
-							Title:       "Scheduling Start",
-							Description: "OBS Scheduling Start Operation",
-							Color:       0x05294e,
-							Fields: func() []*discordgo.MessageEmbedField {
-								fmt.Println("discord command called: /obs-start")
-								if obs == nil {
-									return []*discordgo.MessageEmbedField{
-										{Name: "Error", Value: "OBS Client not initialized"},
-									}
-								}
-								now := time.Now()
-
-								return []*discordgo.MessageEmbedField{
-									{
-										Name:  "OBS Recording Started",
-										Value: fmt.Sprintf("Will be scheduling until %d:%d", now.Hour(), now.Minute()),
-									},
-								}
-							}(),
-						},
-					},
-				},
-			},
-			)
-		},
-		"rec-status": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
-			_ = s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
-				Type: discordgo.InteractionResponseChannelMessageWithSource,
-				Data: &discordgo.InteractionResponseData{
-					Embeds: []*discordgo.MessageEmbed{
-						{
-							Type:        discordgo.EmbedTypeRich,
-							Title:       "Scheduling Status",
-							Description: "OBS Scheduling Status Operation",
-							Color:       0x05294e,
-							Fields: func() []*discordgo.MessageEmbedField {
-								fmt.Println("discord command called: /obs-status")
-								if obs == nil {
-									return []*discordgo.MessageEmbedField{
-										{Name: "Error", Value: "OBS Client not initialized"},
-									}
-								}
-								isRecording, err := obs.IsRecording()
-								if err != nil {
-									fmt.Printf("error calling obs.IsRecording endpoint. %v", err)
-									return []*discordgo.MessageEmbedField{
-										{
-											Name:  "Record Status",
-											Value: "Could not access OBS",
-										},
-									}
-								}
-
-								fmt.Println("successfully called obs.IsRecording()")
-								return []*discordgo.MessageEmbedField{
-									{
-										Name:  "Record Status",
-										Value: fmt.Sprintf("recording: %v", isRecording),
-									},
-								}
-							}(),
-						},
-					},
-				},
-			},
-			)
-		},
-	}
-)
-
-// Run the Discord bot. NOTE: Function can be split
-func Run(guildID, botToken *string, removeCommands *bool, obs *rec.Recorder, notifyChan chan string) {
-	var err error
-	var s *discordgo.Session
-	fmt.Println("Starting Discord Bot")
-	s, err = discordgo.New("Bot " + *botToken)
+// NewDiscordBot creates a new Discord Bot
+func NewDiscordBot(logger *zap.Logger, adminGuildID, botToken string, isPublic bool) Bot {
+	session, err := discordgo.New("Bot " + botToken)
 	if err != nil {
 		log.Fatalf("Invalid bot parameters: %v", err)
 	}
 
-	s.AddHandler(func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-		if h, ok := commandHandlers[i.ApplicationCommandData().Name]; ok {
-			h(s, i, obs)
-		}
-	})
+	return &bot{
+		adminGuildID: adminGuildID,
+		session:      session,
+		isPublic:     isPublic,
+		logger:       logger,
+	}
+}
 
-	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
-		log.Printf("Logged in as: %v#%v", s.State.User.Username, s.State.User.Discriminator)
-	})
+// StartBot starts the bot
+func (d *bot) StartBot() {
+	d.run(true, nil, nil)
+}
 
-	err = s.Open()
+// run starts the bot and listens for incoming commands
+func (d *bot) run(removeCommands bool, obs *rec.Recorder, notifyChan chan string) {
+	var err error
+
+	d.addInteractionCreateHandlers()
+	d.addReadyHandlers()
+
+	err = d.session.Open()
 	if err != nil {
-		log.Fatalf("Cannot open the session: %v", err)
+		d.logger.Fatal("Cannot open the session", zap.Error(err))
 	}
 
-	log.Println("Adding commands...")
-	registeredCommands := make([]*discordgo.ApplicationCommand, len(commands))
-	for i, v := range commands {
-		cmd, err := s.ApplicationCommandCreate(s.State.User.ID, *guildID, v)
+	d.logger.Info("Starting Discord Bot",
+		zap.Bool("isPublic", d.isPublic),
+		zap.String("InvitationLink", "https://discord.com/api/oauth2/authorize?client_id="+d.session.State.User.ID+"&scope=bot%20applications.commands"),
+	)
+	d.deleteApplicationCommands()
+	d.addApplicationCommands()
+
+	defer func(s *discordgo.Session) {
+		d.logger.Info("Closing Discord Bot")
+		_ = s.Close()
+	}(d.session)
+
+	stop := make(chan os.Signal, 1)
+	signal.Notify(stop, os.Interrupt)
+
+	d.logger.Info("Press Ctrl+C to exit")
+	defer d.logger.Info("Gracefully shutting down.")
+
+	defer func() {
+		if removeCommands {
+			d.deleteApplicationCommands()
+		}
+	}()
+
+	<-stop
+	time.Sleep(10 * time.Second) // Graceful shutdown, giving some time for the bot to respond to the commands
+
+}
+
+func (d *bot) addInteractionCreateHandlers() {
+	d.logger.Info("Adding Interaction Create Handlers")
+	defer d.logger.Info("Interaction Create Handlers Added")
+	d.session.AddHandler(func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+		if h, ok := publicCommandHandlers[i.ApplicationCommandData().Name]; ok {
+			h(s, i, d.logger.With(
+				zap.String("Command", i.ApplicationCommandData().Name),
+				zap.String("User", i.Member.User.Username),
+				zap.String("Guild", i.GuildID),
+				zap.String("Channel", i.ChannelID),
+				zap.String("InteractionID", i.ID),
+			))
+		}
+	})
+}
+
+func (d *bot) addReadyHandlers() {
+	d.logger.Info("Adding Ready Handlers")
+	defer d.logger.Info("Ready Handlers Added")
+	d.session.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
+		guildNames := make([]string, len(r.Guilds))
+		guildIDs := make([]string, len(r.Guilds))
+		for i, v := range r.Guilds {
+			d.logger.Info("Registering Guild", zap.String("Name", v.Name), zap.String("ID", v.ID), zap.Int("MemberCount", v.MemberCount))
+			guildNames[i] = v.Name
+			guildIDs[i] = v.ID
+		}
+
+		d.logger.Info(
+			"Logged in",
+			zap.String("User", s.State.User.Username),
+			zap.String("Discriminator", s.State.User.Discriminator),
+			zap.Strings("GuildNames", guildNames),
+			zap.Strings("GuildIDs", guildIDs),
+		)
+	})
+}
+
+func (d *bot) addApplicationCommands() {
+	d.logger.Info("Adding Application Commands")
+	defer d.logger.Info("Application Commands Added")
+	registeredCommands := make([]*discordgo.ApplicationCommand, len(publicCommands))
+	for i, v := range publicCommands {
+		commandJSON, _ := json.MarshalIndent(v, "", "  ")
+		d.logger.Info("Registering Command", zap.String("Name", v.Name), zap.String("Description", v.Description), zap.String("CommandJson", string(commandJSON)))
+		cmd, err := d.session.ApplicationCommandCreate(d.session.State.User.ID, "", v)
 		if err != nil {
 			log.Panicf("Cannot create '%v' command: %v", v.Name, err)
 		}
 		registeredCommands[i] = cmd
 	}
+}
 
-	defer func(s *discordgo.Session) {
-		_ = s.Close()
-	}(s)
-
-	var channelID string
-	{
-		channelID = os.Getenv("MDROID_DISCORD_CHANNEL_ID")
-		if channelID == "" {
-			channelID = "1161464871792160789"
-		}
+func (d *bot) deleteApplicationCommands() {
+	commands, err := d.session.ApplicationCommands(d.session.State.User.ID, "")
+	if err != nil {
+		d.logger.Error("Cannot fetch application commands", zap.Error(err))
 	}
-	go func() {
-		previousMessageID := ""
-		for {
-			m, err := s.ChannelMessageSend(channelID, <-notifyChan)
-			if err != nil {
-				log.Println("Couldn't send Message")
-			}
-			if previousMessageID != "" {
-				if err := s.ChannelMessageDelete(channelID, previousMessageID); err != nil {
-					log.Println("Couldn't delete the Previous Message, please clean up the channel manually.")
-				}
-			}
-			previousMessageID = m.ID
-		}
-	}()
-	stop := make(chan os.Signal, 1)
-	signal.Notify(stop, os.Interrupt)
-	fmt.Println("Press Ctrl+C to exit")
-	<-stop
 
-	if *removeCommands {
-		log.Println("Removing commands...")
-
-		for _, v := range registeredCommands {
-			err := s.ApplicationCommandDelete(s.State.User.ID, *guildID, v.ID)
-			if err != nil {
-				log.Panicf("Cannot delete '%v' command: %v", v.Name, err)
-			}
+	for _, v := range commands {
+		d.logger.Info("Deleting Command", zap.String("Command", v.Name), zap.String("GuildID", v.GuildID))
+		err := d.session.ApplicationCommandDelete(d.session.State.User.ID, "", v.ID)
+		if err != nil {
+			d.logger.Panic("Cannot delete command", zap.String("Command", v.Name), zap.Error(err), zap.String("GuildID", v.GuildID))
 		}
 	}
 
-	log.Println("Gracefully shutting down.")
 }

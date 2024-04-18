@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ccil-kbw/robot/discord"
 	"github.com/ccil-kbw/robot/iqama"
+
 	"github.com/ccil-kbw/robot/rec"
 	"github.com/joho/godotenv"
 )
@@ -44,31 +44,10 @@ func main() {
 	godotenv.Load()
 	msgs := make(chan string)
 	stop := make(chan os.Signal, 1)
-	notifyChan := make(chan string)
 
 	signal.Notify(stop, os.Interrupt)
-	/*
-		var prayersData *iqama.PrayersData
-		{
-			prayersData = iqama.StartIqamaServer()
-		}
-		go func() {
-			go iqama.StartRecordingScheduleServer()
 
-			for {
-				in := 15 * time.Minute
-				notifyFunc(notifyChan, prayersData, in)
-				notifyFunc(notifyChan, prayersData, 0)
-				time.Sleep(55 * time.Second)
-			}
-
-		}()
-	*/
 	var obs *rec.Recorder
-
-	if config.Features.DiscordBot {
-		go bot(obs, notifyChan)
-	}
 
 	if config.Features.Record {
 		host := os.Getenv("MDROID_OBS_WEBSOCKET_HOST")
@@ -130,13 +109,6 @@ out:
 // proxy, move to apis, maybe pkg/apis/proxyserver/proxyserver.go
 func proxy() {
 	fmt.Println("implement me")
-}
-
-func bot(obs *rec.Recorder, notifyChan chan string) {
-	guildID := os.Getenv("MDROID_BOT_GUILD_ID")
-	botToken := os.Getenv("MDROID_BOT_TOKEN")
-	removeCommands := true
-	discord.Run(&guildID, &botToken, &removeCommands, obs, notifyChan)
 }
 
 func notifyFunc(notifyChan chan string, prayersData *iqama.PrayersData, in time.Duration) {
