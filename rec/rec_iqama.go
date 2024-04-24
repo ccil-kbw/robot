@@ -29,8 +29,6 @@ func NewRecordConfigDataS() *RecordConfigDataS {
 	}
 
 	fajr := today.Fajr.Iqama
-	dhuhr := today.Dhuhr.Iqama
-	isha := today.Isha.Iqama
 	rc := &RecordConfigDataS{
 		iqama: iqamaClient,
 		data: &[]RecordConfig{
@@ -43,18 +41,6 @@ func NewRecordConfigDataS() *RecordConfigDataS {
 			{
 				Description:   "Fajr Recording",
 				StartTime:     fajr,
-				Duration:      DarsRecordDuration,
-				RecordingDays: EveryDay,
-			},
-			{
-				Description:   "Dhuhur Recording",
-				StartTime:     dhuhr,
-				Duration:      DarsRecordDuration,
-				RecordingDays: EveryDay,
-			},
-			{
-				Description:   "Isha Recording",
-				StartTime:     isha,
 				Duration:      DarsRecordDuration,
 				RecordingDays: EveryDay,
 			},

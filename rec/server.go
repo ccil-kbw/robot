@@ -18,29 +18,31 @@ func StartRecServer(host, password string, data *RecordConfigDataS) (*Recorder, 
 
 			isRecording, err := client.IsRecording()
 			if err != nil {
-				fmt.Println("couldn't check if OBS is recording")
+				fmt.Printf("couldn't check if OBS is recording: %v\n", err)
 			}
 
 			shouldRecord := SupposedToBeRecording(data)
 
 			// Start recording if supposed to be recording but currently not recording
 			if shouldRecord && !isRecording {
+				fmt.Println("should be recording")
 				err := client.StartRecording()
 				if err != nil {
-					fmt.Println("couldn't start recording")
+					fmt.Printf("couldn't start recording: %v\n", err)
 				}
 			}
 
-			var recordTimeLimit float64
-			{
-				recordTimeLimit = 2 * 60 * 60 * 1000
-			}
+			//var recordTimeLimit float64
+			//{
+			//	recordTimeLimit = 2 * 60 * 60 * 1000
+			//}
 
 			// Stop recording if not supposed to be recording but currently recording
-			if !shouldRecord && isRecording && (client.RecordTime() > recordTimeLimit) {
+			if !shouldRecord && isRecording { // && (client.RecordTime() > recordTimeLimit) {
+				fmt.Println("should not be recording")
 				err := client.StopRecording()
 				if err != nil {
-					fmt.Println("couldn't stop recording")
+					fmt.Printf("couldn't stop recording: %v\n", err)
 				}
 			}
 
