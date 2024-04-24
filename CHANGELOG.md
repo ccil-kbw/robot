@@ -1,3 +1,15 @@
+# v2.0.7 (Wed Apr 24 2024)
+
+#### ⚠️ Pushed to `master`
+
+- feat: remove the 2h limit and dhuhur/isha recs ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.0.6 (Tue Apr 16 2024)
 
 #### ⚠️ Pushed to `master`
