@@ -2,14 +2,15 @@ package main
 
 import (
 	"fmt"
-	"github.com/ccil-kbw/robot/iqama"
 	"os"
 	"os/signal"
 	"strings"
 	"time"
 
 	"github.com/ccil-kbw/robot/discord"
+	"github.com/ccil-kbw/robot/iqama"
 	"github.com/ccil-kbw/robot/rec"
+	"github.com/joho/godotenv"
 )
 
 var (
@@ -40,6 +41,7 @@ var (
 )
 
 func main() {
+	godotenv.Load()
 	msgs := make(chan string)
 	stop := make(chan os.Signal, 1)
 	notifyChan := make(chan string)
