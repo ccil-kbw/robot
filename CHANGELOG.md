@@ -1,3 +1,15 @@
+# v2.0.14 (Sat May 04 2024)
+
+#### ⚠️ Pushed to `master`
+
+- Update README.md ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.0.13 (Sat May 04 2024)
 
 #### 💥 Breaking Change
