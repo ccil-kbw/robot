@@ -144,7 +144,7 @@ func (d *bot) deleteApplicationCommands() {
 	}
 
 	for _, v := range commands {
-		d.logger.Info("Deleting Command", zap.String("Command", v.Name), zap.String("GuildID", v.GuildID))
+		d.logger.Info("Deleting command", zap.String("Command", v.Name), zap.String("GuildID", v.GuildID))
 		err := d.session.ApplicationCommandDelete(d.session.State.User.ID, "", v.ID)
 		if err != nil {
 			d.logger.Panic("Cannot delete command", zap.String("Command", v.Name), zap.Error(err), zap.String("GuildID", v.GuildID))
