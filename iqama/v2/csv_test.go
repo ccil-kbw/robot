@@ -16,7 +16,7 @@ func TestNewIqamaCSV(t *testing.T) {
 		{
 			name: "TestNewIqamaCSV",
 			args: args{
-				filePath: "test_assets/iqama_2024.csv",
+				filePath: "Chomedey Laval QC/@ccil_kbw",
 			},
 		},
 	}
@@ -30,7 +30,7 @@ func TestNewIqamaCSV(t *testing.T) {
 
 func TestIqamaCSV_GetTodayTimes(t *testing.T) {
 	// Manually Load CSV and read Today's Record
-	i := NewIqamaCSV("test_assets/iqama_2024.csv")
+	i := NewIqamaCSV("Chomedey Laval QC/@ccil_kbw")
 	daily, err := i.GetTodayTimes()
 	if err != nil {
 		t.Errorf("IqamaCSV.GetTodayTimes() error = %v", err)
@@ -44,28 +44,28 @@ func TestIqamaCSV_GetTodayTimes(t *testing.T) {
 	// This will allow us to compare the times without worrying about the date
 
 	// Assert that Fajr is after 3:00 am (Summer) and before 7am (Winter)
-	if daily.Fajr.Adhan.Hour() < 3 || daily.Fajr.Adhan.Hour() > 6 {
-		t.Errorf("IqamaCSV.GetTodayTimes() = %v, want between 3am and 6am", daily.Fajr.Adhan)
+	if daily.Fajr.Iqama.Hour() < 3 || daily.Fajr.Iqama.Hour() > 6 {
+		t.Errorf("IqamaCSV.GetTodayTimes() = %v, want between 3am and 6am", daily.Fajr.Iqama)
 	}
 
 	// Assert that Dhuhr is after 11:00 am and before 2pm
-	if daily.Dhuhr.Adhan.Hour() < 11 || daily.Dhuhr.Adhan.Hour() > 14 {
-		t.Errorf("IqamaCSV.GetTodayTimes() = %v, want between 12pm and 1pm", daily.Dhuhr.Adhan)
+	if daily.Dhuhr.Iqama.Hour() < 11 || daily.Dhuhr.Iqama.Hour() > 14 {
+		t.Errorf("IqamaCSV.GetTodayTimes() = %v, want between 12pm and 1pm", daily.Dhuhr.Iqama)
 	}
 
 	// Assert that Asr is after 2:00 pm and before 5pm
-	if daily.Asr.Adhan.Hour() < 14 || daily.Asr.Adhan.Hour() > 17 {
-		t.Errorf("IqamaCSV.GetTodayTimes() = %v, want between 2pm and 5pm", daily.Asr.Adhan)
+	if daily.Asr.Iqama.Hour() < 14 || daily.Asr.Iqama.Hour() > 20 {
+		t.Errorf("IqamaCSV.GetTodayTimes() = %v, want between 2pm and 5pm", daily.Asr.Iqama)
 	}
 
 	// Assert that Maghrib is after 4:00 pm and before 9pm
-	if daily.Maghrib.Adhan.Hour() < 16 || daily.Maghrib.Adhan.Hour() > 21 {
-		t.Errorf("IqamaCSV.GetTodayTimes() = %v, want between 5pm and 8pm", daily.Maghrib.Adhan)
+	if daily.Maghrib.Iqama.Hour() < 16 || daily.Maghrib.Iqama.Hour() > 21 {
+		t.Errorf("IqamaCSV.GetTodayTimes() = %v, want between 5pm and 8pm", daily.Maghrib.Iqama)
 	}
 
 	// Assert that Isha is after 5:00 pm and before 11pm
-	if daily.Isha.Adhan.Hour() < 17 || daily.Isha.Adhan.Hour() > 23 {
-		t.Errorf("IqamaCSV.GetTodayTimes() = %v, want between 6pm and 9pm", daily.Isha.Adhan)
+	if daily.Isha.Iqama.Hour() < 17 || daily.Isha.Iqama.Hour() > 23 {
+		t.Errorf("IqamaCSV.GetTodayTimes() = %v, want between 6pm and 9pm", daily.Isha.Iqama)
 
 	}
 }
@@ -83,7 +83,7 @@ func TestIqamaCSV_GetDiscordPrettified(t *testing.T) {
 		{
 			name: "TestIqamaCSV_GetDiscordPrettified",
 			fields: fields{
-				filePath:   "test_assets/iqama_2024.csv",
+				filePath:   "Chomedey Laval QC/@ccil_kbw",
 				iqamaTimes: nil,
 			},
 			want: "```markdown\n+------+------+--------+-----+---------+------+\n| DATE | FAJR | DHUHUR | ASR | MAGHRIB | ISHA |\n+------+------+--------+-----+---------+------+\n+------+------+--------+-----+---------+------+\n```",

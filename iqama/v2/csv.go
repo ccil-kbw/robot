@@ -13,7 +13,8 @@ type IqamaCSV struct {
 	iqamaTimes map[string]IqamaDailyTimes
 }
 
-func NewIqamaCSV(filePath string) Iqama {
+func NewIqamaCSV(masjid string) Iqama {
+	filePath := fmt.Sprintf("assets/masjids_data/%s/iqama.csv", masjid)
 	i := &IqamaCSV{filePath: filePath}
 	if err := i.readCSV(); err != nil {
 		log.Fatalf("Unable to read CSV file %s", filePath)
@@ -75,48 +76,33 @@ func (i *IqamaCSV) readCSV() error {
 		}
 		date, err := ParseDate(record[0])
 		handleErr(err)
-		fajrAdhan, err := ParseHoursMinutes(record[2])
+		fajrIqama, err := ParseHoursMinutes(record[1])
 		handleErr(err)
-		fajrIqama, err := ParseHoursMinutes(record[3])
+		dhuhrIqama, err := ParseHoursMinutes(record[2])
 		handleErr(err)
-		dhuhrAdhan, err := ParseHoursMinutes(record[5])
+		asrIqama, err := ParseHoursMinutes(record[3])
 		handleErr(err)
-		dhuhrIqama, err := ParseHoursMinutes(record[6])
+		maghribIqama, err := ParseHoursMinutes(record[4])
 		handleErr(err)
-		asrAdhan, err := ParseHoursMinutes(record[7])
-		handleErr(err)
-		asrIqama, err := ParseHoursMinutes(record[8])
-		handleErr(err)
-		maghribAdhan, err := ParseHoursMinutes(record[9])
-		handleErr(err)
-		maghribIqama, err := ParseHoursMinutes(record[10])
-		handleErr(err)
-		ishaAdhan, err := ParseHoursMinutes(record[11])
-		handleErr(err)
-		ishaIqama, err := ParseHoursMinutes(record[12])
+		ishaIqama, err := ParseHoursMinutes(record[5])
 		handleErr(err)
 
 		dateStr := date.Format("01/02/2006")
 		iqamaTimes[dateStr] = IqamaDailyTimes{
 			Date: date,
 			Fajr: Prayer{
-				Adhan: fajrAdhan,
 				Iqama: fajrIqama,
 			},
 			Dhuhr: Prayer{
-				Adhan: dhuhrAdhan,
 				Iqama: dhuhrIqama,
 			},
 			Asr: Prayer{
-				Adhan: asrAdhan,
 				Iqama: asrIqama,
 			},
 			Maghrib: Prayer{
-				Adhan: maghribAdhan,
 				Iqama: maghribIqama,
 			},
 			Isha: Prayer{
-				Adhan: ishaAdhan,
 				Iqama: ishaIqama,
 			},
 		}

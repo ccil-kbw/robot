@@ -1,14 +1,13 @@
-package mappers
+package discord
 
 import (
-	"fmt"
-
 	"github.com/bwmarrin/discordgo"
 	"github.com/ccil-kbw/robot/iqama/v2"
+	"go.uber.org/zap"
 )
 
-func IqamaTimesToDiscordInteractionResponseData(resp v2.IqamaDailyTimes) *discordgo.InteractionResponseData {
-	fmt.Println("discord command called: /iqama")
+func iqamaDiscordInteraction(logger *zap.Logger, resp v2.IqamaDailyTimes) *discordgo.InteractionResponseData {
+	logger.Info("iqamaDiscordInteraction", zap.Time("Date", resp.Date))
 	return &discordgo.InteractionResponseData{
 		Embeds: []*discordgo.MessageEmbed{
 			{

@@ -22,13 +22,12 @@ type RecordConfigDataS struct {
 }
 
 func NewRecordConfigDataS() *RecordConfigDataS {
-	iqamaClient := v2.NewIqamaCSV("iqama_2024.csv")
+	iqamaClient := v2.NewIqamaCSV("Chomedey Laval QC/@ccil_kbw")
 	today, err := iqamaClient.GetTodayTimes()
 	if err != nil {
 		fmt.Println("couldn't fetch iqama times, keeping current data")
 	}
 
-	fajr := today.Fajr.Iqama
 	rc := &RecordConfigDataS{
 		iqama: iqamaClient,
 		data: &[]RecordConfig{
@@ -38,15 +37,23 @@ func NewRecordConfigDataS() *RecordConfigDataS {
 				Duration:      JumuaaRecordDuration,
 				RecordingDays: []time.Weekday{time.Friday},
 			},
-			{
-				Description:   "Fajr Recording",
-				StartTime:     fajr,
-				Duration:      DarsRecordDuration,
-				RecordingDays: EveryDay,
-			},
 		},
 	}
-	//rc.Refresh()
+	if today == nil {
+		return rc
+	}
+
+	fajr := today.Fajr.Iqama
+	todaysData := &[]RecordConfig{
+		{
+			Description:   "Fajr Recording",
+			StartTime:     fajr,
+			Duration:      DarsRecordDuration,
+			RecordingDays: EveryDay,
+		},
+	}
+	fullData := append(*rc.data, *todaysData...)
+	rc.data = &fullData
 	return rc
 }
 func (rc *RecordConfigDataS) Get() *[]RecordConfig {

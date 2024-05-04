@@ -12,14 +12,14 @@
       "name": "breaking",
       "changelogTitle": "💥 Breaking Change",
       "description": "Increment the major version when merged",
-      "releaseType": "major",
+      "releaseType": "patch",
       "color": "#C5000B"
     },
     {
       "name": "feature",
       "changelogTitle": "🚀 Enhancement",
       "description": "Increment the minor version when merged",
-      "releaseType": "minor",
+      "releaseType": "patch",
       "color": "#F1A60E"
     },
     {
@@ -38,7 +38,7 @@
     {
       "name": "release",
       "description": "Create a release when this pr is merged",
-      "releaseType": "release",
+      "releaseType": "patch",
       "color": "#007f70"
     },
     {
