@@ -1,3 +1,15 @@
+# v2.0.10 (Sat May 04 2024)
+
+#### 💥 Breaking Change
+
+- Commands Separation [#34](https://github.com/ccil-kbw/robot/pull/34) ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.0.9 (Sat May 04 2024)
 
 #### 🐛 Bug Fix
