@@ -1,3 +1,15 @@
+# v2.0.12 (Sat May 04 2024)
+
+#### 💥 Breaking Change
+
+- feat: refactoring how monolith loads .env [#37](https://github.com/ccil-kbw/robot/pull/37) ([@GitHNX](https://github.com/GitHNX))
+
+#### Authors: 1
+
+- HNX ([@GitHNX](https://github.com/GitHNX))
+
+---
+
 # v2.0.11 (Sat May 04 2024)
 
 #### ⚠️ Pushed to `master`
