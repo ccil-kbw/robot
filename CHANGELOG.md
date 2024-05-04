@@ -1,3 +1,15 @@
+# v2.0.9 (Sat May 04 2024)
+
+#### 🐛 Bug Fix
+
+- feat: Adding .env support [#35](https://github.com/ccil-kbw/robot/pull/35) ([@GitHNX](https://github.com/GitHNX))
+
+#### Authors: 1
+
+- HNX ([@GitHNX](https://github.com/GitHNX))
+
+---
+
 # v2.0.8 (Tue Apr 30 2024)
 
 #### ⚠️ Pushed to `master`
