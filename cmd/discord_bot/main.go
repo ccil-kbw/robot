@@ -51,15 +51,20 @@ func initializeLogger() {
 	var err error
 	if cfg.Environment == "dev" {
 		logger, err = zap.NewDevelopment()
-	} else {
-		logger, err = zap.NewProduction()
-	}
-	if err != nil {
-		log.Println("can't initialize zap logger, using basic logger", err)
-		logger = zap.NewExample()
-	} else if cfg.Environment == "dev" {
+		if err != nil {
+			initExampleLoggerWhenFail()
+		}
 		logger.Info("Using Development Logger")
 	} else {
+		logger, err = zap.NewProduction()
+		if err != nil {
+			initExampleLoggerWhenFail()
+		}
 		logger.Info("Using Production Logger")
 	}
+}
+
+func initExampleLoggerWhenFail() {
+	log.Println("can't initialize zap logger, using basic logger")
+	logger = zap.NewExample()
 }
