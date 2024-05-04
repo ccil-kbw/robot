@@ -25,8 +25,6 @@
 
 # Introduction
 
-# Introduction
-
 Masjid's Droid is a project born out of the desire to serve the needs of the Masjid Khaled Ben Walid community. However, its vision extends beyond a single community. It is designed to be an open and accessible tool for the Ummah, reaching from East to West.
 
 This bot is not just a tool, but a companion that assists in managing and organizing various tasks within the community. It is a testament to the power of technology in fostering community and facilitating communication.
@@ -39,8 +37,6 @@ To invite the bot to your server, you can use the following link:
 ```
 https://discord.com/oauth2/authorize?client_id=1044631828545405048
 ```
-
-Replace `YOUR_BOT_CLIENT_ID` with the client ID of your bot. This will allow you to add the bot to any server where you have the 'Manage Server' permission.
 
 # Forking and Deploying Your Own Version
 
