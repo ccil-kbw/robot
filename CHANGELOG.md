@@ -1,3 +1,15 @@
+# v2.0.13 (Sat May 04 2024)
+
+#### 💥 Breaking Change
+
+- feat: add forking and invitation info to README.md [#38](https://github.com/ccil-kbw/robot/pull/38) ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.0.12 (Sat May 04 2024)
 
 #### 💥 Breaking Change
