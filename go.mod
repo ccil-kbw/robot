@@ -7,6 +7,7 @@ require (
 	github.com/bwmarrin/discordgo v0.27.1
 	github.com/fsnotify/fsnotify v1.7.0
 	github.com/jedib0t/go-pretty/v6 v6.5.4
+	github.com/joho/godotenv v1.5.1
 	golang.org/x/oauth2 v0.18.0
 	google.golang.org/api v0.169.0
 	gorm.io/driver/sqlite v1.5.5
