@@ -1,3 +1,15 @@
+# v2.0.11 (Sat May 04 2024)
+
+#### ⚠️ Pushed to `master`
+
+- feat: simple folders move ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.0.10 (Sat May 04 2024)
 
 #### 💥 Breaking Change
