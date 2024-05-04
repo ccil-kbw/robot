@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	iqamav2 "github.com/ccil-kbw/robot/iqama/v2"
+	iqamav2 "github.com/ccil-kbw/robot/pkg/iqama/v2"
 	"os"
 )
 

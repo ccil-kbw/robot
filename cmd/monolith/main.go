@@ -2,15 +2,15 @@ package main
 
 import (
 	"fmt"
+	"github.com/ccil-kbw/robot/pkg/discord"
+	rec2 "github.com/ccil-kbw/robot/pkg/rec"
 
-	"github.com/ccil-kbw/robot/discord"
 	"go.uber.org/zap"
 	"os"
 	"os/signal"
 	"strings"
 	"time"
 
-	"github.com/ccil-kbw/robot/rec"
 	"github.com/joho/godotenv"
 )
 
@@ -48,7 +48,7 @@ func main() {
 
 	signal.Notify(stop, os.Interrupt)
 
-	var obs *rec.Recorder
+	var obs *rec2.Recorder
 
 	if config.Features.DiscordBot {
 		go bot()
@@ -57,7 +57,7 @@ func main() {
 	if config.Features.Record {
 		host := os.Getenv("MDROID_OBS_WEBSOCKET_HOST")
 		password := os.Getenv("MDROID_OBS_WEBSOCKET_PASSWORD")
-		data := rec.NewRecordConfigDataS()
+		data := rec2.NewRecordConfigDataS()
 
 		obsClient := startServerWithRetry(host, password, data)
 
@@ -120,9 +120,9 @@ func bot() {
 	discordBot.StartBot()
 }
 
-func startServerWithRetry(host string, password string, data *rec.RecordConfigDataS) *rec.Recorder {
+func startServerWithRetry(host string, password string, data *rec2.RecordConfigDataS) *rec2.Recorder {
 	for {
-		obs, err := rec.StartRecServer(host, password, data)
+		obs, err := rec2.StartRecServer(host, password, data)
 		if err != nil {
 			fmt.Printf("could not reach or authenticate to OBS, retrying in 1 minutes...\n")
 			time.Sleep(1 * time.Minute)

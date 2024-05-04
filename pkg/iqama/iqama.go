@@ -2,8 +2,8 @@ package iqama
 
 import (
 	"fmt"
-	v1 "github.com/ccil-kbw/robot/iqama/v1"
-	"github.com/ccil-kbw/robot/rec"
+	v1 "github.com/ccil-kbw/robot/pkg/iqama/v1"
+	"github.com/ccil-kbw/robot/pkg/rec"
 	"sync"
 	"time"
 )

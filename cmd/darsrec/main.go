@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/ccil-kbw/robot/rec"
+	rec2 "github.com/ccil-kbw/robot/pkg/rec"
 	"os"
 )
 
@@ -23,8 +23,8 @@ func main() {
 			os.Exit(1)
 		}
 	}
-	data := rec.NewRecordConfigDataS()
+	data := rec2.NewRecordConfigDataS()
 
-	rec.StartRecServer(host, password, data)
+	rec2.StartRecServer(host, password, data)
 
 }

@@ -2,7 +2,7 @@ package discord
 
 import (
 	"github.com/bwmarrin/discordgo"
-	"github.com/ccil-kbw/robot/iqama/v2"
+	"github.com/ccil-kbw/robot/pkg/iqama/v2"
 	"go.uber.org/zap"
 )
 

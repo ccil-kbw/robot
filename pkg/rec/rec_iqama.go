@@ -2,8 +2,8 @@ package rec
 
 import (
 	"fmt"
-	v1 "github.com/ccil-kbw/robot/iqama/v1"
-	v2 "github.com/ccil-kbw/robot/iqama/v2"
+	v1 "github.com/ccil-kbw/robot/pkg/iqama/v1"
+	v2 "github.com/ccil-kbw/robot/pkg/iqama/v2"
 	"sync"
 	"time"
 )

@@ -4,7 +4,7 @@
 package discord
 
 import (
-	"github.com/ccil-kbw/robot/rec"
+	"github.com/ccil-kbw/robot/pkg/rec"
 	"log"
 	"os"
 	"os/signal"

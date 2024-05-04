@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/caarlos0/env/v11"
-	"github.com/ccil-kbw/robot/discord"
+	"github.com/ccil-kbw/robot/pkg/discord"
 	"github.com/joho/godotenv"
 	"go.uber.org/zap"
 	"log"

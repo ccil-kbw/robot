@@ -3,7 +3,7 @@ package discord
 import (
 	"fmt"
 	"github.com/bwmarrin/discordgo"
-	"github.com/ccil-kbw/robot/rec"
+	"github.com/ccil-kbw/robot/pkg/rec"
 	"time"
 )
 

@@ -5,7 +5,7 @@ import (
 	"io"
 	"net/http"
 
-	v1 "github.com/ccil-kbw/robot/iqama/v1"
+	v1 "github.com/ccil-kbw/robot/pkg/iqama/v1"
 )
 
 func main() {
