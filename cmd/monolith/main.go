@@ -2,14 +2,17 @@ package main
 
 import (
 	"fmt"
+	"log"
+
 	"github.com/ccil-kbw/robot/pkg/discord"
 	rec2 "github.com/ccil-kbw/robot/pkg/rec"
 
-	"go.uber.org/zap"
 	"os"
 	"os/signal"
 	"strings"
 	"time"
+
+	"go.uber.org/zap"
 
 	"github.com/joho/godotenv"
 )
@@ -41,8 +44,11 @@ var (
 	stdMinutes = "4"
 )
 
+func init() {
+	loadEnvs()
+}
+
 func main() {
-	godotenv.Load()
 	msgs := make(chan string)
 	stop := make(chan os.Signal, 1)
 
@@ -129,5 +135,14 @@ func startServerWithRetry(host string, password string, data *rec2.RecordConfigD
 		} else {
 			return obs
 		}
+	}
+}
+
+func loadEnvs() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Println(".env not present, using process envs and defaults")
+	} else {
+		log.Println(".env loaded")
 	}
 }
