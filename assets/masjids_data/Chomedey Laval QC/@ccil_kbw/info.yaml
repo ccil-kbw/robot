@@ -1,0 +1,14 @@
+name: "Centre Culturel Islamique de Laval Khalid Bin Walid"
+address: "1330 Antonio, Laval QC"
+website: "https://ccil-kbw.com/"
+social: # not used yet, need to discuss about these
+  - platform: "facebook"
+    url: "https://www.facebook.com/exampleurlidk"
+  - platform: "instagram"
+    url: "https://www.instagram.com/exampleurlidk/"
+  - platform: "youtube"
+    url: "https://www.youtube.com/@ccil-kbw"
+coordinates:
+  latitude: 45.547559
+  longitude: -73.7568045
+contributed_by: "@ccil_kbw"

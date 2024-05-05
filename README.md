@@ -1,6 +1,6 @@
 <div align="center">
 
-# Masjid's Droid
+# Masjid's Droid v2.0.10
 
 <img src="./assets/img/fares___blueprint.png" width="512" alt="M-Droid Blueprint"/>
 

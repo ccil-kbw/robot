@@ -12,6 +12,7 @@ require (
 	go.uber.org/zap v1.27.0
 	golang.org/x/oauth2 v0.18.0
 	google.golang.org/api v0.169.0
+	gopkg.in/yaml.v2 v2.4.0
 	gorm.io/driver/sqlite v1.5.5
 	gorm.io/gorm v1.25.7
 )
