@@ -3,6 +3,7 @@ package discord
 import (
 	"github.com/bwmarrin/discordgo"
 	iqamav2 "github.com/ccil-kbw/robot/pkg/iqama/v2"
+	"github.com/ccil-kbw/robot/pkg/masjid_info"
 	"go.uber.org/zap"
 	"os"
 	"strings"
@@ -26,10 +27,14 @@ var (
 			choice := cityName + "/" + masjidName
 			iqamaClient := iqamav2.NewIqamaCSV(choice)
 			resp, _ := iqamaClient.GetTodayTimes()
-			_ = s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+			respMasjidInfo := masjid_info.GetMasjidInfoFromFile(choice)
+			err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
-				Data: iqamaDiscordInteraction(logger, *resp),
+				Data: iqamaDiscordInteraction(logger, *resp, respMasjidInfo),
 			})
+			if err != nil {
+				logger.Error("Error responding to interaction", zap.String("GuildID", i.GuildID), zap.Error(err))
+			}
 		},
 	}
 )
