@@ -1,3 +1,15 @@
+# v2.0.15 (Sun May 05 2024)
+
+#### 💥 Breaking Change
+
+- feat: add simple data [#43](https://github.com/ccil-kbw/robot/pull/43) ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.0.14 (Sat May 04 2024)
 
 #### ⚠️ Pushed to `master`
