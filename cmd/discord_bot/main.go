@@ -1,13 +1,15 @@
 package main
 
 import (
-	"github.com/caarlos0/env/v11"
-	"github.com/ccil-kbw/robot/pkg/discord"
-	"github.com/joho/godotenv"
-	"go.uber.org/zap"
 	"log"
+
+	"github.com/caarlos0/env/v11"
+	environment "github.com/ccil-kbw/robot/internal/environment"
+	"github.com/ccil-kbw/robot/pkg/discord"
+	"go.uber.org/zap"
 )
 
+// TODO: Should Types have a folder of their own?
 type config struct {
 	Environment        string `env:"ENVIRONMENT" envDefault:"dev"`
 	DiscordServerID    string `env:"DISCORD_SERVER_ID"`
@@ -21,7 +23,7 @@ var (
 )
 
 func init() {
-	loadEnvs()
+	environment.LoadEnvironmentVariables()
 	loadConfig()
 	initializeLogger()
 }
@@ -29,15 +31,6 @@ func init() {
 func main() {
 	bot := discord.NewDiscordBot(logger, cfg.DiscordServerID, cfg.DiscordBotToken, cfg.DiscordBotAsPublic)
 	bot.StartBot()
-}
-
-func loadEnvs() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Println(".env not present, using process envs and defaults")
-	} else {
-		log.Println(".env loaded")
-	}
 }
 
 func loadConfig() {
