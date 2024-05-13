@@ -2,9 +2,15 @@ package main
 
 import (
 	"fmt"
-	rec2 "github.com/ccil-kbw/robot/pkg/rec"
 	"os"
+
+	environment "github.com/ccil-kbw/robot/internal/environment"
+	rec2 "github.com/ccil-kbw/robot/pkg/rec"
 )
+
+func init() {
+	environment.LoadEnvironmentVariables()
+}
 
 // TODO: Swap all this as a darsRec.StartServer()
 func main() {
