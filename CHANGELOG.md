@@ -1,3 +1,15 @@
+# v2.0.16 (Mon May 13 2024)
+
+#### 💥 Breaking Change
+
+- ISSUE-36 - Organize Environment and Logger init [#46](https://github.com/ccil-kbw/robot/pull/46) ([@GitHNX](https://github.com/GitHNX))
+
+#### Authors: 1
+
+- HNX ([@GitHNX](https://github.com/GitHNX))
+
+---
+
 # v2.0.15 (Sun May 05 2024)
 
 #### 💥 Breaking Change
