@@ -19,6 +19,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: PR Title Verify
+        uses: actions/action-pr-title@master
+        with:
+          regex: '([A-Z]+-[0-9]*) -.*'
+          allowed_prefixes: 'ISSUE'
+          prefix_case_sensitive: true
+
       - name: Log in to the Container registry
         uses: docker/login-action@v2
         with:
