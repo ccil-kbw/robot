@@ -3,24 +3,17 @@ package logger
 import (
 	"log"
 
+	config "github.com/ccil-kbw/robot/internal/config"
 	"go.uber.org/zap"
 )
 
 var (
 	Logger *zap.Logger
-	Cfg    = config{}
 )
-
-type config struct {
-	Environment        string `env:"ENVIRONMENT" envDefault:"dev"`
-	DiscordServerID    string `env:"DISCORD_SERVER_ID"`
-	DiscordBotToken    string `env:"DISCORD_BOT_TOKEN"`
-	DiscordBotAsPublic bool   `env:"DISCORD_BOT_AS_PUBLIC" envDefault:"true"`
-}
 
 func InitializeLogger() {
 	var err error
-	if Cfg.Environment == "dev" {
+	if config.Cfg.Environment == "dev" {
 		Logger, err = zap.NewDevelopment()
 		if err != nil {
 			initExampleLoggerWhenFail()
