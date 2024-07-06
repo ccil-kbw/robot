@@ -1,3 +1,21 @@
+# v2.0.17 (Sat Jul 06 2024)
+
+#### 💥 Breaking Change
+
+- ISSUE-36 - Organize Environment and Logger init [#48](https://github.com/ccil-kbw/robot/pull/48) ([@GitHNX](https://github.com/GitHNX))
+
+#### ⚠️ Pushed to `master`
+
+- fix: remove hack of installing git on github runners ([@serafdev](https://github.com/serafdev))
+- feat: add saturday dars hours for rec ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 2
+
+- HNX ([@GitHNX](https://github.com/GitHNX))
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.0.16 (Mon May 13 2024)
 
 #### 💥 Breaking Change
