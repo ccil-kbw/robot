@@ -20,12 +20,6 @@ jobs:
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
-      - name: Install specific git version
-        run: |
-          echo 🤮 for the next 3 lines
-          sudo apt-get update
-          sudo add-apt-repository ppa:git-core/ppa 
-          sudo apt install git=1:2.34.1-1ubuntu1.10 git-man=1:2.34.1-1ubuntu1.10 -y --allow-downgrades
       - name: Checkout
         uses: actions/checkout@v4
         with: # https://stackoverflow.com/a/65081720
