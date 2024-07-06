@@ -12,11 +12,13 @@ func iqamaDiscordInteraction(logger *zap.Logger, resp v2.IqamaDailyTimes, respMa
 	return &discordgo.InteractionResponseData{
 		Embeds: []*discordgo.MessageEmbed{
 			{
-				URL:         respMasjidInfo.Website,
-				Type:        discordgo.EmbedTypeRich,
-				Title:       "Iqama Times for " + respMasjidInfo.Name + " on " + resp.Date.Format("2006-01-02"),
-				Description: "Contributed By " + respMasjidInfo.ContributedBy,
-				Color:       0x05993e,
+				URL:   respMasjidInfo.Website,
+				Type:  discordgo.EmbedTypeRich,
+				Title: "Iqama Times for " + respMasjidInfo.Name + " on " + resp.Date.Format("2006-01-02"),
+				Footer: &discordgo.MessageEmbedFooter{
+					Text: "Contributed By " + respMasjidInfo.ContributedBy,
+				},
+				Color: 0x05993e,
 				Image: &discordgo.MessageEmbedImage{
 					// This is a test URL
 					URL:    "https://cdn.discordapp.com/attachments/1159517401809952828/1232860492180099162/fares____bedouins_in_desert_discussing_night_cold_snow_far_away_4e47cde4-6cfa-423a-b966-9921d252e668.png?ex=6638d60e&is=6637848e&hm=99fe7744a0c41e7abe4b858eedd07c6a0d26eab652c9ce0fbef262704d41d620&",

@@ -3,6 +3,7 @@ package iqama
 import (
 	"fmt"
 	v1 "github.com/ccil-kbw/robot/pkg/iqama/v1"
+
 	"github.com/ccil-kbw/robot/pkg/rec"
 	"sync"
 	"time"
@@ -62,6 +63,7 @@ func StartRecordingScheduleServer() *RecordingsData {
 func StartIqamaServer() *PrayersData {
 	data := &PrayersData{}
 	data.Refresh()
+
 	ticker := time.NewTicker(1 * time.Hour)
 	go func() {
 		for range ticker.C {
