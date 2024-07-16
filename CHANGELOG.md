@@ -1,3 +1,15 @@
+# v2.0.18 (Tue Jul 16 2024)
+
+#### ⚠️ Pushed to `master`
+
+- feat: add summer program ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.0.17 (Sat Jul 06 2024)
 
 #### 💥 Breaking Change
