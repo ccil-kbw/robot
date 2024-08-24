@@ -44,7 +44,7 @@ func NewRecordConfigDataS() *RecordConfigDataS {
 	}
 
 	fajr := today.Fajr.Iqama
-	maghrib := today.Maghrib.Iqama
+	//maghrib := today.Maghrib.Iqama
 	asr := today.Asr.Iqama
 	todaysData := &[]RecordConfig{
 		{
@@ -55,8 +55,8 @@ func NewRecordConfigDataS() *RecordConfigDataS {
 		},
 		{
 			Description:   "Saturday Dars",
-			StartTime:     maghrib,
-			Duration:      2 * time.Hour,
+			StartTime:     time.Date(2024, 1, 1, 17, 0, 0, 0, time.Local),
+			Duration:      5 * time.Hour,
 			RecordingDays: []time.Weekday{time.Saturday},
 		},
 		{
