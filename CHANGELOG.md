@@ -1,3 +1,15 @@
+# v2.0.19 (Sat Aug 24 2024)
+
+#### ⚠️ Pushed to `master`
+
+- feat: mv dars to 5pm ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.0.18 (Tue Jul 16 2024)
 
 #### ⚠️ Pushed to `master`
