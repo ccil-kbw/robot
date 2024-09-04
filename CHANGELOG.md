@@ -1,3 +1,15 @@
+# v2.0.21 (Wed Sep 04 2024)
+
+#### ⚠️ Pushed to `master`
+
+- feat: add dhuhur in recordings ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.0.20 (Wed Sep 04 2024)
 
 #### ⚠️ Pushed to `master`
