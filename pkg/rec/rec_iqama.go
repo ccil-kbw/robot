@@ -10,6 +10,7 @@ import (
 
 var (
 	EveryDay             []time.Weekday = []time.Weekday{time.Sunday, time.Monday, time.Tuesday, time.Wednesday, time.Thursday, time.Friday, time.Saturday}
+	EveryDayButFriday    []time.Weekday = []time.Weekday{time.Sunday, time.Monday, time.Tuesday, time.Wednesday, time.Thursday, time.Saturday}
 	JumuaaRecordDuration time.Duration  = 2 * time.Hour
 	DarsRecordDuration   time.Duration  = 45 * time.Minute
 	location             string         = "America/Montreal"
@@ -44,25 +45,32 @@ func NewRecordConfigDataS() *RecordConfigDataS {
 	}
 
 	fajr := today.Fajr.Iqama
+	dhuhur := today.Dhuhr.Iqama
 	isha := today.Isha.Iqama
 	todaysData := &[]RecordConfig{
 		{
 			Description:   "Fajr Recording",
 			StartTime:     fajr,
 			Duration:      DarsRecordDuration,
-			RecordingDays: EveryDay,
+			RecordingDays: EveryDayButFriday,
+		},
+		{
+			Description:   "Dhuhur Recording",
+			StartTime:     dhuhur,
+			Duration:      DarsRecordDuration,
+			RecordingDays: EveryDayButFriday,
 		},
 		{
 			Description:   "Saturday Dars",
 			StartTime:     time.Date(2024, 1, 1, 17, 0, 0, 0, time.Local),
-			Duration:      5 * time.Hour,
+			Duration:      4 * time.Hour,
 			RecordingDays: []time.Weekday{time.Saturday},
 		},
 		{
 			Description:   "Isha Recording",
 			StartTime:     isha,
 			Duration:      DarsRecordDuration,
-			RecordingDays: EveryDay,
+			RecordingDays: EveryDayButFriday,
 		},
 	}
 	fullData := append(*rc.data, *todaysData...)
