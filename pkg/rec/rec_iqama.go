@@ -44,8 +44,7 @@ func NewRecordConfigDataS() *RecordConfigDataS {
 	}
 
 	fajr := today.Fajr.Iqama
-	//maghrib := today.Maghrib.Iqama
-	asr := today.Asr.Iqama
+	isha := today.Isha.Iqama
 	todaysData := &[]RecordConfig{
 		{
 			Description:   "Fajr Recording",
@@ -60,10 +59,10 @@ func NewRecordConfigDataS() *RecordConfigDataS {
 			RecordingDays: []time.Weekday{time.Saturday},
 		},
 		{
-			Description:   "Summer Program",
-			StartTime:     asr,
-			Duration:      2 * time.Hour,
-			RecordingDays: []time.Weekday{time.Sunday, time.Tuesday, time.Thursday},
+			Description:   "Isha Recording",
+			StartTime:     isha,
+			Duration:      DarsRecordDuration,
+			RecordingDays: EveryDay,
 		},
 	}
 	fullData := append(*rc.data, *todaysData...)
