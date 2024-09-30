@@ -25,7 +25,6 @@ func NewIqamaCSV(masjid string) Iqama {
 func (i *IqamaCSV) GetTodayTimes() (*IqamaDailyTimes, error) {
 	// Get today's date
 	today := time.Now()
-
 	times, err := i.iqamaForDate(today)
 	handleErr(err)
 	return &times, nil

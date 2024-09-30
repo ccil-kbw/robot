@@ -15,7 +15,7 @@ import (
 )
 
 type Bot interface {
-	StartBot()
+	StartBot() error
 }
 
 type bot struct {
@@ -41,12 +41,12 @@ func NewDiscordBot(logger *zap.Logger, adminGuildID, botToken string, isPublic b
 }
 
 // StartBot starts the bot
-func (d *bot) StartBot() {
-	d.run(true, nil, nil)
+func (d *bot) StartBot() error {
+	return d.run(true, nil, nil)
 }
 
 // run starts the bot and listens for incoming commands
-func (d *bot) run(removeCommands bool, obs *rec.Recorder, notifyChan chan string) {
+func (d *bot) run(removeCommands bool, obs *rec.Recorder, notifyChan chan string) error {
 	var err error
 
 	d.addInteractionCreateHandlers()
@@ -54,7 +54,8 @@ func (d *bot) run(removeCommands bool, obs *rec.Recorder, notifyChan chan string
 
 	err = d.session.Open()
 	if err != nil {
-		d.logger.Fatal("Cannot open the session", zap.Error(err))
+		d.logger.Error("Cannot open the session", zap.Error(err))
+		return err
 	}
 
 	d.logger.Info("Starting Discord Bot",
@@ -83,6 +84,7 @@ func (d *bot) run(removeCommands bool, obs *rec.Recorder, notifyChan chan string
 	<-stop
 	time.Sleep(10 * time.Second) // Graceful shutdown, giving some time for the bot to respond to the commands
 
+	return nil
 }
 
 func (d *bot) addInteractionCreateHandlers() {

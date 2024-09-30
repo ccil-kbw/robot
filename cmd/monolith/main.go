@@ -61,39 +61,50 @@ func main() {
 	if config.Features.Record {
 		host := os.Getenv("MDROID_OBS_WEBSOCKET_HOST")
 		password := os.Getenv("MDROID_OBS_WEBSOCKET_PASSWORD")
-		data := rec2.NewRecordConfigDataS()
 
-		obsClient := startServerWithRetry(host, password, data)
-
-		// Calculate the duration until midnight
-		now := time.Now()
-		night := time.Date(now.Year(), now.Month(), now.Day()+1, 2, 0, 0, 0, now.Location())
-		duration := night.Sub(now)
-
-		// Create a timer that waits until midnight
-		timer := time.NewTimer(duration)
-		<-timer.C // This blocks until the timer fires
-
-		// Now that it's midnight, start a ticker that ticks every 24 hours
-		ticker := time.NewTicker(24 * time.Hour)
-
-		// Call rec.StartRecServer every time the ticker ticks
 		go func() {
-			for range ticker.C {
-				err := obsClient.Disconnect()
+			for {
+				data := rec2.NewRecordConfigDataS()
+				obsClient, err := rec2.StartRecServer(host, password, data)
 				if err != nil {
-					return
+					fmt.Printf("could not reach or authenticate to OBS, retrying in 1 minute...\n")
+					time.Sleep(1 * time.Minute)
+					continue
 				}
-				obsClient = startServerWithRetry(host, password, data)
+
+				// Check recording status every minute
+				for {
+					data = rec2.NewRecordConfigDataS()
+					shouldRecord := rec2.SupposedToBeRecording(data)
+					isRecording, err := obsClient.IsRecording()
+					if err != nil {
+						fmt.Printf("couldn't check if OBS is recording: %v\n", err)
+						continue
+					}
+
+					if shouldRecord && !isRecording {
+						fmt.Println("should be recording")
+						err := obsClient.StartRecording()
+						if err != nil {
+							fmt.Printf("couldn't start recording: %v\n", err)
+						}
+					} else if !shouldRecord && isRecording {
+						fmt.Println("should not be recording")
+						err := obsClient.StopRecording()
+						if err != nil {
+							fmt.Printf("couldn't stop recording: %v\n", err)
+						}
+					}
+					time.Sleep(1 * time.Minute)
+
+				}
 			}
 		}()
-
 	}
 
 out:
 	for {
 		select {
-		// discord msgs dispatcher
 		case msg := <-msgs:
 			fmt.Printf("%v, operation received from discord: %s\n", time.Now(), msg)
 			if strings.HasPrefix(msg, "rec-") {
@@ -106,13 +117,10 @@ out:
 				}
 			}
 		case <-stop:
-			// simplest way to wait for the nested go routines to clean up
-			// takes < 2 ms but better be safe
 			time.Sleep(10 * time.Second)
 			break out
 		}
 	}
-
 }
 
 func bot() {
@@ -121,17 +129,14 @@ func bot() {
 
 	logger, _ := zap.NewProduction()
 	discordBot := discord.NewDiscordBot(logger, guildID, botToken, true)
-	discordBot.StartBot()
-}
 
-func startServerWithRetry(host string, password string, data *rec2.RecordConfigDataS) *rec2.Recorder {
 	for {
-		obs, err := rec2.StartRecServer(host, password, data)
+		err := discordBot.StartBot()
 		if err != nil {
-			fmt.Printf("could not reach or authenticate to OBS, retrying in 1 minutes...\n")
-			time.Sleep(1 * time.Minute)
+			logger.Error("Failed to start Discord bot, retrying in 10 minutes", zap.Error(err))
+			time.Sleep(10 * time.Minute)
 		} else {
-			return obs
+			break
 		}
 	}
 }
