@@ -12,6 +12,5 @@ services:
     image: ghcr.io/ccil-kbw/robot:latest
     restart: always
     volumes:
-      - /home/seraf/Documents/MEGAKBW:/data
       - /home/seraf/.ytcreds.json:/credentials.json
     command: "/yt-upload-v2"

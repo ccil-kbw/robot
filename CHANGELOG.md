@@ -1,3 +1,123 @@
+# v2.0.16 (Mon May 13 2024)
+
+#### 💥 Breaking Change
+
+- ISSUE-36 - Organize Environment and Logger init [#46](https://github.com/ccil-kbw/robot/pull/46) ([@GitHNX](https://github.com/GitHNX))
+
+#### Authors: 1
+
+- HNX ([@GitHNX](https://github.com/GitHNX))
+
+---
+
+# v2.0.15 (Sun May 05 2024)
+
+#### 💥 Breaking Change
+
+- feat: add simple data [#43](https://github.com/ccil-kbw/robot/pull/43) ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
+# v2.0.14 (Sat May 04 2024)
+
+#### ⚠️ Pushed to `master`
+
+- Update README.md ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
+# v2.0.13 (Sat May 04 2024)
+
+#### 💥 Breaking Change
+
+- feat: add forking and invitation info to README.md [#38](https://github.com/ccil-kbw/robot/pull/38) ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
+# v2.0.12 (Sat May 04 2024)
+
+#### 💥 Breaking Change
+
+- feat: refactoring how monolith loads .env [#37](https://github.com/ccil-kbw/robot/pull/37) ([@GitHNX](https://github.com/GitHNX))
+
+#### Authors: 1
+
+- HNX ([@GitHNX](https://github.com/GitHNX))
+
+---
+
+# v2.0.11 (Sat May 04 2024)
+
+#### ⚠️ Pushed to `master`
+
+- feat: simple folders move ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
+# v2.0.10 (Sat May 04 2024)
+
+#### 💥 Breaking Change
+
+- Commands Separation [#34](https://github.com/ccil-kbw/robot/pull/34) ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
+# v2.0.9 (Sat May 04 2024)
+
+#### 🐛 Bug Fix
+
+- feat: Adding .env support [#35](https://github.com/ccil-kbw/robot/pull/35) ([@GitHNX](https://github.com/GitHNX))
+
+#### Authors: 1
+
+- HNX ([@GitHNX](https://github.com/GitHNX))
+
+---
+
+# v2.0.8 (Tue Apr 30 2024)
+
+#### ⚠️ Pushed to `master`
+
+- Update docker-compose.yml ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
+# v2.0.7 (Wed Apr 24 2024)
+
+#### ⚠️ Pushed to `master`
+
+- feat: remove the 2h limit and dhuhur/isha recs ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.0.6 (Tue Apr 16 2024)
 
 #### ⚠️ Pushed to `master`

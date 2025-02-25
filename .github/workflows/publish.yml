@@ -44,6 +44,10 @@ jobs:
         run: |
           echo "$(git describe --tags)"
           echo "version=$(git describe --tags)" >> "$GITHUB_OUTPUT"
+          ./tools/bump_version.sh "$(git describe --tags)"
+          git add ./internal/version/version.go
+          git add ./README.md
+          git commit -m "Bump version to $(git describe --tags) [skip ci]"
 
   releases-matrix:
     needs: release

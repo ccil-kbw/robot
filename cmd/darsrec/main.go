@@ -2,9 +2,15 @@ package main
 
 import (
 	"fmt"
-	"github.com/ccil-kbw/robot/rec"
 	"os"
+
+	environment "github.com/ccil-kbw/robot/internal/environment"
+	rec2 "github.com/ccil-kbw/robot/pkg/rec"
 )
+
+func init() {
+	environment.LoadEnvironmentVariables()
+}
 
 // TODO: Swap all this as a darsRec.StartServer()
 func main() {
@@ -23,8 +29,8 @@ func main() {
 			os.Exit(1)
 		}
 	}
-	data := rec.NewRecordConfigDataS()
+	data := rec2.NewRecordConfigDataS()
 
-	rec.StartRecServer(host, password, data)
+	rec2.StartRecServer(host, password, data)
 
 }
