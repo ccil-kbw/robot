@@ -2,3 +2,5 @@
 python/
 .vscode
 .idea/
+.env
+cover.out

@@ -1,0 +1,11 @@
+.env
+.env.sample
+.gitignore
+CHANGELOG.md
+README.md
+LICENSE
+Dockerfile
+docker-compose.yml
+.autorc
+.github
+.git

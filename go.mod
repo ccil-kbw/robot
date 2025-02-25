@@ -5,10 +5,14 @@ go 1.22
 require (
 	github.com/andreykaipov/goobs v1.2.3
 	github.com/bwmarrin/discordgo v0.27.1
+	github.com/caarlos0/env/v11 v11.0.0
 	github.com/fsnotify/fsnotify v1.7.0
 	github.com/jedib0t/go-pretty/v6 v6.5.4
+	github.com/joho/godotenv v1.5.1
+	go.uber.org/zap v1.27.0
 	golang.org/x/oauth2 v0.18.0
 	google.golang.org/api v0.169.0
+	gopkg.in/yaml.v2 v2.4.0
 	gorm.io/driver/sqlite v1.5.5
 	gorm.io/gorm v1.25.7
 )
@@ -40,6 +44,7 @@ require (
 	go.opentelemetry.io/otel v1.24.0 // indirect
 	go.opentelemetry.io/otel/metric v1.24.0 // indirect
 	go.opentelemetry.io/otel/trace v1.24.0 // indirect
+	go.uber.org/multierr v1.10.0 // indirect
 	golang.org/x/crypto v0.21.0 // indirect
 	golang.org/x/net v0.22.0 // indirect
 	golang.org/x/sys v0.18.0 // indirect

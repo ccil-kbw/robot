@@ -1,20 +1,29 @@
-// Package main
 package main
 
 import (
-	"flag"
+	"log"
 
-	"github.com/ccil-kbw/robot/discord"
+	"github.com/caarlos0/env/v11"
+	config "github.com/ccil-kbw/robot/internal/config"
+	environment "github.com/ccil-kbw/robot/internal/environment"
+	logger "github.com/ccil-kbw/robot/internal/logger"
+	"github.com/ccil-kbw/robot/pkg/discord"
 )
 
-var (
-	GuildID        = flag.String("guild", "", "Test guild ID. If not passed - bot registers commands globally")
-	BotToken       = flag.String("token", "", "Bot access token")
-	RemoveCommands = flag.Bool("rmcmd", true, "Remove all commands after shutdowning or not")
-)
-
-func init() { flag.Parse() }
+func init() {
+	environment.LoadEnvironmentVariables()
+	logger.InitializeLogger()
+	loadConfig()
+}
 
 func main() {
-	go discord.Run(GuildID, BotToken, RemoveCommands, nil, make(chan string))
+	bot := discord.NewDiscordBot(logger.Logger, config.Cfg.DiscordServerID, config.Cfg.DiscordBotToken, config.Cfg.DiscordBotAsPublic)
+	bot.StartBot()
+}
+
+func loadConfig() {
+	if err := env.Parse(&config.Cfg); err != nil {
+		log.Fatalf("%+v\n", err)
+	}
+	log.Println("configuration ready")
 }
