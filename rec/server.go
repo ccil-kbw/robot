@@ -36,6 +36,8 @@ func StartRecServer(host, password string, data *RecordConfigDataS) (*Recorder, 
 				recordTimeLimit = 2 * 60 * 60 * 1000
 			}
 
+
+
 			// Stop recording if not supposed to be recording but currently recording
 			if !shouldRecord && isRecording && (client.RecordTime() > recordTimeLimit) {
 				err := client.StopRecording()

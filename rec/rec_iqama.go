@@ -9,10 +9,11 @@ import (
 )
 
 var (
-	EveryDay             []time.Weekday = []time.Weekday{time.Sunday, time.Monday, time.Tuesday, time.Wednesday, time.Thursday, time.Friday, time.Saturday}
-	JumuaaRecordDuration time.Duration  = 2 * time.Hour
-	DarsRecordDuration   time.Duration  = 45 * time.Minute
-	location             string         = "America/Montreal"
+	EveryDay              []time.Weekday = []time.Weekday{time.Sunday, time.Monday, time.Tuesday, time.Wednesday, time.Thursday, time.Friday, time.Saturday}
+	JumuaaRecordDuration  time.Duration  = 2 * time.Hour
+	DarsRecordDuration    time.Duration  = 45 * time.Minute
+	TarawihRecordDuration time.Duration  = 3 * time.Hour
+	location              string         = "America/Montreal"
 )
 
 type RecordConfigDataS struct {
@@ -55,7 +56,7 @@ func NewRecordConfigDataS() *RecordConfigDataS {
 			{
 				Description:   "Isha Recording",
 				StartTime:     isha,
-				Duration:      DarsRecordDuration,
+				Duration:      TarawihRecordDuration,
 				RecordingDays: EveryDay,
 			},
 		},
@@ -104,12 +105,6 @@ func (rc *RecordConfigDataS) Refresh() {
 			Description:   "Dhuhur Recording",
 			StartTime:     toTime(iqamaTimes.Dhuhr.Iqama),
 			Duration:      DarsRecordDuration,
-			RecordingDays: EveryDay,
-		},
-		{
-			Description:   "Isha Recording",
-			StartTime:     toTime(iqamaTimes.Isha.Iqama).Add(-30 * time.Minute),
-			Duration:      JumuaaRecordDuration,
 			RecordingDays: EveryDay,
 		},
 		{
