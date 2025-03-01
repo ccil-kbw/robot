@@ -1,3 +1,15 @@
+# v2.1.1 (Sat Mar 01 2025)
+
+#### ⚠️ Pushed to `master`
+
+- fix: rec time ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس بالسرور ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.1.0 (Sat Mar 01 2025)
 
 #### 🚀 Enhancement
