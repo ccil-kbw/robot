@@ -1,15 +1,3 @@
-# v2.0.22 (Tue Feb 28 2025)
-
-#### ⚠️ Pushed to `master`
-
-- feat: tbf this changelog was added manually to hack the system, wow ([@serafdev](https://github.com/serafdev))
-
-#### Authors: 1
-
-- فارس ([@serafdev](https://github.com/serafdev))
-
----
-
 # v2.0.6 (Tue Apr 16 2024)
 
 #### ⚠️ Pushed to `master`
