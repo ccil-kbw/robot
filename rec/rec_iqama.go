@@ -12,7 +12,7 @@ var (
 	EveryDay              []time.Weekday = []time.Weekday{time.Sunday, time.Monday, time.Tuesday, time.Wednesday, time.Thursday, time.Friday, time.Saturday}
 	JumuaaRecordDuration  time.Duration  = 2 * time.Hour
 	DarsRecordDuration    time.Duration  = 45 * time.Minute
-	TarawihRecordDuration time.Duration  = 3 * time.Hour
+	TarawihRecordDuration time.Duration  = 150 * time.Minute
 	location              string         = "America/Montreal"
 )
 
@@ -55,7 +55,7 @@ func NewRecordConfigDataS() *RecordConfigDataS {
 			},
 			{
 				Description:   "Isha Recording",
-				StartTime:     isha,
+				StartTime:     isha.Add(-15 * time.Minute),
 				Duration:      TarawihRecordDuration,
 				RecordingDays: EveryDay,
 			},
