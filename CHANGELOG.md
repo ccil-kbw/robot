@@ -1,3 +1,21 @@
+# v2.1.0 (Sat Mar 01 2025)
+
+#### 🚀 Enhancement
+
+- Update CHANGELOG.md [#53](https://github.com/ccil-kbw/robot/pull/53) ([@serafdev](https://github.com/serafdev))
+
+#### ⚠️ Pushed to `master`
+
+- feat: CHANGELOG huehue ([@serafdev](https://github.com/serafdev))
+- fix: remove git tag ([@serafdev](https://github.com/serafdev))
+- feat: tarawih recording ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس بالسرور ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.0.6 (Tue Apr 16 2024)
 
 #### ⚠️ Pushed to `master`
