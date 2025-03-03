@@ -1,3 +1,16 @@
+# v2.1.2 (Mon Mar 03 2025)
+
+#### ⚠️ Pushed to `master`
+
+- fix: tarawih recording times ([@serafdev](https://github.com/serafdev))
+- feat: add 2025 calendar ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس بالسرور ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.1.1 (Sat Mar 01 2025)
 
 #### ⚠️ Pushed to `master`
