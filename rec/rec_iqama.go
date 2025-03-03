@@ -54,8 +54,8 @@ func NewRecordConfigDataS() *RecordConfigDataS {
 				RecordingDays: EveryDay,
 			},
 			{
-				Description:   "Isha Recording",
-				StartTime:     isha.Add(-15 * time.Minute),
+				Description:   "Tarawih Recording",
+				StartTime:     isha.Add(-20 * time.Minute),
 				Duration:      TarawihRecordDuration,
 				RecordingDays: EveryDay,
 			},
