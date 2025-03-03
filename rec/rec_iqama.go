@@ -23,7 +23,7 @@ type RecordConfigDataS struct {
 }
 
 func NewRecordConfigDataS() *RecordConfigDataS {
-	iqamaClient := v2.NewIqamaCSV("iqama_2024.csv")
+	iqamaClient := v2.NewIqamaCSV("iqama_2025.csv")
 	today, err := iqamaClient.GetTodayTimes()
 	if err != nil {
 		fmt.Println("couldn't fetch iqama times, keeping current data")

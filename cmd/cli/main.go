@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	client := iqamav2.NewIqamaCSV("iqama_2024.csv")
+	client := iqamav2.NewIqamaCSV("iqama_2025.csv")
 
 	fmt.Println(client.GetShellPrettified())
 }

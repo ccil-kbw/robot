@@ -16,7 +16,7 @@ func TestNewIqamaCSV(t *testing.T) {
 		{
 			name: "TestNewIqamaCSV",
 			args: args{
-				filePath: "test_assets/iqama_2024.csv",
+				filePath: "test_assets/iqama_2025.csv",
 			},
 		},
 	}
@@ -30,7 +30,7 @@ func TestNewIqamaCSV(t *testing.T) {
 
 func TestIqamaCSV_GetTodayTimes(t *testing.T) {
 	// Manually Load CSV and read Today's Record
-	i := NewIqamaCSV("test_assets/iqama_2024.csv")
+	i := NewIqamaCSV("test_assets/iqama_2025.csv")
 	daily, err := i.GetTodayTimes()
 	if err != nil {
 		t.Errorf("IqamaCSV.GetTodayTimes() error = %v", err)
@@ -83,7 +83,7 @@ func TestIqamaCSV_GetDiscordPrettified(t *testing.T) {
 		{
 			name: "TestIqamaCSV_GetDiscordPrettified",
 			fields: fields{
-				filePath:   "test_assets/iqama_2024.csv",
+				filePath:   "test_assets/iqama_2025.csv",
 				iqamaTimes: nil,
 			},
 			want: "```markdown\n+------+------+--------+-----+---------+------+\n| DATE | FAJR | DHUHUR | ASR | MAGHRIB | ISHA |\n+------+------+--------+-----+---------+------+\n+------+------+--------+-----+---------+------+\n```",

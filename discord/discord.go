@@ -37,7 +37,7 @@ var (
 		},
 	}
 
-	iqamaClient = iqamav2.NewIqamaCSV("iqama_2024.csv")
+	iqamaClient = iqamav2.NewIqamaCSV("iqama_2025.csv")
 
 	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder){
 		"iqama": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {

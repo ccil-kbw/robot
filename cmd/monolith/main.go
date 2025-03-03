@@ -18,7 +18,7 @@ var (
 	// Double check on the env side if we need the feature at run time (e.g openbroadcaster is configured, proxy is required, etc)
 	config = Config{
 		Features: Features{
-			DiscordBot: true,
+			DiscordBot: false,
 			Record:     true,
 		},
 	}
