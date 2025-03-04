@@ -1,3 +1,15 @@
+# v2.1.3 (Tue Mar 04 2025)
+
+#### ⚠️ Pushed to `master`
+
+- Update Dockerfile ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس بالسرور ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.1.2 (Mon Mar 03 2025)
 
 #### ⚠️ Pushed to `master`
