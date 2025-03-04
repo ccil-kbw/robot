@@ -17,6 +17,8 @@ WORKDIR /
 COPY --from=build-stage /monolith /monolith
 COPY --from=build-stage /yt-upload-v2 /yt-upload-v2
 
+COPY iqama_2025.csv /iqama_2025.csv
+
 EXPOSE 3333
 
 USER nonroot:nonroot
