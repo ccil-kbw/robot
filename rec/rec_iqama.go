@@ -2,7 +2,6 @@ package rec
 
 import (
 	"fmt"
-	v1 "github.com/ccil-kbw/robot/iqama/v1"
 	v2 "github.com/ccil-kbw/robot/iqama/v2"
 	"sync"
 	"time"
@@ -27,6 +26,10 @@ func NewRecordConfigDataS() *RecordConfigDataS {
 	today, err := iqamaClient.GetTodayTimes()
 	if err != nil {
 		fmt.Println("couldn't fetch iqama times, keeping current data")
+	}
+
+	if today == nil {
+
 	}
 
 	fajr := today.Fajr.Iqama
@@ -61,59 +64,13 @@ func NewRecordConfigDataS() *RecordConfigDataS {
 			},
 		},
 	}
-	//rc.Refresh()
 	return rc
 }
+
 func (rc *RecordConfigDataS) Get() *[]RecordConfig {
 	defer rc.mu.Unlock()
 	rc.mu.Lock()
 	return rc.data
-}
-
-func (rc *RecordConfigDataS) Refresh() {
-	defer rc.mu.Unlock()
-	rc.mu.Lock()
-	timeLocation, err := time.LoadLocation("America/Montreal")
-	if err != nil {
-		fmt.Println("couldn't access remote iqama")
-	}
-
-	iqamaTimes, err := v1.Get()
-	if err != nil || iqamaTimes == nil {
-		fmt.Println("couldn't fetch iqama times, keeping current data")
-		if rc.Get() == nil {
-			rc.data = &[]RecordConfig{
-				{
-					Description:   "Jumuaa Recording",
-					StartTime:     time.Date(2023, 1, 1, 11, 55, 0, 0, timeLocation),
-					Duration:      JumuaaRecordDuration,
-					RecordingDays: []time.Weekday{time.Friday},
-				},
-			}
-		}
-		return
-	}
-
-	rc.data = &[]RecordConfig{
-		{
-			Description:   "Fajr Recording",
-			StartTime:     toTime(iqamaTimes.Fajr.Iqama),
-			Duration:      DarsRecordDuration,
-			RecordingDays: EveryDay,
-		},
-		{
-			Description:   "Dhuhur Recording",
-			StartTime:     toTime(iqamaTimes.Dhuhr.Iqama),
-			Duration:      DarsRecordDuration,
-			RecordingDays: EveryDay,
-		},
-		{
-			Description:   "Jumuaa Recording",
-			StartTime:     time.Date(2023, 1, 1, 11, 55, 0, 0, timeLocation),
-			Duration:      JumuaaRecordDuration,
-			RecordingDays: []time.Weekday{time.Friday},
-		},
-	}
 }
 
 type RecordConfig struct {

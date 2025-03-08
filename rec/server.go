@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func StartRecServer(host, password string, data *RecordConfigDataS) (*Recorder, error) {
+func StartRecServer(host, password string) (*Recorder, error) {
 	client, err := New(host, password)
 	if err != nil {
 		fmt.Println("could not initiate client")
@@ -15,6 +15,7 @@ func StartRecServer(host, password string, data *RecordConfigDataS) (*Recorder, 
 	fmt.Println("Starting OBS recording control routine")
 	go func() {
 		for {
+			data := NewRecordConfigDataS()
 
 			isRecording, err := client.IsRecording()
 			if err != nil {
@@ -35,8 +36,6 @@ func StartRecServer(host, password string, data *RecordConfigDataS) (*Recorder, 
 			{
 				recordTimeLimit = 2 * 60 * 60 * 1000
 			}
-
-
 
 			// Stop recording if not supposed to be recording but currently recording
 			if !shouldRecord && isRecording && (client.RecordTime() > recordTimeLimit) {

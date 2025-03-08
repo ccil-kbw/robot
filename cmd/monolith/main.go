@@ -71,9 +71,8 @@ func main() {
 	if config.Features.Record {
 		host := os.Getenv("MDROID_OBS_WEBSOCKET_HOST")
 		password := os.Getenv("MDROID_OBS_WEBSOCKET_PASSWORD")
-		data := rec.NewRecordConfigDataS()
 
-		obsClient := startServerWithRetry(host, password, data)
+		obsClient := startServerWithRetry(host, password)
 
 		// Calculate the duration until midnight
 		now := time.Now()
@@ -94,7 +93,7 @@ func main() {
 				if err != nil {
 					return
 				}
-				obsClient = startServerWithRetry(host, password, data)
+				obsClient = startServerWithRetry(host, password)
 			}
 		}()
 
@@ -123,11 +122,6 @@ out:
 		}
 	}
 
-}
-
-// proxy, move to apis, maybe pkg/apis/proxyserver/proxyserver.go
-func proxy() {
-	fmt.Println("implement me")
 }
 
 func bot(obs *rec.Recorder, notifyChan chan string) {
@@ -175,9 +169,9 @@ func notifyPrayer(prayerName, prayerTime string, in time.Duration, notifyChan ch
 	notifyChan <- msg
 }
 
-func startServerWithRetry(host string, password string, data *rec.RecordConfigDataS) *rec.Recorder {
+func startServerWithRetry(host string, password string) *rec.Recorder {
 	for {
-		obs, err := rec.StartRecServer(host, password, data)
+		obs, err := rec.StartRecServer(host, password)
 		if err != nil {
 			fmt.Printf("could not reach or authenticate to OBS, retrying in 1 minutes...\n")
 			time.Sleep(1 * time.Minute)

@@ -23,8 +23,10 @@ func main() {
 			os.Exit(1)
 		}
 	}
-	data := rec.NewRecordConfigDataS()
 
-	rec.StartRecServer(host, password, data)
+	_, err := rec.StartRecServer(host, password)
+	if err != nil {
+		return
+	}
 
 }
