@@ -1,3 +1,15 @@
+# v2.1.4 (Sat Mar 08 2025)
+
+#### ⚠️ Pushed to `master`
+
+- feat: add dynamic times ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس بالسرور ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.1.3 (Tue Mar 04 2025)
 
 #### ⚠️ Pushed to `master`
