@@ -1,3 +1,15 @@
+# v2.1.6 (Sun Apr 06 2025)
+
+#### ⚠️ Pushed to `master`
+
+- feat: add .env to .gitignore ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس بالسرور ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.1.5 (Wed Apr 02 2025)
 
 #### ⚠️ Pushed to `master`
