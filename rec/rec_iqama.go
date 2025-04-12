@@ -8,9 +8,9 @@ import (
 )
 
 var (
-	EveryDay             []time.Weekday = []time.Weekday{time.Sunday, time.Monday, time.Tuesday, time.Wednesday, time.Thursday, time.Friday, time.Saturday}
+	EveryDayButFriday    []time.Weekday = []time.Weekday{time.Sunday, time.Monday, time.Tuesday, time.Wednesday, time.Thursday, time.Saturday}
 	JumuaaRecordDuration time.Duration  = 2 * time.Hour
-	DarsRecordDuration   time.Duration  = 45 * time.Minute
+	DarsRecordDuration   time.Duration  = 35 * time.Minute
 	location             string         = "America/Montreal"
 )
 
@@ -20,15 +20,18 @@ type RecordConfigDataS struct {
 	mu    sync.Mutex
 }
 
+// NewRecordConfigDataS TODO: temporarily in code but needs to move to the postgresql db from the robot-api project
 func NewRecordConfigDataS() *RecordConfigDataS {
 	iqamaClient := v2.NewIqamaCSV("iqama_2025.csv")
 	today, err := iqamaClient.GetTodayTimes()
 	if err != nil {
 		fmt.Println("couldn't fetch iqama times, keeping current data")
+		return nil
 	}
 
 	if today == nil {
-
+		fmt.Println("couldn't fetch iqama times, keeping current data")
+		return nil
 	}
 
 	fajr := today.Fajr.Iqama
@@ -48,26 +51,25 @@ func NewRecordConfigDataS() *RecordConfigDataS {
 				Description:   "Fajr Recording",
 				StartTime:     fajr,
 				Duration:      DarsRecordDuration,
-				RecordingDays: EveryDay,
+				RecordingDays: EveryDayButFriday,
 			},
 			{
 				Description:   "Dhuhur Recording",
 				StartTime:     dhuhr,
 				Duration:      DarsRecordDuration,
-				RecordingDays: EveryDay,
+				RecordingDays: EveryDayButFriday,
 			},
 			{
 				Description:   "Maghrib Recording Sunday",
 				StartTime:     maghrib,
-				Duration:      JumuaaRecordDuration,
+				Duration:      isha.Add(-5 * time.Minute).Sub(maghrib),
 				RecordingDays: []time.Weekday{time.Sunday},
 			},
-
 			{
 				Description:   "Isha Recording",
 				StartTime:     isha,
 				Duration:      DarsRecordDuration,
-				RecordingDays: EveryDay,
+				RecordingDays: EveryDayButFriday,
 			},
 		},
 	}
@@ -132,19 +134,6 @@ func SupposedToBeRecording(data *RecordConfigDataS) bool {
 	}
 
 	return shouldRecord
-}
-
-func GetIqamaRecordingConfigs() {
-
-}
-
-func toTime(s string) time.Time {
-	t, err := time.Parse("15:04", s)
-	if err != nil {
-		panic(fmt.Sprintf("could not parse prayer time %s, %s", s, err.Error()))
-	}
-	fmt.Println(timeToday(t.Hour(), t.Minute()))
-	return timeToday(t.Hour(), t.Minute())
 }
 
 func timeToday(hour, minute int) time.Time {
