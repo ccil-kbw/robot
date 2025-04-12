@@ -1,3 +1,15 @@
+# v2.1.8 (Sat Apr 12 2025)
+
+#### ⚠️ Pushed to `master`
+
+- feat: reducing duration for disk space optimization ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس بالسرور ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.1.7 (Mon Apr 07 2025)
 
 #### ⚠️ Pushed to `master`
