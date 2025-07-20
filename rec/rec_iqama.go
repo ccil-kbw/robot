@@ -63,7 +63,7 @@ func NewRecordConfigDataS() *RecordConfigDataS {
 				Description:   "Maghrib Recording Sunday",
 				StartTime:     maghrib,
 				Duration:      isha.Add(-5 * time.Minute).Sub(maghrib),
-				RecordingDays: []time.Weekday{time.Sunday},
+				RecordingDays: []time.Weekday{time.Saturday, time.Sunday},
 			},
 			{
 				Description:   "Isha Recording",
