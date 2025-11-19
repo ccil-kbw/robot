@@ -92,7 +92,8 @@ func main() {
 func refreshFileList() {
 	folders, err := os.ReadDir(root)
 	if err != nil {
-		log.Fatal(err)
+		log.Printf("Error reading directory %s: %v", root, err)
+		return
 	}
 
 	var refreshedFileList []File
