@@ -59,9 +59,9 @@ func TestIqamaCSV_GetTodayTimes(t *testing.T) {
 		t.Errorf("IqamaCSV.GetTodayTimes() = %v, want between 12pm and 1pm", daily.Dhuhr.Adhan)
 	}
 
-	// Assert that Asr is after 2:00 pm and before 5pm
-	if daily.Asr.Adhan.Hour() < 14 || daily.Asr.Adhan.Hour() > 17 {
-		t.Errorf("IqamaCSV.GetTodayTimes() = %v, want between 2pm and 5pm", daily.Asr.Adhan)
+	// Assert that Asr is after 1:00 pm and before 5pm (varies by season)
+	if daily.Asr.Adhan.Hour() < 13 || daily.Asr.Adhan.Hour() > 17 {
+		t.Errorf("IqamaCSV.GetTodayTimes() = %v, want between 1pm and 5pm", daily.Asr.Adhan)
 	}
 
 	// Assert that Maghrib is after 4:00 pm and before 9pm

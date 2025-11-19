@@ -3,7 +3,6 @@ package v2
 import (
 	"encoding/csv"
 	"fmt"
-	"log"
 	"os"
 	"time"
 )
@@ -26,7 +25,9 @@ func (i *IqamaCSV) GetTodayTimes() (*IqamaDailyTimes, error) {
 	today := time.Now()
 
 	times, err := i.iqamaForDate(today)
-	handleErr(err)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get today's iqama times: %w", err)
+	}
 	return &times, nil
 }
 
@@ -34,7 +35,9 @@ func (i *IqamaCSV) GetTomorrowTimes() (*IqamaDailyTimes, error) {
 	// Get tomorrow's date
 	tomorrow := time.Now().Add(24 * time.Hour)
 	times, err := i.iqamaForDate(tomorrow)
-	handleErr(err)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get tomorrow's iqama times: %w", err)
+	}
 	return &times, nil
 }
 
