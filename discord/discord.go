@@ -41,77 +41,93 @@ var (
 
 	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder){
 		"iqama": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
-			resp, _ := iqamaClient.GetTodayTimes()
-			_ = s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+			resp, err := iqamaClient.GetTodayTimes()
+			if err != nil {
+				log.Printf("Error getting today's iqama times: %v", err)
+				if err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+					Type: discordgo.InteractionResponseChannelMessageWithSource,
+					Data: &discordgo.InteractionResponseData{
+						Content: fmt.Sprintf("Error retrieving prayer times: %v", err),
+					},
+				}); err != nil {
+					log.Printf("Error responding to interaction: %v", err)
+				}
+				return
+			}
+			if err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: mappers.IqamaTimesToDiscordInteractionResponseData(*resp),
-			})
+			}); err != nil {
+				log.Printf("Error responding to iqama command: %v", err)
+			}
 		},
 		"rec-schedule": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
-			_ = s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+			if err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
 					Embeds: []*discordgo.MessageEmbed{
 						{
 							Type:        discordgo.EmbedTypeRich,
-							Title:       "Scheduling Start",
-							Description: "OBS Scheduling Start Operation",
+							Title:       "Recording Schedule",
+							Description: "OBS Recording Schedule",
 							Color:       0x05294e,
 							Fields: func() []*discordgo.MessageEmbedField {
 								resp := []*discordgo.MessageEmbedField{}
-
+								// TODO: Implement actual schedule fetching
 								return resp
 							}(),
 						},
 					},
 				},
-			},
-			)
+			}); err != nil {
+				log.Printf("Error responding to rec-schedule command: %v", err)
+			}
 		},
 		"rec-start": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
-			_ = s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+			log.Println("discord command called: /rec-start")
+			if err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
 					Embeds: []*discordgo.MessageEmbed{
 						{
 							Type:        discordgo.EmbedTypeRich,
-							Title:       "Scheduling Start",
-							Description: "OBS Scheduling Start Operation",
+							Title:       "Recording Start",
+							Description: "OBS Recording Start Operation",
 							Color:       0x05294e,
 							Fields: func() []*discordgo.MessageEmbedField {
-								fmt.Println("discord command called: /obs-start")
 								if obs == nil {
 									return []*discordgo.MessageEmbedField{
 										{Name: "Error", Value: "OBS Client not initialized"},
 									}
 								}
 								now := time.Now()
-
+								// TODO: Implement actual recording start logic
 								return []*discordgo.MessageEmbedField{
 									{
 										Name:  "OBS Recording Started",
-										Value: fmt.Sprintf("Will be scheduling until %d:%d", now.Hour(), now.Minute()),
+										Value: fmt.Sprintf("Recording scheduled at %d:%02d", now.Hour(), now.Minute()),
 									},
 								}
 							}(),
 						},
 					},
 				},
-			},
-			)
+			}); err != nil {
+				log.Printf("Error responding to rec-start command: %v", err)
+			}
 		},
 		"rec-status": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
-			_ = s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+			log.Println("discord command called: /rec-status")
+			if err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
 					Embeds: []*discordgo.MessageEmbed{
 						{
 							Type:        discordgo.EmbedTypeRich,
-							Title:       "Scheduling Status",
-							Description: "OBS Scheduling Status Operation",
+							Title:       "Recording Status",
+							Description: "OBS Recording Status",
 							Color:       0x05294e,
 							Fields: func() []*discordgo.MessageEmbedField {
-								fmt.Println("discord command called: /obs-status")
 								if obs == nil {
 									return []*discordgo.MessageEmbedField{
 										{Name: "Error", Value: "OBS Client not initialized"},
@@ -119,28 +135,29 @@ var (
 								}
 								isRecording, err := obs.IsRecording()
 								if err != nil {
-									fmt.Printf("error calling obs.IsRecording endpoint. %v", err)
+									log.Printf("error calling obs.IsRecording endpoint: %v", err)
 									return []*discordgo.MessageEmbedField{
 										{
 											Name:  "Record Status",
-											Value: "Could not access OBS",
+											Value: fmt.Sprintf("Could not access OBS: %v", err),
 										},
 									}
 								}
 
-								fmt.Println("successfully called obs.IsRecording()")
+								log.Println("successfully called obs.IsRecording()")
 								return []*discordgo.MessageEmbedField{
 									{
 										Name:  "Record Status",
-										Value: fmt.Sprintf("recording: %v", isRecording),
+										Value: fmt.Sprintf("Recording: %v", isRecording),
 									},
 								}
 							}(),
 						},
 					},
 				},
-			},
-			)
+			}); err != nil {
+				log.Printf("Error responding to rec-status command: %v", err)
+			}
 		},
 	}
 )
