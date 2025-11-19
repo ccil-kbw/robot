@@ -9,7 +9,7 @@ func StartRecServer(host, password string) (*Recorder, error) {
 	client, err := New(host, password)
 	if err != nil {
 		fmt.Println("could not initiate client")
-		return nil, nil
+		return nil, err
 	}
 
 	fmt.Println("Starting OBS recording control routine")
