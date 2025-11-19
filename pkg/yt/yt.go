@@ -19,7 +19,13 @@ func UploadVideo(video Video) error {
 		return fmt.Errorf("failed to get YouTube service: %w", err)
 	}
 
-	return upload(service, "UCGWuMVzuiaJBrE-HwcB7j-w", video)
+	// Get channel ID from environment or use default
+	channelID := os.Getenv("MDROID_YOUTUBE_CHANNEL_ID")
+	if channelID == "" {
+		channelID = "UCGWuMVzuiaJBrE-HwcB7j-w" // Default fallback
+	}
+
+	return upload(service, channelID, video)
 }
 
 // upload quota is about 1650 (1600 for video.insert and 50 for playlistItems.insert), max quota per day is 10000
@@ -54,14 +60,19 @@ func upload(service *youtube.Service, channelID string, v Video) error {
 
 	fmt.Printf("Upload successful! Video ID: %s\n", response.Id)
 
-	backlog := "PL1PP365t1jqj2xSIjh17vIB4tmDfJwJDQ"
+	// Get playlist ID from environment or use default
+	playlistID := os.Getenv("MDROID_YOUTUBE_PLAYLIST_ID")
+	if playlistID == "" {
+		playlistID = "PL1PP365t1jqj2xSIjh17vIB4tmDfJwJDQ" // Default fallback
+	}
+
 	callAddToPlaylist := service.PlaylistItems.Insert([]string{"snippet"}, &youtube.PlaylistItem{Snippet: &youtube.PlaylistItemSnippet{
-		PlaylistId: backlog, Position: 0, ResourceId: &youtube.ResourceId{Kind: "youtube#video", VideoId: response.Id}}})
+		PlaylistId: playlistID, Position: 0, ResourceId: &youtube.ResourceId{Kind: "youtube#video", VideoId: response.Id}}})
 
 	respPlaylistInsert, err := callAddToPlaylist.Do()
 	if err != nil {
 		return err
 	}
-	fmt.Printf("Video with ID %s added successfully to playlist backlog (%s) Response ID: %s\n", response.Id, backlog, respPlaylistInsert.Id)
+	fmt.Printf("Video with ID %s added successfully to playlist (%s) Response ID: %s\n", response.Id, playlistID, respPlaylistInsert.Id)
 	return nil
 }

@@ -4,15 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	"log"
 	"net/http"
 	"net/url"
 	"os"
 	"os/user"
 	"path/filepath"
 
-	"github.com/ccil-kbw/robot/pkg/helpers"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"google.golang.org/api/youtube/v3"
@@ -40,9 +37,15 @@ func getClient(ctx context.Context, config *oauth2.Config) (*http.Client, error)
 }
 
 func getService() (*youtube.Service, error) {
-	b, err := ioutil.ReadFile("/credentials.json")
+	// Get credentials path from environment or use default
+	credentialsPath := os.Getenv("MDROID_YOUTUBE_CREDENTIALS_PATH")
+	if credentialsPath == "" {
+		credentialsPath = "/credentials.json" // Default fallback
+	}
+
+	b, err := os.ReadFile(credentialsPath)
 	if err != nil {
-		return nil, fmt.Errorf("unable to read client secret file: %w", err)
+		return nil, fmt.Errorf("unable to read client secret file from %s: %w", credentialsPath, err)
 	}
 
 	// If modifying these scopes, delete your previously saved credentials
