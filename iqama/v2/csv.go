@@ -7,11 +7,17 @@ import (
 	"time"
 )
 
+// IqamaCSV implements the Iqama interface by reading prayer times from a CSV file.
+// The CSV file should contain columns: date, adhanFajr, iqamaFajr, shourouk, adhanDhuhr,
+// iqamaDhuhr, adhanAsr, iqamaAsr, adhanMaghrib, iqamaMaghrib, adhanIsha, iqamaIsha.
 type IqamaCSV struct {
 	filePath   string
 	iqamaTimes map[string]IqamaDailyTimes
 }
 
+// NewIqamaCSV creates a new IqamaCSV instance by loading prayer times from the specified CSV file.
+// It reads and parses the entire CSV file during initialization.
+// Returns an error if the file cannot be read or parsed.
 func NewIqamaCSV(filePath string) (Iqama, error) {
 	i := &IqamaCSV{filePath: filePath}
 	if err := i.readCSV(); err != nil {
@@ -20,10 +26,10 @@ func NewIqamaCSV(filePath string) (Iqama, error) {
 	return i, nil
 }
 
+// GetTodayTimes returns the prayer times for the current day.
+// Returns an error if today's date is not found in the CSV or if parsing fails.
 func (i *IqamaCSV) GetTodayTimes() (*IqamaDailyTimes, error) {
-	// Get today's date
 	today := time.Now()
-
 	times, err := i.iqamaForDate(today)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get today's iqama times: %w", err)
@@ -31,8 +37,9 @@ func (i *IqamaCSV) GetTodayTimes() (*IqamaDailyTimes, error) {
 	return &times, nil
 }
 
+// GetTomorrowTimes returns the prayer times for tomorrow.
+// Returns an error if tomorrow's date is not found in the CSV or if parsing fails.
 func (i *IqamaCSV) GetTomorrowTimes() (*IqamaDailyTimes, error) {
-	// Get tomorrow's date
 	tomorrow := time.Now().Add(24 * time.Hour)
 	times, err := i.iqamaForDate(tomorrow)
 	if err != nil {
@@ -41,6 +48,8 @@ func (i *IqamaCSV) GetTomorrowTimes() (*IqamaDailyTimes, error) {
 	return &times, nil
 }
 
+// GetDiscordPrettified returns all prayer times formatted as a Discord-friendly markdown table.
+// The output is wrapped in markdown code blocks for proper Discord rendering.
 func (i *IqamaCSV) GetDiscordPrettified() string {
 	t := toTable(i.iqamaTimes)
 	return "```markdown\n" + t.Render() + "\n```"

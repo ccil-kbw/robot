@@ -5,6 +5,11 @@ import (
 	"time"
 )
 
+// StartRecServer initializes an OBS WebSocket client and starts an automatic recording control routine.
+// It connects to OBS at the specified host using the provided password.
+// The routine runs in a goroutine and checks every minute whether recording should be active
+// based on the current prayer schedule. It automatically starts or stops recording as needed.
+// Returns the Recorder client for manual control, or an error if connection fails.
 func StartRecServer(host, password string) (*Recorder, error) {
 	client, err := New(host, password)
 	if err != nil {

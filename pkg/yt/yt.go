@@ -8,11 +8,18 @@ import (
 	"google.golang.org/api/youtube/v3"
 )
 
+// Video represents a video file to be uploaded to YouTube.
 type Video struct {
-	Title    string
-	FilePath string
+	Title    string // Title is the video title that will appear on YouTube
+	FilePath string // FilePath is the full path to the video file on disk
 }
 
+// UploadVideo uploads a video to YouTube and adds it to the configured playlist.
+// The YouTube channel ID and playlist ID are read from environment variables:
+// - MDROID_YOUTUBE_CHANNEL_ID (defaults to hardcoded value if not set)
+// - MDROID_YOUTUBE_PLAYLIST_ID (defaults to hardcoded value if not set)
+// The video is uploaded as private and marked as not made for kids.
+// Returns an error if authentication, upload, or playlist addition fails.
 func UploadVideo(video Video) error {
 	service, err := getService()
 	if err != nil {

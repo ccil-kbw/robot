@@ -162,7 +162,13 @@ var (
 	}
 )
 
-// Run the Discord bot. NOTE: Function can be split
+// Run starts the Discord bot and blocks until shutdown (Ctrl+C).
+// It initializes the bot with the provided guild ID and token, registers slash commands,
+// and sets up handlers for iqama times and OBS recording control.
+// The obs parameter can be nil if recording features are disabled.
+// The notifyChan is used to send prayer time notifications to a Discord channel.
+// Set removeCommands to true to clean up registered commands on shutdown.
+// Returns an error if bot initialization, command registration, or session setup fails.
 func Run(guildID, botToken *string, removeCommands *bool, obs *rec.Recorder, notifyChan chan string) error {
 	var err error
 	var s *discordgo.Session
