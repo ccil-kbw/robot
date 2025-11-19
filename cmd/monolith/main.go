@@ -73,30 +73,39 @@ func main() {
 		password := os.Getenv("MDROID_OBS_WEBSOCKET_PASSWORD")
 
 		obsClient := startServerWithRetry(host, password)
+		if obsClient == nil {
+			fmt.Println("Warning: Failed to initialize OBS client. Recording features will be disabled.")
+		} else {
+			// Calculate the duration until midnight
+			now := time.Now()
+			night := time.Date(now.Year(), now.Month(), now.Day()+1, 2, 0, 0, 0, now.Location())
+			duration := night.Sub(now)
 
-		// Calculate the duration until midnight
-		now := time.Now()
-		night := time.Date(now.Year(), now.Month(), now.Day()+1, 2, 0, 0, 0, now.Location())
-		duration := night.Sub(now)
+			// Create a timer that waits until midnight
+			timer := time.NewTimer(duration)
+			<-timer.C // This blocks until the timer fires
 
-		// Create a timer that waits until midnight
-		timer := time.NewTimer(duration)
-		<-timer.C // This blocks until the timer fires
+			// Now that it's midnight, start a ticker that ticks every 24 hours
+			ticker := time.NewTicker(24 * time.Hour)
 
-		// Now that it's midnight, start a ticker that ticks every 24 hours
-		ticker := time.NewTicker(24 * time.Hour)
-
-		// Call rec.StartRecServer every time the ticker ticks
-		go func() {
-			for range ticker.C {
-				err := obsClient.Disconnect()
-				if err != nil {
-					return
+			// Call rec.StartRecServer every time the ticker ticks
+			go func() {
+				for range ticker.C {
+					if obsClient != nil {
+						if err := obsClient.Disconnect(); err != nil {
+							fmt.Printf("Error disconnecting from OBS: %v\n", err)
+						}
+					}
+					newClient := startServerWithRetry(host, password)
+					if newClient != nil {
+						obsClient = newClient
+					} else {
+						fmt.Println("Failed to reconnect to OBS")
+					}
 				}
-				obsClient = startServerWithRetry(host, password)
-			}
-		}()
-
+			}()
+		}
+		obs = obsClient
 	}
 
 out:
@@ -172,13 +181,31 @@ func notifyPrayer(prayerName, prayerTime string, in time.Duration, notifyChan ch
 }
 
 func startServerWithRetry(host string, password string) *rec.Recorder {
-	for {
+	maxRetries := 10
+	initialDelay := 10 * time.Second
+	maxDelay := 5 * time.Minute
+
+	for attempt := 1; attempt <= maxRetries; attempt++ {
 		obs, err := rec.StartRecServer(host, password)
-		if err != nil {
-			fmt.Printf("could not reach or authenticate to OBS, retrying in 1 minutes...\n")
-			time.Sleep(1 * time.Minute)
-		} else {
+		if err == nil {
 			return obs
 		}
+
+		if attempt == maxRetries {
+			fmt.Printf("Failed to connect to OBS after %d attempts. Giving up.\n", maxRetries)
+			return nil
+		}
+
+		// Exponential backoff: 10s, 20s, 40s, 80s, 160s (capped at 5min)
+		delay := initialDelay * time.Duration(1<<uint(attempt-1))
+		if delay > maxDelay {
+			delay = maxDelay
+		}
+
+		fmt.Printf("Could not reach or authenticate to OBS (attempt %d/%d): %v\n", attempt, maxRetries, err)
+		fmt.Printf("Retrying in %v...\n", delay)
+		time.Sleep(delay)
 	}
+
+	return nil
 }
