@@ -34,10 +34,6 @@ type Config struct {
 	Features Features
 }
 
-var (
-	stdHour    = "15"
-	stdMinutes = "4"
-)
 
 func main() {
 	msgs := make(chan string)
@@ -45,23 +41,7 @@ func main() {
 	notifyChan := make(chan string)
 
 	signal.Notify(stop, os.Interrupt)
-	/*
-		var prayersData *iqama.PrayersData
-		{
-			prayersData = iqama.StartIqamaServer()
-		}
-		go func() {
-			go iqama.StartRecordingScheduleServer()
 
-			for {
-				in := 15 * time.Minute
-				notifyFunc(notifyChan, prayersData, in)
-				notifyFunc(notifyChan, prayersData, 0)
-				time.Sleep(55 * time.Second)
-			}
-
-		}()
-	*/
 	var obs *rec.Recorder
 
 	if config.Features.DiscordBot {
@@ -140,44 +120,6 @@ func bot(obs *rec.Recorder, notifyChan chan string) {
 	if err := discord.Run(&guildID, &botToken, &removeCommands, obs, notifyChan); err != nil {
 		fmt.Printf("Discord bot error: %v\n", err)
 	}
-}
-
-func notifyFunc(notifyChan chan string, prayersData *iqama.PrayersData, in time.Duration) {
-	now := time.Now().Add(in)
-
-	if prayersData.Confs().Fajr.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
-		notifyPrayer("Fajr", prayersData.Confs().Fajr.Iqama, in, notifyChan)
-	}
-
-	if prayersData.Confs().Dhuhr.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
-		notifyPrayer("Dhuhr", prayersData.Confs().Dhuhr.Iqama, in, notifyChan)
-
-	}
-
-	if prayersData.Confs().Asr.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
-		notifyPrayer("Asr", prayersData.Confs().Asr.Iqama, in, notifyChan)
-	}
-
-	if prayersData.Confs().Maghrib.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
-		notifyPrayer("Maghrib", prayersData.Confs().Maghrib.Iqama, in, notifyChan)
-	}
-
-	if prayersData.Confs().Isha.Iqama == now.Format(fmt.Sprintf("%s:%s", stdHour, stdMinutes)) {
-		notifyPrayer("Isha", prayersData.Confs().Isha.Iqama, in, notifyChan)
-	}
-
-}
-
-func notifyPrayer(prayerName, prayerTime string, in time.Duration, notifyChan chan string) {
-	var msg string
-	{
-		if in == 0 {
-			msg = fmt.Sprintf("%s's Iqama Time now, it's %s!", prayerName, prayerTime)
-		} else {
-			msg = fmt.Sprintf("%s's Iqama in %v, at %s", prayerName, in, prayerTime)
-		}
-	}
-	notifyChan <- msg
 }
 
 func startServerWithRetry(host string, password string) *rec.Recorder {
