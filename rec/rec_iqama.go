@@ -22,10 +22,14 @@ type RecordConfigDataS struct {
 
 // NewRecordConfigDataS TODO: temporarily in code but needs to move to the postgresql db from the robot-api project
 func NewRecordConfigDataS() *RecordConfigDataS {
-	iqamaClient := v2.NewIqamaCSV("iqama_2025.csv")
+	iqamaClient, err := v2.NewIqamaCSV("iqama_2025.csv")
+	if err != nil {
+		fmt.Printf("couldn't initialize iqama client: %v\n", err)
+		return nil
+	}
 	today, err := iqamaClient.GetTodayTimes()
 	if err != nil {
-		fmt.Println("couldn't fetch iqama times, keeping current data")
+		fmt.Printf("couldn't fetch iqama times: %v\n", err)
 		return nil
 	}
 
@@ -141,7 +145,8 @@ func timeToday(hour, minute int) time.Time {
 
 	l, err := time.LoadLocation(location)
 	if err != nil {
-		panic(err)
+		fmt.Printf("failed to load location %s, using local time: %v\n", location, err)
+		l = time.Local
 	}
 	return time.Date(now.Year(), now.Month(), now.Day(), hour, minute, 0, 0, l)
 }

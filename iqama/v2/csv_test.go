@@ -23,14 +23,20 @@ func TestNewIqamaCSV(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			NewIqamaCSV(tt.args.filePath)
+			_, err := NewIqamaCSV(tt.args.filePath)
+			if err != nil {
+				t.Errorf("NewIqamaCSV() error = %v", err)
+			}
 		})
 	}
 }
 
 func TestIqamaCSV_GetTodayTimes(t *testing.T) {
 	// Manually Load CSV and read Today's Record
-	i := NewIqamaCSV("test_assets/iqama_2025.csv")
+	i, err := NewIqamaCSV("test_assets/iqama_2025.csv")
+	if err != nil {
+		t.Fatalf("NewIqamaCSV() error = %v", err)
+	}
 	daily, err := i.GetTodayTimes()
 	if err != nil {
 		t.Errorf("IqamaCSV.GetTodayTimes() error = %v", err)

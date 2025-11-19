@@ -17,7 +17,10 @@ func Get() (*Resp, error) {
 	}
 
 	// Use v2 to read CSV data
-	iqamaClient := v2.NewIqamaCSV(csvPath)
+	iqamaClient, err := v2.NewIqamaCSV(csvPath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to initialize iqama client: %w", err)
+	}
 	todayTimes, err := iqamaClient.GetTodayTimes()
 	if err != nil {
 		return nil, fmt.Errorf("failed to get today's times: %w", err)

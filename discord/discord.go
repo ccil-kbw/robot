@@ -37,7 +37,7 @@ var (
 		},
 	}
 
-	iqamaClient = iqamav2.NewIqamaCSV("iqama_2025.csv")
+	iqamaClient iqamav2.Iqama
 
 	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder){
 		"iqama": func(s *discordgo.Session, i *discordgo.InteractionCreate, obs *rec.Recorder) {
@@ -146,13 +146,20 @@ var (
 )
 
 // Run the Discord bot. NOTE: Function can be split
-func Run(guildID, botToken *string, removeCommands *bool, obs *rec.Recorder, notifyChan chan string) {
+func Run(guildID, botToken *string, removeCommands *bool, obs *rec.Recorder, notifyChan chan string) error {
 	var err error
 	var s *discordgo.Session
 	fmt.Println("Starting Discord Bot")
+
+	// Initialize iqama client
+	iqamaClient, err = iqamav2.NewIqamaCSV("iqama_2025.csv")
+	if err != nil {
+		return fmt.Errorf("failed to initialize iqama client: %w", err)
+	}
+
 	s, err = discordgo.New("Bot " + *botToken)
 	if err != nil {
-		log.Fatalf("Invalid bot parameters: %v", err)
+		return fmt.Errorf("invalid bot parameters: %w", err)
 	}
 
 	s.AddHandler(func(s *discordgo.Session, i *discordgo.InteractionCreate) {
@@ -167,7 +174,7 @@ func Run(guildID, botToken *string, removeCommands *bool, obs *rec.Recorder, not
 
 	err = s.Open()
 	if err != nil {
-		log.Fatalf("Cannot open the session: %v", err)
+		return fmt.Errorf("cannot open the session: %w", err)
 	}
 
 	log.Println("Adding commands...")
@@ -175,7 +182,7 @@ func Run(guildID, botToken *string, removeCommands *bool, obs *rec.Recorder, not
 	for i, v := range commands {
 		cmd, err := s.ApplicationCommandCreate(s.State.User.ID, *guildID, v)
 		if err != nil {
-			log.Panicf("Cannot create '%v' command: %v", v.Name, err)
+			return fmt.Errorf("cannot create '%v' command: %w", v.Name, err)
 		}
 		registeredCommands[i] = cmd
 	}
@@ -217,10 +224,11 @@ func Run(guildID, botToken *string, removeCommands *bool, obs *rec.Recorder, not
 		for _, v := range registeredCommands {
 			err := s.ApplicationCommandDelete(s.State.User.ID, *guildID, v.ID)
 			if err != nil {
-				log.Panicf("Cannot delete '%v' command: %v", v.Name, err)
+				log.Printf("Warning: Cannot delete '%v' command: %v", v.Name, err)
 			}
 		}
 	}
 
 	log.Println("Gracefully shutting down.")
+	return nil
 }

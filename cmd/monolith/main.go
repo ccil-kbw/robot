@@ -128,7 +128,9 @@ func bot(obs *rec.Recorder, notifyChan chan string) {
 	guildID := os.Getenv("MDROID_BOT_GUILD_ID")
 	botToken := os.Getenv("MDROID_BOT_TOKEN")
 	removeCommands := true
-	discord.Run(&guildID, &botToken, &removeCommands, obs, notifyChan)
+	if err := discord.Run(&guildID, &botToken, &removeCommands, obs, notifyChan); err != nil {
+		fmt.Printf("Discord bot error: %v\n", err)
+	}
 }
 
 func notifyFunc(notifyChan chan string, prayersData *iqama.PrayersData, in time.Duration) {

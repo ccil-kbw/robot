@@ -13,12 +13,12 @@ type IqamaCSV struct {
 	iqamaTimes map[string]IqamaDailyTimes
 }
 
-func NewIqamaCSV(filePath string) Iqama {
+func NewIqamaCSV(filePath string) (Iqama, error) {
 	i := &IqamaCSV{filePath: filePath}
 	if err := i.readCSV(); err != nil {
-		log.Fatalf("Unable to read CSV file %s", filePath)
+		return nil, fmt.Errorf("unable to read CSV file %s: %w", filePath, err)
 	}
-	return i
+	return i, nil
 }
 
 func (i *IqamaCSV) GetTodayTimes() (*IqamaDailyTimes, error) {
@@ -54,8 +54,7 @@ func (i *IqamaCSV) GetShellPrettified() string {
 func (i *IqamaCSV) readCSV() error {
 	file, err := os.Open(i.filePath)
 	if err != nil {
-		log.Fatalf("Unable to open file %s", i.filePath)
-		return err
+		return fmt.Errorf("unable to open file %s: %w", i.filePath, err)
 	}
 	defer func(file *os.File) {
 		_ = file.Close()
@@ -64,8 +63,7 @@ func (i *IqamaCSV) readCSV() error {
 	reader := csv.NewReader(file)
 	records, err := reader.ReadAll()
 	if err != nil {
-		log.Fatalf("Unable to parse file as CSV for %s", i.filePath)
-		return err
+		return fmt.Errorf("unable to parse file as CSV for %s: %w", i.filePath, err)
 	}
 
 	iqamaTimes := make(map[string]IqamaDailyTimes)
@@ -74,27 +72,49 @@ func (i *IqamaCSV) readCSV() error {
 			continue
 		}
 		date, err := ParseDate(record[0])
-		handleErr(err)
+		if err != nil {
+			return fmt.Errorf("failed to parse date: %w", err)
+		}
 		fajrAdhan, err := ParseHoursMinutes(record[1])
-		handleErr(err)
+		if err != nil {
+			return fmt.Errorf("failed to parse Fajr Adhan: %w", err)
+		}
 		fajrIqama, err := ParseHoursMinutes(record[2])
-		handleErr(err)
+		if err != nil {
+			return fmt.Errorf("failed to parse Fajr Iqama: %w", err)
+		}
 		dhuhrAdhan, err := ParseHoursMinutes(record[4])
-		handleErr(err)
+		if err != nil {
+			return fmt.Errorf("failed to parse Dhuhr Adhan: %w", err)
+		}
 		dhuhrIqama, err := ParseHoursMinutes(record[5])
-		handleErr(err)
+		if err != nil {
+			return fmt.Errorf("failed to parse Dhuhr Iqama: %w", err)
+		}
 		asrAdhan, err := ParseHoursMinutes(record[6])
-		handleErr(err)
+		if err != nil {
+			return fmt.Errorf("failed to parse Asr Adhan: %w", err)
+		}
 		asrIqama, err := ParseHoursMinutes(record[7])
-		handleErr(err)
+		if err != nil {
+			return fmt.Errorf("failed to parse Asr Iqama: %w", err)
+		}
 		maghribAdhan, err := ParseHoursMinutes(record[8])
-		handleErr(err)
+		if err != nil {
+			return fmt.Errorf("failed to parse Maghrib Adhan: %w", err)
+		}
 		maghribIqama, err := ParseHoursMinutes(record[9])
-		handleErr(err)
+		if err != nil {
+			return fmt.Errorf("failed to parse Maghrib Iqama: %w", err)
+		}
 		ishaAdhan, err := ParseHoursMinutes(record[10])
-		handleErr(err)
+		if err != nil {
+			return fmt.Errorf("failed to parse Isha Adhan: %w", err)
+		}
 		ishaIqama, err := ParseHoursMinutes(record[11])
-		handleErr(err)
+		if err != nil {
+			return fmt.Errorf("failed to parse Isha Iqama: %w", err)
+		}
 
 		dateStr := date.Format("01/02/2006")
 		iqamaTimes[dateStr] = IqamaDailyTimes{
@@ -124,10 +144,4 @@ func (i *IqamaCSV) readCSV() error {
 
 	i.iqamaTimes = iqamaTimes
 	return nil
-}
-
-func handleErr(err error) {
-	if err != nil {
-		log.Fatalf("error: %s", err)
-	}
 }

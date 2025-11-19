@@ -3,6 +3,7 @@ package main
 
 import (
 	"flag"
+	"log"
 
 	"github.com/ccil-kbw/robot/discord"
 )
@@ -16,5 +17,7 @@ var (
 func init() { flag.Parse() }
 
 func main() {
-	go discord.Run(GuildID, BotToken, RemoveCommands, nil, make(chan string))
+	if err := discord.Run(GuildID, BotToken, RemoveCommands, nil, make(chan string)); err != nil {
+		log.Fatalf("Discord bot failed: %v", err)
+	}
 }
