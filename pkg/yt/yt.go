@@ -14,7 +14,10 @@ type Video struct {
 }
 
 func UploadVideo(video Video) error {
-	service := getService()
+	service, err := getService()
+	if err != nil {
+		return fmt.Errorf("failed to get YouTube service: %w", err)
+	}
 
 	return upload(service, "UCGWuMVzuiaJBrE-HwcB7j-w", video)
 }
@@ -35,16 +38,14 @@ func upload(service *youtube.Service, channelID string, v Video) error {
 	})
 
 	file, err := os.Open(v.FilePath)
+	if err != nil {
+		return fmt.Errorf("error opening %s: %w", v.FilePath, err)
+	}
 	defer func() {
-		err = file.Close()
-		if err != nil {
-			fmt.Printf("error in closing file, %v", err)
+		if closeErr := file.Close(); closeErr != nil {
+			fmt.Printf("error in closing file, %v", closeErr)
 		}
 	}()
-	if err != nil {
-		log.Fatalf("error opening %s: %v", v.FilePath, err)
-		return err
-	}
 
 	response, err := call.Media(file).Do()
 	if err != nil {
