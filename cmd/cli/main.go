@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	client, err := iqamav2.NewIqamaCSV("iqama_2025.csv")
+	client, err := iqamav2.NewIqamaCSV(iqamav2.GetDefaultIqamaCSVPath())
 	if err != nil {
 		log.Fatalf("Failed to initialize iqama client: %v", err)
 	}

@@ -3,21 +3,14 @@ package v1
 import (
 	"encoding/json"
 	"fmt"
-	"os"
 
 	v2 "github.com/ccil-kbw/robot/iqama/v2"
 )
 
 // Get returns today's prayer times in v1 format by converting from v2 CSV data
 func Get() (*Resp, error) {
-	// Get CSV file path from environment or use default
-	csvPath := os.Getenv("MDROID_IQAMA_CSV_PATH")
-	if csvPath == "" {
-		csvPath = "iqama_2025.csv"
-	}
-
 	// Use v2 to read CSV data
-	iqamaClient, err := v2.NewIqamaCSV(csvPath)
+	iqamaClient, err := v2.NewIqamaCSV(v2.GetDefaultIqamaCSVPath())
 	if err != nil {
 		return nil, fmt.Errorf("failed to initialize iqama client: %w", err)
 	}

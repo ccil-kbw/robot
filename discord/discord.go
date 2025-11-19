@@ -169,7 +169,7 @@ func Run(guildID, botToken *string, removeCommands *bool, obs *rec.Recorder, not
 	fmt.Println("Starting Discord Bot")
 
 	// Initialize iqama client
-	iqamaClient, err = iqamav2.NewIqamaCSV("iqama_2025.csv")
+	iqamaClient, err = iqamav2.NewIqamaCSV(iqamav2.GetDefaultIqamaCSVPath())
 	if err != nil {
 		return fmt.Errorf("failed to initialize iqama client: %w", err)
 	}

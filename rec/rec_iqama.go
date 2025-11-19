@@ -22,7 +22,7 @@ type RecordConfigDataS struct {
 
 // NewRecordConfigDataS TODO: temporarily in code but needs to move to the postgresql db from the robot-api project
 func NewRecordConfigDataS() *RecordConfigDataS {
-	iqamaClient, err := v2.NewIqamaCSV("iqama_2025.csv")
+	iqamaClient, err := v2.NewIqamaCSV(v2.GetDefaultIqamaCSVPath())
 	if err != nil {
 		fmt.Printf("couldn't initialize iqama client: %v\n", err)
 		return nil
