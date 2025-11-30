@@ -69,7 +69,7 @@ func NewRecordConfigDataS() *RecordConfigDataS {
 				Description:   "Isha Recording",
 				StartTime:     isha,
 				Duration:      DarsRecordDuration,
-				RecordingDays: EveryDayButFriday,
+				RecordingDays: JumuaaRecordDuration,
 			},
 		},
 	}
