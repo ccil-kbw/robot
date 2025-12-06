@@ -60,8 +60,8 @@ func NewRecordConfigDataS() *RecordConfigDataS {
 				RecordingDays: EveryDayButFriday,
 			},
 			{
-				Description:   "Maghrib Recording Sunday",
-				StartTime:     maghrib,
+				Description:   "Weekend Recording",
+				StartTime:     isha,
 				Duration:      JumuaaRecordDuration,
 				RecordingDays: []time.Weekday{time.Saturday, time.Sunday},
 			},
@@ -69,7 +69,7 @@ func NewRecordConfigDataS() *RecordConfigDataS {
 				Description:   "Isha Recording",
 				StartTime:     isha,
 				Duration:      DarsRecordDuration,
-				RecordingDays: JumuaaRecordDuration,
+				RecordingDays: EveryDayButFriday,
 			},
 		},
 	}
