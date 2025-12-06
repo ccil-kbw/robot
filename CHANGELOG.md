@@ -1,3 +1,15 @@
+# v2.1.12 (Sat Dec 06 2025)
+
+#### ⚠️ Pushed to `master`
+
+- Update recording descriptions and start times ([@serafdev](https://github.com/serafdev))
+
+#### Authors: 1
+
+- فارس بالسرور ([@serafdev](https://github.com/serafdev))
+
+---
+
 # v2.1.11 (Sun Nov 30 2025)
 
 #### ⚠️ Pushed to `master`
